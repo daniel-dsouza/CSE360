@@ -2,12 +2,17 @@
 *.iml
 .idea
 
-# Project Files
-build
-/out
+# Eclipse Files
+.classpath
+.project
 
 # Gradle Files
 .gradle
+build/
+/out
+
+# Java files
+*.class
 
 # OS Files
 .DS_Store
