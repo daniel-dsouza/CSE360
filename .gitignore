@@ -1,4 +1,14 @@
+# Intellij Files
 *.iml
 .idea
+
+# Project Files
 build
 /out
+
+# Gradle Files
+.gradle
+
+# OS Files
+.DS_Store
+Thumbs.db
