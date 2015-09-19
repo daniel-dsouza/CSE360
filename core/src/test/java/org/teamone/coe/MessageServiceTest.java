@@ -1,5 +1,7 @@
 package org.teamone.coe;
 
+import org.teamone.coe.MessageService;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +21,6 @@ public class MessageServiceTest {
 
     @Test
     public void getMessage_ShouldReturnMessage() {
-        assertEquals("Hello World!", messageService.getMessage());
+        assertEquals("1Hello World!", messageService.getMessage());
     }
 }
