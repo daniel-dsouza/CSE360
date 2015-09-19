@@ -1,0 +1,5 @@
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+sourceSets.test.java.srcDirs = ["test/org/teamone/coe"]
