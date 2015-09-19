@@ -8,5 +8,12 @@ subprojects {
     repositories {
         mavenCentral()
     }
+
+    test {
+        outputs.upToDateWhen {false}
+        afterTest { desc, result ->
+            println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+        }
+    }
 }
 

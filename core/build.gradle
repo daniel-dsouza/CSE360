@@ -3,3 +3,4 @@ dependencies {
 }
 
 sourceSets.test.java.srcDirs = ["src/test/java/org/teamone/coe"]
+
