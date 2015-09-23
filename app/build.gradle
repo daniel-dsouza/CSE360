@@ -11,14 +11,18 @@ buildscript {
 //uncomment below if we do swing
 //apply plugin: 'application'
 
-//start the tomcat party!
-apply plugin: 'spring-boot'
 apply plugin: 'war'
 
 war {
     baseName = 'teamone-spring-boot'
     version = '0.1.0'
+    manifest {
+        attributes 'Main-Class': 'org.teamone.client.Application'
+    }
 }
+
+//start the tomcat party!
+apply plugin: 'spring-boot'
 
 dependencies {
     compile group: "org.webjars", name: "jquery", version: "2.1.4"

@@ -10,13 +10,11 @@
 <html>
 <head>
   <title>Static</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css"
-        href="webjars/bootstrap/3.0.3/css/bootstrap.min.css" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <link rel='stylesheet' href='webjars/bootstrap/3.3.5/css/bootstrap.min.css'>
 </head>
 <body>
-<script type="text/javascript"
-        src="webjars/jquery/2.0.3/jquery.min.js"></script>
+
 <div id="navbar" class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -41,7 +39,7 @@
     <a class="btn btn-lg btn-primary" href="#navbar" role="button">Go &raquo;</a>
   </p>
 </div>
-<script type="text/javascript"
-        src="webjars/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webjars/jquery/2.1.4/jquery.min.js"></script>
 </body>
 </html>

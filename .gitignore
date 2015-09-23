@@ -9,6 +9,7 @@
 # Gradle Files
 .gradle
 build/
+classes/
 /out
 
 # Java files
