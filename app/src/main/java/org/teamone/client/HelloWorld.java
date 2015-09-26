@@ -1,19 +1,30 @@
 package org.teamone.client;
 
+import java.util.Map;
+
+//import Spring libs
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+
+//import core libs.
 import org.teamone.coe.MessageService;
 
-/**
- * @author Petri Kainulainen
- */
+@Controller
 public class HelloWorld {
 
-    //private static final Logger LOGGER = Logger.getLogger(HelloWorld.class);
+    @RequestMapping("/")
+    public ModelAndView JSPtest() {
+        return new ModelAndView("index");
+    }
 
-    public static void main(String[] args) {
+    @RequestMapping("/message")
+    public String index() {
         MessageService messageService = new MessageService();
 
         String message = messageService.getMessage();
         System.out.println(message);
-        //LOGGER.info("Received message: " + message);
+        return message;
     }
 }
