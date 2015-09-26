@@ -5,15 +5,18 @@ import java.util.Map;
 //import Spring libs
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+
+//import core libs.
 import org.teamone.coe.MessageService;
 
 @Controller
 public class HelloWorld {
 
     @RequestMapping("/")
-    public String JSPtest(Map<String, Object> model) {
-        return "index";
+    public ModelAndView JSPtest() {
+        return new ModelAndView("index");
     }
 
     @RequestMapping("/message")
