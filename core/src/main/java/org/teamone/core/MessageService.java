@@ -1,4 +1,4 @@
-package org.teamone.coe;
+package org.teamone.core;
 
 /**
  * @author Petri Kainulainen

@@ -1,15 +1,11 @@
-package org.teamone.coe;
+package org.teamone.core;
 
-import org.teamone.coe.MessageService;
-
+import org.teamone.core.MessageService;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * @author Petri Kainulainen
- */
 public class MessageServiceTest {
 
     private MessageService messageService;

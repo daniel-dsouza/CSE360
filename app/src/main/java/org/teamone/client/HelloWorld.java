@@ -1,7 +1,5 @@
 package org.teamone.client;
 
-import java.util.Map;
-
 //import Spring libs
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 //import core libs.
-import org.teamone.coe.MessageService;
+import org.teamone.core.MessageService;
 
 @Controller
 public class HelloWorld {
