@@ -29,6 +29,7 @@ public class LoginController {
             @ModelAttribute("userInput") User user,
             Map<String, Object> model) {
         System.out.println(user.username);
+        //more code
     }
 
 }
