@@ -20,7 +20,7 @@ public class LoginController {
     public String viewLogin(Map<String, Object> model) {
         User userInput = new User();
         model.put("userInput", userInput);
-        System.out.print("hi");
+        System.out.println("loading login");
         return "login";
     }
 
@@ -28,7 +28,8 @@ public class LoginController {
     public void processLogin(
             @ModelAttribute("userInput") User user,
             Map<String, Object> model) {
-        System.out.println(user.username);
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
         //more code
     }
 
