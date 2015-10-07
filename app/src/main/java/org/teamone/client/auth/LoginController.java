@@ -1,4 +1,4 @@
-package org.teamone.client.generic;
+package org.teamone.client.auth;
 
 /**
  * Created by daniel on 9/26/15.
@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Map;
 
+import org.teamone.client.generic.User;
+
 @Controller
-@RequestMapping(value = "/login")
+@RequestMapping(value = "/")
 public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET)
@@ -21,6 +23,7 @@ public class LoginController {
         User userInput = new User();
         model.put("userInput", userInput);
         System.out.println("loading login");
+        System.out.println(model);
         return "login";
     }
 
@@ -30,25 +33,8 @@ public class LoginController {
             Map<String, Object> model) {
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
+        System.out.println(model);
         //more code
     }
 
-}
-
-class User {
-    public String username;
-    public String password;
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getPassword() {
-        return password;
-    }
 }

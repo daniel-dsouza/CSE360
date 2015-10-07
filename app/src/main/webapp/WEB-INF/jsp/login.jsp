@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-md-offset-5 col-md-3">
                         <div class="form-login">
-                            <h4>Please Login</h4>
+                            <h4>${message}</h4>
                             <form:input path="username" id="userName" class="form-control input-sm chat-input" placeholder="username" />
                             </br>
                             <input:password path="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
