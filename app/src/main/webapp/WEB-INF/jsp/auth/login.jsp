@@ -10,23 +10,24 @@
         <jsp:include page="/WEB-INF/jsp/generic/navbar.jsp"/>
     </jsp:attribute>
     <jsp:attribute name="footer">
-        <jsp:include page="generic/footer.jsp"/>
+        <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
     <jsp:body>
-        <div class="container-fluid">
-            <div class="jumbotron" style="background-color: deepskyblue">
-                <h1>Welcome to the IPIMS</h1>
-                <p>We put the 'balling in eyeballing</p>
-            </div>
-        </div>
+
+
 
         <!-- used http://bootsnipp.com/snippets/featured/simple-login -->
         <form:form action="login" method="post" commandName="userInput">
             <div class="container">
                 <div class="row">
+                    <div class="col-md-offset-5 col-md-3" style="background-color: red; text-align: center">
+                        <h4><c:out value="${errorMessage}" /></h4>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-offset-5 col-md-3">
                         <div class="form-login">
-                            <h4>${message}</h4>
+                            <h4>Please Login</h4>
                             <form:input path="username" id="userName" class="form-control input-sm chat-input" placeholder="username" />
                             </br>
                             <input:password path="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />

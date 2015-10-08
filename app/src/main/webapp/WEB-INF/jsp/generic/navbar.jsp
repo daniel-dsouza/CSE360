@@ -8,15 +8,14 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index">IPIMS</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/user/${user.username}">IPIMS</a>
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <li><a href="../../../"> Home </a></li>
-      <c:forTokens items="Zara,nuha,login,navbar,login" delims="," var="name">
+      <c:forTokens items="${user.actions}" delims="," var="name">
         <li>
           <a href="${pageContext.request.contextPath}/${name}">
-            Page: <c:out value="${name}" />
+            <c:out value="${name}" />
           </a>
         </li>
       </c:forTokens>
