@@ -13,7 +13,7 @@
         <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
   <jsp:body>
-    <form:form action="hsp-registration" method="post" commandName="userInput">
+    <form:form action="registration" method="post" commandName="userInput">
     <div class="span12">
       <div class="widget stacked widget-table action-table">
         <div class="widget-content" style="padding: 0"> <!-- Border around table and Table -->
@@ -79,9 +79,6 @@
         <span class="group-btn">
             <input type="submit" value="Next" class="btn btn-primary btn-md"/>
         </span>
-        <!--<span class="group-btn">
-            <input type="submit" value="Medical History" class="btn btn-primary btn-md"/>
-        </span> -->
       </div>
     </div> <!-- /widget -->
     </form:form>
