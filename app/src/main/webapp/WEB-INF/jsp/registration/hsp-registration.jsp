@@ -13,6 +13,7 @@
         <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
   <jsp:body>
+    <!-- used http://bootsnipp.com/snippets/featured/styled-table -->
     <form:form action="registration" method="post" commandName="userInput">
     <div class="span12">
       <div class="widget stacked widget-table action-table">
@@ -64,10 +65,28 @@
               <td>
                 <form:input class='form-control' size='4' type='text' path="email" />
               </td>
+              <td>Insurance: </td>
+              <td> <!-- IMPORTANT: Likely should change input type -->
+                <form:input class='form-control' size='4' type='text' path="insurance" />
+              </td>
+            </tr>
+            <tr> <!-- Row 6 -->
+              <td>Social Security #: </td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="ssn" />
+              </td>
+              <td>Age: </td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="age" />
+              </td>
+            </tr>
+            <tr>  <!-- Row 7 -->
               <td>Gender: </td>
               <td> <!-- IMPORTANT: Likely should change input type -->
                 <form:input class='form-control' size='4' type='text' path="gender" />
               </td>
+              <td></td>
+              <td></td>
             </tr>
             </tbody>
           </table> <!-- End of table -->
