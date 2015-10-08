@@ -18,21 +18,21 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
-public class PatientSchedAppt {
+public class PatientSchedAppt2 {
 
     //@Autowired
     //private User user;
 
-    @RequestMapping(value = "/SchedAppt", method = RequestMethod.GET)
+    @RequestMapping(value = "/SchedAppt2", method = RequestMethod.GET)
     public String viewUserHome(
             Map<String, Object> model)
-            {
+    {
         //model.put("user", user);
         System.out.println("load User?");
         System.out.println(model);
         //System.out.println(user);
         //System.out.println(user.getUsername());
         //System.out.println(userID);
-        return "PatientSchedAppt";
+        return "PatientSchedAppt2";
     }
 }
