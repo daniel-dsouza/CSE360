@@ -5,11 +5,6 @@
   Time: 7:29 PM
   To change this template use File | Settings | File Templates.
 --%>
-@media (min-width: 979px) {
-body {
-padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-}
-}
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
