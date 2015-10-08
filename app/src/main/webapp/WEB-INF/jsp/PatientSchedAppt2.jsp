@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <script type='text/javascript'>//<![CDATA[
+  <script type="text/javascript">//<![CDATA[
   $(window).load(function(){
     $(document).ready(function () {
       var allOptions = $('#selectprod option')
