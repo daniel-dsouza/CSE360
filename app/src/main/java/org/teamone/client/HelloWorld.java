@@ -4,10 +4,10 @@ package org.teamone.client;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.teamone.core.MessageService;
 
 //import core libs.
-import org.teamone.core.MessageService;
+
 
 @Controller
 public class HelloWorld {

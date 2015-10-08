@@ -1,47 +1,56 @@
 package org.teamone.core;
 
-import java.util.Date;
 
 /**
  * Created by Ryan on 10/7/2015.
  */
 public class Appointments {
-    private int doctorID;
-    private String date;//do away with the calender
-    private String time;//
+    private String date;//date is 01/01/2001
+    private String time;//time is 3:00 PM
+    private int doctorID = 0;
     private String reason;
+    private int patientID = 0;
 
-    public Appointments()
-    {
-        doctorID = 0;
-        date= "0/0/0000";
-        time= "0:00 AM";
-        reason = "I'm healthy";
+    public int getPatientID() {
+        return patientID;
     }
-    public Appointments(int ID, String Date, String Time, String Reason)
-    {
-        doctorID = 0;
-        date = Date;
-        time = Time;
-        reason = Reason;
-    }
-    public void editAppoint(int newID)
-    {
-        doctorID = newID;
 
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
     }
-    public void search(String type)
-    {
-        //sql query to report all avaviable doctors of that "Type"
-        //return array[strings]
+
+    public String getDate() {
+        return date;
     }
-   /* public java.sql.Timestamp getCurrentTimeStamp()//private for helper method
-    //http://www.mkyong.com/jdbc/how-to-insert-timestamp-value-in-preparedstatement/
-    {
 
-        //today = new Date();
-        return new java.sql.Timestamp(today.getTime());
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-    }*/
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(int doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+
 
 }
