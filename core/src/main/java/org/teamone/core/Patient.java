@@ -10,6 +10,8 @@ public class Patient extends Person{
     private String insurance;
     private int age;
     private int phone;
+    private Appointments appoint;
+    private HealthConditions hConditions;
 
     public Patient()//default constructor
     {
@@ -19,6 +21,8 @@ public class Patient extends Person{
         insurance = "";
         age = 0;
         phone = 0000000000;
+        appoint = new Appointments();
+        hConditions = new HealthConditions();
     }
     public Patient(String address1, int SSN1, String gender1, String insurance1, int age1, int phone1, Person new1)
     {
@@ -47,7 +51,18 @@ public class Patient extends Person{
     public void setAge(int age1)            {age = age1;}
     public void setPhone(int phone1)        {phone=phone1;}
 
-
+    public void updatePatient(Patient toUpdate)
+    {
+        //call sql query with Patient 0bject
+    }
+    public void updateHealthConditions()
+    {
+        //modify the object health Conditions
+    }
+    public void updateAppointment()
+    {
+        //modify the oject appointments
+    }
 
 }
 

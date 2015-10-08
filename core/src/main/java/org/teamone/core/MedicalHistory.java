@@ -5,4 +5,8 @@ package org.teamone.core;
  */
 public class MedicalHistory {
     private String medicalHi;
+    public MedicalHistory()
+    {
+        medicalHi = "";
+    }
 }

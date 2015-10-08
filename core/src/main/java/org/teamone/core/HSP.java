@@ -7,6 +7,12 @@ public class HSP extends Person{
     private int numOfHSP;
     private boolean alertSubmitted;
 
+    public HSP ()
+    {
+        numOfHSP = 0;
+        alertSubmitted = false;
+
+    }
     public void generateStats()
     {
 

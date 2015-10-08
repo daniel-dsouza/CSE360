@@ -5,4 +5,12 @@ package org.teamone.core;
  */
 public class HealthConditions {
     private String condition;
+    public HealthConditions()
+    {
+        condition = "Healthy, nothing to see here";
+    }
+    public void editConditions(String newCond)
+    {
+        condition = newCond;
+    }
 }

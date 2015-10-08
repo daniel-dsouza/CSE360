@@ -6,6 +6,10 @@ package org.teamone.core;
 public class LabStaff extends Person {
     private String Reports;
 
+    public LabStaff()
+    {
+        Reports= "New report";
+    }
     public void receiveTest(){}
 
     public void updateLab(){}
