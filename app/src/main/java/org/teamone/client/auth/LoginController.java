@@ -5,18 +5,16 @@ package org.teamone.client.auth;
  */
 
 //import Spring libs
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.teamone.client.generic.User;
 
 import java.util.Map;
-
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.teamone.client.generic.User;
 
 @Controller
 @Scope("request")
@@ -58,7 +56,6 @@ public class LoginController {
             return "auth/login";
         }
     }
-
 }
 
 class LoginAttempt {

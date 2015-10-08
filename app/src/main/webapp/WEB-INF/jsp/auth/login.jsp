@@ -13,9 +13,6 @@
         <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
     <jsp:body>
-
-
-
         <!-- used http://bootsnipp.com/snippets/featured/simple-login -->
         <form:form action="login" method="post" commandName="userInput">
             <div class="container">

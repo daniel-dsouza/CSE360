@@ -1,6 +1,5 @@
 package org.teamone.core;
 
-import org.teamone.core.MessageService;
 import org.junit.Before;
 import org.junit.Test;
 

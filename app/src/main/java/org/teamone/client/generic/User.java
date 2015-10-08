@@ -3,8 +3,6 @@ package org.teamone.client.generic;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 /**
  * Created by daniel on 10/7/15.
  */
