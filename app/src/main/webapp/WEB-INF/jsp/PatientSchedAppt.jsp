@@ -5,6 +5,11 @@
   Time: 7:29 PM
   To change this template use File | Settings | File Templates.
 --%>
+@media (min-width: 979px) {
+body {
+padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+}
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -19,7 +24,7 @@
         <select class="form-control" id="sel1">
           <option>Foot Doctor</option>
           <option>Emergency Doctor</option>
-          <option>Genneral Care Physician</option>
+          <option>General Care Physician</option>
           <option>Pediatrician</option>
         </select>
       </div>
@@ -33,7 +38,7 @@
           <option>Dr. Hinze</option>
           <option>Dr. Hutchins</option>
           <option>Dr. Lin</option>
-          <option>Dr. Romeroy</option>
+          <option>Dr. Romero</option>
           <option>Dr. Rose</option>
           <option>Dr. Venkata</option>
         </select>
