@@ -80,7 +80,10 @@
         <option value="23" class="selectors Pla3">23</option>
       </select>
     </div>
-    <div class="clearfix"></div>
+    <div class="form-group">
+      <label for="comment">Comment:</label>
+      <textarea class="form-control" rows="5" id="comment"></textarea>
+    </div>
   </div>
 </center>
 </body>
