@@ -4,6 +4,7 @@ package org.teamone.core;
  * Created by Ryan on 10/7/2015.
  */
 public class Patient extends Person{
+    private int serialNumber;//paientID
     private String address;
     private int SSN;
     private String gender;
@@ -12,6 +13,7 @@ public class Patient extends Person{
     private int phone;
     private Appointments appoint;
     private HealthConditions hConditions;
+    private MedicalHistory mHistory;//no UI to modify this
 
     public Patient()//default constructor
     {
@@ -61,7 +63,13 @@ public class Patient extends Person{
     }
     public void updateAppointment()
     {
-        //modify the oject appointments
+        // call sql query and pass in appointment obj
+
+        //String insertTableSQL = "INSERT INTO DBUSER"
+        //        + "(USER_ID, USERNAME, CREATED_BY, CREATED_DATE) VALUES"
+        //        + "(?,?,?,?)";
+        //preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+        //preparedStatement.setTimestamp(4,getCurrentTimeStamp());
     }
 
 }

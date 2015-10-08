@@ -27,14 +27,19 @@ public class HSP extends Person{
 
     }
 
-    public void updateAppointment( )
+    public void updateAppointment(int patientId, int doctorID, java.sql.Timestamp newTime )
     {
-
+    //sql query search patientID, UPDATE appointment table
     }
 
-    public void updatePatientInfo( )
+    public void updateHealthCon(int patientId, String health )
     {
+//sql query search patientID, UPDATE  health
+    }
 
+    public void updateMedicalHistory(int patientId, String mHistory )
+    {
+        //sql query search patientID, UPDATE  history
     }
 
 
