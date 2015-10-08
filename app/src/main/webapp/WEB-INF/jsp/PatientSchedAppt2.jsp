@@ -26,7 +26,7 @@
 
 </head>
 <body>
-<center>
+
   <div class="prodselectbox">
     <div class="cat">Type of Doctor</div><br>
     <div class="catid">
@@ -85,6 +85,6 @@
       <textarea class="form-control" rows="5" id="comment"></textarea>
     </div>
   </div>
-</center>
+
 </body>
 </html>
