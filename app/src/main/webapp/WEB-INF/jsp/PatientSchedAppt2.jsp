@@ -9,19 +9,18 @@
 <html>
 <head>
   <script type="text/javascript">//<![CDATA[
-  $(window).load(function(){
-    $(document).ready(function () {
-      var allOptions = $('#selectprod option')
-      $('#selectcat').change(function () {
-        $('#selectprod option').remove()
-        var classN = $('#selectcat option:selected').prop('class');
-        var opts = allOptions.filter('.' + classN);
-        $.each(opts, function (i, j) {
-          $(j).appendTo('#selectprod');
-        });
+  $(document).ready(function () {
+    var allOptions = $('#selectprod option')
+    $('#selectcat').change(function () {
+      $('#selectprod option').remove()
+      var classN = $('#selectcat option:selected').prop('class');
+      var opts = allOptions.filter('.' + classN);
+      $.each(opts, function (i, j) {
+        $(j).appendTo('#selectprod');
       });
     });
-  });//]]>
+  });
+//]]>
 
   </script>
 
