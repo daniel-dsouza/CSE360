@@ -3,7 +3,7 @@ package org.teamone.core;
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Staff {
+public class Staff extends Person{
 
     private int staffID = 0;
     private String occupation ;
