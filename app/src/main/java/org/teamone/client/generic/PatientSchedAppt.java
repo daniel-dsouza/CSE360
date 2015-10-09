@@ -45,9 +45,9 @@ public class PatientSchedAppt {
 
         Map referenceData = new HashMap();
         List<String> doctorsList = new ArrayList<String>();
-        doctorsList.add("Gardening");
-        doctorsList.add("Listening Music");
-        doctorsList.add("Writing Technical Tutorials");
+        doctorsList.add("Dr. A");
+        doctorsList.add("Dr. B");
+        doctorsList.add("Dr. C");
         referenceData.put("doctorsList", doctorsList);
 
         return referenceData;
