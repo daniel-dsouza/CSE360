@@ -26,23 +26,26 @@ public class RegistrationController {
     public String processPatientInfo(@ModelAttribute("userInput") RegistrationAttempt attempt,
                                      Map<String, Object> model) {
 
-        if(1 == 1) {        //Still can't get the moving through the pages & assign values to variables to work at the same time______This code gets the form inputs but does not cycle
+        if(1 == 0) {        //Still can't get the moving through the pages & assign values to variables to work at the same time______This code gets the form inputs but does not cycle
             System.out.println("Creating a Patient");
 
             //attempt.displayPatientPersonalInformation();
 
             return "/registration/hsp-healthConditions";
-        }else if(2 == 2){
+        }else if(2 == 1){
             System.out.println("Loading Health Conditions");
 
             //attempt.displayHealthConditions();
 
             //return "/registration/hsp-healthConditions"; //Used for debugging to make sure that check boxes functioned properly
-            return "/registration/registration-page3"; //This is the correct return
+            return "/registration/hsp-medicalHistory"; //This is the correct return
         }else{
+            System.out.println("Loading Medical Conditions");
 
+            attempt.displayMedicalHistory();
 
-            return "/registration/hsp-registration";
+            return "/registration/hsp-medicalHistory"; //Used for debugging to make sure that check boxes functioned properly
+            //return "/registration/hsp-registration"; //This should be hsp-patients page or hsp-homepage
         }
     }
 
@@ -50,19 +53,19 @@ public class RegistrationController {
 
 class RegistrationAttempt {
 
-    //Start of the Patient's Personal Information_______________________________________________________________________
+    //Start of the Patient's Personal Information (13 strings)__________________________________________________________
     private String firstName;
-    private String lastName;
+    private String lastName;        //2
     private String dob;
-    private String address;
+    private String address;         //4
     private String city;
-    private String state;
+    private String state;           //6
     private String zipcode;
-    private String homePhone;
+    private String homePhone;       //8         Make into a longint
     private String email;
-    private String insurance;
-    private String ssn;
-    private String age;
+    private String insurance;       //10
+    private String ssn;                         //probably should be a long int
+    private String age;             //12
     private String gender;
 
 
@@ -125,46 +128,46 @@ class RegistrationAttempt {
 
 
 
-    //Start of "Health conditions_______________________________________________________________________________________
+    //Start of "Health conditions (40 booleans)_________________________________________________________________________
     private boolean anklePain;
     private boolean anxiety;
-    private boolean badBreath;
+    private boolean badBreath;              //3
     private boolean bleedingGums;
     private boolean bloodyStools;
-    private boolean constipation;
+    private boolean constipation;           //6
     private boolean diarrhea;
     private boolean discoloredUrine;
-    private boolean dizziness;
+    private boolean dizziness;              //9
     private boolean drySkin;
     private boolean earDrainage;
-    private boolean excessiveBurping;
+    private boolean excessiveBurping;       //12
     private boolean excessiveYawning;
     private boolean fatigue;
-    private boolean footPain;
+    private boolean footPain;               //15
     private boolean frequentUrination;
     private boolean gas;
-    private boolean hairLoss;
+    private boolean hairLoss;               //18
     private boolean headaches;
     private boolean hearingProblems;
-    private boolean heartBurn;
+    private boolean heartBurn;              //21
     private boolean highBloodPressure;
     private boolean impotence;
-    private boolean jointPain;
+    private boolean jointPain;              //24
     private boolean lowerBackPain;
     private boolean nightBlindness;
-    private boolean nightUrination;
+    private boolean nightUrination;         //27
     private boolean noseBleeds;
     private boolean protrudingEyes;
-    private boolean redFace;
+    private boolean redFace;                //30
     private boolean redThickSkin;
     private boolean sensitivityToLight;
-    private boolean snoring;
+    private boolean snoring;                //33
     private boolean stomachPain;
     private boolean swelling;
-    private boolean testiclePain;
+    private boolean testiclePain;           //36
     private boolean visionProblems;
     private boolean vomiting;
-    private boolean warts;
+    private boolean warts;                  //39
     private boolean wheezing;
 
     public void setAnklePain(boolean anklePain) { this.anklePain = anklePain; }
@@ -330,6 +333,256 @@ class RegistrationAttempt {
         System.out.println("Wheezing: "+getWheezing());
     }
 
+
+
+
+// Start of Medical History (48 boolean)________________________________________________________________________________
+    private boolean aidsHIVPositive;
+    private boolean alzheimerDisease;
+    private boolean anaphylaxis;
+    private boolean anemia;                         //4
+    private boolean angina;
+    private boolean arthritis;
+    private boolean artificialHeartValve;
+    private boolean artificialJoint;                //8
+    private boolean asthma;
+    private boolean bloodDisease;
+    private boolean bloodTransfusion;
+    private boolean breathingProblem;               //12
+    private boolean bruiseEasily;
+    private boolean cancer;
+    private boolean chemotherapy;
+    private boolean chestPains;                     //16
+    private boolean coldSores;
+    private boolean congenitalDisorder;
+    private boolean convulsions;
+    private boolean cortisonMedicine;               //20
+    private boolean diabetes;
+    private boolean drugAddiction;
+    private boolean easilyWinded;
+    private boolean emphysema;                      //24
+    private boolean epilepsy;
+    private boolean excessiveBleeding;
+    private boolean excessiveThirst;
+    private boolean faintingSpells;                 //28
+    private boolean glaucoma;
+    private boolean heyFever;
+    private boolean heartAttack;
+    private boolean heartMurmur;                    //32
+    private boolean heartPacemaker;
+    private boolean heartDisease;
+    private boolean hemophilia;
+    private boolean hepitisA;                       //36
+    private boolean hepatitisBC;
+    private boolean highBloodPressure2;
+    private boolean highCholesterol;
+    private boolean hives;                          //40
+    private boolean hypoglicemia;
+    private boolean irregularHearbeat;
+    private boolean kidneyProblems;
+    private boolean leukemia;                       //44
+    private boolean liverDisease;
+    private boolean lowBloodPressure;
+    private boolean lungDisease;
+    private boolean mitralValveProlapse;            //48
+
+
+
+    public void setAidsHIVPositive(boolean aidsHIVPositive) { this.aidsHIVPositive = aidsHIVPositive; }
+    public boolean getAidsHIVPositive() { return this.aidsHIVPositive; }
+
+    public void setAlzheimerDisease(boolean alzheimerDisease) { this.alzheimerDisease = alzheimerDisease; }
+    public boolean getAlzheimerDisease() { return this.alzheimerDisease; }
+
+    public void setAnaphylaxis(boolean anaphylaxis) { this.anaphylaxis = anaphylaxis; }
+    public boolean getAnaphylaxis() { return this.anaphylaxis; }
+
+    public void setAnemia(boolean anemia) { this.anemia = anemia; }
+    public boolean getAnemia() { return this.anemia; }
+
+    public void setAngina(boolean angina) { this.angina = angina; }
+    public boolean getAngina() { return this.angina; }
+
+    public void setArthritis(boolean arthritis) { this.arthritis = arthritis; }
+    public boolean getArthritis() { return this.arthritis; }
+
+    public void setArtificialHeartValve(boolean artificialHeartValve) { this.artificialHeartValve = artificialHeartValve; }
+    public boolean getArtificialHeartValve() { return this.artificialHeartValve; }
+
+    public void setArtificialJoint(boolean artificialJoint) { this.artificialJoint = artificialJoint; }
+    public boolean getArtificialJoint() { return this.artificialJoint; }
+
+    public void setAsthma(boolean asthma) { this.asthma = asthma; }
+    public boolean getAsthma() { return this.asthma; }
+
+    public void setBloodDisease(boolean bloodDisease) { this.bloodDisease = bloodDisease; }
+    public boolean getBloodDisease() { return this.bloodDisease; }
+
+    public void setBloodTransfusion(boolean bloodTransfusion) { this.bloodTransfusion = bloodTransfusion; }
+    public boolean getBloodTransfusion() { return this.bloodTransfusion; }
+
+    public void setBreathingProblem(boolean breathingProblem) { this.breathingProblem = breathingProblem; }
+    public boolean getBreathingProblem() { return this.breathingProblem; }
+
+    public void setBruiseEasily(boolean bruiseEasily) { this.bruiseEasily = bruiseEasily; }
+    public boolean getBruiseEasily() { return this.bruiseEasily; }
+
+    public void setCancer(boolean cancer) { this.cancer = cancer; }
+    public boolean getCancer() { return this.cancer; }
+
+    public void setChemotherapy(boolean chemotherapy) { this.chemotherapy = chemotherapy; }
+    public boolean getChemotherapy() { return this.chemotherapy; }
+
+    public void setChestPains(boolean chestPains) { this.chestPains = chestPains; }
+    public boolean getChestPains() { return this.chestPains; }
+
+    public void setColdSores(boolean coldSores) { this.coldSores = coldSores; }
+    public boolean getColdSores() { return this.coldSores; }
+
+    public void setCongenitalDisorder(boolean congenitalDisorder) { this.congenitalDisorder = congenitalDisorder; }
+    public boolean getCongenitalDisorder() { return this.congenitalDisorder; }
+
+    public void setConvulsions(boolean convulsions) { this.convulsions = convulsions; }
+    public boolean getConvulsions() { return this.convulsions; }
+
+    public void setCortisonMedicine(boolean cortisonMedicine) { this.cortisonMedicine = cortisonMedicine; }
+    public boolean getCortisonMedicine() { return this.cortisonMedicine; }
+
+    public void setDiabetes(boolean diabetes) { this.diabetes = diabetes; }
+    public boolean getDiabetes() { return this.diabetes; }
+
+    public void setDrugAddiction(boolean drugAddiction) { this.drugAddiction = drugAddiction; }
+    public boolean getDrugAddiction() { return this.drugAddiction; }
+
+    public void setEasilyWinded(boolean easilyWinded) { this.easilyWinded = easilyWinded; }
+    public boolean getEasilyWinded() { return this.easilyWinded; }
+
+    public void setEmphysema(boolean emphysema) { this.emphysema = emphysema; }
+    public boolean getEmphysema() { return this.emphysema; }
+
+    public void setEpilepsy(boolean epilepsy) { this.epilepsy = epilepsy; }
+    public boolean getEpilepsy() { return this.epilepsy; }
+
+    public void setExcessiveBleeding(boolean excessiveBleeding) { this.excessiveBleeding = excessiveBleeding; }
+    public boolean getExcessiveBleeding() { return this.excessiveBleeding; }
+
+    public void setExcessiveThirst(boolean excessiveThirst) { this.excessiveThirst = excessiveThirst; }
+    public boolean getExcessiveThirst() { return this.excessiveThirst; }
+
+    public void setFaintingSpells(boolean faintingSpells) { this.faintingSpells = faintingSpells; }
+    public boolean getFaintingSpells() { return this.faintingSpells; }
+
+    public void setGlaucoma(boolean glaucoma) { this.glaucoma = glaucoma; }
+    public boolean getGlaucoma() { return this.glaucoma; }
+
+    public void setHeyFever(boolean heyFever) { this.heyFever = heyFever; }
+    public boolean getHeyFever() { return this.heyFever; }
+
+    public void setHeartAttack(boolean heartAttack) { this.heartAttack = heartAttack; }
+    public boolean getHeartAttack() { return this.heartAttack; }
+
+    public void setHeartMurmur(boolean heartMurmur) { this.heartMurmur = heartMurmur; }
+    public boolean getHeartMurmur() { return this.heartMurmur; }
+
+    public void setHeartPacemaker(boolean heartPacemaker) { this.heartPacemaker = heartPacemaker; }
+    public boolean getHeartPacemaker() { return this.heartPacemaker; }
+
+    public void setHeartDisease(boolean heartDisease) { this.heartDisease = heartDisease; }
+    public boolean getHeartDisease() { return this.heartDisease; }
+
+    public void setHemophilia(boolean hemophilia) { this.hemophilia = hemophilia; }
+    public boolean getHemophilia() { return this.hemophilia; }
+
+    public void setHepitisA(boolean hepitisA) { this.hepitisA = hepitisA; }
+    public boolean getHepitisA() { return this.hepitisA; }
+
+    public void setHepatitisBC(boolean hepatitisBC) { this.hepatitisBC = hepatitisBC; }
+    public boolean getHepatitisBC() { return this.hepatitisBC; }
+
+    public void setHighBloodPressure2(boolean highBloodPressure2) { this.highBloodPressure2 = highBloodPressure2; }
+    public boolean getHighBloodPressure2() { return this.highBloodPressure2; }
+
+    public void setHighCholesterol(boolean highCholesterol) { this.highCholesterol = highCholesterol; }
+    public boolean getHighCholesterol() { return this.highCholesterol; }
+
+    public void setHives(boolean hives) { this.hives = hives; }
+    public boolean getHives() { return this.hives; }
+
+    public void setHypoglicemia(boolean hypoglicemia) { this.hypoglicemia = hypoglicemia; }
+    public boolean getHypoglicemia() { return this.hypoglicemia; }
+
+    public void setIrregularHearbeat(boolean irregularHearbeat) { this.irregularHearbeat = irregularHearbeat; }
+    public boolean getIrregularHearbeat() { return this.irregularHearbeat; }
+
+    public void setKidneyProblems(boolean kidneyProblems) { this.kidneyProblems = kidneyProblems; }
+    public boolean getKidneyProblems() { return this.kidneyProblems; }
+
+    public void setLeukemia(boolean leukemia) { this.leukemia = leukemia; }
+    public boolean getLeukemia() { return this.leukemia; }
+
+    public void setLiverDisease(boolean liverDisease) { this.liverDisease = liverDisease; }
+    public boolean getLiverDisease() { return this.liverDisease; }
+
+    public void setLowBloodPressure(boolean lowBloodPressure) { this.lowBloodPressure = lowBloodPressure; }
+    public boolean getLowBloodPressure() { return this.lowBloodPressure; }
+
+    public void setLungDisease(boolean lungDisease) { this.lungDisease = lungDisease; }
+    public boolean getLungDisease() { return this.lungDisease; }
+
+    public void setMitralValveProlapse(boolean mitralValveProlapse) { this.mitralValveProlapse = mitralValveProlapse; }
+    public boolean getMitralValveProlapse() { return this.mitralValveProlapse; }
+
+
+
+    public void displayMedicalHistory(){
+        System.out.println("AIDS/HIV Positive: "+getAidsHIVPositive());
+        System.out.println("Alzheimer's Disease: "+getAlzheimerDisease());
+        System.out.println("Anaphylaxis: "+getAnaphylaxis());
+        System.out.println("Anemia: "+getAnemia());
+        System.out.println("Angina: "+getAngina());
+        System.out.println("Arthritis/Gout: "+getArthritis());
+        System.out.println("Artificial Heart Valve: "+getArtificialHeartValve());
+        System.out.println("Artificial Joint: "+getArtificialJoint());
+        System.out.println("Asthma: "+getAsthma());
+        System.out.println("Blood Disease: "+getBloodDisease());
+        System.out.println("Blood Transfusion: "+getBloodTransfusion());
+        System.out.println("Breathing Problem: "+getBreathingProblem());
+        System.out.println("Bruise Easily: "+getBruiseEasily());
+        System.out.println("Cancer: "+getCancer());
+        System.out.println("Chemotherapy: "+getChemotherapy());
+        System.out.println("Chest Pains: "+getChestPains());
+        System.out.println("Cold Sores: "+getColdSores());
+        System.out.println("Congenital Disorder: "+getCongenitalDisorder());
+        System.out.println("Convulsions: "+getConvulsions());
+        System.out.println("Cortisone Medicine: "+getCortisonMedicine());
+        System.out.println("Drug Addiction: "+getDrugAddiction());
+        System.out.println("Easily Winded: "+getEasilyWinded());
+        System.out.println("Emphysema: "+getEmphysema());
+        System.out.println("Epilepsy or Seizures: "+getEpilepsy());
+        System.out.println("Excessive Bleeding: "+getExcessiveBleeding());
+        System.out.println("Excessive Thirst: "+getExcessiveThirst());
+        System.out.println("Fainting Spells: "+getFaintingSpells());
+        System.out.println("Glaucoma: "+getGlaucoma());
+        System.out.println("Hay Fever: "+getHeyFever());
+        System.out.println("Heart Attack/Failure: "+getHeartAttack());
+        System.out.println("Heart Murmur: "+getHeartMurmur());
+        System.out.println("Heart Pacemaker: "+getHeartPacemaker());
+        System.out.println("Heart Trouble/Disease: "+getHeartDisease());
+        System.out.println("Hemophilia: "+getHemophilia());
+        System.out.println("Hepatitis A: "+getHepitisA());
+        System.out.println("Hepatitis B or C: "+getHepatitisBC());
+        System.out.println("High Blood Pressure: "+getHighBloodPressure2());
+        System.out.println("High Cholesterol: "+getHighCholesterol());
+        System.out.println("Hives or Rash: "+getHives());
+        System.out.println("Hypoglicemia: "+getHypoglicemia());
+        System.out.println("Irregular Heartbeat: "+getIrregularHearbeat());
+        System.out.println("Kidney Problems: "+getKidneyProblems());
+        System.out.println("Leukemia: "+getLeukemia());
+        System.out.println("Liver Disease: "+getLiverDisease());
+        System.out.println("Low Blood Pressure: "+getLowBloodPressure());
+        System.out.println("Lung Disease: "+getLungDisease());
+        System.out.println("Mitral Valve Prolapse: "+getMitralValveProlapse());
+    }
 
 
 
