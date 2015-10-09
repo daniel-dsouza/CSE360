@@ -1,6 +1,5 @@
 package org.teamone.client.registration;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,7 @@ public class RegistrationController {
     public String processLogin(
             @ModelAttribute("userInput") RegistrationAttempt attempt,
             Map<String, Object> model) {
-        /*
+/*
         System.out.println("First Name: " + attempt.getFirstName());
         System.out.println("Last Name: " + attempt.getLastName());
         System.out.println("Date of Birth: " + attempt.getdob());
@@ -45,9 +44,9 @@ public class RegistrationController {
         System.out.println("Social Security #: " + attempt.getssn());
         System.out.println("Age: " + attempt.getAge());
         System.out.println("Gender: " + attempt.getGender());
-        */
-        if(attempt.getFirstName().equalsIgnoreCase("") || attempt.getLastName().equalsIgnoreCase("") || attempt.getdob().equalsIgnoreCase("") || attempt.getAddress().equalsIgnoreCase("") || attempt.getCity().equalsIgnoreCase("") || attempt.getState().equalsIgnoreCase("") || attempt.getZipcode().equalsIgnoreCase("") || attempt.getHomePhone().equalsIgnoreCase("") || attempt.getEmail().equalsIgnoreCase("") || attempt.getInsurance().equalsIgnoreCase("") || attempt.getssn().equalsIgnoreCase("") || attempt.getAge().equalsIgnoreCase("") || attempt.getGender().equalsIgnoreCase("")){
-            //If feild is empty error
+*/
+        if(attempt.getFirstName().equalsIgnoreCase("") || attempt.getLastName().equalsIgnoreCase("") || attempt.getdob().equalsIgnoreCase("") || attempt.getAddress().equalsIgnoreCase("") || attempt.getCity().equalsIgnoreCase("") || attempt.getState().equalsIgnoreCase("") || attempt.getZipcode().equalsIgnoreCase("") || attempt.getHomePhone().equalsIgnoreCase("") || attempt.getEmail().equalsIgnoreCase("") || attempt.getInsurance().equalsIgnoreCase("") || attempt.getssn().equalsIgnoreCase("") || attempt.getAge().equalsIgnoreCase("") || attempt.getGender().equalsIgnoreCase("select one")){
+            //If a field has not been filled out
             System.out.println("All fields must be filled in");
             return "/registration/hsp-registration";
         }else{

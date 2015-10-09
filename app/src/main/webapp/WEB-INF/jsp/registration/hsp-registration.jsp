@@ -81,8 +81,12 @@
           </tr>
           <tr>  <!-- Row 7 -->
             <td>Gender: </td>
-            <td> <!-- IMPORTANT: Likely should change input type -->
-              <form:input class='form-control' size='4' type='text' path="gender" />
+            <td>
+              <form:select path="gender" class="selectpicker">
+                <option>select one</option>
+                <option>Male</option>
+                <option>Female</option>
+              </form:select>
             </td>
             <td></td>
             <td></td>
