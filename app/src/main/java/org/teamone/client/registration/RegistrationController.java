@@ -25,11 +25,18 @@ public class RegistrationController {
         return "/registration/hsp-registration";
     }
 
+    @RequestMapping(method = RequestMethod.GET)
+    public String createHealthConditions(Map<String, Object> model) {
+
+        HealthConditionsAttempt attempt = new HealthConditionsAttempt();
+        model.put("userChecks", attempt);
+        System.out.println("Loading Health Conditions");
+        return "/registration/hsp-registration";
+    }
+
 
     @RequestMapping(method = RequestMethod.POST)
-    public String processPatientInfo(
-            @ModelAttribute("userInput") RegistrationAttempt attempt,
-            Map<String, Object> model) {
+    public String processPatientInfo(@ModelAttribute("userInput") RegistrationAttempt attempt, Map<String, Object> model) {
 /*
         System.out.println("First Name: " + attempt.getFirstName());
         System.out.println("Last Name: " + attempt.getLastName());
@@ -52,15 +59,18 @@ public class RegistrationController {
         }else{
             //Assign values to a patient actor and moves on to the health conditions of the patient
             System.out.println("Making patient");
-
-            HealthConditionsAttempt attempt2 = new HealthConditionsAttempt();
-            model.put("userInput", attempt2);
-            /*
-            System.out.println("loading Registration");
-            System.out.println(attempt2.getAnklePain());
-            */
             return "/registration/hsp-healthConditions";
         }
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String processHealthConditions(@ModelAttribute("userChecks") HealthConditionsAttempt attempt, Map<String, Object> model) {
+
+        System.out.println("Ankle Pain: "+attempt.getAnklePain());
+        System.out.println("Anxiety: "+attempt.getAnxiety());
+        System.out.println("BadBreath: "+attempt.getBadBreath());
+
+        return "/registration/hsp-healthConditions";
     }
 }
 
