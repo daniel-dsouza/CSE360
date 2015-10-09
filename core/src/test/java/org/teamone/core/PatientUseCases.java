@@ -4,7 +4,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.Patient;
-import org.teamone.core.PatientManipulation;
+import org.teamone.core.PatientUpdateInfo;
 
 public class PatientUseCases {
     //this is for all use cases of patient: such as send alert/update info/schedule appointment.....
@@ -27,7 +27,7 @@ public class PatientUseCases {
     @Test
     public void tester()
     {
-        int x = PatientManipulation.UpdatePersonalInfo(patient);
+        int x = PatientUpdateInfo.UpdatePersonalInfo(patient);
         System.out.print(x);
     }
 
