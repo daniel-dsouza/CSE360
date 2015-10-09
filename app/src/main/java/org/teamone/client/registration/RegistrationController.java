@@ -17,7 +17,7 @@ import java.util.Map;
 public class RegistrationController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String viewLogin(Map<String, Object> model) {
+    public String createPatient(Map<String, Object> model) {
         //User userInput = new User();
         RegistrationAttempt attempt = new RegistrationAttempt();
         model.put("userInput", attempt);
@@ -27,7 +27,7 @@ public class RegistrationController {
 
 
     @RequestMapping(method = RequestMethod.POST)
-    public String processLogin(
+    public String processPatientInfo(
             @ModelAttribute("userInput") RegistrationAttempt attempt,
             Map<String, Object> model) {
 /*
