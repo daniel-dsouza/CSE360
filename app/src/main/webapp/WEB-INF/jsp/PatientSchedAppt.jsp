@@ -49,11 +49,13 @@
       </center>
     </div> //-->
 
-<form:form method="POST" commandName="PatientSchedAppt"><!-- need to request something to see doctorsList -->
+<form:form method="POST" commandName="creditCardTypes"><!-- need to request something to see doctorsList -->
          <form:select path="doctorsList">
-          <form:option value="Select" label="Select a card type"></form:option>
+          <form:option value="Select" label="Select a card type" />
           <form:options items="${doctorsList}" />
         </form:select>
+      </form:form>
   </div>
+
 </body>
 </html>

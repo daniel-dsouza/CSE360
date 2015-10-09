@@ -29,24 +29,26 @@ public class PatientSchedAppt {
     @RequestMapping(value = "/PatientSchedAppt", method = RequestMethod.GET)
     public String viewUserHome(Map<String, Object> model)
             {
-        Appointment userInput = new Appointment();
-        model.put("userInput", userInput);
-        System.out.println("load User?");
+        Appointment creditCardTypes = new Appointment();
+        model.put("creditCardTypes", creditCardTypes);
+        System.out.println("load creditCardTypes\n?");
         System.out.println(model);
         //System.out.println(user);
         //System.out.println(user.getUsername());
         //System.out.println(userID);
         return "PatientSchedAppt";
             }
-    @ModelAttribute("creditCardTypes")
 
-    public Map<String,String> populateDoctorsList() {
-        Map<String,String> doctorsList = new LinkedHashMap<String,String>();
+
+    public Map<String,String> populateDoctorsList(@ModelAttribute("creditCardTypes") Map<String,String> doctorsList) {
+
+        doctorsList = new LinkedHashMap<String,String>();
         doctorsList.put("VS", "Visa"); doctorsList.put("MC", "MasterCard");
         doctorsList.put("AE", "American Express");
         doctorsList.put("DS", "Discover"); doctorsList.put("DC", "Diner's Club");
         return  doctorsList;
     }
+
 
 }
 
