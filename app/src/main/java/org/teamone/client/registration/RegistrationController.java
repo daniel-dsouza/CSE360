@@ -49,12 +49,18 @@ public class RegistrationController {
         if(attempt.getFirstName().equalsIgnoreCase("") || attempt.getLastName().equalsIgnoreCase("") || attempt.getdob().equalsIgnoreCase("") || attempt.getAddress().equalsIgnoreCase("") || attempt.getCity().equalsIgnoreCase("") || attempt.getState().equalsIgnoreCase("") || attempt.getZipcode().equalsIgnoreCase("") || attempt.getHomePhone().equalsIgnoreCase("") || attempt.getEmail().equalsIgnoreCase("") || attempt.getInsurance().equalsIgnoreCase("") || attempt.getssn().equalsIgnoreCase("") || attempt.getAge().equalsIgnoreCase("") || attempt.getGender().equalsIgnoreCase("")){
             //If feild is empty error
             System.out.println("All fields must be filled in");
-        }else{
+            return "/registration/hsp-registration";
+        }else {
             //Assign values to a patient actor
-            System.out.print("Making patient");
+            System.out.println("Making patient");
+
+            HealthConditionsAttempt attempt2 = new HealthConditionsAttempt();
+            model.put("userInput", attempt2);
+            System.out.println("loading Registration");
+            System.out.println(attempt2.getAnklePain());
+            return "/registration/hsp-healthConditions";
         }
-        //more code
-        return "/registration/hsp-registration";
+
     }
 }
 
@@ -114,4 +120,19 @@ class RegistrationAttempt {
     public String getGender() { return this.gender; }
 
     RegistrationAttempt(){}
+}
+
+class HealthConditionsAttempt{
+    boolean anklePain;
+    boolean anxiety;
+    boolean badBreath;
+
+    public void setAnklePain(boolean anklePain) { this.anklePain = anklePain; }
+    public boolean getAnklePain() { return this.anklePain; }
+
+    public void setAnxiety(boolean anxiety) { this.anxiety = anxiety; }
+    public boolean getAnxiety() { return this.anxiety; }
+
+    public void setBadBreath(boolean badBreath) { this.badBreath = badBreath; }
+    public boolean getBadBreath() { return this.badBreath; }
 }

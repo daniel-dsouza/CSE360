@@ -15,86 +15,83 @@
   <jsp:body>
     <!-- used http://bootsnipp.com/snippets/featured/styled-table -->
     <form:form action="registration" method="post" commandName="userInput">
-    <div class="span12">
-      <div class="widget stacked widget-table action-table">
-        <div class="widget-content" style="padding: 0"> <!-- Border around table and Table -->
-          <table class="table" style="margin-bottom: 0;border: none"> <!-- Rows and cols of the table -->
-            <tbody>
-            <tr> <!-- Row 1 -->
-              <td>First Name: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="firstName" />
-              </td>
-              <td>Last Name: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="lastName" />
-              </td>
-            </tr>
-            <tr> <!-- Row 2 -->
-              <td>Date of Birth: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="dob" />
-              </td>
-              <td>Address: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="address" />
-              </td>
-            </tr>
-            <tr> <!-- Row 3 -->
-              <td>City: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="city" />
-              </td>
-              <td>State: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="state" />
-              </td>
-            </tr>
-            <tr> <!-- Row 4 -->
-              <td>Zipcode: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="zipcode" />
-              </td>
-              <td>Home Phone #: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="homePhone" />
-              </td>
-            </tr>
-            <tr> <!-- Row 5 -->
-              <td>Email: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="email" />
-              </td>
-              <td>Insurance: </td>
-              <td> <!-- IMPORTANT: Likely should change input type -->
-                <form:input class='form-control' size='4' type='text' path="insurance" />
-              </td>
-            </tr>
-            <tr> <!-- Row 6 -->
-              <td>Social Security #: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="ssn" />
-              </td>
-              <td>Age: </td>
-              <td>
-                <form:input class='form-control' size='4' type='text' path="age" />
-              </td>
-            </tr>
-            <tr>  <!-- Row 7 -->
-              <td>Gender: </td>
-              <td> <!-- IMPORTANT: Likely should change input type -->
-                <form:input class='form-control' size='4' type='text' path="gender" />
-              </td>
-              <td></td>
-              <td></td>
-            </tr>
-            </tbody>
-          </table> <!-- End of table -->
-        </div>
+    <div class="span8">
+      <div class="widget-content" style="padding: 0"> <!-- Border around table and Table -->
+        <table class="table" style="margin-bottom: 0;border: none"> <!-- Rows and cols of the table -->
+          <tbody>
+          <tr> <!-- Row 1 -->
+            <td>First Name: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="firstName" />
+            </td>
+            <td>Last Name: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="lastName" />
+            </td>
+          </tr>
+          <tr> <!-- Row 2 -->
+            <td>Date of Birth: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="dob" />
+            </td>
+            <td>Address: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="address" />
+            </td>
+          </tr>
+          <tr> <!-- Row 3 -->
+            <td>City: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="city" />
+            </td>
+            <td>State: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="state" />
+            </td>
+          </tr>
+          <tr> <!-- Row 4 -->
+            <td>Zipcode: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="zipcode" />
+            </td>
+            <td>Home Phone #: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="homePhone" />
+            </td>
+          </tr>
+          <tr> <!-- Row 5 -->
+            <td>Email: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="email" />
+            </td>
+            <td>Insurance: </td>
+            <td> <!-- IMPORTANT: Likely should change input type -->
+              <form:input class='form-control' size='4' type='text' path="insurance" />
+            </td>
+          </tr>
+          <tr> <!-- Row 6 -->
+            <td>Social Security #: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="ssn" />
+            </td>
+            <td>Age: </td>
+            <td>
+              <form:input class='form-control' size='4' type='text' path="age" />
+            </td>
+          </tr>
+          <tr>  <!-- Row 7 -->
+            <td>Gender: </td>
+            <td> <!-- IMPORTANT: Likely should change input type -->
+              <form:input class='form-control' size='4' type='text' path="gender" />
+            </td>
+            <td></td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table> <!-- End of table -->
       </div> <!-- End of widget-content -->
       <br/>
       <div class="button_holder" style="text-align: center;">
-        <!-- Figure out how to center and if I need to change the "type" -->
         <span class="group-btn">
             <input type="submit" value="Next" class="btn btn-primary btn-md"/>
         </span>
