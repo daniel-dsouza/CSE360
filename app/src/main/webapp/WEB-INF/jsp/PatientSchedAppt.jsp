@@ -5,8 +5,12 @@
   Time: 7:29 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
   <div class="container">
@@ -44,13 +48,14 @@
       </div>
     </center>
   </div> //-->
-      <tr>
-        <td>Doctors :</td>
-        <td><select path="Doctors" multiple="true">
-          <options items="${doctorsList}"/>
-        </select>
-        </td>
-      </tr>
+
+
+        <form:select path="doctorsList">
+          <option value="Select" label="Select a card type"></option>
+          <form:options items="${doctorsList}" />
+        </form:select>
+
+
 
 
 </head>
