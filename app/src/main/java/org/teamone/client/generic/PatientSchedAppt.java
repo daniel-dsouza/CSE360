@@ -38,13 +38,14 @@ public class PatientSchedAppt {
         //System.out.println(userID);
         return "PatientSchedAppt";
             }
-    @ModelAttribute("creditCardTypes")
 
-    public Map<String,String> populateDoctorsList() {
+    protected Map referenceData (HttpServletRequest request) throws Exception {
+        Map referenceData = new HashMap();
         Map<String,String> doctorsList = new LinkedHashMap<String,String>();
         doctorsList.put("VS", "Visa"); doctorsList.put("MC", "MasterCard");
         doctorsList.put("AE", "American Express");
         doctorsList.put("DS", "Discover"); doctorsList.put("DC", "Diner's Club");
+        referenceData.put("doctorsList", doctorsList);
         return  doctorsList;
     }
 
