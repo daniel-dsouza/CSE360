@@ -72,7 +72,7 @@ public class RegistrationController {
             model.put("userInput", attempt2);
             return "registration/hsp-healthConditions";
         } else if (page.equals("page2")) {
-            //      These break my code
+            //      These do not populate either, though I do not know if they ever populated
             System.out.println("Ankle Pain: "+attempt2.getAnklePain());
             System.out.println("Anxiety: "+attempt2.getAnxiety());
             System.out.println("Bad Breath: "+attempt2.getBadBreath());
