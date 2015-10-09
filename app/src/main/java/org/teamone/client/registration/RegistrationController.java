@@ -29,15 +29,15 @@ public class RegistrationController {
         if(1 == 1) {        //Still can't get the moving through the pages & assign values to variables to work at the same time______This code gets the form inputs but does not cycle
             System.out.println("Creating a Patient");
 
-            attempt.displayPatientPersonalInformation();
+            //attempt.displayPatientPersonalInformation();
 
             return "/registration/hsp-healthConditions";
         }else if(2 == 2){
             System.out.println("Loading Health Conditions");
 
-            attempt.displayHealthConditions();
+            //attempt.displayHealthConditions();
 
-            //return "/registration/hsp-healthConditions";
+            //return "/registration/hsp-healthConditions"; //Used for debugging to make sure that check boxes functioned properly
             return "/registration/registration-page3"; //This is the correct return
         }else{
 
