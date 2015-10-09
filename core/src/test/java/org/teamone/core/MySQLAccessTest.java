@@ -20,7 +20,7 @@ public class MySQLAccessTest {
     public void getMessage_ShouldReturnMessage() {
         try {
             //test.readDataBase();//comment out this to prevent testing it.
-            System.out.println("Read successfully");
+           // System.out.println("Read successfully");
         }
         catch(Exception e)
         {

@@ -13,11 +13,17 @@ public class LoginTest {
 
         test = new Person();
         test.setUserID(101);
-        test.setPassword("100");
+        test.setPassword("doctor1");
     }
 
     @Test
     public void helpM() {
-        LoginSQL.authenticate(test);
+
+        if(LoginSQL.authenticate(test))
+        {
+            System.out.println("LOGIN SUCCESS!");
+        }
+        else
+            System.out.println("LOGIN FAILED");
     }
 }
