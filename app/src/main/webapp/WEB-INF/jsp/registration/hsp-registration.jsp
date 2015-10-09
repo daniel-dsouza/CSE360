@@ -65,7 +65,7 @@
               <form:input class='form-control' size='4' type='text' path="email" />
             </td>
             <td>Insurance: </td>
-            <td> <!-- IMPORTANT: Likely should change input type -->
+            <td>
               <form:input class='form-control' size='4' type='text' path="insurance" />
             </td>
           </tr>

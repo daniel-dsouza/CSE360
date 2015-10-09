@@ -50,17 +50,18 @@ public class RegistrationController {
             //If feild is empty error
             System.out.println("All fields must be filled in");
             return "/registration/hsp-registration";
-        }else {
-            //Assign values to a patient actor
+        }else{
+            //Assign values to a patient actor and moves on to the health conditions of the patient
             System.out.println("Making patient");
 
             HealthConditionsAttempt attempt2 = new HealthConditionsAttempt();
             model.put("userInput", attempt2);
+            /*
             System.out.println("loading Registration");
             System.out.println(attempt2.getAnklePain());
+            */
             return "/registration/hsp-healthConditions";
         }
-
     }
 }
 

@@ -28,34 +28,38 @@
     <!-- used http://bootsnipp.com/snippets/featured/animated-radios-amp-checkboxes-nojs -->
     <form:form action="registration" method="post" commandName="userInput">
       <div class="container">
-        <div class="col-sm-12">
-          <table class="table" style="margin-bottom: 0;border: none">
-            <tbody>
-              <tr>
-                <td>
-                  <label class="checkbox">
-                    <form:checkbox path="anklePain" />
-                    <span class="cr"></span>
-                    Ankle Pain
-                  </label>
-                </td>
-                <td>
-                  <label class="checkbox">
-                    <form:checkbox path="anxiety" />
-                    <span class="cr"></span>
-                    Anxiety
-                  </label>
-                </td>
-                <td>
-                  <label class="checkbox">
-                    <form:checkbox path="badBreath" />
-                    <span class="cr"></span>
-                    Bad Breath
-                  </label>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <table class="table" style="margin-bottom: 0;border: none">
+          <tbody>
+            <tr> <!-- IMPORTANT: Need to make sure that the boolean values change when the check box is pressed -->
+              <td>
+                <label class="checkbox">
+                  <form:checkbox path="anklePain" />
+                  <span class="cr"></span>
+                  Ankle Pain
+                </label>
+              </td>
+              <td>
+                <label class="checkbox">
+                  <form:checkbox path="anxiety" />
+                  <span class="cr"></span>
+                  Anxiety
+                </label>
+              </td>
+              <td>
+                <label class="checkbox">
+                  <form:checkbox path="badBreath" />
+                  <span class="cr"></span>
+                  Bad Breath
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+        <div class="button_holder" style="text-align: center;"> <!-- Cause an error -->
+          <span class="group-btn">
+              <input type="submit" value="Next" class="btn btn-primary btn-md"/>
+          </span>
         </div>
       </div>
     </form:form>
