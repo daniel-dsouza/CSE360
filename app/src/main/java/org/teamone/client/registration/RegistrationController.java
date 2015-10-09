@@ -1,9 +1,8 @@
 package org.teamone.client.registration;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -13,65 +12,66 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping(value = "/registration")
+@Scope("request") //provides the user variable
 public class RegistrationController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String createPatient(Map<String, Object> model) {
-        //User userInput = new User();
-        RegistrationAttempt attempt = new RegistrationAttempt();
+    RegistrationAttempt attempt;
+
+    public RegistrationController() {
+        if (attempt == null)
+            attempt = new RegistrationAttempt();
+    }
+
+    @RequestMapping(value = "/registration/{page}", method = RequestMethod.GET)
+    public String createPatient(Map<String, Object> model,
+                                @PathVariable String page) {
+
+        String pageMapping = "registration/hsp-registration";
+
+        if (page.equals("page1")) {
+            attempt = new RegistrationAttempt();
+            pageMapping = "registration/hsp-registration";
+        }
+        else if (page.equals("page2"))
+            pageMapping = "registration/hsp-healthConditions";
+        else if (page.equals("page3"))
+            pageMapping = "registration/registration-page3";
+
         model.put("userInput", attempt);
         System.out.println("loading Registration");
+        return pageMapping;
+    }
+
+//    @RequestMapping(method = RequestMethod.GET)
+//    public String createHealthConditions(Map<String, Object> model) {
+//
+//        HealthConditionsAttempt attempt = new HealthConditionsAttempt();
+//        model.put("userChecks", attempt);
+//        System.out.println("Loading Health Conditions");
+//        return "/registration/hsp-registration";
+//    }
+
+
+/*    @RequestMapping(method = RequestMethod.POST)
+    public String processPatientInfo(@ModelAttribute("userInput") RegistrationAttempt attempt,
+                                     @PathVariable String page,
+                                     Map<String, Object> model) {
+
+        System.out.println(page);
+
         return "/registration/hsp-registration";
-    }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String createHealthConditions(Map<String, Object> model) {
+    }*/
 
-        HealthConditionsAttempt attempt = new HealthConditionsAttempt();
-        model.put("userChecks", attempt);
-        System.out.println("Loading Health Conditions");
-        return "/registration/hsp-registration";
-    }
-
-
-    @RequestMapping(method = RequestMethod.POST)
-    public String processPatientInfo(@ModelAttribute("userInput") RegistrationAttempt attempt, Map<String, Object> model) {
-/*
-        System.out.println("First Name: " + attempt.getFirstName());
-        System.out.println("Last Name: " + attempt.getLastName());
-        System.out.println("Date of Birth: " + attempt.getdob());
-        System.out.println("Address: " + attempt.getAddress());
-        System.out.println("City: " + attempt.getCity());
-        System.out.println("State: " + attempt.getState());
-        System.out.println("Zipcode: " + attempt.getZipcode());
-        System.out.println("Home Phone #: " + attempt.getHomePhone());
-        System.out.println("Email: " + attempt.getEmail());
-        System.out.println("Insurance: " + attempt.getInsurance());
-        System.out.println("Social Security #: " + attempt.getssn());
-        System.out.println("Age: " + attempt.getAge());
-        System.out.println("Gender: " + attempt.getGender());
-*/
-        if(attempt.getFirstName().equalsIgnoreCase("") || attempt.getLastName().equalsIgnoreCase("") || attempt.getdob().equalsIgnoreCase("") || attempt.getAddress().equalsIgnoreCase("") || attempt.getCity().equalsIgnoreCase("") || attempt.getState().equalsIgnoreCase("") || attempt.getZipcode().equalsIgnoreCase("") || attempt.getHomePhone().equalsIgnoreCase("") || attempt.getEmail().equalsIgnoreCase("") || attempt.getInsurance().equalsIgnoreCase("") || attempt.getssn().equalsIgnoreCase("") || attempt.getAge().equalsIgnoreCase("") || attempt.getGender().equalsIgnoreCase("select one")){
-            //If a field has not been filled out
-            System.out.println("All fields must be filled in");
-            return "/registration/hsp-registration";
-        }else{
-            //Assign values to a patient actor and moves on to the health conditions of the patient
-            System.out.println("Making patient");
-            return "/registration/hsp-healthConditions";
-        }
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public String processHealthConditions(@ModelAttribute("userChecks") HealthConditionsAttempt attempt, Map<String, Object> model) {
-
-        System.out.println("Ankle Pain: "+attempt.getAnklePain());
-        System.out.println("Anxiety: "+attempt.getAnxiety());
-        System.out.println("BadBreath: "+attempt.getBadBreath());
-
-        return "/registration/hsp-healthConditions";
-    }
+//    @RequestMapping(method = RequestMethod.POST)
+//    public String processHealthConditions(@ModelAttribute("userChecks") HealthConditionsAttempt attempt, Map<String, Object> model) {
+//
+//        System.out.println("Ankle Pain: "+attempt.getAnklePain());
+//        System.out.println("Anxiety: "+attempt.getAnxiety());
+//        System.out.println("BadBreath: "+attempt.getBadBreath());
+//
+//        return "/registration/hsp-healthConditions";
+//    }
 }
 
 class RegistrationAttempt {
@@ -129,10 +129,6 @@ class RegistrationAttempt {
     public void setGender(String gender) { this.gender = gender; }
     public String getGender() { return this.gender; }
 
-    RegistrationAttempt(){}
-}
-
-class HealthConditionsAttempt{
     boolean anklePain;
     boolean anxiety;
     boolean badBreath;
@@ -145,4 +141,6 @@ class HealthConditionsAttempt{
 
     public void setBadBreath(boolean badBreath) { this.badBreath = badBreath; }
     public boolean getBadBreath() { return this.badBreath; }
+
+    RegistrationAttempt(){}
 }
