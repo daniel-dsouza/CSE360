@@ -49,7 +49,7 @@ public class RegistrationController {
     }
 
 
-    //@RequestMapping(value = "/registration/{page}", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration/{page}", method = RequestMethod.POST)
     public String createPatientPost(Map<String, Object> model,
                                     @PathVariable String page) {
 
@@ -72,11 +72,11 @@ public class RegistrationController {
             model.put("userInput", attempt2);
             return "registration/hsp-healthConditions";
         } else if (page.equals("page2")) {
-            /*      These break my code
+            //      These break my code
             System.out.println("Ankle Pain: "+attempt2.getAnklePain());
             System.out.println("Anxiety: "+attempt2.getAnxiety());
             System.out.println("Bad Breath: "+attempt2.getBadBreath());
-            */
+
 
             model.put("userInput", attempt);
             return "registration/registration-page3";
