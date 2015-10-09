@@ -2,7 +2,7 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.LoginSQL;
+import org.teamone.core.SQL.PatientHealthCondtions;
 
 public class HealthConditionUpdateTest {
 
@@ -11,20 +11,20 @@ public class HealthConditionUpdateTest {
     @Before
     public void setUp() {
 
-        test = new Person();
+        test = new Patient();
         test.setPatientID(101);
-        test.setHealthConditions("asdfghjklqwertyuiopzxcvbnm");
+        test.setHealthConditions("Ryan is a good boy");
     }
 
     @Test
-    public void helpM() {
+    public void updateHC() {
 
-        if(LoginSQL.authenticate(test))
+        if(PatientHealthCondtions.updateHealthCondition(test))
         {
-            System.out.println("LOGIN SUCCESS!");
+            System.out.println("Update successful");
         }
         else
-            System.out.println("LOGIN FAILED");
+            System.out.println("\nUpdate failed");
         //Person p1 = SQL.cehck
 
     }
