@@ -26,11 +26,11 @@ public class PatientSchedAppt {
     //@Autowired
     //private User user;
 
-    @RequestMapping(value = "/SchedAppt", method = RequestMethod.GET)
-    public String viewUserHome(
-            Map<String, Object> model)
+    @RequestMapping(value = "/PatientSchedAppt", method = RequestMethod.GET)
+    public String viewUserHome(Map<String, Object> model)
             {
-        //model.put("user", user);
+        Appointment userInput = new Appointment();
+        model.put("userInput", userInput);
         System.out.println("load User?");
         System.out.println(model);
         //System.out.println(user);
