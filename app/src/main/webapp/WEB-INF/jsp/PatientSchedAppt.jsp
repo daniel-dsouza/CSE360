@@ -11,7 +11,7 @@
 <head>
   <div class="container">
     <center>
-      <h1>New Appointment</h1>
+     <!-- <h1>New Appointment</h1>
       <br>
       <br>
       <div class="form-group">
@@ -43,8 +43,16 @@
         <textarea class="form-control" rows="5" id="comment"></textarea>
       </div>
     </center>
-  </div>
-  <!-- /container -->
+  </div> //-->
+      <tr>
+        <td>Doctors :</td>
+        <td><select path="Doctors" multiple="true">
+          <options items="${doctorsList}"/>
+        </select>
+        </td>
+      </tr>
+
+
 </head>
 <body>
 

@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 //import org.teamone.client.generic.User;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -34,5 +40,18 @@ public class PatientSchedAppt {
         //System.out.println(user.getUsername());
         //System.out.println(userID);
         return "PatientSchedAppt";
+            }
+    protected Map referenceData(HttpServletRequest request) throws Exception {
+
+        Map referenceData = new HashMap();
+        List<String> doctorsList = new ArrayList<String>();
+        doctorsList.add("Gardening");
+        doctorsList.add("Listening Music");
+        doctorsList.add("Writing Technical Tutorials");
+        referenceData.put("doctorsList", doctorsList);
+
+        return referenceData;
+
     }
+
 }
