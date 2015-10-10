@@ -27,10 +27,13 @@ public class PatientSchedAppt {
     @RequestMapping(method = RequestMethod.GET)
     public String viewUserHome(Map<String, Object> model) {
         Appointment appointment1 = new Appointment(); //this is an example of a model attribute
-        Map<String, String> doctorsList = new LinkedHashMap<String,String>(); //this is an example of a model attribute not in the appointment
 
-        doctorsList.put("Rick", "Rick");
-        doctorsList.put("Morty", "Morty");
+        Map<String, String> doctorsList = new LinkedHashMap<String,String>(); //this is an example of a model attribute not in the appointment
+        doctorsList.put("Emergency Doctor", "Emergency Doctor");
+        doctorsList.put("Pediatrician", "Pediatrician");
+        doctorsList.put("General Care", "General Care");
+        doctorsList.put("Neurologist", "Neurologist");
+        doctorsList.put("X-Ray Specialist", "X-Ray Specialist");
 
         /*
         adding the model attributes to the model. Can be used to have preset answers,
@@ -38,6 +41,19 @@ public class PatientSchedAppt {
          */
         model.put("appointment", appointment1);
         model.put("doctorlist", doctorsList);
+
+       // Experimental below this line
+        Map<String,String> doctorPerson = new LinkedHashMap<String,String>();
+
+        doctorPerson.put("Dr. A", "Dr. A");
+        doctorPerson.put("Dr. B", "Dr. B");
+        doctorPerson.put("Dr. C", "Dr. C");
+        doctorPerson.put("Dr. D", "Dr. D");
+        model.put("doctorPersonList", doctorPerson);
+
+        Map<String,String> reason = new LinkedHashMap<String,String>();
+
+        model.put("reason", reason);
 
         System.out.println(model); //debug statement
         return "PatientSchedAppt"; //return the view with linked model
@@ -53,11 +69,26 @@ public class PatientSchedAppt {
 
 class Appointment {
     public String doctor;
+    public String doctorPerson;
+    public String reason;
 
     public void setDoctor(String doctor) {
         this.doctor = doctor;
     }
     public String getDoctor() {
         return this.doctor;
+    }
+
+    public void setdoctorPerson(String doctorPerson) {
+        this.doctorPerson = doctorPerson;
+    }
+    public String getdoctorPerson() {
+        return this.doctorPerson;
+    }
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+    public String getReason(){
+        return this.reason;
     }
 }

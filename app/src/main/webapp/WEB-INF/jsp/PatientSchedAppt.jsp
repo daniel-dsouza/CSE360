@@ -18,14 +18,18 @@
         <!-- method is what do when done, commandName is what object from the model to put stuff into, action should be the name of your jsp. -->
         <form:form method="post" commandName="appointment">
             <!-- path is where in the object specified by command name to store the result, items is the list of results -->
-            <form:select path="doctor" items="${doctorlist}" />
+           Specialty:<br/><form:select path="doctor" items="${doctorlist}" /><br/>
+            <!-- path is where in the object specified by command name to store the result, items is the list of results -->
+            Doctor:<br/><form:select path="doctorPerson" items="${doctorPersonList}" /><br/>
+            Reason:<br/><form:input path="reason" /><br/>
             <div class="wrapper">
                 <span class="group-btn">
-                    <input type="submit" value="Register" class="btn btn-primary btn-md"/>
+                    <input type="submit" value="Schedule" class="btn btn-primary btn-md"/>
                 </span>
             </div>
+
         </form:form>
-    </div>
+    </br>
 </div>
 
 </body>
