@@ -1,4 +1,4 @@
-package org.teamone.core;
+package org.teamone.core.users;
 
 /**
  * Created by Ryan on 10/7/2015.

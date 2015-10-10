@@ -1,4 +1,4 @@
-package org.teamone.core;
+package org.teamone.core.appointments;
 
 
 /**
