@@ -55,7 +55,7 @@ class RegistrationAttempt {
     //Start of the Patient's Personal Information (13 strings)__________________________________________________________
     private String firstName;
     private String lastName;        //2
-    private String dob;
+    private String age;
     private String address;         //4
     private String city;
     private String state;           //6
@@ -64,8 +64,8 @@ class RegistrationAttempt {
     private String email;
     private String insurance;       //10
     private String ssn;                         //probably should be a long int
-    private String age;             //12
-    private String gender;
+    private String gender;             //12
+
 
 
     public void setFirstName(String firstName) { this.firstName = firstName; }
@@ -73,9 +73,6 @@ class RegistrationAttempt {
 
     public void setLastName(String lastName) { this.lastName = lastName; }
     public String getLastName() { return this.lastName; }
-
-    public void setdob(String dob) { this.dob = dob; }
-    public String getdob() { return this.dob; }
 
     public void setAddress(String address) { this.address = address; }
     public String getAddress() { return this.address; }
@@ -111,7 +108,6 @@ class RegistrationAttempt {
     public void displayPatientPersonalInformation(){
         System.out.println("First Name: " + getFirstName());
         System.out.println("Last Name: " + getLastName());
-        System.out.println("Date of Birth: " + getdob());
         System.out.println("Address: " + getAddress());
         System.out.println("City: " + getCity());
         System.out.println("State: " + getState());
