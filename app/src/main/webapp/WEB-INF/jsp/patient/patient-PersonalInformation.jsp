@@ -13,6 +13,9 @@
         <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
   <jsp:body>
+    <h2 style="text-align: center;">
+      Patient: Edit Personal Information
+    </h2>
     <!-- used http://bootsnipp.com/snippets/featured/styled-table && http://www.web4j.com/web4j/javadoc/hirondelle/web4j/ui/tag/Populate.html -->
     <form:form action="editPersonal" method="post" commandName="userInput" onsubmit="return checkPersonalInformation()" name="test"> <!-- action="<name>" <!-- this does /<name> on POST -->
       <div class="span8">
