@@ -26,7 +26,7 @@
     </jsp:attribute>
   <jsp:body>
     <!-- used http://bootsnipp.com/snippets/featured/animated-radios-amp-checkboxes-nojs -->
-    <form:form action="registration" method="post" commandName="userInput">
+    <form:form action="page2" method="post" commandName="userInput">
       <div class="container">
         <table class="table" style="margin-bottom: 0;border: none">
           <tbody>

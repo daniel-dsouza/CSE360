@@ -14,7 +14,7 @@
     </jsp:attribute>
   <jsp:body>
     <!-- used http://bootsnipp.com/snippets/featured/styled-table -->
-    <form:form action="registration" method="post" commandName="userInput"> <!-- action="<name>" <!-- this does /registration/<name> on POST -->
+    <form:form action="page1" method="post" commandName="userInput"> <!-- action="<name>" <!-- this does /registration/<name> on POST -->
     <div class="span8">
       <div class="widget-content" style="padding: 0"> <!-- Border around table and Table -->
         <table class="table" style="margin-bottom: 0;border: none"> <!-- Rows and cols of the table -->

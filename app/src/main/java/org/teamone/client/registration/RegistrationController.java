@@ -10,29 +10,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/registration")
+//@RequestMapping(value = "/registration")
 public class RegistrationController {
 
-    @RequestMapping(method = RequestMethod.GET)
+
+    //The web page that leads to this must direct to registration/, registration will return a 404 error
+    @RequestMapping(value = "/registration/", method = RequestMethod.GET)
     public String createPatient(Map<String, Object> model) {
-        //User userInput = new User();
+
         RegistrationAttempt attempt = new RegistrationAttempt();
         model.put("userInput", attempt);
-        System.out.println("Loading Registration");
+
         return "/registration/hsp-registration";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/registration/{page}",method = RequestMethod.POST)
     public String processPatientInfo(@ModelAttribute("userInput") RegistrationAttempt attempt,
-                                     Map<String, Object> model) {
+                                     Map<String, Object> model,
+                                     @PathVariable String page) {
 
-        if(1 == 0) {        //Still can't get the moving through the pages & assign values to variables to work at the same time______This code gets the form inputs but does not cycle
+        if(page.equalsIgnoreCase("page1")) {        //Still can't get the moving through the pages & assign values to variables to work at the same time______This code gets the form inputs but does not cycle
             System.out.println("Creating a Patient");
 
             //attempt.displayPatientPersonalInformation();
 
             return "/registration/hsp-healthConditions";
-        }else if(2 == 1){
+        }else if(page.equalsIgnoreCase("page2")){
             System.out.println("Loading Health Conditions");
 
             //attempt.displayHealthConditions();
@@ -42,10 +45,10 @@ public class RegistrationController {
         }else{
             System.out.println("Loading Medical Conditions");
 
-            attempt.displayMedicalHistory();
+            //attempt.displayMedicalHistory();
 
-            return "/registration/hsp-medicalHistory"; //Used for debugging to make sure that check boxes functioned properly
-            //return "/registration/hsp-registration"; //This should be hsp-patients page or hsp-homepage
+            //return "/registration/hsp-medicalHistory"; //Used for debugging to make sure that check boxes functioned properly
+            return "/registration/hsp-registration"; //This should be hsp-patients page or hsp-homepage
         }
     }
 
@@ -583,9 +586,6 @@ class RegistrationAttempt {
         System.out.println("Lung Disease: "+getLungDisease());
         System.out.println("Mitral Valve Prolapse: "+getMitralValveProlapse());
     }
-
-
-
 
     RegistrationAttempt(){}
 }
