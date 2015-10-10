@@ -21,34 +21,34 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
+@RequestMapping(value = "/appointment") //request mapping usually needed. this will suffice if unless you have multi-page form logic, eg. greater than 2 requests.
 public class PatientSchedAppt {
 
-    //@Autowired
-    //private User user;
+    @RequestMapping(method = RequestMethod.GET)
+    public String viewUserHome(Map<String, Object> model) {
+        Appointment appointment1 = new Appointment(); //this is an example of a model attribute
+        Map<String, String> doctorsList = new LinkedHashMap<String,String>(); //this is an example of a model attribute not in the appointment
 
-    @RequestMapping(value = "/PatientSchedAppt", method = RequestMethod.GET)
-    public String viewUserHome(Map<String, Object> model)
-            {
-        Appointment userInput = new Appointment();
-        model.put("userInput", userInput);
-        System.out.println("load User?");
-        System.out.println(model);
-        //System.out.println(user);
-        //System.out.println(user.getUsername());
-        //System.out.println(userID);
-        return "PatientSchedAppt";
-            }
+        doctorsList.put("Rick", "Rick");
+        doctorsList.put("Morty", "Morty");
 
-    protected Map referenceData (HttpServletRequest request) throws Exception {
-        Map referenceData = new HashMap();
-        Map<String,String> doctorsList = new LinkedHashMap<String,String>();
-        doctorsList.put("VS", "Visa"); doctorsList.put("MC", "MasterCard");
-        doctorsList.put("AE", "American Express");
-        doctorsList.put("DS", "Discover"); doctorsList.put("DC", "Diner's Club");
-        referenceData.put("doctorsList", doctorsList);
-        return  doctorsList;
+        /*
+        adding the model attributes to the model. Can be used to have preset answers,
+        can be useful for updating stuff in the future.
+         */
+        model.put("appointment", appointment1);
+        model.put("doctorlist", doctorsList);
+
+        System.out.println(model); //debug statement
+        return "PatientSchedAppt"; //return the view with linked model
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public String handlePost(Map<String, Object> model,
+                             @ModelAttribute("appointment") Appointment ap1) { //this tells the method that there will be a field named appointment in the model
+        System.out.println(ap1.getDoctor()); //proof.
+        return "PatientSchedAppt"; //this will need to be "redirect:somesuccesspage" at some point.
+    }
 }
 
 class Appointment {
