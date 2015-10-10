@@ -13,6 +13,9 @@
         <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
   <jsp:body>
+    <h2 style="text-align: center;">
+      HSP: New Patient
+    </h2>
     <!-- used http://bootsnipp.com/snippets/featured/styled-table -->
     <form:form action="page1" method="post" commandName="userInput" onsubmit="return checkFormRegistration()" name="test"> <!-- action="<name>" <!-- this does /registration/<name> on POST -->
     <div class="span8">

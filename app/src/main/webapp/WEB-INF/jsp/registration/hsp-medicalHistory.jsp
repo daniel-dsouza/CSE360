@@ -24,6 +24,9 @@
         <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
   <jsp:body>
+      <h2 style="text-align: center;">
+          HSP: Create Medical History
+      </h2>
       <!-- used http://bootsnipp.com/snippets/featured/animated-radios-amp-checkboxes-nojs -->
       <form:form action="page3" method="post" commandName="userInput">
           <div class="container-fluid">
