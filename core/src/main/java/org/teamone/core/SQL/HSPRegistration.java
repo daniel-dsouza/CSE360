@@ -14,14 +14,14 @@ import java.sql.Statement;
 
 
 
-public class PatientUpdateInfo {
+public class HSPRegistration {
     private static Connection connect = null;
     private static Statement statement = null;
     private static PreparedStatement preparedStatementPatient = null;
     private static PreparedStatement preparedStatementPerson = null;
     private static ResultSet resultSet = null;
 
-    public static boolean UpdatePersonalInfo(Patient patient)
+    public static boolean RegisterNewPatient(Patient patient)
     { boolean boolResult;
         try {
             int checker, checker2;
@@ -46,24 +46,16 @@ public class PatientUpdateInfo {
             String insurance = patient.getInsurance();
             int age = patient.getAge();
             String gender = patient.getGender();
+            String password = patient.getPassword();
 
-            preparedStatementPatient = connect.prepareStatement("UPDATE patient set address = ?,phone = ?,SSN = ?,insurance = ?,age = ?,gender = ? where patientID = ? ;");
-            preparedStatementPatient.setString(1, address);
-            preparedStatementPatient.setInt(2, phone);
-            preparedStatementPatient.setInt(3, SSN);
-            preparedStatementPatient.setString(4, insurance);
-            preparedStatementPatient.setInt(5, age);
-            preparedStatementPatient.setString(6, gender);
-            preparedStatementPatient.setInt(7, patientID);
+            preparedStatementPerson = connect.prepareStatement("INSERT INTO `person`(`emailID`,`lName`,`fName`,`userID`,`password`)VALUES('" + email + "','" + lname + "','" + fname + "'," + patientID + ",'" + password + "');");
+            //String sqlStr2 = "INSERT INTO person(`email`,`lName`,`fName`,`userID`)VALUES('" + email + "','" + lname + "','" + fname + "'," + patientID + ")";
+            checker2 = preparedStatementPerson.executeUpdate();
+
+            preparedStatementPatient = connect.prepareStatement("INSERT INTO `patient`(`address`,`phone`,`SSN`,`insurance`,`age`,`gender`,`patientID`)VALUES('" + address + "'," + phone + "," + SSN + ",'" + insurance + "'," + age + ",'" + gender + "'," + patientID+");");
+           // String sqlStr1 = "INSERT INTO patient(`address`,`phone`,`SSN`,`insurance`,`age`,`gender`,`patientID`)VALUES('" + address + "'," + phone + "," + SSN + ",'" + insurance + "'," + age + ",'" + gender + "'," + patientID +")";
             checker = preparedStatementPatient.executeUpdate();
 
-            preparedStatementPerson = connect.prepareStatement("UPDATE person set emailID = ?,lName = ?,fName = ? where userID = ? ;");
-            preparedStatementPerson.setString(3, fname);
-            preparedStatementPerson.setString(2, lname);
-            preparedStatementPerson.setInt(4, patientID);
-            preparedStatementPerson.setString(1, email);
-
-            checker2 = preparedStatementPerson.executeUpdate();
 
             System.out.println("checker1=============="+checker);
             System.out.println("checker2=============="+checker2);

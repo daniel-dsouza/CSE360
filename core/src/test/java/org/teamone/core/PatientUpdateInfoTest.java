@@ -4,32 +4,33 @@
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.Patient;
-import org.teamone.core.SQL.PatientUpdateInfo;
+import org.teamone.core.SQL.HSPRegistration;
 
-public class PatientUseCases {
-    //this is for all use cases of patient: such as send alert/update info/schedule appointment.....
+public class PatientUpdateInfoTest {
+
     private Patient test;
 
     @Before
     public void setUp()
     {
         test = new Patient();
-        test.setPatientID(102);
-        test.setfName("Lin");
-        test.setlName("Haisheng");
-        test.setAddress("Tempe");
-        test.setEmail("xxxxxxxx@asu.edu");
-        test.setPhone(1234567890);
-        test.setSSN(123456789);
-        test.setInsurance("nope");
-        test.setAge(18);
+        test.setPatientID(106);
+        test.setfName("luffy");
+        test.setlName("monkey");
+        test.setAddress("Eastern Ocean");
+        test.setEmail("luffy@asu.edu");
+        test.setPhone(13230932);
+        test.setSSN(987654321);
+        test.setInsurance("fight");
+        test.setAge(21);
         test.setGender("male");
+        test.setPassword("hiRyan");
     }
 
     @Test
     public void tester()
     {
-        if(PatientUpdateInfo.UpdatePersonalInfo(test))
+        if(HSPRegistration.RegisterNewPatient(test))
         {
             System.out.println("*********************Update successful************************");
         }
