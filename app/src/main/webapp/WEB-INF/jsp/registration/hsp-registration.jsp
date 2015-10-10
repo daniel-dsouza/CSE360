@@ -105,7 +105,7 @@
 
 <!-- http://stackoverflow.com/questions/16134733/html-javascript-simple-form-validation-on-submit -->
 <script>
-  function checkPersonalInformation(){
+  function checkFormRegistration(){
     var email = $("#email").val();
     var gender = $("#gender").val();
     var zipcode = $("#zipcode").val();
@@ -113,7 +113,7 @@
     var ssn = $("#ssn").val();
     var age = $("#age").val();
     var firstName = $("#firstName").val();
-    var lastName = $("lastName").val();
+    var lastName = $("#lastName").val();
     if ((/(.+)@(.+){2,}\.(.+){2,}/.test(email)) || email=="" || email==null) { } else {       //this is copied and pasted from stack overflow
       alert("Please enter a valid email");
       return false;
@@ -139,7 +139,7 @@
         alert("Please enter an age under 150.");
       }
     } else{
-      alert("Please enter a number for age.")
+      alert("Please enter a number for age.");
       return false;
     }
     if(/^[a-zA-Z]{1,}$/.test(firstName)){} else{
