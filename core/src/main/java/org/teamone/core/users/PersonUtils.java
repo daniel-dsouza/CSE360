@@ -1,5 +1,7 @@
 package org.teamone.core.users;
 
+import org.teamone.core.appointments.Appointments;
+
 import java.util.ArrayList;
 
 /**
@@ -29,6 +31,12 @@ public class PersonUtils {
         //TODO: getPatientList implementation
         return null;
     }
+
+    public Appointments getStaffAppointment (Staff staff) {
+        //TODO: getPatientList implementation
+        return null;
+    }
+
 
     /**
      * Returns a list of patients based on doctors.
