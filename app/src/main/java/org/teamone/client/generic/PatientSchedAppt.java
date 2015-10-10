@@ -56,13 +56,15 @@ public class PatientSchedAppt {
         model.put("reason", reason);
 
         System.out.println(model); //debug statement
-        return "PatientSchedAppt"; //return the view with linked model
+        return "appointment/PatientSchedAppt"; //return the view with linked model
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String handlePost(Map<String, Object> model,
                              @ModelAttribute("appointment") Appointment ap1) { //this tells the method that there will be a field named appointment in the model
-        System.out.println(ap1.getDoctor()); //proof.
+        System.out.println(ap1.getDoctor());
+        System.out.println(ap1.getdoctorPerson());
+        System.out.println(ap1.getReason());//proof.
         return "PatientSchedAppt"; //this will need to be "redirect:somesuccesspage" at some point.
     }
 }
