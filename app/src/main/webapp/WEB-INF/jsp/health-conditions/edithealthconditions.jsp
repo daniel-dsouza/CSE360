@@ -12,12 +12,31 @@
     <jsp:attribute name="footer">
         <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
-  <jsp:body>
-    <div class="container-fluid">
-      <div class="jumbotron" style="background-color: deepskyblue">
-        <h1>Welcome <c:out value="${user.username}"/> to the IPIMS</h1>
-        <p>We put the 'balling in eyeballing</p>
+  <jsp:body> hi
+<%--    <form:form method="POST" commandName="healthConditions">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-4">
+            Ankle Pain
+          </div>
+          <div class="col-lg-4">
+            <form:checkbox path="anklePain" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            Anxiety
+          </div>
+          <div class="col-lg-4">
+            <form:checkbox path="anxiety" />
+          </div>
+        </div>
+        <div class="row">
+          <span class="group-btn">
+              <input type="submit" value="Login" class="btn btn-primary btn-md"/>
+          </span>
+        </div>
       </div>
-    </div>
+    </form:form>--%>
   </jsp:body>
 </t:userpage>
