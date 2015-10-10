@@ -32,7 +32,7 @@ public class PersonUtils {
         return null;
     }
 
-    public Appointments getStaffAppointment (Staff staff) {
+    public Appointments getDoctorAppointment (Staff staff) {
         //TODO: getPatientList implementation
         return null;
     }
