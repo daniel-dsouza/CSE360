@@ -3,7 +3,7 @@ package org.teamone.core;
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Patient {
+public class Patient extends Person{
     private int patientID = 0;
     private String medicalHistory;
     private String occupation;
