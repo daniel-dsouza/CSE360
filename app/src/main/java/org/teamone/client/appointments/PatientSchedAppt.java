@@ -1,18 +1,14 @@
-package org.teamone.client.generic;
+package org.teamone.client.appointments;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 //import org.teamone.client.generic.User;
 
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -65,7 +61,7 @@ public class PatientSchedAppt {
         System.out.println(ap1.getDoctor());
         System.out.println(ap1.getdoctorPerson());
         System.out.println(ap1.getReason());//proof.
-        return "PatientSchedAppt"; //this will need to be "redirect:somesuccesspage" at some point.
+        return "appointment/PatientSchedAppt"; //this will need to be "redirect:somesuccesspage" at some point.
     }
 }
 
