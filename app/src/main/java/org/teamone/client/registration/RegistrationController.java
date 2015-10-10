@@ -1,6 +1,5 @@
 package org.teamone.client.registration;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Map;
 
 @Controller
-//@RequestMapping(value = "/registration")
 public class RegistrationController {
-
 
     //The web page that leads to this must direct to registration/, registration will return a 404 error
     @RequestMapping(value = "/registration/", method = RequestMethod.GET)
@@ -29,7 +26,7 @@ public class RegistrationController {
                                      Map<String, Object> model,
                                      @PathVariable String page) {
 
-        if(page.equalsIgnoreCase("page1")) {        //Still can't get the moving through the pages & assign values to variables to work at the same time______This code gets the form inputs but does not cycle
+        if(page.equalsIgnoreCase("page1")) {
             System.out.println("Creating a Patient");
 
             //attempt.displayPatientPersonalInformation();
@@ -48,10 +45,9 @@ public class RegistrationController {
             //attempt.displayMedicalHistory();
 
             //return "/registration/hsp-medicalHistory"; //Used for debugging to make sure that check boxes functioned properly
-            return "/registration/hsp-registration"; //This should be hsp-patients page or hsp-homepage
+            return "/registration/hsp-registration"; //This should be hsp-patients page or hsp-homepage or what ever the page that this should exit to is called
         }
     }
-
 }
 
 class RegistrationAttempt {
