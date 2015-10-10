@@ -118,6 +118,7 @@ public class AppointmentViewEdit {
     }
     public static Appointments editAppointmentDoctor(Appointments readMe) {
         try {
+            int checker;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
@@ -132,10 +133,11 @@ public class AppointmentViewEdit {
 
             // PreparedStatements can use variables and are more efficient
 
-            preparedStatement = connect.prepareStatement("UPDATE appointment SET date = " + date + ", time = " + time + ", reason = " + reason + "WHERE doctorID = ?");
-            preparedStatement.setInt(1, docID);
-            int update = preparedStatement.executeUpdate();
-            if (update == 0) {
+            preparedStatement = connect.prepareStatement("UPDATE appointment SET date = " + date + ", time = " + time + ", reason = " + reason + "WHERE doctorID = " + docID);
+            checker = preparedStatement.executeUpdate();
+            System.out.println("checker1=============="+checker);
+            //If no data was manipulated insert new appointment
+            if (checker == 0) {
                 preparedStatement = connect.prepareStatement("INSERT INTO appointment (date, time, reason, doctorID) VALUES (" + date + ", " + time + ", " + reason + ", " + docID);
                 preparedStatement.executeUpdate();
             }
@@ -150,6 +152,7 @@ public class AppointmentViewEdit {
     }
     public static Appointments editAppointmentPatient(Appointments readMe) {
         try {
+            int checker;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
@@ -164,10 +167,11 @@ public class AppointmentViewEdit {
 
             // PreparedStatements can use variables and are more efficient
 
-            preparedStatement = connect.prepareStatement("UPDATE appointment SET date = " + date + ", time = " + time + ", reason = " + reason + "WHERE patientID = ?");
-            preparedStatement.setInt(1, patID);
-            int update = preparedStatement.executeUpdate();
-            if (update == 0) {
+            preparedStatement = connect.prepareStatement("UPDATE appointment SET date = " + date + ", time = " + time + ", reason = " + reason + "WHERE patientID = " + patID);
+            checker = preparedStatement.executeUpdate();
+            System.out.println("checker1=============="+checker);
+            //If no data was manipulated insert new appointment
+            if (checker == 0) {
                 preparedStatement = connect.prepareStatement("INSERT INTO appointment (date, time, reason, doctorID) VALUES (" + date + ", " + time + ", " + reason + ", " + patID);
                 preparedStatement.executeUpdate();
             }
