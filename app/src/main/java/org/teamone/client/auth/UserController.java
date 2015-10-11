@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package org.teamone.client.auth;
 
 import org.springframework.context.annotation.Scope;
