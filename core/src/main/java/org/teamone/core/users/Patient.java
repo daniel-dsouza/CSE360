@@ -1,9 +1,9 @@
-package org.teamone.core;
+package org.teamone.core.users;
 
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Patient extends Person{
+public class Patient extends Person {
     private int patientID = 0;
     private String medicalHistory;
     private String occupation;
