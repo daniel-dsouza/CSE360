@@ -28,7 +28,7 @@ public class AppointmentViewEdit {
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
 
-            preparedStatement = connect.prepareStatement("SELECT 'date', 'time', 'reason', patientID FROM appointment where doctorID = ?");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID FROM appointment where doctorID = ?");
             preparedStatement.setInt(1, docID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
@@ -75,7 +75,7 @@ public class AppointmentViewEdit {
             // PreparedStatements can use variables and are more efficient
             int patID = readMe.getPatientID();
 
-            preparedStatement = connect.prepareStatement("SELECT 'date', 'time', 'reason', doctorID FROM appointment where patientID = ?");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID FROM appointment where patientID = ?");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
@@ -120,19 +120,36 @@ public class AppointmentViewEdit {
 
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
 
+            int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();
             String date = readMe.getDate();
             String time = readMe.getTime();
             String reason = readMe.getReason();
 
+            String updateApp = "UPDATE appointment SET"
+                    + " date = ?, time = ?, reason = ?, patientID = ? WHERE doctorID = ? ;";
             // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect.prepareStatement(updateApp);
+            preparedStatement.setString(1, date);
+            preparedStatement.setString(2,time);
+            preparedStatement.setString(3,reason);
+            preparedStatement.setInt(4, patID);
+            preparedStatement.setInt(5,docID);
 
-            preparedStatement = connect.prepareStatement("UPDATE appointment SET date = " + date + ", time = " + time + ", reason = " + reason + "WHERE doctorID = " + docID);
             checker = preparedStatement.executeUpdate();
-            System.out.println("checker1=============="+checker);
+            System.out.println("checker for doctor=============="+checker);
             //If no data was manipulated insert new appointment
             if (checker == 0) {
-                preparedStatement = connect.prepareStatement("INSERT INTO appointment (date, time, reason, doctorID) VALUES (" + date + ", " + time + ", " + reason + ", " + docID);
+                String insertApp = "INSERT INTO appointment "
+                        + "(date, time, reason, doctorID, patientID) VALUES"
+                        + "(?,?,?,?,?);";
+                // PreparedStatements can use variables and are more efficient
+                preparedStatement = connect.prepareStatement(insertApp);
+                preparedStatement.setString(1, date);
+                preparedStatement.setString(2,time);
+                preparedStatement.setString(3,reason);
+                preparedStatement.setInt(4, docID);
+                preparedStatement.setInt(5, patID);
                 preparedStatement.executeUpdate();
             }
 
@@ -154,7 +171,6 @@ public class AppointmentViewEdit {
 
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
 
-
             int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();
             String date = readMe.getDate();
@@ -172,7 +188,7 @@ public class AppointmentViewEdit {
             preparedStatement.setInt(5,patID);
 
             checker = preparedStatement.executeUpdate();
-            System.out.println("checker1=============="+checker);
+            System.out.println("checker for patient=============="+checker);
             //If no data was manipulated insert new appointment
             if (checker == 0) {
                 String insertApp = "INSERT INTO appointment "

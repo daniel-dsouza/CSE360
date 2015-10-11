@@ -39,7 +39,7 @@ public class AppointmentTester {
             System.out.println("\nUpdate failed");
 
         //case 2, where user wants appoint through DoctorID
-        if(AppointmentViewEdit.editAppointmentPatient(update)!=null)//edit appoint returns a object Appointment
+        if(AppointmentViewEdit.editAppointmentDoctor(update)!=null)//edit appoint returns a object Appointment
         {
             System.out.println("\nUpdate successful");
             System.out.println("Date:\t" + update.getDate());
@@ -64,7 +64,7 @@ public class AppointmentTester {
             System.out.println("\nView failed");
 
         //case 2, where user wants appoint through patientID
-        test.setPatientID(102);
+        test.setPatientID(1246);
         if(AppointmentViewEdit.viewAppointmentPatient(test)!=null)//view appoint returns a object Appointment
         {
             System.out.println("\nView successful");
