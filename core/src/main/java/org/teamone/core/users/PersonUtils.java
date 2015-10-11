@@ -1,7 +1,8 @@
 package org.teamone.core.users;
 
 import org.teamone.core.appointments.Appointment;
-//import org.teamone.core.Patient;
+import org.teamone.core.users.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,7 +21,7 @@ public class PersonUtils {
     private static Connection connect = null;
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
-    private static PreparedStatement preparedStatementPerson = null;
+    private static PreparedStatement preparedStatementPatient = null;
     private static ResultSet resultSet = null;
 
     /**
@@ -92,18 +93,49 @@ public class PersonUtils {
 
     /**
      * Returns a list of patients
-     * @param patient: patient object with required information
+     * @param Patient: patient object with required information
      * @return
      */
-    public ArrayList<Patient> getPatients (Patient patient) {
+    public static ArrayList<Patient> getPatients(String queryName) {
+        boolean boolResult;
+        ArrayList<Patient> patientList = new ArrayList();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+
+            // Statements allow to issue SQL queries to the database
+            statement = connect.createStatement();
+
+            // PreparedStatements can use variables and are more efficient
+
+            preparedStatementPatient = connect.prepareStatement("select name as patientName from person where occupation = 'patient' and name like '%" + queryName + "%';");
+            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+            ResultSet rs = preparedStatementPatient.executeQuery();
+
+            while (rs.next()) {
+                Patient patient = new Patient();
+                patient.setName(rs.getString("patientName"));
+                patientList.add(patient);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace().toString());
+            patientList = null;
+            boolResult = false;
+        } finally {
+            close();
+        }
+        return patientList;
+    }
+
+    public Appointment getDoctorAppointment(Staff staff) {
         //TODO: getPatientList implementation
         return null;
     }
 
-    public Appointment getDoctorAppointment (Staff staff) {
-        //TODO: getPatientList implementation
-        return null;
-    }
 
 
     /**
