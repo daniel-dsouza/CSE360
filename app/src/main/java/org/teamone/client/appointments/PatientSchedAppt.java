@@ -2,10 +2,10 @@ package org.teamone.client.appointments;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 //import org.teamone.client.generic.User;
+
+import org.teamone.core.users.Staff;
 
 import java.util.*;
 
@@ -17,8 +17,23 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
-@RequestMapping(value = "/appointment") //request mapping usually needed. this will suffice if unless you have multi-page form logic, eg. greater than 2 requests.
+@RequestMapping(value = "/**/appointment") //request mapping usually needed. this will suffice if unless you have multi-page form logic, eg. greater than 2 requests.
 public class PatientSchedAppt {
+
+    @RequestMapping(value = "/getdoctors/{speciality}", method = RequestMethod.GET)
+    public @ResponseBody
+    Set<Staff> findDoctors(@PathVariable String speciality) {
+        Set<Staff> doctorList = new HashSet<Staff>();
+        Staff d1 = new Staff();
+        Staff d2 = new Staff();
+        d1.setName("rick");
+        d1.setName("beth");
+        doctorList.add(d1);
+        doctorList.add(d2);
+        System.out.println(speciality);
+        System.out.println("returning list");
+        return doctorList;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewUserHome(Map<String, Object> model) {
