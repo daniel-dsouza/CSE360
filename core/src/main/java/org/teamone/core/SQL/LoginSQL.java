@@ -18,8 +18,9 @@ public class LoginSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
-    public static boolean authenticate(Person check) {
-        boolean boolResult;
+    public static Person authenticate(Person check) {
+
+
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
@@ -35,18 +36,26 @@ public class LoginSQL {
             int ID = check.getUserID();
             String pass = check.getPassword();
 
-            preparedStatement = connect.prepareStatement("SELECT password from person WHERE userID = ?");
+            preparedStatement = connect.prepareStatement("SELECT * from person WHERE userID = ?");
             preparedStatement.setInt(1,ID);
             resultSet = preparedStatement.executeQuery();
-            boolResult = verify(resultSet, pass);
+            if(verify(resultSet, pass))
+            {
+                //resultSet.next();
+                check.setName(resultSet.getString("name"));
+                check.setOccupation(resultSet.getString("occupation"));
+                check.setEmail(resultSet.getString("emailID"));
+            }
+            else
+                check = null;
 
         } catch (Exception e) {
             System.out.println(e.getStackTrace().toString());
-            boolResult = false;
+            check = null;
         } finally {
             close();
         }
-        return boolResult;
+        return check;
 
     }
 
