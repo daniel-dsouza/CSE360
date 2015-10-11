@@ -5,8 +5,6 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.HSPRegistration;
-import org.teamone.core.SQL.PatientUpdateInfo;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.PersonUtils;
 

@@ -1,5 +1,6 @@
 <%@tag description="Overall Page template" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@attribute name="head" fragment="true" %>
 <%@attribute name="nav" fragment="true" %>
 <%@attribute name="footer" fragment="true" %>
 
@@ -9,6 +10,8 @@
     <link rel='stylesheet' href="<c:url value="/webjars/bootstrap/3.3.5/css/bootstrap.min.css" />"/>
     <script type="text/javascript" src="<c:url value="/webjars/jquery/2.1.4/jquery.min.js" />"></script>
     <script type="text/javascript" src="<c:url value="/webjars/bootstrap/3.3.5/js/bootstrap.min.js" />"></script>
+
+    <jsp:invoke fragment="head"/>
 </head>
 
 <body>
