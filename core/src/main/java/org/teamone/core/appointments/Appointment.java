@@ -1,10 +1,10 @@
-package org.teamone.core;
+package org.teamone.core.appointments;
 
 
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Appointments {
+public class Appointment {
     private String date;//date is 01/01/2001
     private String time;//time is 3:00 PM
     private int doctorID = 0;

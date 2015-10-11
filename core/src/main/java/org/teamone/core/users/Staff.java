@@ -1,9 +1,9 @@
-package org.teamone.core;
+package org.teamone.core.users;
 
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Staff extends Person{
+public class Staff extends Person {
 
     private int staffID = 0;
     private String occupation ;
