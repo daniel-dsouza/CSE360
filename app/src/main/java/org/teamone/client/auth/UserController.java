@@ -14,12 +14,13 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
+@RequestMapping(value = "/user/{userID}")
 public class UserController {
 
     //@Autowired
     //private User user;
 
-    @RequestMapping(value = "/user/{userID}", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String viewUserHome(
             Map<String, Object> model,
             @PathVariable String userID) {
