@@ -5,6 +5,8 @@ import org.teamone.core.appointments.Appointment;
 import java.sql.*;
 import java.util.ArrayList;
 
+//import org.teamone.core.Patient;
+
 /**
  * Created by daniel on 10/10/15.
  */
@@ -34,9 +36,6 @@ public class PersonUtils {
             // Setup the connection with the DB
             System.out.println("\n\nTrying to connect to mysql with root and pass\n");
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "0922");
-
-            // Statements allow to issue SQL queries to the database
-            statement = connect.createStatement();
 
             //String specialty = staff.getSpecialty();
 
@@ -98,9 +97,6 @@ public class PersonUtils {
             // Setup the connection with the DB
             System.out.println("\n\nTrying to connect to mysql with root and pass\n");
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
-
-            // Statements allow to issue SQL queries to the database
-            statement = connect.createStatement();
 
             // PreparedStatements can use variables and are more efficient
 
