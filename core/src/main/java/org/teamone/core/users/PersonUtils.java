@@ -1,6 +1,6 @@
 package org.teamone.core.users;
 
-import org.teamone.core.appointments.Appointments;
+import org.teamone.core.appointments.Appointment;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class PersonUtils {
         return null;
     }
 
-    public Appointments getDoctorAppointment (Staff staff) {
+    public Appointment getDoctorAppointment (Staff staff) {
         //TODO: getPatientList implementation
         return null;
     }
