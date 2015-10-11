@@ -1,12 +1,8 @@
 package org.teamone.core.SQL;
 
-import org.teamone.core.Patient;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.teamone.core.users.Patient;
+
+import java.sql.*;
 
 /**
  * Created by Lin on 2015/10/8.
@@ -37,19 +33,18 @@ public class PatientUpdateInfo {
 
             // PreparedStatements can use variables and are more efficient
             int patientID = patient.getPatientID();
-            String fname = patient.getfName();
-            String lname = patient.getlName();
+            String name = patient.getName();
             int SSN = patient.getSSN();
             String address = patient.getAddress();
             String email = patient.getEmail();
-            int phone = patient.getPhone();
+            long phone = patient.getPhone();
             String insurance = patient.getInsurance();
             int age = patient.getAge();
             String gender = patient.getGender();
 
             preparedStatementPatient = connect.prepareStatement("UPDATE patient set address = ?,phone = ?,SSN = ?,insurance = ?,age = ?,gender = ? where patientID = ? ;");
             preparedStatementPatient.setString(1, address);
-            preparedStatementPatient.setInt(2, phone);
+            preparedStatementPatient.setLong(2, phone);
             preparedStatementPatient.setInt(3, SSN);
             preparedStatementPatient.setString(4, insurance);
             preparedStatementPatient.setInt(5, age);
@@ -57,10 +52,9 @@ public class PatientUpdateInfo {
             preparedStatementPatient.setInt(7, patientID);
             checker = preparedStatementPatient.executeUpdate();
 
-            preparedStatementPerson = connect.prepareStatement("UPDATE person set emailID = ?,lName = ?,fName = ? where userID = ? ;");
-            preparedStatementPerson.setString(3, fname);
-            preparedStatementPerson.setString(2, lname);
-            preparedStatementPerson.setInt(4, patientID);
+            preparedStatementPerson = connect.prepareStatement("UPDATE person set emailID = ?,name = ? where userID = ? ;");
+            preparedStatementPerson.setString(2, name);
+            preparedStatementPerson.setInt(3, patientID);
             preparedStatementPerson.setString(1, email);
 
             checker2 = preparedStatementPerson.executeUpdate();

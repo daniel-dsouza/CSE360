@@ -2,14 +2,14 @@ package org.teamone.client.appointments;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.teamone.client.generic.User;
 
-import java.util.*;
-
+import java.util.LinkedHashMap;
 import java.util.Map;
+
+//import org.teamone.client.generic.User;
 
 /**
  * Created by daniel on 10/7/15.
