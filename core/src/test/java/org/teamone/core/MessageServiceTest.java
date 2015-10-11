@@ -2,6 +2,7 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.teamone.core.users.Patient;
 
 public class MessageServiceTest {
 
