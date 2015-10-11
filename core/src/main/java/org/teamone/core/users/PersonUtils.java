@@ -1,14 +1,8 @@
 package org.teamone.core.users;
 
 import org.teamone.core.appointments.Appointment;
-import org.teamone.core.users.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -26,11 +20,11 @@ public class PersonUtils {
 
     /**
      * Method returns a list doctors.
-     * @param staff: object populated with required information
-     * @return
+     * @param String: Specialty to find in sql
+     * @return ArrayList: Arraylist of staff objects
      */
-    public static ArrayList<Staff> getStaffList (Staff staff) {
-        ArrayList<Staff> arrayOfDoctors = null;
+    public static ArrayList<Staff> getStaffList (String specialty) {
+        ArrayList<Staff> arrayOfDoctors = new ArrayList<Staff>();
 
 
         try {
@@ -44,19 +38,18 @@ public class PersonUtils {
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
 
-            String specialty = staff.getSpecialty();
+            //String specialty = staff.getSpecialty();
 
             preparedStatement = connect.prepareStatement("SELECT person.name as name, person.userID as staffID FROM person WHERE person.userID IN (SELECT staff.staffID FROM staff WHERE staff.specialty = ?) ;");
             preparedStatement.setString(1, specialty);
-            ResultSet rs = preparedStatement.executeQuery();
-            ResultSet rs2 = rs;
+            resultSet = preparedStatement.executeQuery();
 
-            while(rs.next()) {
+            while(resultSet.next()) {
                 //Retrieve by column name
 
-                Staff newStaff = null;
-                newStaff.setName(rs.getString("name"));
-                newStaff.setStaffID(rs.getInt("staffID"));
+                Staff newStaff = new Staff();
+                newStaff.setName(resultSet.getString("name"));
+                newStaff.setStaffID(resultSet.getInt("staffID"));
 
                 arrayOfDoctors.add(newStaff);
             }
@@ -93,8 +86,8 @@ public class PersonUtils {
 
     /**
      * Returns a list of patients
-     * @param Patient: patient object with required information
-     * @return
+     * @param String: Find perople
+     * @return ArrayList: Arraylist of Patient objects
      */
     public static ArrayList<Patient> getPatients(String queryName) {
         boolean boolResult;
