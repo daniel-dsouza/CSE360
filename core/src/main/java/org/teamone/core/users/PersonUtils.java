@@ -1,14 +1,11 @@
 package org.teamone.core.users;
 
 import org.teamone.core.appointments.Appointment;
-//import org.teamone.core.Patient;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
+
+//import org.teamone.core.Patient;
 
 /**
  * Created by daniel on 10/10/15.

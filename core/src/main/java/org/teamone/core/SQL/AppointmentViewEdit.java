@@ -4,16 +4,10 @@ package org.teamone.core.SQL;
  * Created by Jaime on 10/9/2015.
  * This class will be used to create,view, and edit appointments by both Patients and Staff
  */
-import org.teamone.core.Appointments;
-import org.teamone.core.Patient;
-import org.teamone.core.Staff;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.teamone.core.appointments.Appointment;
+
+import java.sql.*;
 
 public class AppointmentViewEdit {
     private static Connection connect = null;
@@ -21,7 +15,7 @@ public class AppointmentViewEdit {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
-    public static Appointments viewAppointmentDoctor(Appointments readMe) {
+    public static Appointment viewAppointmentDoctor(Appointment readMe) {
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -68,7 +62,7 @@ public class AppointmentViewEdit {
         return readMe;
 
     }
-    public static Appointments viewAppointmentPatient(Appointments readMe) {
+    public static Appointment viewAppointmentPatient(Appointment readMe) {
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -116,7 +110,7 @@ public class AppointmentViewEdit {
         return readMe;
 
     }
-    public static Appointments editAppointmentDoctor(Appointments readMe) {
+    public static Appointment editAppointmentDoctor(Appointment readMe) {
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -150,7 +144,7 @@ public class AppointmentViewEdit {
         }
         return readMe;
     }
-    public static Appointments editAppointmentPatient(Appointments readMe) {
+    public static Appointment editAppointmentPatient(Appointment readMe) {
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -160,19 +154,37 @@ public class AppointmentViewEdit {
 
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
 
+
             int patID = readMe.getPatientID();
+            int docID = readMe.getDoctorID();
             String date = readMe.getDate();
             String time = readMe.getTime();
             String reason = readMe.getReason();
 
+            String updateApp = "UPDATE appointment SET"
+                                 + " date = ?, time = ?, reason = ?, doctorID = ? WHERE patientID = ? ;";
             // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect.prepareStatement(updateApp);
+            preparedStatement.setString(1, date);
+            preparedStatement.setString(2,time);
+            preparedStatement.setString(3,reason);
+            preparedStatement.setInt(4, docID);
+            preparedStatement.setInt(5,patID);
 
-            preparedStatement = connect.prepareStatement("UPDATE appointment SET date = " + date + ", time = " + time + ", reason = " + reason + "WHERE patientID = " + patID);
             checker = preparedStatement.executeUpdate();
             System.out.println("checker1=============="+checker);
             //If no data was manipulated insert new appointment
             if (checker == 0) {
-                preparedStatement = connect.prepareStatement("INSERT INTO appointment (date, time, reason, doctorID) VALUES (" + date + ", " + time + ", " + reason + ", " + patID);
+                String insertApp = "INSERT INTO appointment "
+                        + "(date, time, reason, doctorID, patientID) VALUES"
+                        + "(?,?,?,?,?);";
+                // PreparedStatements can use variables and are more efficient
+                preparedStatement = connect.prepareStatement(insertApp);
+                preparedStatement.setString(1, date);
+                preparedStatement.setString(2,time);
+                preparedStatement.setString(3,reason);
+                preparedStatement.setInt(4, docID);
+                preparedStatement.setInt(5,patID);
                 preparedStatement.executeUpdate();
             }
 
