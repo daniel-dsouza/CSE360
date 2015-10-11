@@ -7,14 +7,10 @@ package org.teamone.core.SQL;
  *
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
-import org.teamone.core.Person;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.teamone.core.users.Person;
+
+import java.sql.*;
 
 public class LoginSQL {
     private static Connection connect = null;
