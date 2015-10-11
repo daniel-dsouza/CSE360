@@ -15,6 +15,11 @@ public class AppointmentViewEdit {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
+    /**
+     *
+     * @param readMe Appointment Object to select information from database
+     * @return readMe
+     */
     public static Appointment viewAppointmentDoctor(Appointment readMe) {
         try {
             int checker;
@@ -62,6 +67,12 @@ public class AppointmentViewEdit {
         return readMe;
 
     }
+
+    /**
+     *
+     * @param readMe Appointment Object to select information from database
+     * @return
+     */
     public static Appointment viewAppointmentPatient(Appointment readMe) {
         try {
             int checker;
@@ -110,6 +121,12 @@ public class AppointmentViewEdit {
         return readMe;
 
     }
+
+    /**
+     *
+     * @param readMe Appointment Object to extract appointment info and update database
+     * @return
+     */
     public static Appointment editAppointmentDoctor(Appointment readMe) {
         try {
             int checker;
@@ -161,6 +178,12 @@ public class AppointmentViewEdit {
         }
         return readMe;
     }
+
+    /**
+     *
+     * @param readMe Appointment Object to extract appointment info and update database
+     * @return
+     */
     public static Appointment editAppointmentPatient(Appointment readMe) {
         try {
             int checker;
@@ -212,6 +235,10 @@ public class AppointmentViewEdit {
         }
         return readMe;
     }
+
+    /**
+     * Method used for closing the sql library functions
+     */
     private static void close() {
         try {
             if (resultSet != null) {
