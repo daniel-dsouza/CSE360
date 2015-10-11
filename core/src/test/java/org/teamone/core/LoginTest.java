@@ -3,6 +3,7 @@ package org.teamone.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.LoginSQL;
+import org.teamone.core.users.Person;
 
 public class LoginTest {
 
