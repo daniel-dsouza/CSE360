@@ -3,13 +3,14 @@ package org.teamone.client.appointments;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-//import org.teamone.client.generic.User;
-
+import org.teamone.core.users.PersonUtils;
 import org.teamone.core.users.Staff;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
+
+//import org.teamone.client.generic.User;
 
 /**
  * Created by daniel on 10/7/15.
@@ -27,14 +28,9 @@ public class PatientSchedAppt {
      */
     @RequestMapping(value = "/getdoctors/{speciality}", method = RequestMethod.GET)
     public @ResponseBody
-    Set<Staff> findDoctors(@PathVariable String speciality) {
-        Set<Staff> doctorList = new HashSet<Staff>(); //Hashing strikes again.
-        Staff d1 = new Staff(); //this code will need to be replaced
-        Staff d2 = new Staff();
-        d1.setName("rick");
-        d1.setName("beth");
-        doctorList.add(d1);
-        doctorList.add(d2);
+    ArrayList<Staff> findDoctors(@PathVariable String speciality) {
+        ArrayList<Staff> doctorList = new ArrayList<Staff>(); //Hashing strikes again.
+        doctorList = PersonUtils.getStaffList(speciality);
         System.out.println(speciality); //DEBUG statements
         System.out.println("returning list");
         return doctorList; //return JSON object
@@ -45,11 +41,11 @@ public class PatientSchedAppt {
         Appointment appointment1 = new Appointment(); //this is an example of a model attribute
 
         Map<String, String> doctorsList = new LinkedHashMap<String,String>(); //this is an example of a model attribute not in the appointment
-        doctorsList.put("Emergency Doctor", "Emergency Doctor");
+        doctorsList.put("EmergencyDoctor", "Emergency Doctor");//Internal value, user interface value
         doctorsList.put("Pediatrician", "Pediatrician");
-        doctorsList.put("General Care", "General Care");
+        doctorsList.put("GeneralCare", "General Care");
         doctorsList.put("Neurologist", "Neurologist");
-        doctorsList.put("X-Ray Specialist", "X-Ray Specialist");
+        doctorsList.put("X-Ray", "X-Ray Specialist");
 
         /*
         adding the model attributes to the model. Can be used to have preset answers,

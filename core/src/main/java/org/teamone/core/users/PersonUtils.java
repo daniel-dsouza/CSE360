@@ -1,14 +1,11 @@
 package org.teamone.core.users;
 
 import org.teamone.core.appointments.Appointment;
-//import org.teamone.core.Patient;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
+
+//import org.teamone.core.Patient;
 
 /**
  * Created by daniel on 10/10/15.
@@ -25,11 +22,11 @@ public class PersonUtils {
 
     /**
      * Method returns a list doctors.
-     * @param staff: object populated with required information
+     * @param Staff: object populated with required information
      * @return
      */
-    public static ArrayList<Staff> getStaffList (Staff staff) {
-        ArrayList<Staff> arrayOfDoctors = null;
+    public static ArrayList<Staff> getStaffList (String specialty) {
+        ArrayList<Staff> arrayOfDoctors = new ArrayList<Staff>();
 
 
         try {
@@ -43,8 +40,6 @@ public class PersonUtils {
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
 
-            String specialty = staff.getSpecialty();
-
             preparedStatement = connect.prepareStatement("SELECT person.name as name, person.userID as staffID FROM person WHERE person.userID IN (SELECT staff.staffID FROM staff WHERE staff.specialty = ?) ;");
             preparedStatement.setString(1, specialty);
             ResultSet rs = preparedStatement.executeQuery();
@@ -53,7 +48,7 @@ public class PersonUtils {
             while(rs.next()) {
                 //Retrieve by column name
 
-                Staff newStaff = null;
+                Staff newStaff = new Staff();
                 newStaff.setName(rs.getString("name"));
                 newStaff.setStaffID(rs.getInt("staffID"));
 
