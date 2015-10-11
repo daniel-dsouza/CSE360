@@ -17,22 +17,27 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
-@RequestMapping(value = "/**/appointment") //request mapping usually needed. this will suffice if unless you have multi-page form logic, eg. greater than 2 requests.
+@RequestMapping(value = "/**/appointment") //allows arbitrary prefixes.
 public class PatientSchedAppt {
 
+    /**
+     * This is used with .ajax to dynamically update the list of doctors.
+     * @param speciality which speciality was selected.
+     * @return json list of doctors.
+     */
     @RequestMapping(value = "/getdoctors/{speciality}", method = RequestMethod.GET)
     public @ResponseBody
     Set<Staff> findDoctors(@PathVariable String speciality) {
-        Set<Staff> doctorList = new HashSet<Staff>();
-        Staff d1 = new Staff();
+        Set<Staff> doctorList = new HashSet<Staff>(); //Hashing strikes again.
+        Staff d1 = new Staff(); //this code will need to be replaced
         Staff d2 = new Staff();
         d1.setName("rick");
         d1.setName("beth");
         doctorList.add(d1);
         doctorList.add(d2);
-        System.out.println(speciality);
+        System.out.println(speciality); //DEBUG statements
         System.out.println("returning list");
-        return doctorList;
+        return doctorList; //return JSON object
     }
 
     @RequestMapping(method = RequestMethod.GET)

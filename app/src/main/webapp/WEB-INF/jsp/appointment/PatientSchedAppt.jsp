@@ -9,20 +9,7 @@
     <jsp:attribute name="head">
         <script type="text/javascript">
             <!--
-                function updateList() {
-                    $.getJSON("/appointment/getdoctors", {speciality: $(this).val(), ajax: 'true'}, function (data) {
-                        var outputHTML = '<option value="">doctor</option>';
-                        var len = data.length;
-                        for (var i = 0; i < len; i++) {
-                            outputHTML += '<option value="' + data[i].name + '">' + data[i].name + '</option>';
-                        }
-                        outputHTML += '</option>';
-
-                        $('#doctor').html(outputHTML)
-                    });
-                }
             function loadDoctors() {
-                alert('/appointment/getdoctors/' + $("#special").val());
                 $.ajax('/appointment/getdoctors/' + $("#special").val(), {
                     type:'GET',
                     dataType:'json',
@@ -60,7 +47,7 @@
                     <!-- path is where in the object specified by command name to store the result, items is the list of results -->
                     <!-- Doctor: -->
 
-
+                    <!-- id is how jquery get the element. -->
                     <form:select id="doctor" path="doctorPerson">
                         <form:option value="">Doctor</form:option>
                     </form:select>
