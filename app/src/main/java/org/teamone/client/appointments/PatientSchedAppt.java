@@ -2,9 +2,12 @@ package org.teamone.client.appointments;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.teamone.core.users.PersonUtils;
-import org.teamone.core.users.Staff;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ModelAttribute;
+//import org.teamone.client.generic.User;
+
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -82,9 +85,13 @@ public class PatientSchedAppt {
 }
 
 class Appointment {
+    public String patient;
     public String doctor;
     public String doctorPerson;
     public String reason;
+
+    public void setPatient(String patient)  {this.patient = patient; }
+    public String getPatient() {return this.patient;}
 
     public void setDoctor(String doctor) {
         this.doctor = doctor;
