@@ -27,9 +27,6 @@ public class LoginSQL {
             System.out.println("\n\nMySQLAccess\n\nTrying to connect to mysql with root and pass\n");
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
 
-            // Statements allow to issue SQL queries to the database
-            statement = connect.createStatement();
-
 
             // PreparedStatements can use variables and are more efficient
             int ID = check.getUserID();
