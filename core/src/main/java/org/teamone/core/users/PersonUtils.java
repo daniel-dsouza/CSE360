@@ -17,16 +17,16 @@ public class PersonUtils {
     private static Connection connect = null;
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
-    private static PreparedStatement preparedStatementPerson = null;
+    private static PreparedStatement preparedStatementPatient = null;
     private static ResultSet resultSet = null;
 
     /**
      * Method returns a list doctors.
-     * @param staff: object populated with required information
-     * @return
+     * @param String: Specialty to find in sql
+     * @return ArrayList: Arraylist of staff objects
      */
-    public static ArrayList<Staff> getStaffList (Staff staff) {
-        ArrayList<Staff> arrayOfDoctors = null;
+    public static ArrayList<Staff> getStaffList (String specialty) {
+        ArrayList<Staff> arrayOfDoctors = new ArrayList<Staff>();
 
 
         try {
@@ -40,19 +40,18 @@ public class PersonUtils {
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
 
-            String specialty = staff.getSpecialty();
+            //String specialty = staff.getSpecialty();
 
             preparedStatement = connect.prepareStatement("SELECT person.name as name, person.userID as staffID FROM person WHERE person.userID IN (SELECT staff.staffID FROM staff WHERE staff.specialty = ?) ;");
             preparedStatement.setString(1, specialty);
-            ResultSet rs = preparedStatement.executeQuery();
-            ResultSet rs2 = rs;
+            resultSet = preparedStatement.executeQuery();
 
-            while(rs.next()) {
+            while(resultSet.next()) {
                 //Retrieve by column name
 
-                Staff newStaff = null;
-                newStaff.setName(rs.getString("name"));
-                newStaff.setStaffID(rs.getInt("staffID"));
+                Staff newStaff = new Staff();
+                newStaff.setName(resultSet.getString("name"));
+                newStaff.setStaffID(resultSet.getInt("staffID"));
 
                 arrayOfDoctors.add(newStaff);
             }
@@ -89,18 +88,49 @@ public class PersonUtils {
 
     /**
      * Returns a list of patients
-     * @param patient: patient object with required information
-     * @return
+     * @param String: Find perople
+     * @return ArrayList: Arraylist of Patient objects
      */
-    public ArrayList<Patient> getPatients (Patient patient) {
+    public static ArrayList<Patient> getPatients(String queryName) {
+        boolean boolResult;
+        ArrayList<Patient> patientList = new ArrayList();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+
+            // Statements allow to issue SQL queries to the database
+            statement = connect.createStatement();
+
+            // PreparedStatements can use variables and are more efficient
+
+            preparedStatementPatient = connect.prepareStatement("select name as patientName from person where occupation = 'patient' and name like '%" + queryName + "%';");
+            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+            ResultSet rs = preparedStatementPatient.executeQuery();
+
+            while (rs.next()) {
+                Patient patient = new Patient();
+                patient.setName(rs.getString("patientName"));
+                patientList.add(patient);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace().toString());
+            patientList = null;
+            boolResult = false;
+        } finally {
+            close();
+        }
+        return patientList;
+    }
+
+    public Appointment getDoctorAppointment(Staff staff) {
         //TODO: getPatientList implementation
         return null;
     }
 
-    public Appointment getDoctorAppointment (Staff staff) {
-        //TODO: getPatientList implementation
-        return null;
-    }
 
 
     /**
