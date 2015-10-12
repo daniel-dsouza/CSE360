@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
-
+import org.teamone.core.SQL.LoginSQL;
 import org.teamone.core.users.Person;
 
 import java.util.Map;
@@ -30,36 +30,38 @@ public class LoginController {
     public String viewLogin(Map<String, Object> model) {
         LoginAttempt attempt = new LoginAttempt();
         model.put("userInput", attempt);
-        /*
-        Person attempt = new Person();
-         */
+
+        Person pAttempt = new Person();
+
         System.out.println("loading login");
         return "auth/login";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String processLogin(
-            @ModelAttribute("userInput") LoginAttempt attempt,
-            //@ModelAttribute("userInput") Person attempt
+            //@ModelAttribute("userInput") LoginAttempt attempt,
+            @ModelAttribute("userInput") Person pAttempt,
             @ModelAttribute("user") User user, //special bean used to store session
             Map<String, Object> model) {
 
         //more code
-        if(attempt.getPassword().equals("go")) {
-        //if (LoginSQL.authenticate(attempt) !=null) {
-            System.out.println("auth succeed");
-            user.setUsername(attempt.getUserID());
-            user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
-            return "redirect:/user/" + user.getUsername();
-        }
-        else {
-            System.out.println("auth fail");
-            String errorMessage = "Your userID or password were incorrect. Try again.";
-            model.put("errorMessage", errorMessage);
-            return "auth/login";
+        //if (attempt.getPassword().equals("go")) {
+            if (LoginSQL.authenticate(pAttempt) != null) {
+                System.out.println("auth succeed");
+                user.setUsername(LoginSQL.getName(pAttempt.getUserID()));
+                user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
+                return "redirect:/user/" + user.getUsername();
+            } else {
+                System.out.println("auth fail");
+                String errorMessage = "Your userID or password were incorrect. Try again.";
+                model.put("errorMessage", errorMessage);
+                return "auth/login";
+            }
         }
     }
-}
+
+
+
 
 class LoginAttempt {
     private String userID;
