@@ -25,17 +25,27 @@
                 <li>9:00 AM</li>
                 <li>Dr. Stephanie Bui</li>
                 <li>Reason: Headache</li>
+                <li>
+                    <span class="group-btn">
+                        <input type="submit" value="Edit" class="btn btn-primary btn-md"/>
+                    </span>
+            </li>
             </u1>
         </div>
         <hr size = 7>
         <div class = "container">
             <u1 class = "list-inline">
-                <li style="margin-left: 10px;">Patient: Bob shmo</li>
+                <li style="margin-left: 10px;">Patient: Rie Hinze</li>
                 <li>10/13/15</li>
                 <li>10:30 AM</li>
                 <li>Dr. Ryan Ang</li>
                 <li>Reason: Insomnia</li>
-            </u1>
+                <li>
+                    <span class="group-btn">
+                        <input type="submit" value="Edit" class="btn btn-primary btn-md"/>
+                    </span>
+                </li>
+                </u1>
         </div>
 
     </jsp:body>

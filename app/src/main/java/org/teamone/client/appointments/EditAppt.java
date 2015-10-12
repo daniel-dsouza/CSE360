@@ -39,11 +39,18 @@ public class EditAppt {
         // Experimental below this line
         Map<String,String> doctorPerson = new LinkedHashMap<String,String>();
 
-        doctorPerson.put("Dr. A", "Dr. A");
-        doctorPerson.put("Dr. B", "Dr. B");
-        doctorPerson.put("Dr. C", "Dr. C");
-        doctorPerson.put("Dr. D", "Dr. D");
+        doctorPerson.put("Dr. Ang", "Dr. Ang");
+        doctorPerson.put("Dr. Dudley", "Dr. Dudley");
+
         model.put("doctorPersonList", doctorPerson);
+
+        Map<String,String> dateList = new LinkedHashMap<String,String>();
+        dateList.put("List of Times", "List of Times");
+        dateList.put("October 14, 2015 10:00 AM", "October 14, 2015 10:00 AM");
+        dateList.put("October 15, 2015 11:00 AM", "October 15, 2015 11:00 AM");
+        dateList.put("October 16, 2015 9:00 AM","October 16, 2015 9:00 AM");
+        dateList.put("October 16, 2015 3:00 PM", "October 16, 2015 3:00 PM");
+        model.put("dateList", dateList);
 
         Map<String,String> reason = new LinkedHashMap<String,String>();
 
