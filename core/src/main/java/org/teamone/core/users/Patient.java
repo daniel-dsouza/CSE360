@@ -5,19 +5,25 @@ package org.teamone.core.users;
  */
 public class Patient extends Person {
     private int patientID = 0;
-    private String medicalHistory;
-    private String occupation;
-    private String address;
-    private int SSN = 0;
-    private String gender;
-    private String insurance;
-    private int age = 0;
-    private long phone = 0;
-    private String healthConditions;
-    private String labReports;
+    private String medicalHistory; //wtf is this?
+    private String occupation; //why do we care?
+    //private String address;
+    //private int SSN = 0;
+    //private String gender;
+    //private String insurance;
+    //private int age = 0;
+    //private long phone = 0;
+    private String healthConditions; //wtf is this
+    private String labReports; //wtf is this
     private String alertDateAndTime;
     private boolean alertStatus = false;
-    private String prescription;
+    private String prescription; //wtf is this
+
+    PatientInformation patientInformation;
+
+    public Patient() {
+        patientInformation = new PatientInformation();
+    }
 
     public int getPatientID() {
         return patientID;
@@ -44,51 +50,62 @@ public class Patient extends Person {
     }
 
     public String getAddress() {
-        return address;
+        return this.patientInformation.getAddress();
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        //this.address = address;
+        this.patientInformation.setAddress(address);
     }
 
     public int getSSN() {
-        return SSN;
+        //return SSN;
+        return this.patientInformation.getSsn();
     }
 
     public void setSSN(int SSN) {
-        this.SSN = SSN;
+        //this.SSN = SSN;
+        this.patientInformation.setSsn(SSN);
     }
 
     public String getGender() {
-        return gender;
+        //return gender;
+        return this.patientInformation.getGender();
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        //this.gender = gender;
+        this.patientInformation.setGender(gender);
     }
 
     public String getInsurance() {
-        return insurance;
+        //return insurance;
+        return this.patientInformation.getInsurance();
     }
 
     public void setInsurance(String insurance) {
-        this.insurance = insurance;
+        //this.insurance = insurance;
+        this.patientInformation.setInsurance(insurance);
     }
 
     public int getAge() {
-        return age;
+        //return age;
+        return Integer.parseInt(this.patientInformation.getAge());
     }
 
     public void setAge(int age) {
-        this.age = age;
+        //this.age = age;
+        this.patientInformation.setAge(Integer.toString(age));
     }
 
     public long getPhone() {
-        return phone;
+        //return phone;
+        return Long.parseLong(this.patientInformation.getHomePhone());
     }
 
     public void setPhone(int phone) {
-        this.phone = phone;
+        //this.phone = phone;
+        this.patientInformation.setHomePhone(Integer.toString(phone));
     }
 
     public String getHealthConditions() {
