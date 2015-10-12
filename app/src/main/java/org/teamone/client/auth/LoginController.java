@@ -37,21 +37,21 @@ public class LoginController {
     public String processLogin(
             @ModelAttribute("userInput") LoginAttempt attempt,
             Map<String, Object> model) {
-        System.out.println(attempt.getUsername());
+        System.out.println(attempt.getUserID());
         System.out.println(attempt.getPassword());
         System.out.println(model);
         //more code
         if(attempt.getPassword().equals("go")) {
             System.out.println("auth succeed");
             //User user = new User();
-            user.setUsername(attempt.getUsername());
+            user.setUsername(attempt.getUserID());
             user.setActions("Left,Left,Left,Right,Left,logout");
             model.put("userObj", user);
             return "redirect:/user/" + user.getUsername();
         }
         else {
             System.out.println("auth fail");
-            String errorMessage = "you suck";
+            String errorMessage = "Your userID or password were incorrect. Try again.";
             model.put("errorMessage", errorMessage);
             return "auth/login";
         }
@@ -59,16 +59,16 @@ public class LoginController {
 }
 
 class LoginAttempt {
-    private String username;
+    private String userID;
     private String password;
+    private String showError;
 
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserID(String username) {
+        this.userID = username;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getUserID() {
+        return this.userID;
     }
 
     public void setPassword(String password) {
@@ -77,6 +77,14 @@ class LoginAttempt {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public String getShowError() {
+        return showError;
+    }
+
+    public void setShowError(String showError) {
+        this.showError = showError;
     }
 
     LoginAttempt(){
