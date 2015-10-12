@@ -5,7 +5,7 @@ package org.teamone.core.users;
  */
 public class Patient extends Person {
     private int patientID = 0;
-    private String medicalHistory; //wtf is this?
+    //private String medicalHistory; //wtf is this?
     private String occupation; //why do we care?
     //private String address;
     //private int SSN = 0;
@@ -21,10 +21,12 @@ public class Patient extends Person {
 
     public PatientInformation patientInformation;
     public HealthConditions healthConditions;
+    public MedicalHistory medicalHistory;
 
     public Patient() {
         patientInformation = new PatientInformation();
         healthConditions = new HealthConditions();
+        medicalHistory = new MedicalHistory();
     }
 
     public int getPatientID() {
@@ -36,11 +38,11 @@ public class Patient extends Person {
     }
 
     public String getMedicalHistory() {
-        return medicalHistory;
+        return medicalHistory.toString();
     }
 
     public void setMedicalHistory(String medicalHistory) {
-        this.medicalHistory = medicalHistory;
+        //this.medicalHistory = medicalHistory;
     }
 
     public String getOccupation() {
