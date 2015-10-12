@@ -32,6 +32,10 @@ public class PatientTest {
         for (String condition : patient.healthConditions.getKeys()) {
             patient.healthConditions.set(condition, true);
         }
+
+        for (String condition : patient.medicalHistory.getKeys()) {
+            patient.medicalHistory.set(condition, true);
+        }
     }
     @Test
     public void checkPatientInformation() {
@@ -55,6 +59,13 @@ public class PatientTest {
     public void checkHealthConditions() {
         for (String condition : patient.healthConditions.getKeys()) {
             Assert.assertTrue(patient.healthConditions.isTrue(condition));
+        }
+    }
+
+    @Test
+    public void checkMedicalHistory() {
+        for (String condition : patient.medicalHistory.getKeys()) {
+            Assert.assertTrue(condition + " is not working", patient.medicalHistory.isTrue(condition));
         }
     }
 }
