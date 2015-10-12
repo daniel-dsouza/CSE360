@@ -31,7 +31,8 @@
                     <div class="col-md-offset-5 col-md-3">
                         <div class="form-login">
                             <h4>Please Login</h4>
-                            <form:input path="userID" id="userID" class="form-control input-sm chat-input" placeholder="userID" maxlength="10" autofocus="autofocus" required="required"/>
+                            <form:input path="userID" id="userID" class="form-control input-sm chat-input" placeholder="userID"
+                                        type="number" min="1" max="9999" step="1" maxlength="10" autofocus="autofocus" required="required"/>
                             </br>
                             <input:password path="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" maxlength="40" required="required"/>
                             </br>
