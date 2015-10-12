@@ -1,9 +1,9 @@
-package org.teamone.core;
+package org.teamone.core.users;
 
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Patient {
+public class Patient extends Person {
     private int patientID = 0;
     private String medicalHistory;
     private String occupation;
@@ -12,7 +12,7 @@ public class Patient {
     private String gender;
     private String insurance;
     private int age = 0;
-    private int phone = 0;
+    private long phone = 0;
     private String healthConditions;
     private String labReports;
     private String alertDateAndTime;
@@ -83,7 +83,7 @@ public class Patient {
         this.age = age;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
