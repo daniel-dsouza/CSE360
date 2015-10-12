@@ -57,12 +57,12 @@ public class PatientSchedAppt {
         model.put("appointment", appointment1);
         model.put("doctorlist", doctorsList);
 
-        Map<String,String> date = new LinkedHashMap<String,String>();
-        date.put("October 14, 2015 10:00 AM", "October 14, 2015 10:00 AM");
-        date.put("October 15, 2015 11:00 AM", "October 15, 2015 11:00 AM");
-        date.put("October 16, 2015 9:00 AM","October 16, 2015 9:00 AM");
-        date.put("October 16, 2015 3:00 PM", "October 16, 2015 3:00 PM");
-        model.put("date", date);
+        Map<String,String> dateList = new LinkedHashMap<String,String>();
+        dateList.put("October 14, 2015 10:00 AM", "October 14, 2015 10:00 AM");
+        dateList.put("October 15, 2015 11:00 AM", "October 15, 2015 11:00 AM");
+        dateList.put("October 16, 2015 9:00 AM","October 16, 2015 9:00 AM");
+        dateList.put("October 16, 2015 3:00 PM", "October 16, 2015 3:00 PM");
+        model.put("dateList", dateList);
 
         Map<String,String> reason = new LinkedHashMap<String,String>();
 
@@ -77,7 +77,8 @@ public class PatientSchedAppt {
                              @ModelAttribute("appointment") Appointment ap1) { //this tells the method that there will be a field named appointment in the model
         System.out.println(ap1.getDoctorSpec());
         System.out.println(ap1.getDoctorName());
-        System.out.println(ap1.getReason());//proof.
+        System.out.println(ap1.getReason());
+        System.out.println(ap1.getDate());//proof.
         return "appointment/PatientSchedAppt"; //this will need to be "redirect:somesuccesspage" at some point.
     }
 }
