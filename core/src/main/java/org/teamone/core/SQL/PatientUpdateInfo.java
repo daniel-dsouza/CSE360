@@ -78,21 +78,6 @@ public class PatientUpdateInfo {
 
     }
 
-    /* private static boolean verify(ResultSet resultSet, String pass) throws SQLException {
-         // ResultSet is initially before the first data set
-         resultSet.next();
-         boolean boolResult;
-         String passwordSQL = resultSet.getString("password");
-
-         if(pass.compareTo(passwordSQL)==0)
-         {
-             boolResult = true;
-         }
-         else
-             boolResult = false;
-         return boolResult;
-     }
- */
     // You need to close the resultSet
     private static void close() {
         try {
