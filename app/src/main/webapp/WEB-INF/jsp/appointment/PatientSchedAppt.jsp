@@ -51,7 +51,7 @@
                     Doctor:<br/><form:select id="doctor" path="doctorName">
                          <form:option value="">Doctor</form:option>
                     </form:select><br/>
-                    Time:<form:select id="date" path="date" items="${dateList}"/><br/>
+                    Time:<br/><form:select id="date" path="date" items="${dateList}"/><br/>
 
 
                     Reason:<br/><form:input path="reason" /><br/>
