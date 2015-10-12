@@ -49,7 +49,7 @@
 
                     <!-- id is how jquery get the element. -->
                     Doctor:<br/><form:select id="doctor" path="doctorName">
-                         <form:option value="">Doctor</form:option>
+                         <form:option value="">List of Doctors</form:option>
                     </form:select><br/>
                     Time:<br/><form:select id="date" path="date" items="${dateList}"/><br/>
 

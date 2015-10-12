@@ -58,6 +58,7 @@ public class PatientSchedAppt {
         model.put("doctorlist", doctorsList);
 
         Map<String,String> dateList = new LinkedHashMap<String,String>();
+        dateList.put("List of Times", "List of Times");
         dateList.put("October 14, 2015 10:00 AM", "October 14, 2015 10:00 AM");
         dateList.put("October 15, 2015 11:00 AM", "October 15, 2015 11:00 AM");
         dateList.put("October 16, 2015 9:00 AM","October 16, 2015 9:00 AM");
