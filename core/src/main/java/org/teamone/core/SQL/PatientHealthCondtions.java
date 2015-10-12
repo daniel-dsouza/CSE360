@@ -8,7 +8,7 @@ package org.teamone.core.SQL;
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
 
-import org.teamone.core.Patient;
+import org.teamone.core.users.Patient;
 
 import java.sql.*;
 
@@ -17,10 +17,6 @@ public class PatientHealthCondtions {
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
-
-
-
-
 
     public static boolean updateHealthCondition(Patient patient) {
         boolean boolResult;
@@ -31,10 +27,6 @@ public class PatientHealthCondtions {
             // Setup the connection with the DB
             System.out.println("\n\nTrying to connect to mysql with root and pass\n");
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
-
-            // Statements allow to issue SQL queries to the database
-            statement = connect.createStatement();
-
 
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
