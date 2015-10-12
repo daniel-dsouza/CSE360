@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.teamone.core.appointments.Appointment;
 //import org.teamone.client.generic.User;
 
 import java.util.*;
@@ -55,8 +56,8 @@ public class EditAppt {
     @RequestMapping(method = RequestMethod.POST)
     public String handlePost(Map<String, Object> model,
                              @ModelAttribute("appointment") Appointment ap1) { //this tells the method that there will be a field named appointment in the model
-        System.out.println(ap1.getDoctor());
-        System.out.println(ap1.getdoctorPerson());
+        System.out.println(ap1.getDoctorSpec());
+        System.out.println(ap1.getDoctorName());
         System.out.println(ap1.getReason());//proof.
         return "appointment/EditAppt"; //this will need to be "redirect:somesuccesspage" at some point.
     }
