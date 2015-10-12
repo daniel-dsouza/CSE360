@@ -13,16 +13,18 @@ public class Patient extends Person {
     //private String insurance;
     //private int age = 0;
     //private long phone = 0;
-    private String healthConditions; //wtf is this
+    //private String healthConditions; //wtf is this
     private String labReports; //wtf is this
     private String alertDateAndTime;
     private boolean alertStatus = false;
     private String prescription; //wtf is this
 
-    PatientInformation patientInformation;
+    public PatientInformation patientInformation;
+    public HealthConditions healthConditions;
 
     public Patient() {
         patientInformation = new PatientInformation();
+        healthConditions = new HealthConditions();
     }
 
     public int getPatientID() {
@@ -109,11 +111,12 @@ public class Patient extends Person {
     }
 
     public String getHealthConditions() {
-        return healthConditions;
+        //return healthConditions;
+        return "this is lazy.";
     }
 
     public void setHealthConditions(String healthConditions) {
-        this.healthConditions = healthConditions;
+        //this.healthConditions = healthConditions;
     }
 
     public String getLabReports() {
