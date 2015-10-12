@@ -33,7 +33,7 @@ public class PersonUtils {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "0922");
 
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();

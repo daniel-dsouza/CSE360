@@ -7,9 +7,27 @@ package org.teamone.core.appointments;
 public class Appointment {
     private String date;//date is 01/01/2001
     private String time;//time is 3:00 PM
+    private String doctorName;
+    private String doctorSpec;
     private int doctorID = 0;
     private String reason;
     private int patientID = 0;
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getDoctorSpec() {
+        return doctorSpec;
+    }
+
+    public void setDoctorSpec(String doctorSpec) {
+        this.doctorSpec = doctorSpec;
+    }
 
     public int getPatientID() {
         return patientID;
