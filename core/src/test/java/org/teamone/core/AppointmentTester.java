@@ -27,7 +27,7 @@ public class AppointmentTester {
     @Test
     public void viewAppointment() {
         //case 1, where user wants appoint through PatientID
-        if(AppointmentViewEdit.editAppointmentPatient(update)!=null)//edit appoint returns a object Appointment
+       /* if(AppointmentViewEdit.editAppointmentPatient(update)!=null)//edit appoint returns a object Appointment
         {
             System.out.println("\nUpdate successful");
             System.out.println("Date:\t" + update.getDate());
@@ -77,6 +77,6 @@ public class AppointmentTester {
             System.out.println("\nView failed");
 
 
-
+*/
     }
 }

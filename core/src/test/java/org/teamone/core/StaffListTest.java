@@ -2,6 +2,7 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.teamone.core.appointments.Appointment;
 import org.teamone.core.users.PersonUtils;
 import org.teamone.core.users.Staff;
 
@@ -28,6 +29,24 @@ public class StaffListTest {
             for(int i = 0; i < testArr.size(); i++) {
                 tempStaff = testArr.get(i);
                 System.out.println(tempStaff.getName());
+            }
+        }
+        else
+            System.out.println("LOGIN FAILED");
+
+        ArrayList<Appointment> testAppoint = PersonUtils.getPatientsAppointment("Radyar");
+        if(testAppoint!=null)
+        {
+
+            Appointment tempStaff;
+            for(int i = 0; i < testAppoint.size(); i++) {
+                tempStaff = testAppoint.get(i);
+
+                System.out.println("Date:\t" + tempStaff.getDate());
+                System.out.println("Time:\t" + tempStaff.getTime());
+                System.out.println("Reason:\t" + tempStaff.getReason());
+                System.out.println("DoctorID:\t" + tempStaff.getDoctorID());
+                System.out.println("PatientID;\t" + tempStaff.getPatientID() + "\n");
             }
         }
         else

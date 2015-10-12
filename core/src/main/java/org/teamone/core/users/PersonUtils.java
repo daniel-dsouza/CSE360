@@ -88,7 +88,7 @@ public class PersonUtils {
 
     /**
      * Returns a list of patients
-     * @param String: Find perople
+     * @param String: Find people
      * @return ArrayList: Arraylist of Patient objects
      */
     public static ArrayList<Patient> getPatients(String queryName) {
@@ -126,12 +126,49 @@ public class PersonUtils {
         return patientList;
     }
 
+    public static ArrayList<Appointment> getPatientsAppointment(String patientName) {
+
+        ArrayList<Appointment> apptList = new ArrayList();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+
+            preparedStatementPatient = connect.prepareStatement("select userID from person where name = ?");
+            preparedStatementPatient.setString(1,patientName);
+            ResultSet rs2 = preparedStatementPatient.executeQuery();
+            rs2.next();
+            int patientID = rs2.getInt("userID");
+
+            preparedStatementPatient = connect.prepareStatement("select date, time, reason, doctorID, patientID from appointment where patientID = " + patientID );
+            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+            ResultSet rs = preparedStatementPatient.executeQuery();
+
+            while (rs.next()) {
+                Appointment appt = new Appointment();
+                appt.setDate(rs.getString("date"));
+                appt.setTime(rs.getString("time"));
+                appt.setReason(rs.getString("reason"));
+                appt.setDoctorID(rs.getInt("doctorID"));
+                appt.setPatientID(rs.getInt("patientID"));
+                apptList.add(appt);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace().toString());
+            apptList = null;
+        } finally {
+            close();
+        }
+        return apptList;
+    }
+
     public Appointment getDoctorAppointment(Staff staff) {
         //TODO: getPatientList implementation
         return null;
     }
-
-
 
     /**
      * Returns a list of patients based on doctors.
