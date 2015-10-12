@@ -12,7 +12,7 @@ public class HealthConditionUpdateTest {
     public void setUp() {
 
         test = new Patient();
-        test.setPatientID(101);
+        test.setPatientID(1234);
         test.setHealthConditions("Ryan is a good boy");
     }
 

@@ -7,15 +7,10 @@ package org.teamone.core.SQL;
  *
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
-import org.teamone.core.Patient;
-import org.teamone.core.Person;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.teamone.core.Patient;
+
+import java.sql.*;
 
 public class PatientHealthCondtions {
     private static Connection connect = null;
@@ -35,7 +30,7 @@ public class PatientHealthCondtions {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "Abhi1990");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
 
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
