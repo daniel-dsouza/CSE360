@@ -9,31 +9,36 @@
     <jsp:attribute name="nav">
         <jsp:include page="/WEB-INF/jsp/generic/navbar.jsp"/>
     </jsp:attribute>
+
     <jsp:attribute name="footer">
         <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
+
     <jsp:body>
         <!-- used http://bootsnipp.com/snippets/featured/simple-login -->
-        <form:form action="login" method="post" commandName="userInput">
+        <form:form name="login" action="login" method="post" commandName="userInput">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-offset-5 col-md-3" style="background-color: red; text-align: center">
-                        <h4><c:out value="${errorMessage}" /></h4>
+
+                <c:if test="${not empty errorMessage}" >
+                    <div class="row">
+                        <div class="col-md-offset-5 col-md-3" style="background-color: #FF4D4D; text-align: center; border-radius: 4px"; for>
+                            <h4><c:out value="${errorMessage}" /></h4>
+                        </div>
                     </div>
-                </div>
+                </c:if>
+
                 <div class="row">
                     <div class="col-md-offset-5 col-md-3">
                         <div class="form-login">
                             <h4>Please Login</h4>
-                            <form:input path="username" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+                            <form:input path="userID" id="userID" class="form-control input-sm chat-input" placeholder="userID" maxlength="10" autofocus="autofocus" required="required"/>
                             </br>
-                            <input:password path="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+                            <input:password path="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" maxlength="40" required="required"/>
                             </br>
-                            <div class="wrapper">
-                        <span class="group-btn">
-                            <input type="submit" value="Login" class="btn btn-primary btn-md"/>
-                        </span>
-                            </div>
+
+                            <span class="group-btn">
+                                <input type="submit" value="Login" class="btn btn-primary btn-md"/>
+                            </span>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,8 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.teamone.core.SQL.HSPRegistration;
+import org.teamone.core.SQL.PatientUpdateInfo;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.PersonUtils;
 
@@ -18,7 +20,7 @@ public class PatientUpdateInfoTest {
     @Before
     public void setUp()
     {
-        /*
+
         regis = new Patient();
         regis.setPatientID(123);
         regis.setUserID(123);
@@ -44,14 +46,14 @@ public class PatientUpdateInfoTest {
         update.setAge(21);
         update.setGender("male");
         update.setPassword("hiRyan");
-        */
+
         String queryName = "luf";
     }
 
     @Test
     public void tester()
     {
-        /*
+
         if(HSPRegistration.RegisterNewPatient(regis))
         {
             System.out.println("*********************Register successful************************");
@@ -64,7 +66,7 @@ public class PatientUpdateInfoTest {
         }
         else
             System.out.println("\n************************Update failed********************");
-        */
+
         ArrayList<Patient> patientList = PersonUtils.getPatients("luf");
         System.out.println("*********************Find successful************************");
         System.out.println("******"+patientList+"***********");

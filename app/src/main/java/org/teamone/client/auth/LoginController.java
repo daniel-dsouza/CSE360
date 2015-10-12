@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
+import org.teamone.core.SQL.LoginSQL;
+import org.teamone.core.users.Person;
 
 import java.util.Map;
 
@@ -26,49 +28,51 @@ public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewLogin(Map<String, Object> model) {
-        //User userInput = new User();
         LoginAttempt attempt = new LoginAttempt();
         model.put("userInput", attempt);
+
+        Person pAttempt = new Person();
+
         System.out.println("loading login");
         return "auth/login";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String processLogin(
-            @ModelAttribute("userInput") LoginAttempt attempt,
+            //@ModelAttribute("userInput") LoginAttempt attempt,
+            @ModelAttribute("userInput") Person pAttempt,
+            @ModelAttribute("user") User user, //special bean used to store session
             Map<String, Object> model) {
-        System.out.println(attempt.getUsername());
-        System.out.println(attempt.getPassword());
-        System.out.println(model);
+
         //more code
-        if(attempt.getPassword().equals("go")) {
-            System.out.println("auth succeed");
-            //User user = new User();
-            user.setUsername(attempt.getUsername());
-            user.setActions("Left,Left,Left,Right,Left,logout");
-            model.put("userObj", user);
-            return "redirect:/user/" + user.getUsername();
-        }
-        else {
-            System.out.println("auth fail");
-            String errorMessage = "you suck";
-            model.put("errorMessage", errorMessage);
-            return "auth/login";
+        //if (attempt.getPassword().equals("go")) {
+            if (LoginSQL.authenticate(pAttempt) != null) {
+                System.out.println("auth succeed");
+                user.setUsername(LoginSQL.getName(pAttempt.getUserID()));
+                user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
+                return "redirect:/user/" + user.getUsername();
+            } else {
+                System.out.println("auth fail");
+                String errorMessage = "Your userID or password were incorrect. Try again.";
+                model.put("errorMessage", errorMessage);
+                return "auth/login";
+            }
         }
     }
-}
+
+
+
 
 class LoginAttempt {
-    private String username;
+    private String userID;
     private String password;
 
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserID(String username) {
+        this.userID = username;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getUserID() {
+        return this.userID;
     }
 
     public void setPassword(String password) {
