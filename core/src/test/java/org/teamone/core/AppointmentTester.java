@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.AppointmentViewEdit;
 import org.teamone.core.appointments.Appointment;
+import org.teamone.core.baseclasstests.TestStrings;
 
 public class AppointmentTester {
 
@@ -27,7 +28,8 @@ public class AppointmentTester {
     @Test
     public void viewAppointment() {
         //case 1, where user wants appoint through PatientID
-       /* if(AppointmentViewEdit.editAppointmentPatient(update)!=null)//edit appoint returns a object Appointment
+        System.out.println("\nTest========Updating patient with patient ID");
+        if(AppointmentViewEdit.editAppointmentPatient(update)!=null)//edit appoint returns a object Appointment
         {
             System.out.println("\nUpdate successful");
             System.out.println("Date:\t" + update.getDate());
@@ -37,8 +39,10 @@ public class AppointmentTester {
         }
         else
             System.out.println("\nUpdate failed");
+        System.out.println(TestStrings.testEnd);
 
         //case 2, where user wants appoint through DoctorID
+        System.out.println("\nTest========Updating patient with doctor ID");
         if(AppointmentViewEdit.editAppointmentDoctor(update)!=null)//edit appoint returns a object Appointment
         {
             System.out.println("\nUpdate successful");
@@ -49,9 +53,10 @@ public class AppointmentTester {
         }
         else
             System.out.println("\nUpdate failed");
-
+        System.out.println(TestStrings.testEnd);
 
         //case 1, where user wants appoint through doctorID
+        System.out.println("\nTest========Viewing patient with doctor ID");
         if(AppointmentViewEdit.viewAppointmentDoctor(test)!=null)//view appoint returns a object Appointment
         {
             System.out.println("\nView successful");
@@ -62,9 +67,11 @@ public class AppointmentTester {
         }
         else
             System.out.println("\nView failed");
+        System.out.println(TestStrings.testEnd);
 
         //case 2, where user wants appoint through patientID
         test.setPatientID(1246);
+        System.out.println("\nTest========Viewing patient with patient ID");
         if(AppointmentViewEdit.viewAppointmentPatient(test)!=null)//view appoint returns a object Appointment
         {
             System.out.println("\nView successful");
@@ -75,8 +82,8 @@ public class AppointmentTester {
         }
         else
             System.out.println("\nView failed");
+        System.out.println(TestStrings.testEnd);
 
 
-*/
     }
 }

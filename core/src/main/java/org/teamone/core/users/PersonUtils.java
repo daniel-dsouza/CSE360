@@ -1,5 +1,6 @@
 package org.teamone.core.users;
 
+import org.teamone.core.SQL.pass;
 import org.teamone.core.appointments.Appointment;
 
 import java.sql.*;
@@ -35,7 +36,7 @@ public class PersonUtils {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "0922");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             //String specialty = staff.getSpecialty();
 
@@ -53,7 +54,7 @@ public class PersonUtils {
                 arrayOfDoctors.add(newStaff);
             }
         } catch (Exception e) {
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             arrayOfDoctors = null;
         } finally {
             close();
@@ -77,7 +78,7 @@ public class PersonUtils {
                 connect.close();
             }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
 
 
@@ -89,14 +90,14 @@ public class PersonUtils {
      * @return ArrayList: Arraylist of Patient objects
      */
     public static ArrayList<Patient> getPatients(String queryName) {
-        boolean boolResult;
-        ArrayList<Patient> patientList = new ArrayList();
+
+        ArrayList<Patient> patientList = new ArrayList<Patient>();
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             // PreparedStatements can use variables and are more efficient
 
@@ -111,9 +112,9 @@ public class PersonUtils {
             }
 
         } catch (Exception e) {
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             patientList = null;
-            boolResult = false;
+
         } finally {
             close();
         }
@@ -122,13 +123,13 @@ public class PersonUtils {
 
     public static ArrayList<Appointment> getPatientsAppointment(String patientName) {
 
-        ArrayList<Appointment> apptList = new ArrayList();
+        ArrayList<Appointment> apptList = new ArrayList<Appointment>();
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             preparedStatementPatient = connect.prepareStatement("select userID from person where name = ?");
             preparedStatementPatient.setString(1,patientName);
@@ -151,7 +152,7 @@ public class PersonUtils {
             }
 
         } catch (Exception e) {
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             apptList = null;
         } finally {
             close();
@@ -166,8 +167,8 @@ public class PersonUtils {
 
     /**
      * Returns a list of patients based on doctors.
-     * @param staff
-     * @return
+     * @param staff: Given a staff object
+     * @return ArrayList: List of Patients
      */
     public ArrayList<Patient> getPatientByStaff (Staff staff) {
         //TODO: getPatientByStaff

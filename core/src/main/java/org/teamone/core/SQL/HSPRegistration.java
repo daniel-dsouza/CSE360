@@ -24,8 +24,8 @@ public class HSPRegistration {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int userID = patient.getUserID();
@@ -82,7 +82,7 @@ public class HSPRegistration {
 
 
         } catch (Exception e) {
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             boolResult = false;
         } finally {
             close();

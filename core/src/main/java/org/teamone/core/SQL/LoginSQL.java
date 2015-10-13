@@ -24,8 +24,8 @@ public class LoginSQL {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nMySQLAccess\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
 
             // PreparedStatements can use variables and are more efficient
@@ -46,7 +46,7 @@ public class LoginSQL {
                 check = null;
 
         } catch (Exception e) {
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             check = null;
         } finally {
             close();
@@ -61,8 +61,8 @@ public class LoginSQL {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nMySQLAccess\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
 
             preparedStatement = connect.prepareStatement("SELECT * from person WHERE userID = ?");
@@ -75,7 +75,7 @@ public class LoginSQL {
 
 
         } catch (Exception e) {
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             username = null;
         } finally {
             close();

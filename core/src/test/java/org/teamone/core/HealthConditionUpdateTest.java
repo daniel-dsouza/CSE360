@@ -3,6 +3,7 @@ package org.teamone.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.PatientHealthCondtions;
+import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 
 public class HealthConditionUpdateTest {
@@ -19,7 +20,7 @@ public class HealthConditionUpdateTest {
 
     @Test
     public void updateHC() {
-
+        System.out.println("\nTest========Update health conditions");
         if(PatientHealthCondtions.updateHealthCondition(test))
         {
             System.out.println("Update successful");
@@ -27,6 +28,6 @@ public class HealthConditionUpdateTest {
         else
             System.out.println("\nUpdate failed");
         //Person p1 = SQL.cehck
-
+        System.out.println(TestStrings.testEnd);
     }
 }

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.HSPRegistration;
 import org.teamone.core.SQL.PatientUpdateInfo;
+import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.PersonUtils;
 
@@ -53,23 +54,34 @@ public class PatientUpdateInfoTest {
     @Test
     public void tester()
     {
-
+        System.out.println("\nTest========Registering New Patient");
         if(HSPRegistration.RegisterNewPatient(regis))
         {
             System.out.println("*********************Register successful************************");
         }
         else
             System.out.println("\n************************Register failed********************");
+        System.out.println(TestStrings.testEnd);
+
+        System.out.println("\nTest========Updating Patient Infomation");
         if(PatientUpdateInfo.UpdatePersonalInfo(update))
         {
             System.out.println("*********************Update successful************************");
         }
         else
             System.out.println("\n************************Update failed********************");
+        System.out.println(TestStrings.testEnd);
+
 
         ArrayList<Patient> patientList = PersonUtils.getPatients("luf");
+        System.out.println("\nTest========Searching for Patient with 'luf' ");
         System.out.println("*********************Find successful************************");
-        System.out.println("******"+patientList+"***********");
+        Patient tempPat;
+        for(int i = 0; i < patientList.size(); i++) {
+            tempPat = patientList.get(i);
+            System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getPatientID());
+        }
+        System.out.println(TestStrings.testEnd);
 
 
     }

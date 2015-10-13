@@ -9,6 +9,7 @@ import org.teamone.core.appointments.Appointment;
 
 import java.sql.*;
 
+
 public class AppointmentViewEdit {
     private static Connection connect = null;
     private static Statement statement = null;
@@ -26,9 +27,9 @@ public class AppointmentViewEdit {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
@@ -41,7 +42,7 @@ public class AppointmentViewEdit {
             String time = resultSet.getString("time");
             String reason = resultSet.getString("reason");
             int patID = resultSet.getInt("patientID");
-            if (date != "null" &&  time != "null" && reason != "null" && patID != 0) {
+            if (!date.equals("null") &&  !time.equals(null) && !reason.equals("null") && patID != 0) {
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
                 System.out.println("Reason:\t" + reason);
@@ -59,7 +60,7 @@ public class AppointmentViewEdit {
             }
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             readMe = null;
         } finally {
             close();
@@ -79,9 +80,9 @@ public class AppointmentViewEdit {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int patID = readMe.getPatientID();
@@ -95,7 +96,7 @@ public class AppointmentViewEdit {
             String time = resultSet.getString("time");
             String reason = resultSet.getString("reason");
             int docID = resultSet.getInt("doctorID");
-            if (date != "null" &&  "time" != "null" && reason != "null" && patID != 0) {
+            if (!date.equals("null") &&  !time.equals(null) && !reason.equals("null") && patID != 0) {
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
                 System.out.println("Reason:\t" + reason);
@@ -113,7 +114,7 @@ public class AppointmentViewEdit {
             }
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             readMe = null;
         } finally {
             close();
@@ -133,9 +134,9 @@ public class AppointmentViewEdit {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();
@@ -173,7 +174,7 @@ public class AppointmentViewEdit {
         }
         catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             readMe = null;
         }
         return readMe;
@@ -182,7 +183,7 @@ public class AppointmentViewEdit {
     /**
      *
      * @param readMe Appointment Object to extract appointment info and update database
-     * @return
+     * @return Appointment Object
      */
     public static Appointment editAppointmentPatient(Appointment readMe) {
         try {
@@ -190,9 +191,9 @@ public class AppointmentViewEdit {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();
@@ -230,7 +231,7 @@ public class AppointmentViewEdit {
         }
         catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             readMe = null;
         }
         return readMe;

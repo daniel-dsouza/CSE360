@@ -71,19 +71,19 @@ CREATE TABLE IF NOT EXISTS `patient` (
 --
 
 INSERT INTO `patient` (`serialNumber`, `patientID`, `medicalHistory`, `occupation`, `address`, `SSN`, `gender`, `insurance`, `age`, `phone`, `healthConditions`, `labReports`, `alertDateAndTime`, `alertStatus`, `prescription`) VALUES
-(13, 1234, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 1245, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(15, 1246, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 1247, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, 1248, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 1249, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 1250, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(20, 1260, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 1265, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 1266, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(23, 1267, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(24, 1268, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(25, 1269, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+  (13, 1234, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (14, 1245, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (15, 1246, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (16, 1247, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (17, 1248, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (18, 1249, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (19, 1250, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (20, 1260, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (21, 1265, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (22, 1266, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (23, 1267, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (24, 1268, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  (25, 1269, NULL, 'patient', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -105,31 +105,31 @@ CREATE TABLE IF NOT EXISTS `person` (
 --
 
 INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES
-(1232, 'Ry;an', 'doctor', 'temporary', 'ryan@asu.edu'),
-(1233, 'Dan;iel', 'doctor', 'temporary', 'Dan1@asu.edu'),
-(1234, 'Jam;es', 'patient', 'temporary', 'james1@asu.edu'),
-(1235, 'Came;ron', 'hsp', 'temporary', 'cameron1@asu.edu'),
-(1236, 'Steph;anie', 'hsp', 'temporary', 'stephanie1@asu.edu'),
-(1237, 'Came;rona', 'hsp', 'temporary', 'camerona1@asu.edu'),
-(1238, 'Camero;nasasas', 'labstaff', 'temporary', 'camerona1@asu.edu'),
-(1239, 'dasdfgg;kjdfgb', 'labstaff', 'temporary', 'came@asu.edu'),
-(1240, 'abhis;hek', 'doctor', 'temporary', 'abhi@asu.edu'),
-(1241, 'asd;ff', 'doctor', 'temporary', 'r54n@asu.edu'),
-(1242, 'Ri;e', 'doctor', 'temporary', 'rie@asu.edu'),
-(1243, 'Rs;dn', 'doctor', 'temporary', 'ryaaan@asu.edu'),
-(1244, 'Rya;nxsa', 'doctor', 'temporary', 'ryanad@asu.edu'),
-(1245, 'Radya;nxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1246, 'Radya;nxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1247, 'Radyanx;sa', 'patient', 'temporary', 'ryanadhdad@asu.edu'),
-(1248, 'Rady;anxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1249, 'Ra;dyanxsa', 'patient', 'temporary', 'ryanaAdad@asu.edu'),
-(1250, 'Rady;yanxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1260, 'Radyanxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1265, 'Radyanxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1266, 'Radyanxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1267, 'Radyanxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1268, 'Radyanxsa', 'patient', 'temporary', 'ryanadad@asu.edu'),
-(1269, 'Radyanxsa', 'patient', 'temporary', 'ryanadad@asu.edu');
+  (1232, 'Dr. Ryan Ang', 'doctor', 'temporary', 'ryan@asu.edu'),
+  (1233, 'Mr. Daniel', 'doctor', 'temporary', 'Dan1@asu.edu'),
+  (1234, 'James', 'patient', 'temporary', 'james1@asu.edu'),
+  (1235, 'Cameron', 'hsp', 'temporary', 'cameron1@asu.edu'),
+  (1236, 'Haisheng', 'hsp', 'temporary', 'Haishen1@asu.edu'),
+  (1237, 'Jaime', 'hsp', 'temporary', 'Jaime@asu.edu'),
+  (1238, 'Vince', 'labstaff', 'temporary', 'Vrose@asu.edu'),
+  (1239, 'Aby', 'labstaff', 'temporary', 'Aby@asu.edu'),
+  (1240, 'Dr. Rie', 'doctor', 'temporary', 'Rie12@asu.edu'),
+  (1241, 'Dr. Stephanie', 'doctor', 'temporary', 'Steph@asu.edu'),
+  (1242, 'Dr. Eric', 'doctor', 'temporary', 'eric@asu.edu'),
+  (1243, 'Dr. Get', 'doctor', 'temporary', 'ryaaan@asu.edu'),
+  (1244, 'Dr. Ryan', 'doctor', 'temporary', 'ryanad@asu.edu'),
+  (1245, 'Patien1', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1246, 'Patien2', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1247, 'Patien3', 'patient', 'temporary', 'ryanadhdad@asu.edu'),
+  (1248, 'Patien4', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1249, 'Patien5', 'patient', 'temporary', 'ryanaAdad@asu.edu'),
+  (1250, 'Patien6', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1260, 'Patien7', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1265, 'Patien8', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1266, 'Patien9', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1267, 'Patien10', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1268, 'Patien11', 'patient', 'temporary', 'ryanadad@asu.edu'),
+  (1269, 'Patien12', 'patient', 'temporary', 'ryanadad@asu.edu');
 
 -- --------------------------------------------------------
 
@@ -155,18 +155,18 @@ CREATE TABLE IF NOT EXISTS `staff` (
 --
 
 INSERT INTO `staff` (`serialNumber`, `staffID`, `occupation`, `specialty`, `patientID`, `schedule`, `emergencyWardDoctor`) VALUES
-(1, 1232, 'doctor', 'EmergencyDoctor', NULL, NULL, 'yes'),
-(2, 1233, 'doctor', 'EmergencyDoctor', NULL, NULL, 'yes'),
-(3, 1240, 'doctor', 'Pediatrician', NULL, NULL, 'yes'),
-(4, 1241, 'doctor', 'Pediatrician', NULL, NULL, 'yes'),
-(5, 1242, 'doctor', 'GeneralCare', NULL, NULL, 'yes'),
-(6, 1243, 'doctor', 'Neurologist', NULL, NULL, 'yes'),
-(7, 1244, 'doctor', 'X-Ray', NULL, NULL, 'yes'),
-(8, 1235, 'hsp', 'hsp', NULL, NULL, 'yes'),
-(9, 1236, 'hsp', 'hsp', NULL, NULL, 'yes'),
-(10, 1237, 'hsp', 'hsp', NULL, NULL, 'yes'),
-(11, 1238, 'labstaff', 'labstaff', NULL, NULL, 'yes'),
-(12, 1239, 'labstaff', 'labstaff', NULL, NULL, 'yes');
+  (1, 1232, 'doctor', 'EmergencyDoctor', NULL, NULL, 'yes'),
+  (2, 1233, 'doctor', 'EmergencyDoctor', NULL, NULL, 'yes'),
+  (3, 1240, 'doctor', 'Pediatrician', NULL, NULL, 'yes'),
+  (4, 1241, 'doctor', 'Pediatrician', NULL, NULL, 'yes'),
+  (5, 1242, 'doctor', 'GeneralCare', NULL, NULL, 'yes'),
+  (6, 1243, 'doctor', 'Neurologist', NULL, NULL, 'yes'),
+  (7, 1244, 'doctor', 'X-Ray', NULL, NULL, 'yes'),
+  (8, 1235, 'hsp', 'hsp', NULL, NULL, 'yes'),
+  (9, 1236, 'hsp', 'hsp', NULL, NULL, 'yes'),
+  (10, 1237, 'hsp', 'hsp', NULL, NULL, 'yes'),
+  (11, 1238, 'labstaff', 'labstaff', NULL, NULL, 'yes'),
+  (12, 1239, 'labstaff', 'labstaff', NULL, NULL, 'yes');
 
 -- --------------------------------------------------------
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
 --
 
 INSERT INTO `statistics` (`serialNumber`, `patientPopulation`, `patientType`, `admissionRates`, `healthOutcomes`) VALUES
-(1, 25, NULL, 2.2, 'positive');
+  (1, 25, NULL, 2.2, 'positive');
 
 --
 -- Constraints for dumped tables
@@ -198,21 +198,21 @@ INSERT INTO `statistics` (`serialNumber`, `patientPopulation`, `patientType`, `a
 -- Constraints for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE;
+ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`) ON DELETE CASCADE,
+ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `patient`
 --
 ALTER TABLE `patient`
-  ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `person` (`userID`) ON DELETE CASCADE;
+ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `person` (`userID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `staff`
 --
 ALTER TABLE `staff`
-  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `person` (`userID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);
+ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `person` (`userID`) ON DELETE CASCADE,
+ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
