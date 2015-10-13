@@ -21,17 +21,18 @@
 
                 <c:if test="${not empty errorMessage}" >
                     <div class="row">
-                        <div class="col-md-offset-5 col-md-3" style="background-color: #FF4D4D; text-align: center; border-radius: 4px"; for>
+                        <div class="col-md-offset-4 col-md-4" style="background-color: #FF4D4D; text-align: center; border-radius: 4px"; for>
                             <h4><c:out value="${errorMessage}" /></h4>
                         </div>
                     </div>
                 </c:if>
 
                 <div class="row">
-                    <div class="col-md-offset-5 col-md-3">
+                    <div class="col-md-offset-4 col-md-4">
                         <div class="form-login">
                             <h4>Please Login</h4>
-                            <form:input path="userID" id="userID" class="form-control input-sm chat-input" placeholder="userID" maxlength="10" autofocus="autofocus" required="required"/>
+                            <form:input path="userID" id="userID" class="form-control input-sm chat-input" placeholder="userID"
+                                        type="number" min="1" max="9999" step="1" maxlength="10" autofocus="autofocus" required="required"/>
                             </br>
                             <input:password path="password" id="userPassword" class="form-control input-sm chat-input" placeholder="password" maxlength="40" required="required"/>
                             </br>

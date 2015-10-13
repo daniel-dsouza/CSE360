@@ -30,9 +30,6 @@ public class LoginController {
     public String viewLogin(Map<String, Object> model) {
         LoginAttempt attempt = new LoginAttempt();
         model.put("userInput", attempt);
-
-        Person pAttempt = new Person();
-
         System.out.println("loading login");
         return "auth/login";
     }
@@ -40,28 +37,28 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.POST)
     public String processLogin(
             //@ModelAttribute("userInput") LoginAttempt attempt,
-            @ModelAttribute("userInput") Person pAttempt,
+            @ModelAttribute("userInput") LoginAttempt attempt,
             @ModelAttribute("user") User user, //special bean used to store session
             Map<String, Object> model) {
 
-        //more code
-        //if (attempt.getPassword().equals("go")) {
-            if (LoginSQL.authenticate(pAttempt) != null) {
-                System.out.println("auth succeed");
-                user.setUsername(LoginSQL.getName(pAttempt.getUserID()));
-                user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
-                return "redirect:/user/" + user.getUsername();
-            } else {
-                System.out.println("auth fail");
-                String errorMessage = "Your userID or password were incorrect. Try again.";
-                model.put("errorMessage", errorMessage);
-                return "auth/login";
-            }
+        Person pAttempt = new Person();
+        pAttempt.setUserID(Integer.parseInt(attempt.getUserID()));
+        pAttempt.setPassword(attempt.getPassword());
+
+        if (LoginSQL.authenticate(pAttempt) != null || attempt.getPassword().equals("go")) { //TODO:remove backdoor
+            System.out.println("auth succeed");
+            //user.setUsername(LoginSQL.getName(pAttempt.getUserID()));
+            user.setUsername(attempt.getUserID());
+            user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
+            return "redirect:/user/" + user.getUsername();
+        } else {
+            System.out.println("auth fail");
+            String errorMessage = "Your userID or password were incorrect. Try again.";
+            model.put("errorMessage", errorMessage);
+            return "auth/login";
         }
     }
-
-
-
+}
 
 class LoginAttempt {
     private String userID;
