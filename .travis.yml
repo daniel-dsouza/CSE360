@@ -4,3 +4,6 @@ jdk:
   
 before_install:
   - chmod +x gradlew
+
+script:
+  - mysql -uroot < cse360.sql

@@ -3,6 +3,7 @@ package org.teamone.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.appointments.Appointment;
+import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.PersonUtils;
 import org.teamone.core.users.Staff;
 
@@ -22,6 +23,7 @@ public class StaffListTest {
     @Test
     public void helpM() {
         ArrayList<Staff> testArr = PersonUtils.getStaffList("Pediatrician");
+        System.out.println("\nTest========Searching for Staff members 'Pediatrician' ");
         if(testArr!=null)
         {
 
@@ -32,9 +34,11 @@ public class StaffListTest {
             }
         }
         else
-            System.out.println("LOGIN FAILED");
+            System.out.println("SEARCH FAILED");
+        System.out.println(TestStrings.testEnd);
 
-        ArrayList<Appointment> testAppoint = PersonUtils.getPatientsAppointment("Radyar");
+        ArrayList<Appointment> testAppoint = PersonUtils.getPatientsAppointment("Patien2");
+        System.out.println("\nTest========Searching for Patient's Appointments for 'Patien2' ");
         if(testAppoint!=null)
         {
 
@@ -46,10 +50,11 @@ public class StaffListTest {
                 System.out.println("Time:\t" + tempStaff.getTime());
                 System.out.println("Reason:\t" + tempStaff.getReason());
                 System.out.println("DoctorID:\t" + tempStaff.getDoctorID());
-                System.out.println("PatientID;\t" + tempStaff.getPatientID() + "\n");
+                System.out.println("PatientID:\t" + tempStaff.getPatientID() + "\n");
             }
         }
         else
-            System.out.println("LOGIN FAILED");
+            System.out.println("SEARCH FAILED");
+        System.out.println(TestStrings.testEnd);
     }
 }

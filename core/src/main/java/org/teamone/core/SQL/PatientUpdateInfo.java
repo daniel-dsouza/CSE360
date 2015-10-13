@@ -24,8 +24,8 @@ public class PatientUpdateInfo {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", "cse360");
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
 
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
@@ -69,7 +69,7 @@ public class PatientUpdateInfo {
 
 
         } catch (Exception e) {
-            System.out.println(e.getStackTrace().toString());
+            System.out.println(e);
             boolResult = false;
         } finally {
             close();

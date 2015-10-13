@@ -3,6 +3,7 @@ package org.teamone.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.LoginSQL;
+import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Person;
 
 public class LoginTest {
@@ -19,7 +20,7 @@ public class LoginTest {
 
     @Test
     public void helpM() {
-
+        System.out.println("\nTest========Testing login authentication");
         if(LoginSQL.authenticate(test)!=null)
         {
             System.out.println("LOGIN SUCCESS!");
@@ -29,6 +30,6 @@ public class LoginTest {
         }
         else
             System.out.println("LOGIN FAILED");
-        String name = LoginSQL.getName(1234);
+        System.out.println(TestStrings.testEnd);
     }
 }
