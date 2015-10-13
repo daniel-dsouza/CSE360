@@ -4,3 +4,8 @@ jdk:
   
 before_install:
   - chmod +x gradlew
+
+before_script:
+  - cse360.sql > sql/import.sql
+script:
+  - mysql < sql/import.sql
