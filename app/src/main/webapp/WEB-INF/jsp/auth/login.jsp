@@ -6,6 +6,10 @@
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
 <t:userpage>
+    <jsp:attribute name="head">
+        <script type="text/javascript" src="<c:url value="/webjars/jquery-maskedinput/1.4.0/jquery.maskedinput.min.js" />"></script>
+    </jsp:attribute>
+
     <jsp:attribute name="nav">
         <jsp:include page="/WEB-INF/jsp/generic/navbar.jsp"/>
     </jsp:attribute>
