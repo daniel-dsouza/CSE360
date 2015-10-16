@@ -1,21 +1,55 @@
 package org.teamone.core.SQL;
 
+/**
+ * Created by Ryan on 10/9/2015.
+ * http://www.vogella.com/tutorials/MySQLJava/article.html
+ * http://zetcode.com/db/mysqljava/
+ *
+ * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
+ */
 import org.teamone.core.users.Patient;
 
 import java.sql.*;
 
-/**
- * Created by Lin on 2015/10/8.
- */
-
-
-
-public class PatientUpdateInfo {
+public class PatientSQL {
     private static Connection connect = null;
     private static Statement statement = null;
-    private static PreparedStatement preparedStatementPatient = null;
-    private static PreparedStatement preparedStatementPerson = null;
+    private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
+
+    public static boolean updateHealthCondition(org.teamone.core.users.Patient patient) {
+        boolean boolResult;
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int ID = patient.getPatientID();
+            String hc = patient.getHealthConditions();
+
+            preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
+            preparedStatement.setString(1,hc);
+            preparedStatement.setInt(2, ID);
+            checker = preparedStatement.executeUpdate();
+            if (checker==0)
+            boolResult = false;
+            else
+            boolResult = true;
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            boolResult = false;
+        } finally {
+            close();
+        }
+        return boolResult;
+
+    }
 
     public static boolean UpdatePersonalInfo(Patient patient)
     { boolean boolResult;
@@ -25,29 +59,29 @@ public class PatientUpdateInfo {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
 
-            // Statements allow to issue SQL queries to the database
-            statement = connect.createStatement();
+            PreparedStatement preparedStatementPatient = null;
+            PreparedStatement preparedStatementPerson = null;
 
 
             // PreparedStatements can use variables and are more efficient
             int patientID = patient.getPatientID();
             String name = patient.getName();
-            int SSN = patient.getSSN();
+            String SSN = patient.getSSN();
             String address = patient.getAddress();
             String email = patient.getEmail();
-            long phone = patient.getPhone();
+            String phone = patient.getPhone();
             String insurance = patient.getInsurance();
-            int age = patient.getAge();
+            String age = patient.getAge();
             String gender = patient.getGender();
 
             preparedStatementPatient = connect.prepareStatement("UPDATE patient set address = ?,phone = ?,SSN = ?,insurance = ?,age = ?,gender = ? where patientID = ? ;");
             preparedStatementPatient.setString(1, address);
-            preparedStatementPatient.setLong(2, phone);
-            preparedStatementPatient.setInt(3, SSN);
+            preparedStatementPatient.setString(2, phone);
+            preparedStatementPatient.setString(3, SSN);
             preparedStatementPatient.setString(4, insurance);
-            preparedStatementPatient.setInt(5, age);
+            preparedStatementPatient.setString(5, age);
             preparedStatementPatient.setString(6, gender);
             preparedStatementPatient.setInt(7, patientID);
             checker = preparedStatementPatient.executeUpdate();
@@ -78,6 +112,7 @@ public class PatientUpdateInfo {
 
     }
 
+
     // You need to close the resultSet
     private static void close() {
         try {
@@ -93,7 +128,7 @@ public class PatientUpdateInfo {
                 connect.close();
             }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
 

@@ -2,13 +2,13 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.PatientHealthCondtions;
+import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 
 public class HealthConditionUpdateTest {
 
-    private Patient test;
+    private org.teamone.core.users.Patient test;
 
     @Before
     public void setUp() {
@@ -21,7 +21,7 @@ public class HealthConditionUpdateTest {
     @Test
     public void updateHC() {
         System.out.println("\nTest========Update health conditions");
-        if(PatientHealthCondtions.updateHealthCondition(test))
+        if(PatientSQL.updateHealthCondition(test))
         {
             System.out.println("Update successful");
         }

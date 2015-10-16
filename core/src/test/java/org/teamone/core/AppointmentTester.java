@@ -2,7 +2,7 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.AppointmentViewEdit;
+import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.baseclasstests.TestStrings;
 
@@ -29,7 +29,7 @@ public class AppointmentTester {
     public void viewAppointment() {
         //case 1, where user wants appoint through PatientID
         System.out.println("\nTest========Updating patient with patient ID");
-        if(AppointmentViewEdit.editAppointmentPatient(update)!=null)//edit appoint returns a object Appointment
+        if(AppointmentSQL.editAppointmentPatient(update)!=null)//edit appoint returns a object Appointment
         {
             System.out.println("\nUpdate successful");
             System.out.println("Date:\t" + update.getDate());
@@ -43,7 +43,7 @@ public class AppointmentTester {
 
         //case 2, where user wants appoint through DoctorID
         System.out.println("\nTest========Updating patient with doctor ID");
-        if(AppointmentViewEdit.editAppointmentDoctor(update)!=null)//edit appoint returns a object Appointment
+        if(AppointmentSQL.editAppointmentDoctor(update)!=null)//edit appoint returns a object Appointment
         {
             System.out.println("\nUpdate successful");
             System.out.println("Date:\t" + update.getDate());
@@ -57,7 +57,7 @@ public class AppointmentTester {
 
         //case 1, where user wants appoint through doctorID
         System.out.println("\nTest========Viewing patient with doctor ID");
-        if(AppointmentViewEdit.viewAppointmentDoctor(test)!=null)//view appoint returns a object Appointment
+        if(AppointmentSQL.viewAppointmentDoctor(test)!=null)//view appoint returns a object Appointment
         {
             System.out.println("\nView successful");
             System.out.println("Date:\t" + test.getDate());
@@ -72,7 +72,7 @@ public class AppointmentTester {
         //case 2, where user wants appoint through patientID
         test.setPatientID(1246);
         System.out.println("\nTest========Viewing patient with patient ID");
-        if(AppointmentViewEdit.viewAppointmentPatient(test)!=null)//view appoint returns a object Appointment
+        if(AppointmentSQL.viewAppointmentPatient(test)!=null)//view appoint returns a object Appointment
         {
             System.out.println("\nView successful");
             System.out.println("Date:\t" + test.getDate());
