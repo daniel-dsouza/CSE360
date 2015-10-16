@@ -48,7 +48,7 @@ public class LoginController {
         if (LoginSQL.authenticate(pAttempt) != null || attempt.getPassword().equals("go")) { //TODO:remove backdoor
             System.out.println("auth succeed");
             //user.setUsername(LoginSQL.getName(pAttempt.getUserID()));
-            user.setUsername(attempt.getUserID());
+            user.setUsername(pAttempt.getName());
             user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
             return "redirect:/user/" + user.getUsername();
         } else {

@@ -25,7 +25,7 @@ public class LoginSQL {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
 
 
             // PreparedStatements can use variables and are more efficient
@@ -62,7 +62,7 @@ public class LoginSQL {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
 
 
             preparedStatement = connect.prepareStatement("SELECT * from person WHERE userID = ?");

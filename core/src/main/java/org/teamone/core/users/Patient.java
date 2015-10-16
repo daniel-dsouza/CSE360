@@ -5,15 +5,9 @@ package org.teamone.core.users;
  */
 public class Patient extends Person {
     private int patientID = 0;
-    //private String medicalHistory; //wtf is this?
+
     private String occupation; //why do we care?
-    //private String address;
-    //private int SSN = 0;
-    //private String gender;
-    //private String insurance;
-    //private int age = 0;
-    //private long phone = 0;
-    //private String healthConditions; //wtf is this
+
     private String labReports; //wtf is this
     private String alertDateAndTime;
     private boolean alertStatus = false;
@@ -62,12 +56,12 @@ public class Patient extends Person {
         this.patientInformation.setAddress(address);
     }
 
-    public int getSSN() {
+    public String getSSN() {
         //return SSN;
         return this.patientInformation.getSsn();
     }
 
-    public void setSSN(int SSN) {
+    public void setSSN(String SSN) {
         //this.SSN = SSN;
         this.patientInformation.setSsn(SSN);
     }
@@ -92,24 +86,24 @@ public class Patient extends Person {
         this.patientInformation.setInsurance(insurance);
     }
 
-    public int getAge() {
+    public String getAge() {
         //return age;
-        return Integer.parseInt(this.patientInformation.getAge());
+        return this.patientInformation.getAge();
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         //this.age = age;
-        this.patientInformation.setAge(Integer.toString(age));
+        this.patientInformation.setAge(age);
     }
 
-    public long getPhone() {
+    public String getPhone() {
         //return phone;
-        return Long.parseLong(this.patientInformation.getHomePhone());
+        return this.patientInformation.getHomePhone();
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         //this.phone = phone;
-        this.patientInformation.setHomePhone(Integer.toString(phone));
+        this.patientInformation.setHomePhone(phone);
     }
 
     public String getHealthConditions() {

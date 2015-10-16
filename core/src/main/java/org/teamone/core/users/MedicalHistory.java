@@ -23,7 +23,7 @@ public class MedicalHistory {
     }
 
     public String toString() {
-        return "MedicalHistory";
+        return "MedicalHistory";//TODO: loop through Map and concat everything into 1 string and send to SQL
     }
 
     public void setAidsHIVPositive(boolean aidsHIVPositive) { this.medicalHistory.put("aidsHIVPositive", aidsHIVPositive); }
