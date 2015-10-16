@@ -6,7 +6,7 @@ import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 
-public class HealthConditionUpdateTest {
+public class HealthConditionTest {
 
     private org.teamone.core.users.Patient test;
 
@@ -27,7 +27,27 @@ public class HealthConditionUpdateTest {
         }
         else
             System.out.println("\nUpdate failed");
-        //Person p1 = SQL.cehck
+
+        System.out.println(TestStrings.testEnd);
+
+        System.out.println("\nTest========setting list health conditions");
+        if(PatientSQL.setHealthConditions(test))
+        {
+            System.out.println("Set successful");
+        }
+        else
+            System.out.println("\nSet failed");
+
+        System.out.println(TestStrings.testEnd);
+
+        System.out.println("\nTest========Get list health conditions");
+        if(PatientSQL.getHealthConditions(test)!=null)
+        {
+            System.out.println("Get successful");
+        }
+        else
+            System.out.println("\nGet failed");
+
         System.out.println(TestStrings.testEnd);
     }
 }
