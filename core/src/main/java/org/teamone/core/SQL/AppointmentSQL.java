@@ -10,7 +10,7 @@ import org.teamone.core.appointments.Appointment;
 import java.sql.*;
 
 
-public class AppointmentViewEdit {
+public class AppointmentSQL {
     private static Connection connect = null;
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
@@ -29,7 +29,7 @@ public class AppointmentViewEdit {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
@@ -82,7 +82,7 @@ public class AppointmentViewEdit {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int patID = readMe.getPatientID();
@@ -136,7 +136,7 @@ public class AppointmentViewEdit {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
 
             int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();
@@ -193,7 +193,7 @@ public class AppointmentViewEdit {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
 
             int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();

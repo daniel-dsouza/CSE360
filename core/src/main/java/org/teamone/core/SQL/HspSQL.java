@@ -10,7 +10,7 @@ import java.sql.*;
 
 
 
-public class HSPRegistration {
+public class HspSQL {
     private static Connection connect = null;
     private static Statement statement = null;
     private static PreparedStatement preparedStatementPatient = null;
@@ -25,18 +25,18 @@ public class HSPRegistration {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", pass.mySQLpass);
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int userID = patient.getUserID();
             int patientID = patient.getPatientID();
             String name = patient.getName();
-            int SSN = patient.getSSN();
+            String SSN = patient.getSSN();
             String address = patient.getAddress();
             String email = patient.getEmail();
-            long phone = patient.getPhone();
+            String phone = patient.getPhone();
             String insurance = patient.getInsurance();
-            int age = patient.getAge();
+            String age = patient.getAge();
             String gender = patient.getGender();
             String password = patient.getPassword();
 
@@ -65,11 +65,11 @@ public class HSPRegistration {
             preparedStatementPatient.setInt(1, patientID);
             preparedStatementPatient.setString(2, "patient");
             preparedStatementPatient.setString(3, address);
-            preparedStatementPatient.setInt(4, SSN);
+            preparedStatementPatient.setString(4, SSN);
             preparedStatementPatient.setString(5, gender);
             preparedStatementPatient.setString(6, insurance);
-            preparedStatementPatient.setInt(7, age);
-            preparedStatementPatient.setLong(8, phone);
+            preparedStatementPatient.setString(7, age);
+            preparedStatementPatient.setString(8, phone);
             checker = preparedStatementPatient.executeUpdate();
 
             System.out.println("checker1=============="+checker);

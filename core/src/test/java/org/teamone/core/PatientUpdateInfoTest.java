@@ -5,8 +5,8 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.HSPRegistration;
-import org.teamone.core.SQL.PatientUpdateInfo;
+import org.teamone.core.SQL.HspSQL;
+import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.PersonUtils;
@@ -28,10 +28,10 @@ public class PatientUpdateInfoTest {
         regis.setName("luffy;monkey");
         regis.setAddress("Eastern Ocean");
         regis.setEmail("luffy@asu.edu");
-        regis.setPhone(13230932);
-        regis.setSSN(987654321);
+        regis.setPhone("13230932");
+        regis.setSSN("987654321");
         regis.setInsurance("fight");
-        regis.setAge(21);
+        regis.setAge("21");
         regis.setGender("male");
         regis.setPassword("hiRyan");
 
@@ -41,10 +41,10 @@ public class PatientUpdateInfoTest {
         update.setName("luffy;monkey");
         update.setAddress("Eastern Ocean");
         update.setEmail("luffy@asu.edu");
-        update.setPhone(13230932);
-        update.setSSN(987654321);
+        update.setPhone("13230932");
+        update.setSSN("987654321");
         update.setInsurance("fight");
-        update.setAge(21);
+        update.setAge("21");
         update.setGender("male");
         update.setPassword("hiRyan");
 
@@ -55,7 +55,7 @@ public class PatientUpdateInfoTest {
     public void tester()
     {
         System.out.println("\nTest========Registering New Patient");
-        if(HSPRegistration.RegisterNewPatient(regis))
+        if(HspSQL.RegisterNewPatient(regis))
         {
             System.out.println("*********************Register successful************************");
         }
@@ -64,7 +64,7 @@ public class PatientUpdateInfoTest {
         System.out.println(TestStrings.testEnd);
 
         System.out.println("\nTest========Updating Patient Infomation");
-        if(PatientUpdateInfo.UpdatePersonalInfo(update))
+        if(PatientSQL.UpdatePersonalInfo(update))
         {
             System.out.println("*********************Update successful************************");
         }

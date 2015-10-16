@@ -86,24 +86,24 @@ public class Patient extends Person {
         this.patientInformation.setInsurance(insurance);
     }
 
-    public int getAge() {
+    public String getAge() {
         //return age;
-        return Integer.parseInt(this.patientInformation.getAge());
+        return this.patientInformation.getAge();
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         //this.age = age;
-        this.patientInformation.setAge(Integer.toString(age));
+        this.patientInformation.setAge(age);
     }
 
-    public long getPhone() {
+    public String getPhone() {
         //return phone;
-        return Long.parseLong(this.patientInformation.getHomePhone());
+        return this.patientInformation.getHomePhone();
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         //this.phone = phone;
-        this.patientInformation.setHomePhone(Integer.toString(phone));
+        this.patientInformation.setHomePhone(phone);
     }
 
     public String getHealthConditions() {
