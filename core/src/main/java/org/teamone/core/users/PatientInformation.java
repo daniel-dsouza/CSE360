@@ -4,8 +4,7 @@ package org.teamone.core.users;
  * Created by daniel on 10/11/15.
  */
 public class PatientInformation {
-    private String firstName;
-    private String lastName;
+    private String name;
     private String age;
     private String address;
     private String city;
@@ -14,26 +13,18 @@ public class PatientInformation {
     private String homePhone;
     private String email;
     private String insurance;
-    private int ssn;
+    private String ssn;
     private String gender;
 
     public PatientInformation() {
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String name) {
+        this.name = name;
     }
 
     public String getAge() {
@@ -100,11 +91,11 @@ public class PatientInformation {
         this.insurance = insurance;
     }
 
-    public int getSsn() {
+    public String getSsn() {
         return ssn;
     }
 
-    public void setSsn(int ssn) {
+    public void setSsn(String ssn) {
         this.ssn = ssn;
     }
 
