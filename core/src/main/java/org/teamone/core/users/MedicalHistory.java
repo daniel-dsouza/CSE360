@@ -25,7 +25,7 @@ public class MedicalHistory {
         return this.medicalHistory.get(condition);
     }
 
-    public String toString(Map<String, Boolean> medicalHistory) {
+    public String toString() {
         String str = "";
         Iterator<Map.Entry<String, Boolean>> entries = medicalHistory.entrySet().iterator();
         while (entries.hasNext()) {
@@ -33,22 +33,21 @@ public class MedicalHistory {
             str = entry.getKey()+","+entry.getValue()+":";
         }
     System.out.println(str);
-        return str;}
+        return str;
+    }
 
-    public Map<String, Boolean> getString(){
+   public void toMapObj(String str){
         Map<String, Boolean> medicalHistory = null;
-        String temp =Mysql.gethistory();
-        String[] parts = temp.split(":");
+
+        String[] parts = str.split(":");
         for(String temp2:parts)
         {
         String[] temp3 =  temp2.split(",");
-        Boolean abcd =Boolean.valueOf(temp3[1]);
+            boolean abcd = Boolean.parseBoolean(temp3[1]);
             medicalHistory.put(temp3[0], abcd);
         }
 
-
-
-    return medicalHistory;}
+    }
 
     public void setAidsHIVPositive(boolean aidsHIVPositive) { this.medicalHistory.put("aidsHIVPositive", aidsHIVPositive); }
     public boolean getAidsHIVPositive() { return this.medicalHistory.get("aidsHIVPositive"); }
