@@ -1,6 +1,9 @@
 package org.teamone.core.users;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,7 +12,7 @@ import java.util.Set;
  */
 public class MedicalHistory {
     private Map<String, Boolean> medicalHistory;
-    
+
     public Set<String> getKeys() {
         return medicalHistory.keySet();
     }
@@ -22,9 +25,30 @@ public class MedicalHistory {
         return this.medicalHistory.get(condition);
     }
 
-    public String toString() {
-        return "MedicalHistory";
-    }
+    public String toString(Map<String, Boolean> medicalHistory) {
+        String str = "";
+        Iterator<Map.Entry<String, Boolean>> entries = medicalHistory.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry<String, Boolean> entry = entries.next();
+            str = entry.getKey()+","+entry.getValue()+":";
+        }
+    System.out.println(str);
+        return str;}
+
+    public Map<String, Boolean> getString(){
+        Map<String, Boolean> medicalHistory = null;
+        String temp =Mysql.gethistory();
+        String[] parts = temp.split(":");
+        for(String temp2:parts)
+        {
+        String[] temp3 =  temp2.split(",");
+        Boolean abcd =Boolean.valueOf(temp3[1]);
+            medicalHistory.put(temp3[0], abcd);
+        }
+
+
+
+    return medicalHistory;}
 
     public void setAidsHIVPositive(boolean aidsHIVPositive) { this.medicalHistory.put("aidsHIVPositive", aidsHIVPositive); }
     public boolean getAidsHIVPositive() { return this.medicalHistory.get("aidsHIVPositive"); }
@@ -169,7 +193,7 @@ public class MedicalHistory {
 
     public void setMitralValveProlapse(boolean mitralValveProlapse) { this.medicalHistory.put("mitralValveProlapse", mitralValveProlapse); }
     public boolean getMitralValveProlapse() { return this.medicalHistory.get("mitralValveProlapse"); }
-    
+
     public MedicalHistory() {
         medicalHistory = new HashMap<String, Boolean>();
 
