@@ -3,5 +3,5 @@
  */
 
 $( document ).ready(function() {
-    $("input").attr("maxlength", 4);
+    $("input").attr("maxlength", 40);
 });
