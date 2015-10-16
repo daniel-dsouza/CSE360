@@ -1,7 +1,5 @@
 package org.teamone.core.users;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,25 +24,26 @@ public class MedicalHistory {
     }
 
     public String toString() {
-        String str = "";
+        String str = "", temp = "";
         Iterator<Map.Entry<String, Boolean>> entries = medicalHistory.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry<String, Boolean> entry = entries.next();
-            str = entry.getKey()+","+entry.getValue()+":";
+            temp=entry.getKey()+","+entry.getValue()+":";
+            str = str.concat(temp);
         }
-    System.out.println(str);
+        System.out.println(str);
         return str;
     }
 
-   public void toMapObj(String str){
+    public void toMapObj(String str){
         Map<String, Boolean> medicalHistory = null;
 
         String[] parts = str.split(":");
         for(String temp2:parts)
         {
-        String[] temp3 =  temp2.split(",");
+            String[] temp3 =  temp2.split(",");
             boolean abcd = Boolean.parseBoolean(temp3[1]);
-            medicalHistory.put(temp3[0], abcd);
+            this.medicalHistory.put(temp3[0], abcd);
         }
 
     }

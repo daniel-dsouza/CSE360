@@ -7,11 +7,10 @@ package org.teamone.core.SQL;
  *
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
-import org.teamone.core.users.MedicalHistory;
+
 import org.teamone.core.users.Patient;
 
 import java.sql.*;
-import java.util.Map;
 
 public class PatientSQL {
     private static Connection connect = null;
@@ -34,13 +33,13 @@ public class PatientSQL {
             String hc = patient.getHealthConditions();
 
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
-            preparedStatement.setString(1,hc);
+            preparedStatement.setString(1, hc);
             preparedStatement.setInt(2, ID);
             checker = preparedStatement.executeUpdate();
-            if (checker==0)
-            boolResult = false;
+            if (checker == 0)
+                boolResult = false;
             else
-            boolResult = true;
+                boolResult = true;
 
 
         } catch (Exception e) {
@@ -53,8 +52,8 @@ public class PatientSQL {
 
     }
 
-    public static boolean UpdatePersonalInfo(Patient patient)
-    { boolean boolResult;
+    public static boolean UpdatePersonalInfo(Patient patient) {
+        boolean boolResult;
         try {
             int checker, checker2;
             // This will load the MySQL driver, each DB has its own driver
@@ -95,10 +94,10 @@ public class PatientSQL {
 
             checker2 = preparedStatementPerson.executeUpdate();
 
-            System.out.println("checker1=============="+checker);
-            System.out.println("checker2=============="+checker2);
+            System.out.println("checker1==============" + checker);
+            System.out.println("checker2==============" + checker2);
 
-            if (checker==0 | checker2==0)
+            if (checker == 0 | checker2 == 0)
                 boolResult = false;
             else
                 boolResult = true;
@@ -114,7 +113,6 @@ public class PatientSQL {
     }
 
     public static Patient getMedicalHistory(Patient patient) {
-        boolean boolResult;
         Patient medicalHistory = null;
         String temp = null;
 
@@ -131,7 +129,7 @@ public class PatientSQL {
             preparedStatement = connect.prepareStatement("SELECT medicalhistory FROM patient where patientID = ?");
             preparedStatement.setInt(1, ID);
             resultSet = preparedStatement.executeQuery();
-
+            resultSet.next();
             mh = resultSet.getString("medicalhistory");
             patient.setMedicalHistory(mh);
             patient.setPatientID(ID);
@@ -140,12 +138,12 @@ public class PatientSQL {
 
         } catch (Exception e) {
             System.out.println(e);
-            boolResult = false;
+            patient = null;
         } finally {
             close();
         }
 
-        return medicalHistory;
+        return patient;
 
     }
 
@@ -171,7 +169,7 @@ public class PatientSQL {
             preparedStatement.setInt(2, ID);
             checker = preparedStatement.executeUpdate();
 
-            if (checker==0)
+            if (checker == 0)
                 boolResult = false;
             else
                 boolResult = true;
@@ -184,6 +182,79 @@ public class PatientSQL {
         }
         return boolResult;
     }
+
+
+    public static Patient getHealthConditions(Patient patient) {
+        Patient healthConditions = null;
+        String temp = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int ID = patient.getPatientID();
+            String hc = null;
+
+            preparedStatement = connect.prepareStatement("SELECT healthConditions FROM patient where patientID = ?");
+            preparedStatement.setInt(1, ID);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            hc = resultSet.getString("healthConditions");
+            patient.setHealthConditions(hc);
+            patient.setPatientID(ID);
+            temp = hc;
+            patient.healthConditions.toMapObj(temp);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            patient = null;
+        } finally {
+            close();
+        }
+
+        return patient;
+
+    }
+
+    public static Boolean setHealthConditions(Patient patient) {
+        boolean boolResult;
+        String temp = null;
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int ID = patient.getPatientID();
+            String hc = patient.healthConditions.toString();
+
+            preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
+
+            preparedStatement.setString(1, hc);
+            preparedStatement.setInt(2, ID);
+            checker = preparedStatement.executeUpdate();
+
+            if (checker == 0)
+                boolResult = false;
+            else
+                boolResult = true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            boolResult = false;
+        } finally {
+            close();
+        }
+        return boolResult;
+    }
+
 
     // You need to close the resultSet
     private static void close() {
@@ -203,5 +274,4 @@ public class PatientSQL {
             System.out.println(e);
         }
     }
-
 }
