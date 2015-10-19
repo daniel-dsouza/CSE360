@@ -9,8 +9,7 @@ public class Patient extends Person {
     private String occupation; //why do we care?
 
     private String labReports; //wtf is this
-    private String alertDateAndTime;
-    private boolean alertStatus = false;
+
     private String prescription; //wtf is this
 
     public PatientInformation patientInformation;
@@ -123,21 +122,7 @@ public class Patient extends Person {
         this.labReports = labReports;
     }
 
-    public String getAlertDateAndTime() {
-        return alertDateAndTime;
-    }
 
-    public void setAlertDateAndTime(String alertDateAndTime) {
-        this.alertDateAndTime = alertDateAndTime;
-    }
-
-    public boolean isAlertStatus() {
-        return alertStatus;
-    }
-
-    public void setAlertStatus(boolean alertStatus) {
-        this.alertStatus = alertStatus;
-    }
 
     public String getPrescription() {
         return prescription;
