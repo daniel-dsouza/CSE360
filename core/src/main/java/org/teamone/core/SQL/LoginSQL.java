@@ -65,7 +65,7 @@ public class LoginSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
 
-            preparedStatement = connect.prepareStatement("SELECT * from person WHERE userID = ?");
+            preparedStatement = connect.prepareStatement("SELECT name from person WHERE userID = ?");
             preparedStatement.setInt(1,userID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();

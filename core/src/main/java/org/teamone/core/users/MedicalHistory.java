@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class MedicalHistory {
     private Map<String, Boolean> medicalHistory;
-    
+
     public Set<String> getKeys() {
         return medicalHistory.keySet();
     }
@@ -24,7 +24,6 @@ public class MedicalHistory {
     }
 
     public String toString() {
-
 
         String str = "", temp = "";
         Iterator<Map.Entry<String, Boolean>> entries = medicalHistory.entrySet().iterator();
@@ -193,7 +192,7 @@ public class MedicalHistory {
 
     public void setMitralValveProlapse(boolean mitralValveProlapse) { this.medicalHistory.put("mitralValveProlapse", mitralValveProlapse); }
     public boolean getMitralValveProlapse() { return this.medicalHistory.get("mitralValveProlapse"); }
-    
+
     public MedicalHistory() {
         medicalHistory = new HashMap<String, Boolean>();
 

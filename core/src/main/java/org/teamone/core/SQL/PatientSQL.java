@@ -7,6 +7,7 @@ package org.teamone.core.SQL;
  *
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
+
 import org.teamone.core.users.Patient;
 
 import java.sql.*;
@@ -17,7 +18,7 @@ public class PatientSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
-    public static boolean updateHealthCondition(org.teamone.core.users.Patient patient) {
+    public static boolean updateHealthCondition(Patient patient) {
         boolean boolResult;
         try {
             int checker;
@@ -109,7 +110,6 @@ public class PatientSQL {
             close();
         }
         return boolResult;
-
     }
 
     public static Patient getMedicalHistory(Patient patient) {
