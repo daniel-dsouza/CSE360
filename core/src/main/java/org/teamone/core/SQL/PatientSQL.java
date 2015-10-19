@@ -4,13 +4,16 @@ package org.teamone.core.SQL;
  * Created by Ryan on 10/9/2015.
  * http://www.vogella.com/tutorials/MySQLJava/article.html
  * http://zetcode.com/db/mysqljava/
- *
+ * <p/>
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
 
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientSQL {
     private static Connection connect = null;
@@ -234,9 +237,27 @@ public class PatientSQL {
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
             String hc = patient.healthConditions.toString();
+//checking alert
+            List<Integer> myList = new ArrayList<Integer>();
+            if (patient.healthConditions.alertReason != null) {
+                preparedStatement = connect.prepareStatement("SELECT patient_id FROM alerts");
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next())
+                    myList.add(resultSet.getInt("patient_id"));
+                    //Retrieve by column name
 
-            preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
+                if (myList.contains(patient.getPatientID())) {
+                    preparedStatement = connect.prepareStatement("UPDATE alerts set alert_reason = ?, AlertActive=TRUE where patient_id = ?");
+                    preparedStatement.setString(1, patient.healthConditions.alertReason);
+                    preparedStatement.setInt(2, patient.getPatientID());
+                }
+                else {
+                    preparedStatement = connect.prepareStatement("INSERT into alerts(alert_reason, patient_id, AlertActive) set alert_reason = ?, patient_id = ?, AlertActive=TRUE ");
+                    preparedStatement.setString(1, patient.healthConditions.alertReason);
+                    preparedStatement.setInt(2, patient.getPatientID());
 
+                }
+            }
             preparedStatement.setString(1, hc);
             preparedStatement.setInt(2, ID);
             checker = preparedStatement.executeUpdate();
