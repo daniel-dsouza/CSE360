@@ -3,5 +3,5 @@ jdk:
   - oraclejdk8
   
 before_install:
-  - mysql -uroot cse360 < cse360.sql
+  - mysql -uroot source cse360.sql
   - chmod +x gradlew
