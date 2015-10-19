@@ -1,6 +1,6 @@
 package org.teamone.core.users;
 
-import org.teamone.core.SQL.PasswordSQL;
+import org.teamone.core.SQL.credentialsSQL;
 import org.teamone.core.appointments.Appointment;
 
 import java.sql.*;
@@ -36,7 +36,7 @@ public class PersonUtils {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\n\nTrying to connect to mysql with root and pass\n");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             //String specialty = staff.getSpecialty();
 
@@ -97,7 +97,7 @@ public class PersonUtils {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
 
@@ -129,7 +129,7 @@ public class PersonUtils {
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             preparedStatementPatient = connect.prepareStatement("select userID from person where name = ?");
             preparedStatementPatient.setString(1,patientName);

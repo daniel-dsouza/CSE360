@@ -29,7 +29,7 @@ public class AppointmentSQL {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
@@ -82,7 +82,7 @@ public class AppointmentSQL {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int patID = readMe.getPatientID();
@@ -136,7 +136,7 @@ public class AppointmentSQL {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();
@@ -193,7 +193,7 @@ public class AppointmentSQL {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql with root and pass");
 
-            connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/cse360", "root", PasswordSQL.mySQLpass);
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();
