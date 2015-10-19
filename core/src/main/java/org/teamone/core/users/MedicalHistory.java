@@ -1,6 +1,7 @@
 package org.teamone.core.users;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ import java.util.Set;
  */
 public class MedicalHistory {
     private Map<String, Boolean> medicalHistory;
-    
+
     public Set<String> getKeys() {
         return medicalHistory.keySet();
     }
@@ -23,7 +24,29 @@ public class MedicalHistory {
     }
 
     public String toString() {
-        return "MedicalHistory";//TODO: loop through Map and concat everything into 1 string and send to SQL
+
+        String str = "", temp = "";
+        Iterator<Map.Entry<String, Boolean>> entries = medicalHistory.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry<String, Boolean> entry = entries.next();
+            temp=entry.getKey()+","+entry.getValue()+":";
+            str = str.concat(temp);
+        }
+        System.out.println(str);
+        return str;
+    }
+
+    public void toMapObj(String str){
+        Map<String, Boolean> medicalHistory = null;
+
+        String[] parts = str.split(":");
+        for(String temp2:parts)
+        {
+            String[] temp3 =  temp2.split(",");
+            boolean abcd = Boolean.parseBoolean(temp3[1]);
+            this.medicalHistory.put(temp3[0], abcd);
+        }
+
     }
 
     public void setAidsHIVPositive(boolean aidsHIVPositive) { this.medicalHistory.put("aidsHIVPositive", aidsHIVPositive); }
@@ -169,7 +192,7 @@ public class MedicalHistory {
 
     public void setMitralValveProlapse(boolean mitralValveProlapse) { this.medicalHistory.put("mitralValveProlapse", mitralValveProlapse); }
     public boolean getMitralValveProlapse() { return this.medicalHistory.get("mitralValveProlapse"); }
-    
+
     public MedicalHistory() {
         medicalHistory = new HashMap<String, Boolean>();
 
