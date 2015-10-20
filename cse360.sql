@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `cse360`
+-- Database: `cse360` remote is `sql393597`
 --
 CREATE DATABASE IF NOT EXISTS `cse360` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `cse360`;
@@ -214,7 +214,7 @@ ALTER TABLE `staff`
 ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `person` (`userID`) ON DELETE CASCADE,
 ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);
 
-CREATE TABLE `sql393597`.`alerts` (
+CREATE TABLE IF NOT EXISTS `alerts` (
   `alert_id` INT NOT NULL AUTO_INCREMENT,
   `alert_reason` VARCHAR(45) NULL,
   `doctor_id` INT NOT NULL DEFAULT 0,
@@ -224,7 +224,8 @@ CREATE TABLE `sql393597`.`alerts` (
   UNIQUE INDEX `alertId_UNIQUE` (`alert_id` ASC),
   UNIQUE INDEX `patient_id_UNIQUE` (`patient_id` ASC)
   );
-
+INSERT INTO `alerts` (`alert_reason`, `doctor_id`, `patient_id`, `AlertActive`) VALUES
+  ("anklePain:", 1244, 1249, TRUE);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
