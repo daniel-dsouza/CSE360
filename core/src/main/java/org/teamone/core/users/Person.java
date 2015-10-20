@@ -55,6 +55,7 @@ public class Person {
     }
 
     public String getFirstName() {
+        splitName();
         return firstName;
     }
 
@@ -64,6 +65,7 @@ public class Person {
     }
 
     public String getLastName() {
+        splitName();
         return lastName;
     }
 
@@ -73,12 +75,12 @@ public class Person {
     }
     public void concatName()
     {
-        name = lastName + firstName;
+        name = lastName + ":" +firstName;
     }
     public void splitName()
     {
-        String[] data = name.split(" ");
-        firstName =
+        String[] data = name.split(":");
+        firstName = data[0];
         lastName = data[1];
     }
 }

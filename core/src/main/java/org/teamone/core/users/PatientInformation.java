@@ -5,6 +5,8 @@ package org.teamone.core.users;
  */
 public class PatientInformation {
     private String name;
+    private String firstName ="";
+    private String lastName ="";
     private String age;
     private String address;
     private String city;
@@ -36,35 +38,44 @@ public class PatientInformation {
     }
 
     public String getAddress() {
+        splitAddress();
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+        concatAddress();
     }
 
     public String getCity() {
+        splitAddress();
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+        concatAddress();
     }
 
     public String getState() {
+        splitAddress();
         return state;
     }
 
     public void setState(String state) {
         this.state = state;
+        concatAddress();
     }
 
     public String getZipcode() {
+
+        splitAddress();
         return zipcode;
     }
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+        concatAddress();
     }
 
     public String getHomePhone() {
@@ -105,5 +116,45 @@ public class PatientInformation {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+        concatName();
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+        concatName();
+    }
+    public void concatName()
+    {
+        name = lastName + ":" + firstName;
+    }
+    public void splitName()
+    {
+        String[] data = name.split(":");
+        firstName = data[0];
+        lastName = data[1];
+    }
+    public void concatAddress()
+    {
+        address = address + ":" + city + ":" + state + ":" + zipcode;
+    }
+    public void splitAddress()
+    {
+        String[] data = address.split(":");
+        address = data[0];
+        city = data[1];
+        state = data[2];
+        zipcode =data[3];
     }
 }
