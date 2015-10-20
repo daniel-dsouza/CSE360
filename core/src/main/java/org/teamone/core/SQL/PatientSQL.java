@@ -285,6 +285,39 @@ public class PatientSQL {
         }
         return boolResult;
     }
+
+    public static Boolean setAlertOff(Alert alert) {
+        boolean boolResult;
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int alertID = alert.getAlertID();
+
+            preparedStatement = connect.prepareStatement("UPDATE alerts set AlertActive = false where alert_id = ?");
+            preparedStatement.setInt(1, alertID);
+            checker = preparedStatement.executeUpdate();
+
+            if (checker == 0)
+                boolResult = false;
+            else
+                boolResult = true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            boolResult = false;
+        } finally {
+            close();
+        }
+        return boolResult;
+    }
+
     public static ArrayList<Alert> getListAlerts() {
 
         ArrayList<Alert> alertList = new ArrayList<Alert>();
