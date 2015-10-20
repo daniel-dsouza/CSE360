@@ -26,7 +26,7 @@ public class PatientUpdateInfoTest {
         regis.setPatientID(123);
         regis.setUserID(123);
         regis.setName("luffy;monkey");
-        regis.setAddress("Eastern Ocean");
+        //regis.setAddress("Eastern Ocean");
         regis.setEmail("luffy@asu.edu");
         regis.setPhone("13230932");
         regis.setSSN("987654321");
@@ -55,6 +55,7 @@ public class PatientUpdateInfoTest {
     public void tester()
     {
         System.out.println("\nTest========Registering New Patient");
+        regis.patientInformation.getAddress();
         if(HspSQL.RegisterNewPatient(regis))
         {
             System.out.println("*********************Register successful************************");

@@ -8,10 +8,10 @@ public class PatientInformation {
     private String firstName ="";
     private String lastName ="";
     private String age;
-    private String address;
-    private String city;
-    private String state;
-    private String zipcode;
+    private String address=" ";
+    private String city=" ";
+    private String state=" ";
+    private String zipcode=" ";
     private String homePhone;
     private String email;
     private String insurance;
@@ -38,44 +38,36 @@ public class PatientInformation {
     }
 
     public String getAddress() {
-        splitAddress();
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
         this.address = address;
-        concatAddress();
     }
 
     public String getCity() {
-        splitAddress();
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
-        concatAddress();
     }
 
     public String getState() {
-        splitAddress();
         return state;
     }
 
     public void setState(String state) {
         this.state = state;
-        concatAddress();
     }
 
     public String getZipcode() {
 
-        splitAddress();
         return zipcode;
     }
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
-        concatAddress();
     }
 
     public String getHomePhone() {
@@ -124,7 +116,6 @@ public class PatientInformation {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-        concatName();
     }
 
     public String getLastName() {
@@ -133,25 +124,24 @@ public class PatientInformation {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-        concatName();
     }
-    public void concatName()
+    public void toStringName()//to SQL
     {
         name = lastName + ":" + firstName;
     }
-    public void splitName()
+    public void splitName(String nam)//from SQL
     {
-        String[] data = name.split(":");
+        String[] data = nam.split(":");
         firstName = data[0];
         lastName = data[1];
     }
-    public void concatAddress()
+    public void toStringAddress()//to SQL
     {
         address = address + ":" + city + ":" + state + ":" + zipcode;
     }
-    public void splitAddress()
+    public void splitAddress(String add)//from SQL
     {
-        String[] data = address.split(":");
+        String[] data = add.split(":");
         address = data[0];
         city = data[1];
         state = data[2];

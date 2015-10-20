@@ -55,31 +55,31 @@ public class Person {
     }
 
     public String getFirstName() {
-        splitName();
+
         return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-        concatName();
+
     }
 
     public String getLastName() {
-        splitName();
+
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-        concatName();
+
     }
-    public void concatName()
+    public void toStringName()//to SQL
     {
         name = lastName + ":" +firstName;
     }
-    public void splitName()
+    public void splitName(String nam)//from SQL
     {
-        String[] data = name.split(":");
+        String[] data = nam.split(":");
         firstName = data[0];
         lastName = data[1];
     }
