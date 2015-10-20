@@ -30,6 +30,7 @@ public class HealthConditions {
 
     public String toString() {
         String str = "", temp = "";
+        alertReason ="";//clear out alerts
         Iterator<Map.Entry<String, Boolean>> entries = healthConditions.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry<String, Boolean> entry = entries.next();
@@ -37,7 +38,7 @@ public class HealthConditions {
             {
                 if (alertCondition[i] == entry.getKey() && entry.getValue()==true)
                 {
-            alertReason=alertReason+";\n"+entry.getKey();
+                    alertReason=alertReason+entry.getKey()+":";
                 }
             }
             temp=entry.getKey()+","+entry.getValue()+":";
