@@ -107,11 +107,11 @@ public class Patient extends Person {
 
     public String getHealthConditions() {
         //return healthConditions;
-        return "this is lazy.";
+        return healthConditions.toString();
     }
 
-    public void setHealthConditions(String healthConditions) {
-        //this.healthConditions = healthConditions;
+    public void setHealthConditions(String healthCondition) {
+        healthConditions.toMapObj(healthCondition);
     }
 
     public String getLabReports() {
