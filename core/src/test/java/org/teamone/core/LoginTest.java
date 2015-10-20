@@ -21,12 +21,14 @@ public class LoginTest {
     @Test
     public void helpM() {
         System.out.println("\nTest========Testing login authentication");
-        if(LoginSQL.authenticate(test)!=null)
+        Person p = LoginSQL.authenticate(test);
+        if(p!=null)
         {
             System.out.println("LOGIN SUCCESS!");
-            System.out.println("Name: " + test.getName());
-            System.out.println("Occupation: " + test.getOccupation());
-            System.out.println("Email: " + test.getEmail());
+            System.out.println("Class: " + p.getClass());
+            System.out.println("Name: " + p.getName());
+            System.out.println("Occupation: " + p.getOccupation());
+            System.out.println("Email: " + p.getEmail());
         }
         else
             System.out.println("LOGIN FAILED");
