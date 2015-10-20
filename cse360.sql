@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `cse360`
+-- Database: `cse360` remote is `sql393597`
 --
 CREATE DATABASE IF NOT EXISTS `cse360` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `cse360`;
@@ -49,19 +49,19 @@ CREATE TABLE IF NOT EXISTS `appointment` (
 CREATE TABLE IF NOT EXISTS `patient` (
   `serialNumber` int(100) NOT NULL AUTO_INCREMENT,
   `patientID` int(10) NOT NULL,
-  `medicalHistory` varchar(500) DEFAULT NULL,
+  `medicalHistory` varchar(5000) DEFAULT NULL,
   `occupation` enum('patient') NOT NULL,
   `address` varchar(200) DEFAULT NULL,
-  `SSN` int(9) DEFAULT NULL,
+  `SSN` varchar(9) DEFAULT NULL,
   `gender` varchar(100) DEFAULT NULL,
   `insurance` varchar(100) DEFAULT NULL,
-  `age` int(10) DEFAULT NULL,
-  `phone` int(10) DEFAULT NULL,
-  `healthConditions` varchar(500) DEFAULT NULL,
-  `labReports` varchar(500) DEFAULT NULL,
+  `age` varchar(10) DEFAULT NULL,
+  `phone` varchar(10) DEFAULT NULL,
+  `healthConditions` varchar(5000) DEFAULT NULL,
+  `labReports` varchar(5000) DEFAULT NULL,
   `alertDateAndTime` varchar(255) DEFAULT NULL,
   `alertStatus` tinyint(1) DEFAULT NULL,
-  `prescription` varchar(500) DEFAULT NULL,
+  `prescription` varchar(5000) DEFAULT NULL,
   PRIMARY KEY (`serialNumber`),
   UNIQUE KEY `patientID` (`patientID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
@@ -213,6 +213,19 @@ ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `person` (`
 ALTER TABLE `staff`
 ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `person` (`userID`) ON DELETE CASCADE,
 ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);
+
+CREATE TABLE IF NOT EXISTS `alerts` (
+  `alert_id` INT NOT NULL AUTO_INCREMENT,
+  `alert_reason` VARCHAR(45) NULL,
+  `doctor_id` INT NOT NULL DEFAULT 0,
+  `patient_id` INT NOT NULL,
+  `AlertActive` BOOLEAN NOT NULL DEFAULT TRUE,
+  PRIMARY KEY (`alert_id`),
+  UNIQUE INDEX `alertId_UNIQUE` (`alert_id` ASC),
+  UNIQUE INDEX `patient_id_UNIQUE` (`patient_id` ASC)
+  );
+INSERT INTO `alerts` (`alert_reason`, `doctor_id`, `patient_id`, `AlertActive`) VALUES
+  ("anklePain:", 1244, 1249, TRUE);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
