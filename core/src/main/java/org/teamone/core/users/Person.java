@@ -7,6 +7,8 @@ package org.teamone.core.users;
 
 public class Person {
     private String name;
+    private String firstName ="";
+    private String lastName ="";
     private String occupation;
     private String password;
     private String email;
@@ -52,4 +54,31 @@ public class Person {
         this.userID = userID;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+        concatName();
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+        concatName();
+    }
+    public void concatName()
+    {
+        name = lastName + firstName;
+    }
+    public void splitName()
+    {
+        String[] data = name.split(" ");
+        firstName =
+        lastName = data[1];
+    }
 }
