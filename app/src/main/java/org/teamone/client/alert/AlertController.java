@@ -22,10 +22,14 @@ import java.util.Map;
 @RequestMapping(value = "/alert")
 public class AlertController {
 
-    @RequestMapping(value = "/getalerts/{doctor}", method = RequestMethod.GET)
+    /**
+     * AJAX handler to return alerts.
+     * @return list of alerts as JSON objects
+     */
+    @RequestMapping(value = "/getalerts", method = RequestMethod.GET)
     public @ResponseBody
-    ArrayList<Alert> findDoctors(@PathVariable String doctor) {
-        System.out.println("alerts tagged:" + doctor);
+    ArrayList<Alert> findDoctors() {
+        //System.out.println("alerts tagged:" + doctor);
         //request list of patients with optional doctor.
 
         Alert one = new Alert();
@@ -49,6 +53,24 @@ public class AlertController {
         alertList.add(two);
         System.out.println("returning list of alerts");
         return alertList; //return JSON object
+    }
+
+    /**
+     * Resolves an alert.
+     * @param alertID
+     * @return
+     */
+    @RequestMapping(value = "/resolvealert/{alertID}", method = RequestMethod.GET)
+    public @ResponseBody
+    void resolveAlert(@PathVariable String alertID) {
+        System.out.println("lol");
+        Alert resolved = new Alert();
+        try {
+            resolved.setAlertID(Integer.parseInt(alertID));
+            System.out.println("Resolved alert: " + alertID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET)
