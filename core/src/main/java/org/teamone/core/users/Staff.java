@@ -1,5 +1,7 @@
 package org.teamone.core.users;
 
+import java.util.TreeMap;
+
 /**
  * Created by Ryan on 10/7/2015.
  */
@@ -53,5 +55,7 @@ public class Staff extends Person {
         this.schedule = schedule;
     }
 
-
+    public Staff() {
+        super();
+    }
 }

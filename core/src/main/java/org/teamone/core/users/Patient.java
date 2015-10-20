@@ -1,15 +1,14 @@
 package org.teamone.core.users;
 
+import java.util.TreeMap;
+
 /**
  * Created by Ryan on 10/7/2015.
  */
 public class Patient extends Person {
     private int patientID = 0;
-
     private String occupation; //why do we care?
-
     private String labReports; //wtf is this
-
     private String prescription; //wtf is this
 
     public PatientInformation patientInformation;
@@ -17,9 +16,13 @@ public class Patient extends Person {
     public MedicalHistory medicalHistory;
 
     public Patient() {
+        super();
         patientInformation = new PatientInformation();
         healthConditions = new HealthConditions();
         medicalHistory = new MedicalHistory();
+
+        agentActions = new TreeMap<String, String>() {};
+        agentActions.put("Update Information", "registration/personalinformation");
     }
 
     public int getPatientID() {
@@ -121,8 +124,6 @@ public class Patient extends Person {
     public void setLabReports(String labReports) {
         this.labReports = labReports;
     }
-
-
 
     public String getPrescription() {
         return prescription;
