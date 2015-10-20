@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.teamone.core.users.Alert;
+import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.users.PersonUtils;
 import org.teamone.core.users.Staff;
 
@@ -32,25 +33,7 @@ public class AlertController {
         //System.out.println("alerts tagged:" + doctor);
         //request list of patients with optional doctor.
 
-        Alert one = new Alert();
-        one.setAlertDateAndTime("rick and morty time");
-        one.setAlertStatus(true);
-        one.setPatientID(9413);
-        one.setDoctorID(4561);
-        one.setAlertID(3455);
-        one.setReason("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam bibendum ex ac purus pharetra mollis.");
-
-        Alert two = new Alert();
-        two.setAlertDateAndTime("rick and morty time");
-        two.setAlertStatus(true);
-        two.setPatientID(9413);
-        two.setDoctorID(4561);
-        two.setAlertID(3455);
-        two.setReason("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam bibendum ex ac purus pharetra mollis.");
-
-        ArrayList<Alert> alertList= new ArrayList<Alert>();
-        alertList.add(one);
-        alertList.add(two);
+        ArrayList<Alert> alertList = PatientSQL.getListAlerts();
         System.out.println("returning list of alerts");
         return alertList; //return JSON object
     }
@@ -67,6 +50,7 @@ public class AlertController {
         Alert resolved = new Alert();
         try {
             resolved.setAlertID(Integer.parseInt(alertID));
+            PatientSQL.setAlertOff(resolved);
             System.out.println("Resolved alert: " + alertID);
         } catch (Exception e) {
             e.printStackTrace();
