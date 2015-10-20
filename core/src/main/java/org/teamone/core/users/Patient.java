@@ -30,13 +30,7 @@ public class Patient extends Person {
         this.patientID = patientID;
     }
 
-    public String getMedicalHistory() {
-        return medicalHistory.toString();
-    }
 
-    public void setMedicalHistory(String medicalHistory) {
-        //this.medicalHistory = medicalHistory;
-    }
 
     public String getOccupation() {
         return occupation;
@@ -46,14 +40,6 @@ public class Patient extends Person {
         this.occupation = occupation;
     }
 
-    public String getAddress() {
-        return this.patientInformation.getAddress();
-    }
-
-    public void setAddress(String address) {
-        //this.address = address;
-        this.patientInformation.setAddress(address);
-    }
 
     public String getSSN() {
         //return SSN;
@@ -105,13 +91,43 @@ public class Patient extends Person {
         this.patientInformation.setHomePhone(phone);
     }
 
-    public String getHealthConditions() {
+    public HealthConditions getHealthConditions() {
         //return healthConditions;
-        return "this is lazy.";
+        return healthConditions;
     }
 
-    public void setHealthConditions(String healthConditions) {
-        //this.healthConditions = healthConditions;
+    public void setHealthConditions(HealthConditions hc) {
+        healthConditions = hc;
+    }
+    public MedicalHistory getMedicalHistory() {
+
+        return medicalHistory;
+    }
+
+    public void setMedicalHistory(MedicalHistory mh) {
+        medicalHistory = mh;
+    }
+
+    public String getName()
+    {
+
+        return patientInformation.getName();
+    }
+    public void setName(String name)
+    {
+        patientInformation.setName(name);
+        patientInformation.splitName(name);
+    }
+
+    public String getAddress()
+    {
+
+        return patientInformation.getAddress();
+    }
+    public void setAddress(String add)
+    {
+        patientInformation.setAddress(add);
+        patientInformation.splitAddress(add);
     }
 
     public String getLabReports() {

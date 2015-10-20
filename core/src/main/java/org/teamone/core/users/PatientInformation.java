@@ -125,9 +125,10 @@ public class PatientInformation {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public void toStringName()//to SQL
+    public String toStringName()//to SQL
     {
         name = lastName + ":" + firstName;
+        return name;
     }
     public void splitName(String nam)//from SQL
     {
@@ -135,9 +136,10 @@ public class PatientInformation {
         firstName = data[0];
         lastName = data[1];
     }
-    public void toStringAddress()//to SQL
+    public String toStringAddress()//to SQL
     {
         address = address + ":" + city + ":" + state + ":" + zipcode;
+        return address;
     }
     public void splitAddress(String add)//from SQL
     {

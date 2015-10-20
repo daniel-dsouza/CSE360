@@ -30,7 +30,7 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
-            String hc = patient.getHealthConditions();
+            String hc = patient.healthConditions.toString();
 
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
             preparedStatement.setString(1, hc);
@@ -131,10 +131,8 @@ public class PatientSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             mh = resultSet.getString("medicalhistory");
-            patient.setMedicalHistory(mh);
+            patient.medicalHistory.toMapObj(mh);
             patient.setPatientID(ID);
-            temp = mh;
-            patient.medicalHistory.toMapObj(temp);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -203,10 +201,8 @@ public class PatientSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             hc = resultSet.getString("healthConditions");
-            patient.setHealthConditions(hc);
+            patient.healthConditions.toMapObj(hc);
             patient.setPatientID(ID);
-            temp = hc;
-            patient.healthConditions.toMapObj(temp);
 
         } catch (Exception e) {
             System.out.println(e);

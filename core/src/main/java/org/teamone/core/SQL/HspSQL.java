@@ -29,11 +29,11 @@ public class HspSQL {
 
             // PreparedStatements can use variables and are more efficient
             int userID = patient.getUserID();
-            int patientID = patient.getPatientID();
-            String name = patient.getName();
+
+            String name = patient.patientInformation.toStringName();
             String SSN = patient.getSSN();
-            String address = patient.getAddress();
-            String email = patient.getEmail();
+            String address = patient.patientInformation.toStringAddress();
+            String email = patient.patientInformation.getEmail();
             String phone = patient.getPhone();
             String insurance = patient.getInsurance();
             String age = patient.getAge();
@@ -47,13 +47,20 @@ public class HspSQL {
 
             preparedStatementPerson = connect.prepareStatement(insertTablePerson);
             preparedStatementPerson.setInt(1, userID);
-            preparedStatementPerson.setString(2,name);
+            preparedStatementPerson.setString(2, name);
             preparedStatementPerson.setString(3,"patient");
-            preparedStatementPerson.setString(4,password);
+            preparedStatementPerson.setString(4,"go");
             preparedStatementPerson.setString(5,email);
-
-            //INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES (1232, 'Ry;an', 'doctor', 'temporary', 'ryan@asu.edu');
             checker2 = preparedStatementPerson.executeUpdate();
+
+            preparedStatementPerson = connect.prepareStatement("SELECT userID FROM person WHERE name = ?");
+            preparedStatementPerson.setString(1, name);
+            preparedStatementPerson.executeQuery();
+
+
+            int patientID = patient.getPatientID();
+            //INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES (1232, 'Ry;an', 'doctor', 'temporary', 'ryan@asu.edu');
+
             String insertTablePatient = "INSERT INTO patient"
                     + "(patientID, occupation, address, SSN, gender, insurance, age, phone) VALUES"
                     + "(?,?,?,?,?,?,?,?)";

@@ -15,7 +15,7 @@ public class HealthConditionTest {
 
         test = new Patient();
         test.setPatientID(1234);
-        test.setHealthConditions("Ryan is a good boy");
+        test.healthConditions.toMapObj("anklePain,true:");
     }
 
     @Test
