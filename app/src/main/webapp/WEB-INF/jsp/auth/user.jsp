@@ -12,7 +12,7 @@
   <jsp:body>
     <div class="container-fluid">
       <div class="jumbotron" style="background-color: deepskyblue">
-        <h1>Welcome <c:out value="${user.username}"/> to the IPIMS</h1>
+        <h1>Welcome <c:out value="${user.person.name}"/> to the IPIMS</h1>
         <p>We put the 'balling in eyeballing</p>
       </div>
     </div>

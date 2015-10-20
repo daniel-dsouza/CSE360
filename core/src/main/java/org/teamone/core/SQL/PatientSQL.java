@@ -4,13 +4,16 @@ package org.teamone.core.SQL;
  * Created by Ryan on 10/9/2015.
  * http://www.vogella.com/tutorials/MySQLJava/article.html
  * http://zetcode.com/db/mysqljava/
- *
+ * <p/>
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
 
+import org.teamone.core.users.Alert;
 import org.teamone.core.users.Patient;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientSQL {
     private static Connection connect = null;
@@ -233,10 +236,38 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
+
             String hc = patient.healthConditions.toString();
+//checking alert
+            List<Integer> myList = new ArrayList<Integer>();
+            if (patient.healthConditions.alertReason != "") {
+                preparedStatement = connect.prepareStatement("SELECT patient_id FROM alerts");
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next())
+                    myList.add(resultSet.getInt("patient_id"));
+                    //Retrieve by column name
+                System.out.println("patient ids have been added to list");
 
+                if (myList.contains(patient.getPatientID())) {
+                    System.out.println("Alert in alerts table is present. Updating now");
+                    preparedStatement = connect.prepareStatement("UPDATE alerts set alert_reason = ?, AlertActive=TRUE where patient_id = ?");
+                    preparedStatement.setString(1, patient.healthConditions.alertReason);
+                    preparedStatement.setInt(2, patient.getPatientID());
+                    preparedStatement.executeUpdate();
+
+                }
+                else {
+                    System.out.println("Alert in alerts table is NOT present. Inserting now");
+                    //INSERT INTO alerts(alert_reason, patient_id,AlertActive) VALUES (":anklePain", 1234,1) ;
+                    preparedStatement = connect.prepareStatement("INSERT INTO alerts(alert_reason, patient_id, AlertActive) VALUES (?, ?, TRUE) ;");
+                    preparedStatement.setString(1, patient.healthConditions.alertReason);
+                    preparedStatement.setInt(2, patient.getPatientID());
+
+                    preparedStatement.executeUpdate();
+
+                }
+            }
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
-
             preparedStatement.setString(1, hc);
             preparedStatement.setInt(2, ID);
             checker = preparedStatement.executeUpdate();
@@ -255,6 +286,68 @@ public class PatientSQL {
         return boolResult;
     }
 
+    public static Boolean setAlertOff(Alert alert) {
+        boolean boolResult;
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int alertID = alert.getAlertID();
+
+            preparedStatement = connect.prepareStatement("UPDATE alerts set AlertActive = false where alert_id = ?");
+            preparedStatement.setInt(1, alertID);
+            checker = preparedStatement.executeUpdate();
+
+            if (checker == 0)
+                boolResult = false;
+            else
+                boolResult = true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            boolResult = false;
+        } finally {
+            close();
+        }
+        return boolResult;
+    }
+
+    public static ArrayList<Alert> getListAlerts() {
+
+        ArrayList<Alert> alertList = new ArrayList<Alert>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            preparedStatement = connect.prepareStatement("SELECT alert_id,  alert_reason,  doctor_id,  patient_id  FROM alerts WHERE AlertActive = 1;");
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Alert a = new Alert();
+                a.setAlertID(resultSet.getInt("alert_id"));
+                a.setReason(resultSet.getString("alert_reason"));
+                a.setDoctorID(resultSet.getInt("doctor_id"));
+                a.setPatientID(resultSet.getInt("patient_id"));
+                a.setAlertStatus(true);
+                alertList.add(a);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            alertList = null;
+        } finally {
+            close();
+        }
+        return alertList;
+    }
 
     // You need to close the resultSet
     private static void close() {

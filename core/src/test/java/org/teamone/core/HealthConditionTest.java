@@ -14,8 +14,8 @@ public class HealthConditionTest {
     public void setUp() {
 
         test = new Patient();
-        test.setPatientID(1234);
-        test.setHealthConditions("Ryan is a good boy");
+        test.setPatientID(1245);
+        test.setHealthConditions("protrudingEyes,false:visionProblems,false:testiclePain,true:stomachPain,false:frequentUrination,false");
     }
 
     @Test

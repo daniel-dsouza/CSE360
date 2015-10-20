@@ -29,7 +29,7 @@ public class UserController {
             @ModelAttribute User user) {
         System.out.println("load User?");
         System.out.println(model);
-        System.out.println(user.getUsername());
+        //System.out.println(user.getUsername());
         return "auth/user";
     }
 }

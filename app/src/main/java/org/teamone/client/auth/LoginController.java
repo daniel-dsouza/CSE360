@@ -23,8 +23,8 @@ import java.util.Map;
 @RequestMapping(value = {"/", "/login"})
 public class LoginController {
 
-    @Autowired
-    private User user;
+    //@Autowired
+    //private User user;
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewLogin(Map<String, Object> model) {
@@ -47,10 +47,11 @@ public class LoginController {
 
         if (LoginSQL.authenticate(pAttempt) != null || attempt.getPassword().equals("go")) { //TODO:remove backdoor
             System.out.println("auth succeed");
+            user.person = pAttempt;
             //user.setUsername(LoginSQL.getName(pAttempt.getUserID()));
-            user.setUsername(pAttempt.getName());
-            user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
-            return "redirect:/user/" + user.getUsername();
+            //user.setUsername(pAttempt.getName());
+            //user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
+            return "redirect:/user/" + user.person.getUserID();
         } else {
             System.out.println("auth fail");
             String errorMessage = "Your userID or password were incorrect. Try again.";
