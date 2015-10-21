@@ -31,7 +31,7 @@ public class LoginSQL {
             int ID = check.getUserID();
             String pass = check.getPassword();
 
-            preparedStatement = connect.prepareStatement("SELECT * from person WHERE userID = ?");
+            preparedStatement = connect.prepareStatement("SELECT userID, name, occupation, password, emailID from person WHERE userID = ?");
             preparedStatement.setInt(1,ID);
             resultSet = preparedStatement.executeQuery();
             if(verify(resultSet, pass))
@@ -41,39 +41,28 @@ public class LoginSQL {
                if(occ.equals("patient"))
                {
                    check = new Patient();
-                   check.setName(resultSet.getString("name"));
-                   check.setOccupation(resultSet.getString("occupation"));
-                   check.setEmail(resultSet.getString("emailID"));
                }else
                 if(occ.equals("doctor"))
                 {
                     check = new Doctor();
-                    check.setName(resultSet.getString("name"));
-                    check.setOccupation(resultSet.getString("occupation"));
-                    check.setEmail(resultSet.getString("emailID"));
                 }else
                 if(occ.equals("hsp"))
                 {
                     check = new HSP();
-                    check.setName(resultSet.getString("name"));
-                    check.setOccupation(resultSet.getString("occupation"));
-                    check.setEmail(resultSet.getString("emailID"));
                 }
                 else
                 if(occ.equals("labstaff"))
                 {
                     check = new LabStaff();
-                    check.setName(resultSet.getString("name"));
-                    check.setOccupation(resultSet.getString("occupation"));
-                    check.setEmail(resultSet.getString("emailID"));
                 }
                 else
                 {
                     check = new Person();
-                    check.setName(resultSet.getString("name"));
-                    check.setOccupation(resultSet.getString("occupation"));
-                    check.setEmail(resultSet.getString("emailID"));
                 }
+                check.setName(resultSet.getString("name"));
+                check.setOccupation(resultSet.getString("occupation"));
+                check.setEmail(resultSet.getString("emailID"));
+                check.setUserID(ID);
 
             }
             else

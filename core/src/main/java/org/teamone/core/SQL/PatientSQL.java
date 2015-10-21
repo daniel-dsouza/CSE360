@@ -237,7 +237,7 @@ public class PatientSQL {
             String hc = patient.healthConditions.toString();
 //checking alert
             List<Integer> myList = new ArrayList<Integer>();
-            if (patient.healthConditions.alertReason != "") {
+            if (patient.healthConditions.alertReason != null && patient.healthConditions.alertReason != "") {
                 preparedStatement = connect.prepareStatement("SELECT patient_id FROM alerts");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next())
@@ -245,20 +245,27 @@ public class PatientSQL {
                     //Retrieve by column name
                 System.out.println("=Detected alerts. Patient ids have been added to list");
 
+                java.util.Date dt = patient.healthConditions.alertDateAndTime;
+                java.text.SimpleDateFormat sdf =
+                        new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String alertTime = sdf.format(dt);
+
                 if (myList.contains(patient.getPatientID())) {
                     System.out.println("Alert in alerts table is present. Updating now");
-                    preparedStatement = connect.prepareStatement("UPDATE alerts set alert_reason = ?, AlertActive=TRUE where patient_id = ?");
+                    preparedStatement = connect.prepareStatement("UPDATE alerts set alert_reason = ?, AlertActive=TRUE, alertDateAndTime = ? where patient_id = ?");
                     preparedStatement.setString(1, patient.healthConditions.alertReason);
                     preparedStatement.setInt(2, patient.getPatientID());
+                    preparedStatement.setString(3, alertTime);
                     preparedStatement.executeUpdate();
 
                 }
                 else {
                     System.out.println("Alert in alerts table is NOT present. Inserting now");
                     //INSERT INTO alerts(alert_reason, patient_id,AlertActive) VALUES (":anklePain", 1234,1) ;
-                    preparedStatement = connect.prepareStatement("INSERT INTO alerts(alert_reason, patient_id, AlertActive) VALUES (?, ?, TRUE) ;");
+                    preparedStatement = connect.prepareStatement("INSERT INTO alerts(alert_reason, patient_id, alertDateAndTime, AlertActive) VALUES (?, ?, ?, TRUE) ;");
                     preparedStatement.setString(1, patient.healthConditions.alertReason);
                     preparedStatement.setInt(2, patient.getPatientID());
+                    preparedStatement.setString(3, alertTime);
 
                     preparedStatement.executeUpdate();
 
@@ -325,7 +332,7 @@ public class PatientSQL {
             System.out.println("\nTrying to connect to mysql with root and pass");
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
-            preparedStatement = connect.prepareStatement("SELECT alert_id,  alert_reason,  doctor_id,  patient_id  FROM alerts WHERE AlertActive = 1;");
+            preparedStatement = connect.prepareStatement("SELECT alert_id,  alert_reason,  doctor_id,  patient_id, alertDateAndTime  FROM alerts WHERE AlertActive = 1;");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Alert a = new Alert();
@@ -333,6 +340,7 @@ public class PatientSQL {
                 a.setReason(resultSet.getString("alert_reason"));
                 a.setDoctorID(resultSet.getInt("doctor_id"));
                 a.setPatientID(resultSet.getInt("patient_id"));
+                a.setAlertDateAndTime(resultSet.getString("alertDateAndTime"));
                 a.setAlertStatus(true);
                 alertList.add(a);
             }
