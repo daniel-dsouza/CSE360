@@ -1,5 +1,7 @@
 package org.teamone.core.users;
 
+import java.util.Map;
+
 /**
  * Created by Ryan on 10/7/2015.
  */
@@ -14,6 +16,8 @@ public class Person {
     private String email;
     private int userID = 0;
 
+    Map<String, String> agentActions; //action,url
+    Map<String, String> genericActions; //action,url
     public String getName() {
         return name;
     }

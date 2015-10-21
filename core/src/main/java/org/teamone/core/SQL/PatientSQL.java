@@ -242,7 +242,7 @@ public class PatientSQL {
                 while (resultSet.next())
                     myList.add(resultSet.getInt("patient_id"));
                     //Retrieve by column name
-                System.out.println("patient ids have been added to list");
+                System.out.println("=Detected alerts. Patient ids have been added to list");
 
                 if (myList.contains(patient.getPatientID())) {
                     System.out.println("Alert in alerts table is present. Updating now");
