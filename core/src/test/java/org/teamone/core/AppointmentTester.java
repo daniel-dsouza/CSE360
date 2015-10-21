@@ -15,14 +15,14 @@ public class AppointmentTester {
 
 
         update = new Appointment();
-        update.setPatientID(1246);
-        update.setDoctorID(1232);
+        update.setPatientID(1004);
+        update.setDoctorID(501);
         update.setReason("I want to see doctor");
         update.setTime("1:00 pm");
         update.setDate("10/01/2011");
 
         test = new Appointment();
-        test.setDoctorID(1232);
+        test.setDoctorID(501);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class AppointmentTester {
         System.out.println(TestStrings.testEnd);
 
         //case 2, where user wants appoint through patientID
-        test.setPatientID(1246);
+        test.setPatientID(1004);
         System.out.println("\nTest========Viewing patient with patient ID");
         if(AppointmentSQL.viewAppointmentPatient(test)!=null)//view appoint returns a object Appointment
         {

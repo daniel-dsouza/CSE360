@@ -101,13 +101,14 @@ public class PersonUtils {
 
             // PreparedStatements can use variables and are more efficient
 
-            preparedStatementPatient = connect.prepareStatement("select name as patientName from person where occupation = 'patient' and name like '%" + queryName + "%';");
+            preparedStatementPatient = connect.prepareStatement("select userID, name from person where occupation = 'patient' and name like '%" + queryName + "%';");
             //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
             ResultSet rs = preparedStatementPatient.executeQuery();
 
             while (rs.next()) {
                 Patient patient = new Patient();
-                patient.setName(rs.getString("patientName"));
+                patient.setName(rs.getString("name"));
+                patient.setPatientID(rs.getInt("userID"));
                 patientList.add(patient);
             }
 
@@ -134,23 +135,29 @@ public class PersonUtils {
             preparedStatementPatient = connect.prepareStatement("select userID from person where name = ?");
             preparedStatementPatient.setString(1,patientName);
             ResultSet rs2 = preparedStatementPatient.executeQuery();
-            rs2.next();
-            int patientID = rs2.getInt("userID");
+            if(rs2.next()) {
+                int patientID = rs2.getInt("userID");
 
-            preparedStatementPatient = connect.prepareStatement("select date, time, reason, doctorID, patientID from appointment where patientID = " + patientID );
-            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
-            ResultSet rs = preparedStatementPatient.executeQuery();
 
-            while (rs.next()) {
-                Appointment appt = new Appointment();
-                appt.setDate(rs.getString("date"));
-                appt.setTime(rs.getString("time"));
-                appt.setReason(rs.getString("reason"));
-                appt.setDoctorID(rs.getInt("doctorID"));
-                appt.setPatientID(rs.getInt("patientID"));
-                apptList.add(appt);
+                preparedStatementPatient = connect.prepareStatement("select date, time, reason, doctorID, patientID from appointment where patientID = " + patientID);
+                //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+                ResultSet rs = preparedStatementPatient.executeQuery();
+
+                while (rs.next()) {
+                    Appointment appt = new Appointment();
+                    appt.setDate(rs.getString("date"));
+                    appt.setTime(rs.getString("time"));
+                    appt.setReason(rs.getString("reason"));
+                    appt.setDoctorID(rs.getInt("doctorID"));
+                    appt.setPatientID(rs.getInt("patientID"));
+                    apptList.add(appt);
+                }
             }
-
+            else
+            {
+                System.out.println("\nName not found.");
+                apptList =null;
+            }
         } catch (Exception e) {
             System.out.println(e);
             apptList = null;

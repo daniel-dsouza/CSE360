@@ -37,8 +37,9 @@ public class StaffListTest {
             System.out.println("SEARCH FAILED");
         System.out.println(TestStrings.testEnd);
 
-        ArrayList<Appointment> testAppoint = PersonUtils.getPatientsAppointment("Patien2");
         System.out.println("\nTest========Searching for Patient's Appointments for 'Patien2' ");
+        ArrayList<Appointment> testAppoint = PersonUtils.getPatientsAppointment("Patien2");
+
         if(testAppoint!=null)
         {
 

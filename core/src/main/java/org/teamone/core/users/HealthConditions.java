@@ -20,7 +20,7 @@ public class HealthConditions {
         this.healthConditions.put(condition, state);
     }
 
-    public boolean getTrue(String condition) {
+    public boolean isTrue(String condition) {
         return this.healthConditions.get(condition);
     }
 

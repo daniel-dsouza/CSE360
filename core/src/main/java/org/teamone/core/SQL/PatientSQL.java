@@ -71,10 +71,10 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int patientID = patient.getPatientID();
-            String name = patient.getName();
+            String name = patient.patientInformation.toStringName();
             String SSN = patient.getSSN();
-            String address = patient.getAddress();
-            String email = patient.getEmail();
+            String address = patient.patientInformation.toStringAddress();
+            String email = patient.patientInformation.getEmail();
             String phone = patient.getPhone();
             String insurance = patient.getInsurance();
             String age = patient.getAge();
@@ -91,9 +91,10 @@ public class PatientSQL {
             checker = preparedStatementPatient.executeUpdate();
 
             preparedStatementPerson = connect.prepareStatement("UPDATE person set emailID = ?,name = ? where userID = ? ;");
+            preparedStatementPerson.setString(1, email);
             preparedStatementPerson.setString(2, name);
             preparedStatementPerson.setInt(3, patientID);
-            preparedStatementPerson.setString(1, email);
+
 
             checker2 = preparedStatementPerson.executeUpdate();
 
