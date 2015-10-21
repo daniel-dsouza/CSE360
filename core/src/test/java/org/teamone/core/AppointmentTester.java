@@ -6,6 +6,8 @@ import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.baseclasstests.TestStrings;
 
+import java.util.Date;
+
 public class AppointmentTester {
 
     private Appointment test;
@@ -15,11 +17,15 @@ public class AppointmentTester {
 
 
         update = new Appointment();
-        update.setPatientID(1004);
+        update.setPatientID(1000);
         update.setDoctorID(501);
         update.setReason("I want to see doctor");
         update.setTime("1:00 pm");
-        update.setDate("10/01/2011");
+        Date dt = new Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String time = sdf.format(dt);
+        update.setDate(time);
 
         test = new Appointment();
         test.setDoctorID(501);
