@@ -25,6 +25,5 @@ public class NavbarAttributes {
         model.put("message", "message");
         model.put("user", user);
         model.put("pageactions", new TreeMap<String, String>());
-        System.out.println(model);
     }
 }

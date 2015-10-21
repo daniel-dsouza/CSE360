@@ -27,8 +27,7 @@ public class UserController {
             Map<String, Object> model,
             @PathVariable String userID,
             @ModelAttribute User user) {
-        System.out.println("load User?");
-        System.out.println(model);
+        System.out.println("Load User Home");
         //System.out.println(user.getUsername());
         return "auth/user";
     }

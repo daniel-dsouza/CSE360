@@ -17,6 +17,7 @@ public class Patient extends Person {
     public MedicalHistory medicalHistory;
 
     public Patient() {
+        super();
         patientInformation = new PatientInformation();
         healthConditions = new HealthConditions();
         medicalHistory = new MedicalHistory();

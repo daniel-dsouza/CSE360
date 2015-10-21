@@ -1,6 +1,7 @@
 package org.teamone.core.users;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by Ryan on 10/7/2015.
@@ -16,8 +17,15 @@ public class Person {
     private String email;
     private int userID = 0;
 
-    Map<String, String> agentActions; //action,url
-    Map<String, String> genericActions; //action,url
+    public Map<String, String> agentActions; //action,url
+    public Map<String, String> genericActions; //action,url
+
+    public Person() {
+        super();
+        genericActions = new TreeMap<String, String>();
+        genericActions.put("Logout", "logout");
+    }
+
     public String getName() {
         return name;
     }
@@ -58,31 +66,34 @@ public class Person {
         this.userID = userID;
     }
 
-    public String getFirstName() {
+    public Map<String, String> getAgentActions() { return agentActions; }
 
-        return firstName;
-    }
+    public void setAgentActions(Map<String, String> agentActions) { this.agentActions = agentActions; }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public Map<String, String> getGenericActions() { return genericActions; }
 
-    }
+    public void setGenericActions(Map<String, String> genericActions) { this.genericActions = genericActions; }
 
-    public String getLastName() {
+    public String getFirstName() { return firstName; }
 
-        return lastName;
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getLastName() { return lastName; }
 
-    }
-    public void toStringName()//to SQL
-    {
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    /**
+     * //to SQL
+     */
+    public void toStringName(){
         name = lastName + ":" +firstName;
     }
-    public void splitName(String nam)//from SQL
-    {
+
+    /**
+     * //from SQL
+     * @param nam
+     */
+    public void splitName(String nam) {
         String[] data = nam.split(":");
         firstName = data[0];
         lastName = data[1];
