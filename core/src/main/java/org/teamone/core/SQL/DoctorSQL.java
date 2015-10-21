@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Created by Ryan on 10/21/2015.
+ * Created by Lin on 2015/10/19.
  */
 public class DoctorSQL {
     private static Connection connect = null;
@@ -176,6 +176,47 @@ public class DoctorSQL {
             close();
         }
         return LabTestList;
+    }
+    /**
+     *
+     * @param Patient p: given a patient with a valid patientID.
+     * @return String of just one report
+     */
+    public static String ViewLabReport(Patient patient)
+    {
+        String labReport = null;
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int patientID = patient.getPatientID();
+
+            String selectPatientLabReport = "select labReports from patient where patientID = ?";
+            preparedStatement = connect.prepareStatement(selectPatientLabReport);
+
+            //`patientID
+            preparedStatement.setInt(1, patientID);
+            resultSet = preparedStatement.executeQuery();
+
+
+            while (resultSet.next())
+            {
+                labReport = resultSet.getString("labReports");
+            }
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            close();
+        }
+        return labReport;
     }
     // You need to close the resultSet
     private static void close() {
