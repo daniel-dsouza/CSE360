@@ -20,7 +20,7 @@ public class HealthConditions {
         this.healthConditions.put(condition, state);
     }
 
-    public boolean isTrue(String condition) {
+    public boolean getTrue(String condition) {
         return this.healthConditions.get(condition);
     }
 
@@ -61,7 +61,7 @@ public class HealthConditions {
 
     }
 
-    public boolean isAnklePain() {
+    public boolean getAnklePain() {
         return this.healthConditions.get("anklePain");
     }
 
@@ -69,7 +69,7 @@ public class HealthConditions {
         this.healthConditions.put("anklePain", anklePain);
     }
 
-    public boolean isAnxiety() {
+    public boolean getAnxiety() {
         return this.healthConditions.get("anxiety");
     }
 
@@ -77,7 +77,7 @@ public class HealthConditions {
         this.healthConditions.put("anxiety", anxiety);
     }
 
-    public boolean isBadBreath() {
+    public boolean getBadBreath() {
         return this.healthConditions.get("badBreath");
     }
 
@@ -85,7 +85,7 @@ public class HealthConditions {
         this.healthConditions.put("badBreath", badBreath);
     }
 
-    public boolean isBleedingGums() {
+    public boolean getBleedingGums() {
         return this.healthConditions.get("bleedingGums");
     }
 
@@ -93,7 +93,7 @@ public class HealthConditions {
         this.healthConditions.put("bleedingGums", bleedingGums);
     }
 
-    public boolean isBloodyStools() {
+    public boolean getBloodyStools() {
         return this.healthConditions.get("bloodyStools");
     }
 
@@ -101,7 +101,7 @@ public class HealthConditions {
         this.healthConditions.put("bloodyStools", bloodyStools);
     }
 
-    public boolean isConstipation() {
+    public boolean getConstipation() {
         return this.healthConditions.get("constipation");
     }
 
@@ -109,7 +109,7 @@ public class HealthConditions {
         this.healthConditions.put("constipation", constipation);
     }
 
-    public boolean isDiarrhea() {
+    public boolean getDiarrhea() {
         return this.healthConditions.get("diarrhea");
     }
 
@@ -117,7 +117,7 @@ public class HealthConditions {
         this.healthConditions.put("diarrhea", diarrhea);
     }
 
-    public boolean isDiscoloredUrine() {
+    public boolean getDiscoloredUrine() {
         return this.healthConditions.get("discoloredUrine");
     }
 
@@ -125,7 +125,7 @@ public class HealthConditions {
         this.healthConditions.put("discoloredUrine", discoloredUrine);
     }
 
-    public boolean isDizziness() {
+    public boolean getDizziness() {
         return this.healthConditions.get("dizziness");
     }
 
@@ -133,7 +133,7 @@ public class HealthConditions {
         this.healthConditions.put("dizziness", dizziness);
     }
 
-    public boolean isDrySkin() {
+    public boolean getDrySkin() {
         return this.healthConditions.get("drySkin");
     }
 
@@ -141,7 +141,7 @@ public class HealthConditions {
         this.healthConditions.put("drySkin", drySkin);
     }
 
-    public boolean isEarDrainage() {
+    public boolean getEarDrainage() {
         return this.healthConditions.get("earDrainage");
     }
 
@@ -149,7 +149,7 @@ public class HealthConditions {
         this.healthConditions.put("earDrainage", earDrainage);
     }
 
-    public boolean isExcessiveBurping() {
+    public boolean getExcessiveBurping() {
         return this.healthConditions.get("excessiveBurping");
     }
 
@@ -157,7 +157,7 @@ public class HealthConditions {
         this.healthConditions.put("excessiveBurping", excessiveBurping);
     }
 
-    public boolean isExcessiveYawning() {
+    public boolean getExcessiveYawning() {
         return this.healthConditions.get("excessiveYawning");
     }
 
@@ -165,7 +165,7 @@ public class HealthConditions {
         this.healthConditions.put("excessiveYawning", excessiveYawning);
     }
 
-    public boolean isFatigue() {
+    public boolean getFatigue() {
         return this.healthConditions.get("fatigue");
     }
 
@@ -173,7 +173,7 @@ public class HealthConditions {
         this.healthConditions.put("fatigue", fatigue);
     }
 
-    public boolean isFootPain() {
+    public boolean getFootPain() {
         return this.healthConditions.get("footPain");
     }
 
@@ -181,7 +181,7 @@ public class HealthConditions {
         this.healthConditions.put("footPain", footPain);
     }
 
-    public boolean isFrequentUrination() {
+    public boolean getFrequentUrination() {
         return this.healthConditions.get("frequentUrination");
     }
 
@@ -189,7 +189,7 @@ public class HealthConditions {
         this.healthConditions.put("frequentUrination", frequentUrination);
     }
 
-    public boolean isGas() {
+    public boolean getGas() {
         return this.healthConditions.get("gas");
     }
 
@@ -197,7 +197,7 @@ public class HealthConditions {
         this.healthConditions.put("gas", gas);
     }
 
-    public boolean isHairLoss() {
+    public boolean getHairLoss() {
         return this.healthConditions.get("hairLoss");
     }
 
@@ -205,7 +205,7 @@ public class HealthConditions {
         this.healthConditions.put("hairLoss", hairLoss);
     }
 
-    public boolean isHeadaches() {
+    public boolean getHeadaches() {
         return this.healthConditions.get("headaches");
     }
 
@@ -213,7 +213,7 @@ public class HealthConditions {
         this.healthConditions.put("headaches", headaches);
     }
 
-    public boolean isHearingProblems() {
+    public boolean getHearingProblems() {
         return this.healthConditions.get("hearingProblems");
     }
 
@@ -221,7 +221,7 @@ public class HealthConditions {
         this.healthConditions.put("hearingProblems", hearingProblems);
     }
 
-    public boolean isHeartBurn() {
+    public boolean getHeartBurn() {
         return this.healthConditions.get("heartBurn");
     }
 
@@ -229,7 +229,7 @@ public class HealthConditions {
         this.healthConditions.put("heartBurn", heartBurn);
     }
 
-    public boolean isHighBloodPressure() {
+    public boolean getHighBloodPressure() {
         return this.healthConditions.get("highBloodPressure");
     }
 
@@ -237,7 +237,7 @@ public class HealthConditions {
         this.healthConditions.put("highBloodPressure", highBloodPressure);
     }
 
-    public boolean isImpotence() {
+    public boolean getImpotence() {
         return this.healthConditions.get("impotence");
     }
 
@@ -245,7 +245,7 @@ public class HealthConditions {
         this.healthConditions.put("impotence", impotence);
     }
 
-    public boolean isJointPain() {
+    public boolean getJointPain() {
         return this.healthConditions.get("jointPain");
     }
 
@@ -253,7 +253,7 @@ public class HealthConditions {
         this.healthConditions.put("jointPain", jointPain);
     }
 
-    public boolean isLowerBackPain() {
+    public boolean getLowerBackPain() {
         return this.healthConditions.get("lowerBackPain");
     }
 
@@ -261,7 +261,7 @@ public class HealthConditions {
         this.healthConditions.put("nightBlindness", nightBlindness);
     }
 
-    public boolean isNightBlindness() {
+    public boolean getNightBlindness() {
         return this.healthConditions.get("nightBlindness");
     }
 
@@ -269,7 +269,7 @@ public class HealthConditions {
         this.healthConditions.put("nightBlindness", nightBlindness);
     }
 
-    public boolean isNightUrination() {
+    public boolean getNightUrination() {
         return this.healthConditions.get("nightUrination");
     }
 
@@ -277,7 +277,7 @@ public class HealthConditions {
         this.healthConditions.put("nightUrination", nightUrination);
     }
 
-    public boolean isNoseBleeds() {
+    public boolean getNoseBleeds() {
         return this.healthConditions.get("noseBleeds");
     }
 
@@ -285,7 +285,7 @@ public class HealthConditions {
         this.healthConditions.put("noseBleeds", noseBleeds);
     }
 
-    public boolean isProtrudingEyes() {
+    public boolean getProtrudingEyes() {
         return this.healthConditions.get("protrudingEyes");
     }
 
@@ -293,7 +293,7 @@ public class HealthConditions {
         this.healthConditions.put("protrudingEyes", protrudingEyes);
     }
 
-    public boolean isRedFace() {
+    public boolean getRedFace() {
         return this.healthConditions.get("redFace");
     }
 
@@ -301,7 +301,7 @@ public class HealthConditions {
         this.healthConditions.put("redFace", redFace);
     }
 
-    public boolean isRedThickSkin() {
+    public boolean getRedThickSkin() {
         return this.healthConditions.get("redThickSkin");
     }
 
@@ -309,7 +309,7 @@ public class HealthConditions {
         this.healthConditions.put("redThickSkin", redThickSkin);
     }
 
-    public boolean isSensitivityToLight() {
+    public boolean getSensitivityToLight() {
         return this.healthConditions.get("sensitivityToLight");
     }
 
@@ -317,7 +317,7 @@ public class HealthConditions {
         this.healthConditions.put("sensitivityToLight", sensitivityToLight);
     }
 
-    public boolean isSnoring() {
+    public boolean getSnoring() {
         return this.healthConditions.get("snoring");
     }
 
@@ -325,7 +325,7 @@ public class HealthConditions {
         this.healthConditions.put("snoring", snoring);
     }
 
-    public boolean isStomachPain() {
+    public boolean getStomachPain() {
         return this.healthConditions.get("stomachPain");
     }
 
@@ -333,7 +333,7 @@ public class HealthConditions {
         this.healthConditions.put("stomachPain", stomachPain);
     }
 
-    public boolean isSwelling() {
+    public boolean getSwelling() {
         return this.healthConditions.get("swelling");
     }
 
@@ -341,7 +341,7 @@ public class HealthConditions {
         this.healthConditions.put("swelling", swelling);
     }
 
-    public boolean isTesticlePain() {
+    public boolean getTesticlePain() {
         return this.healthConditions.get("testiclePain");
     }
 
@@ -349,7 +349,7 @@ public class HealthConditions {
         this.healthConditions.put("testiclePain", testiclePain);
     }
 
-    public boolean isVisionProblems() {
+    public boolean getVisionProblems() {
         return this.healthConditions.get("visionProblems");
     }
 
@@ -357,7 +357,7 @@ public class HealthConditions {
         this.healthConditions.put("visionProblems", visionProblems);
     }
 
-    public boolean isVomiting() {
+    public boolean getVomiting() {
         return this.healthConditions.get("vomiting");
     }
 
@@ -365,7 +365,7 @@ public class HealthConditions {
         this.healthConditions.put("vomiting", vomiting);
     }
 
-    public boolean isWarts() {
+    public boolean getWarts() {
         return this.healthConditions.get("warts");
     }
 
@@ -373,7 +373,7 @@ public class HealthConditions {
         this.healthConditions.put("warts", warts);
     }
 
-    public boolean isWheezing() {
+    public boolean getWheezing() {
         return this.healthConditions.get("wheezing");
     }
 
