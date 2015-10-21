@@ -29,6 +29,7 @@ public class LoginTest {
             System.out.println("Name: " + p.getName());
             System.out.println("Occupation: " + p.getOccupation());
             System.out.println("Email: " + p.getEmail());
+            System.out.println("UserID: " + p.getUserID());
         }
         else
             System.out.println("LOGIN FAILED");
