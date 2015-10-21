@@ -70,7 +70,7 @@ public class HspSQL {
 
             preparedStatementPatient = connect.prepareStatement(insertTablePatient);
 
-            //`serialNumber`, `patientID`, `medicalHistory`, `occupation`, `address`, `SSN`, `gender`, `insurance`, `age`, `phone`, `healthConditions`, `labReports`, `alertDateAndTime`, `alertStatus`, `prescription`
+            //`serialNumber`, `patientID`, `medicalHistory`, `occupation`, `address`, `SSN`, `gender`, `insurance`, `age`, `phone`, `healthConditions`, `labReports`, `alertDateAndTime`, `alertStatus`, `prescriptions`
 
             preparedStatementPatient.setInt(1, patientID);
             preparedStatementPatient.setString(2, "patient");

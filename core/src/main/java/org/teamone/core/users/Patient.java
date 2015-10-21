@@ -1,5 +1,8 @@
 package org.teamone.core.users;
 
+import org.teamone.core.labs.LabTest;
+import org.teamone.core.prescriptions.Prescription;
+
 /**
  * Created by Ryan on 10/7/2015.
  */
@@ -8,19 +11,20 @@ public class Patient extends Person {
 
     private String occupation; //why do we care?
 
-    private String labReports; //wtf is this
 
-    private String prescription; //wtf is this
 
     public PatientInformation patientInformation;
     public HealthConditions healthConditions;
     public MedicalHistory medicalHistory;
-
+    public Prescription prescription;
+    public LabTest labReports;
     public Patient() {
         super();
         patientInformation = new PatientInformation();
         healthConditions = new HealthConditions();
         medicalHistory = new MedicalHistory();
+        prescription = new Prescription();
+        labReports = new LabTest();
     }
 
     public int getPatientID() {
@@ -31,7 +35,13 @@ public class Patient extends Person {
         this.patientID = patientID;
     }
 
+    public PatientInformation getPatientInformation() {
+        return patientInformation;
+    }
 
+    public void setPatientInformation(PatientInformation patientInformation) {
+        this.patientInformation = patientInformation;
+    }
 
     public String getOccupation() {
         return occupation;
@@ -131,21 +141,19 @@ public class Patient extends Person {
         patientInformation.splitAddress(add);
     }
 
-    public String getLabReports() {
+    public LabTest getLabReports() {
         return labReports;
     }
 
-    public void setLabReports(String labReports) {
+    public void setLabReports(LabTest labReports) {
         this.labReports = labReports;
     }
 
-
-
-    public String getPrescription() {
+    public Prescription getPrescription() {
         return prescription;
     }
 
-    public void setPrescription(String prescription) {
+    public void setPrescription(Prescription prescription) {
         this.prescription = prescription;
     }
 }
