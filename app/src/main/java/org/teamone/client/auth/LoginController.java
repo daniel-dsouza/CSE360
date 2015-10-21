@@ -43,17 +43,14 @@ public class LoginController {
         Person pAttempt = new Person();
         pAttempt.setUserID(Integer.parseInt(attempt.getUserID()));
         pAttempt.setPassword(attempt.getPassword());
-        Person p =LoginSQL.authenticate(pAttempt);
-        if ( p != null || attempt.getPassword().equals("go")) { //TODO:remove backdoor
-            System.out.println("auth succeed");
-            user.person = pAttempt;
-            System.out.println("Name: " + p.getName());
-            //user.setUsername(LoginSQL.getName(pAttempt.getUserID()));
-            //user.setUsername(pAttempt.getName());
-            //user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type
+        Person pResult = LoginSQL.authenticate(pAttempt);
+
+        if (pResult != null) { //TODO:remove backdoor
+            System.out.println("Authentication succeeded");
+            user.person = pResult;
             return "redirect:/user/" + user.person.getUserID();
         } else {
-            System.out.println("auth fail");
+            System.out.println("Authentication Failed");
             String errorMessage = "Your userID or password were incorrect. Try again.";
             model.put("errorMessage", errorMessage);
             return "auth/login";
