@@ -33,7 +33,7 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
-            String hc = patient.getHealthConditions();
+            String hc = patient.healthConditions.toString();
 
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
             preparedStatement.setString(1, hc);
@@ -71,10 +71,10 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int patientID = patient.getPatientID();
-            String name = patient.getName();
+            String name = patient.patientInformation.toStringName();
             String SSN = patient.getSSN();
-            String address = patient.getAddress();
-            String email = patient.getEmail();
+            String address = patient.patientInformation.toStringAddress();
+            String email = patient.patientInformation.getEmail();
             String phone = patient.getPhone();
             String insurance = patient.getInsurance();
             String age = patient.getAge();
@@ -91,9 +91,10 @@ public class PatientSQL {
             checker = preparedStatementPatient.executeUpdate();
 
             preparedStatementPerson = connect.prepareStatement("UPDATE person set emailID = ?,name = ? where userID = ? ;");
+            preparedStatementPerson.setString(1, email);
             preparedStatementPerson.setString(2, name);
             preparedStatementPerson.setInt(3, patientID);
-            preparedStatementPerson.setString(1, email);
+
 
             checker2 = preparedStatementPerson.executeUpdate();
 
@@ -134,10 +135,8 @@ public class PatientSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             mh = resultSet.getString("medicalhistory");
-            patient.setMedicalHistory(mh);
+            patient.medicalHistory.toMapObj(mh);
             patient.setPatientID(ID);
-            temp = mh;
-            patient.medicalHistory.toMapObj(temp);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -206,10 +205,8 @@ public class PatientSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             hc = resultSet.getString("healthConditions");
-            patient.setHealthConditions(hc);
+            patient.healthConditions.toMapObj(hc);
             patient.setPatientID(ID);
-            temp = hc;
-            patient.healthConditions.toMapObj(temp);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -246,7 +243,7 @@ public class PatientSQL {
                 while (resultSet.next())
                     myList.add(resultSet.getInt("patient_id"));
                     //Retrieve by column name
-                System.out.println("patient ids have been added to list");
+                System.out.println("=Detected alerts. Patient ids have been added to list");
 
                 if (myList.contains(patient.getPatientID())) {
                     System.out.println("Alert in alerts table is present. Updating now");

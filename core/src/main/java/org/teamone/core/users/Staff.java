@@ -1,7 +1,5 @@
 package org.teamone.core.users;
 
-import java.util.TreeMap;
-
 /**
  * Created by Ryan on 10/7/2015.
  */

@@ -23,32 +23,36 @@ public class PatientUpdateInfoTest {
     {
 
         regis = new Patient();
-        regis.setPatientID(123);
-        regis.setUserID(123);
-        regis.setName("luffy;monkey");
-        regis.setAddress("Eastern Ocean");
-        regis.setEmail("luffy@asu.edu");
-        regis.setPhone("13230932");
-        regis.setSSN("987654321");
-        regis.setInsurance("fight");
-        regis.setAge("21");
-        regis.setGender("male");
+        regis.patientInformation.setFirstName("newFirst");
+        regis.patientInformation.setLastName("new");
+        regis.patientInformation.setAddress("Eastern Ocean");
+        regis.patientInformation.setCity("Tempe");
+        regis.patientInformation.setState("AZ");
+        regis.patientInformation.setZipcode("85200");
+        regis.patientInformation.setEmail("luffy@asu.edu");
+        regis.patientInformation.setHomePhone("13230932");
+        regis.patientInformation.setSsn("987654321");
+        regis.patientInformation.setInsurance("fight");
+        regis.patientInformation.setAge("21");
+        regis.patientInformation.setGender("male");
         regis.setPassword("hiRyan");
 
         update = new Patient();
-        update.setPatientID(1245);
-        update.setUserID(1245);
-        update.setName("luffy;monkey");
-        update.setAddress("Eastern Ocean");
-        update.setEmail("luffy@asu.edu");
-        update.setPhone("13230932");
-        update.setSSN("987654321");
-        update.setInsurance("fight");
-        update.setAge("21");
-        update.setGender("male");
-        update.setPassword("hiRyan");
+        update.setPatientID(1004);
+        update.setUserID(1004);
+        update.patientInformation.setFirstName("Ryan");
+        update.patientInformation.setLastName("Syani");
+        update.patientInformation.setAddress("Eastern Ocean");
+        update.patientInformation.setCity("Tempe");
+        update.patientInformation.setState("AZ");
+        update.patientInformation.setZipcode("85200");
+        update.patientInformation.setEmail("new@asu.edu");
+        update.patientInformation.setHomePhone("(480)-948-9940");
+        update.patientInformation.setSsn("194-45-3453");
+        update.patientInformation.setInsurance("newSrurnace");
+        update.patientInformation.setAge("22");
+        update.patientInformation.setGender("male");
 
-        String queryName = "luf";
     }
 
     @Test
@@ -63,7 +67,7 @@ public class PatientUpdateInfoTest {
             System.out.println("\n************************Register failed********************");
         System.out.println(TestStrings.testEnd);
 
-        System.out.println("\nTest========Updating Patient Infomation");
+       System.out.println("\nTest========Updating Patient Infomation");
         if(PatientSQL.UpdatePersonalInfo(update))
         {
             System.out.println("*********************Update successful************************");
@@ -73,13 +77,15 @@ public class PatientUpdateInfoTest {
         System.out.println(TestStrings.testEnd);
 
 
-        ArrayList<Patient> patientList = PersonUtils.getPatients("luf");
-        System.out.println("\nTest========Searching for Patient with 'luf' ");
-        System.out.println("*********************Find successful************************");
-        Patient tempPat;
-        for(int i = 0; i < patientList.size(); i++) {
-            tempPat = patientList.get(i);
-            System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getPatientID());
+        ArrayList<Patient> patientList = PersonUtils.getPatients("new");
+        System.out.println("\nTest========Searching for Patient with 'new' ");
+        if(patientList.size()!=0) {
+            System.out.println("*********************Find successful************************");
+            Patient tempPat;
+            for (int i = 0; i < patientList.size(); i++) {
+                tempPat = patientList.get(i);
+                System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getPatientID());
+            }
         }
         System.out.println(TestStrings.testEnd);
 

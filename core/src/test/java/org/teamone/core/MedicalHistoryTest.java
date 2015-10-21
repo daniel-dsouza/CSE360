@@ -14,8 +14,8 @@ public class MedicalHistoryTest {
     public void setUp() {
 
         test = new Patient();
-        test.setPatientID(1234);
-        test.setMedicalHistory("Ryan is a good boy");
+        test.setPatientID(1004);
+        test.medicalHistory.toMapObj("aidsHIVPositive,true:");
     }
 
     @Test

@@ -1,8 +1,10 @@
 package org.teamone.core.SQL;
 
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Person;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by Lin on 2015/10/8.
@@ -29,11 +31,11 @@ public class HspSQL {
 
             // PreparedStatements can use variables and are more efficient
             int userID = patient.getUserID();
-            int patientID = patient.getPatientID();
-            String name = patient.getName();
+
+            String name = patient.patientInformation.toStringName();
             String SSN = patient.getSSN();
-            String address = patient.getAddress();
-            String email = patient.getEmail();
+            String address = patient.patientInformation.toStringAddress();
+            String email = patient.patientInformation.getEmail();
             String phone = patient.getPhone();
             String insurance = patient.getInsurance();
             String age = patient.getAge();
@@ -42,18 +44,26 @@ public class HspSQL {
 
             //http://www.mkyong.com/jdbc/jdbc-preparestatement-example-insert-a-record/
             String insertTablePerson = "INSERT INTO person"
-                    + "(userID, name, occupation, password, emailID) VALUES"
-                    + "(?,?,?,?,?)";
+                    + "( name, occupation, password, emailID) VALUES"
+                    + "(?,?,?,?)";
 
             preparedStatementPerson = connect.prepareStatement(insertTablePerson);
-            preparedStatementPerson.setInt(1, userID);
-            preparedStatementPerson.setString(2,name);
-            preparedStatementPerson.setString(3,"patient");
-            preparedStatementPerson.setString(4,password);
-            preparedStatementPerson.setString(5,email);
-
-            //INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES (1232, 'Ry;an', 'doctor', 'temporary', 'ryan@asu.edu');
+            preparedStatementPerson.setString(1, name);
+            preparedStatementPerson.setString(2,"patient");
+            preparedStatementPerson.setString(3,"go");
+            preparedStatementPerson.setString(4,email);
             checker2 = preparedStatementPerson.executeUpdate();
+
+            preparedStatementPerson = connect.prepareStatement("SELECT userID FROM person WHERE name = ? AND occupation = ? AND password = ? AND emailID = ?");
+            preparedStatementPerson.setString(1, name);
+            preparedStatementPerson.setString(2,"patient");
+            preparedStatementPerson.setString(3,"go");
+            preparedStatementPerson.setString(4,email);
+            resultSet = preparedStatementPerson.executeQuery();
+            resultSet.next();
+            int patientID = resultSet.getInt("userID");
+            //INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES (1232, 'Ry;an', 'doctor', 'temporary', 'ryan@asu.edu');
+
             String insertTablePatient = "INSERT INTO patient"
                     + "(patientID, occupation, address, SSN, gender, insurance, age, phone) VALUES"
                     + "(?,?,?,?,?,?,?,?)";
@@ -91,6 +101,41 @@ public class HspSQL {
 
     }
 
+    public static ArrayList<Person> revealAll() {
+
+        ArrayList<Person> adminList = new ArrayList<Person>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+            preparedStatementPatient = connect.prepareStatement("select userID, name, occupation, password, emailID from person ;");
+            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+            ResultSet rs = preparedStatementPatient.executeQuery();
+
+            while (rs.next()) {
+                Person pers = new Person();
+                pers.setUserID((rs.getInt("userID")));
+                pers.setName(rs.getString("name"));
+                pers.setOccupation(rs.getString("occupation"));
+                pers.setPassword(rs.getString("password"));
+                pers.setEmail(rs.getString("emailID"));
+                adminList.add(pers);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            adminList = null;
+
+        } finally {
+            close();
+        }
+        return adminList;
+    }
     // You need to close the resultSet
     private static void close() {
         try {

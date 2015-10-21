@@ -1,14 +1,15 @@
 package org.teamone.core.users;
 
-import java.util.TreeMap;
-
 /**
  * Created by Ryan on 10/7/2015.
  */
 public class Patient extends Person {
     private int patientID = 0;
+
     private String occupation; //why do we care?
+
     private String labReports; //wtf is this
+
     private String prescription; //wtf is this
 
     public PatientInformation patientInformation;
@@ -16,13 +17,9 @@ public class Patient extends Person {
     public MedicalHistory medicalHistory;
 
     public Patient() {
-        super();
         patientInformation = new PatientInformation();
         healthConditions = new HealthConditions();
         medicalHistory = new MedicalHistory();
-
-        agentActions = new TreeMap<String, String>() {};
-        agentActions.put("Update Information", "registration/personalinformation");
     }
 
     public int getPatientID() {
@@ -33,13 +30,7 @@ public class Patient extends Person {
         this.patientID = patientID;
     }
 
-    public String getMedicalHistory() {
-        return medicalHistory.toString();
-    }
 
-    public void setMedicalHistory(String medicalHistory) {
-        //this.medicalHistory = medicalHistory;
-    }
 
     public String getOccupation() {
         return occupation;
@@ -49,14 +40,6 @@ public class Patient extends Person {
         this.occupation = occupation;
     }
 
-    public String getAddress() {
-        return this.patientInformation.getAddress();
-    }
-
-    public void setAddress(String address) {
-        //this.address = address;
-        this.patientInformation.setAddress(address);
-    }
 
     public String getSSN() {
         //return SSN;
@@ -108,13 +91,43 @@ public class Patient extends Person {
         this.patientInformation.setHomePhone(phone);
     }
 
-    public String getHealthConditions() {
+    public HealthConditions getHealthConditions() {
         //return healthConditions;
-        return healthConditions.toString();
+        return healthConditions;
     }
 
-    public void setHealthConditions(String healthCondition) {
-        healthConditions.toMapObj(healthCondition);
+    public void setHealthConditions(HealthConditions hc) {
+        healthConditions = hc;
+    }
+    public MedicalHistory getMedicalHistory() {
+
+        return medicalHistory;
+    }
+
+    public void setMedicalHistory(MedicalHistory mh) {
+        medicalHistory = mh;
+    }
+
+    public String getName()
+    {
+
+        return patientInformation.getName();
+    }
+    public void setName(String name)
+    {
+        patientInformation.setName(name);
+        patientInformation.splitName(name);
+    }
+
+    public String getAddress()
+    {
+
+        return patientInformation.getAddress();
+    }
+    public void setAddress(String add)
+    {
+        patientInformation.setAddress(add);
+        patientInformation.splitAddress(add);
     }
 
     public String getLabReports() {
@@ -124,6 +137,8 @@ public class Patient extends Person {
     public void setLabReports(String labReports) {
         this.labReports = labReports;
     }
+
+
 
     public String getPrescription() {
         return prescription;

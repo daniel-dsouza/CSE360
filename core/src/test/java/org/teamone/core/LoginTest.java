@@ -14,8 +14,8 @@ public class LoginTest {
     public void setUp() {
 
         test = new Person();
-        test.setUserID(1232);
-        test.setPassword("temporary");
+        test.setUserID(501);
+        test.setPassword("go");
     }
 
     @Test

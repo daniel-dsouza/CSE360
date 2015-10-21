@@ -5,11 +5,13 @@ package org.teamone.core.users;
  */
 public class PatientInformation {
     private String name;
+    private String firstName ="";
+    private String lastName ="";
     private String age;
-    private String address;
-    private String city;
-    private String state;
-    private String zipcode;
+    private String address=" ";
+    private String city=" ";
+    private String state=" ";
+    private String zipcode=" ";
     private String homePhone;
     private String email;
     private String insurance;
@@ -36,7 +38,7 @@ public class PatientInformation {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
@@ -60,6 +62,7 @@ public class PatientInformation {
     }
 
     public String getZipcode() {
+
         return zipcode;
     }
 
@@ -105,5 +108,45 @@ public class PatientInformation {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public String toStringName()//to SQL
+    {
+        name = lastName + ":" + firstName;
+        return name;
+    }
+    public void splitName(String nam)//from SQL
+    {
+        String[] data = nam.split(":");
+        firstName = data[0];
+        lastName = data[1];
+    }
+    public String toStringAddress()//to SQL
+    {
+        address = address + ":" + city + ":" + state + ":" + zipcode;
+        return address;
+    }
+    public void splitAddress(String add)//from SQL
+    {
+        String[] data = add.split(":");
+        address = data[0];
+        city = data[1];
+        state = data[2];
+        zipcode =data[3];
     }
 }
