@@ -8,17 +8,31 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/user/${user.username}">IPIMS</a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/user/${user.person.userID}">IPIMS</a>
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <c:forTokens items="${user.actions}" delims="," var="name">
+      <%--<c:forTokens items="${user.actions}" delims="," var="name">--%>
+        <%--<li>--%>
+          <%--<a href="${pageContext.request.contextPath}/${name}">--%>
+            <%--<c:out value="${name}" />--%>
+          <%--</a>--%>
+        <%--</li>--%>
+      <%--</c:forTokens>--%>
+      <c:forEach var="item" items="${user.person.genericActions}">
         <li>
-          <a href="${pageContext.request.contextPath}/${name}">
-            <c:out value="${name}" />
+          <a href="${pageContext.request.contextPath}/${item.value}">
+              <c:out value="${item.key}" />
           </a>
         </li>
-      </c:forTokens>
+      </c:forEach>
+      <c:forEach var="item" items="${user.person.agentActions}">
+        <li>
+          <a href="${pageContext.request.contextPath}/${item.value}">
+            <c:out value="${item.key}" />
+          </a>
+        </li>
+      </c:forEach>
     </ul>
   </div>
 </div>

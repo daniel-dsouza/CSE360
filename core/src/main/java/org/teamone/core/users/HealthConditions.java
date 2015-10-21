@@ -12,6 +12,10 @@ public class HealthConditions {
 
     private Map<String, Boolean> healthConditions;
 
+    private static String alertCondition[] = {"anklePain", "bloodyStools", "discoloredUrine", "floatingStools", "footPain", "impotence", "protrudingEyes", "redFace", "stomachPain", "swelling", "testiclePain", "vomitting"};
+
+    public String alertReason = null;
+
     public void set(String condition, boolean state) {
         this.healthConditions.put(condition, state);
     }
@@ -26,9 +30,17 @@ public class HealthConditions {
 
     public String toString() {
         String str = "", temp = "";
+        alertReason ="";//clear out alerts
         Iterator<Map.Entry<String, Boolean>> entries = healthConditions.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry<String, Boolean> entry = entries.next();
+            for(int i =0; i< alertCondition.length;i++)
+            {
+                if (alertCondition[i] == entry.getKey() && entry.getValue()==true)
+                {
+                    alertReason=alertReason+entry.getKey()+":";
+                }
+            }
             temp=entry.getKey()+","+entry.getValue()+":";
             str = str.concat(temp);
         }

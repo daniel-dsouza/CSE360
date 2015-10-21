@@ -8,7 +8,7 @@ package org.teamone.core.SQL;
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
 
-import org.teamone.core.users.Person;
+import org.teamone.core.users.*;
 
 import java.sql.*;
 
@@ -27,7 +27,6 @@ public class LoginSQL {
             System.out.println("\nTrying to connect to mysql with root and pass");
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
-
             // PreparedStatements can use variables and are more efficient
             int ID = check.getUserID();
             String pass = check.getPassword();
@@ -38,9 +37,44 @@ public class LoginSQL {
             if(verify(resultSet, pass))
             {
                 //resultSet.next();
-                check.setName(resultSet.getString("name"));
-                check.setOccupation(resultSet.getString("occupation"));
-                check.setEmail(resultSet.getString("emailID"));
+                String occ = resultSet.getString("occupation");
+               if(occ.equals("patient"))
+               {
+                   check = new Patient();
+                   check.setName(resultSet.getString("name"));
+                   check.setOccupation(resultSet.getString("occupation"));
+                   check.setEmail(resultSet.getString("emailID"));
+               }else
+                if(occ.equals("doctor"))
+                {
+                    check = new Doctor();
+                    check.setName(resultSet.getString("name"));
+                    check.setOccupation(resultSet.getString("occupation"));
+                    check.setEmail(resultSet.getString("emailID"));
+                }else
+                if(occ.equals("hsp"))
+                {
+                    check = new HSP();
+                    check.setName(resultSet.getString("name"));
+                    check.setOccupation(resultSet.getString("occupation"));
+                    check.setEmail(resultSet.getString("emailID"));
+                }
+                else
+                if(occ.equals("labstaff"))
+                {
+                    check = new LabStaff();
+                    check.setName(resultSet.getString("name"));
+                    check.setOccupation(resultSet.getString("occupation"));
+                    check.setEmail(resultSet.getString("emailID"));
+                }
+                else
+                {
+                    check = new Person();
+                    check.setName(resultSet.getString("name"));
+                    check.setOccupation(resultSet.getString("occupation"));
+                    check.setEmail(resultSet.getString("emailID"));
+                }
+
             }
             else
                 check = null;

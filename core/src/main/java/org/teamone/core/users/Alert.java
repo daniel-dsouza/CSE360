@@ -57,4 +57,8 @@ public class Alert {
     public void setAlertID(int alertID) {
         this.alertID = alertID;
     }
+    public Alert()
+    {
+
+    }
 }
