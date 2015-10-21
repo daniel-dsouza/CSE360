@@ -16,8 +16,8 @@ public class Person {
     private String email;
     private int userID = 0;
 
-    Map<String, String> agentActions; //action,url
-    Map<String, String> genericActions; //action,url
+    public Map<String, String> agentActions; //action,url
+    public Map<String, String> genericActions; //action,url
     public String getName() {
         return name;
     }
@@ -56,6 +56,22 @@ public class Person {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public Map<String, String> getAgentActions() {
+        return agentActions;
+    }
+
+    public void setAgentActions(Map<String, String> agentActions) {
+        this.agentActions = agentActions;
+    }
+
+    public Map<String, String> getGenericActions() {
+        return genericActions;
+    }
+
+    public void setGenericActions(Map<String, String> genericActions) {
+        this.genericActions = genericActions;
     }
 
     public String getFirstName() {

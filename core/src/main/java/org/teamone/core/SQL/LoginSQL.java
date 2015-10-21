@@ -31,7 +31,7 @@ public class LoginSQL {
             int ID = check.getUserID();
             String pass = check.getPassword();
 
-            preparedStatement = connect.prepareStatement("SELECT * from person WHERE userID = ?");
+            preparedStatement = connect.prepareStatement("SELECT userID, name, occupation, password, emailID from person WHERE userID = ?");
             preparedStatement.setInt(1,ID);
             resultSet = preparedStatement.executeQuery();
             if(verify(resultSet, pass))

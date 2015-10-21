@@ -43,10 +43,11 @@ public class LoginController {
         Person pAttempt = new Person();
         pAttempt.setUserID(Integer.parseInt(attempt.getUserID()));
         pAttempt.setPassword(attempt.getPassword());
-
-        if (LoginSQL.authenticate(pAttempt) != null || attempt.getPassword().equals("go")) { //TODO:remove backdoor
+        Person p =LoginSQL.authenticate(pAttempt);
+        if ( p != null || attempt.getPassword().equals("go")) { //TODO:remove backdoor
             System.out.println("auth succeed");
             user.person = pAttempt;
+            System.out.println("Name: " + p.getName());
             //user.setUsername(LoginSQL.getName(pAttempt.getUserID()));
             //user.setUsername(pAttempt.getName());
             //user.setActions("Left,Left,Left,Right,Left,logout"); //TODO: this field should populate based on user type

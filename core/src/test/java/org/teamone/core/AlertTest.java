@@ -20,12 +20,14 @@ public class AlertTest {
 
         test = new Alert();
         test.setAlertID(2);
+
+
     }
     @Before
     public void setUpPatient() {
 
         test2 = new Patient();
-        test2.setPatientID(1004);
+        test2.setPatientID(1000);
         test2.healthConditions.toMapObj("anxiety,true:discoloredUrine,true");
         test2.medicalHistory.toMapObj(":");
 
@@ -63,6 +65,7 @@ public class AlertTest {
                 tempAlert = testArr.get(i);
                 System.out.println("Name " + LoginSQL.getName(tempAlert.getPatientID()) + " has reason "+tempAlert.getReason());
                 System.out.println("Alert ID: " + tempAlert.getAlertID());
+                System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());
             }
         }
         else

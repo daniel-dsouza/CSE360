@@ -1,9 +1,6 @@
 package org.teamone.core.users;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by daniel on 10/12/15.
@@ -15,6 +12,7 @@ public class HealthConditions {
     private static String alertCondition[] = {"anklePain", "bloodyStools", "discoloredUrine", "floatingStools", "footPain", "impotence", "protrudingEyes", "redFace", "stomachPain", "swelling", "testiclePain", "vomitting"};
 
     public String alertReason = null;
+    public Date alertDateAndTime = null;
 
     public void set(String condition, boolean state) {
         this.healthConditions.put(condition, state);
@@ -39,6 +37,8 @@ public class HealthConditions {
                 if (alertCondition[i] == entry.getKey() && entry.getValue()==true)
                 {
                     alertReason=alertReason+entry.getKey()+":";
+                    alertDateAndTime = new Date();//timeStamp
+
                 }
             }
             temp=entry.getKey()+","+entry.getValue()+":";
