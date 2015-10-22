@@ -3,6 +3,7 @@ package org.teamone.core.SQL;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -221,6 +222,46 @@ public class DoctorSQL {
             close();
         }
         return labReport;
+    }
+
+    /**
+     * Method returns a list doctors.
+     * @param String: Specialty to find in sql
+     * @return ArrayList: Arraylist of staff objects
+     */
+    public static ArrayList<Staff> getListDoctorSpecialty (String specialty) {
+        ArrayList<Staff> arrayOfDoctors = new ArrayList<Staff>();
+        try {
+            int checker, checker2;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            //String specialty = staff.getSpecialty();
+
+            preparedStatement = connect.prepareStatement("SELECT person.name as name, person.userID as staffID FROM person WHERE person.userID IN (SELECT staff.staffID FROM staff WHERE staff.specialty = ?) ;");
+            preparedStatement.setString(1, specialty);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+                //Retrieve by column name
+
+                Staff newStaff = new Staff();
+                newStaff.setName(resultSet.getString("name"));
+                newStaff.setStaffID(resultSet.getInt("staffID"));
+
+                arrayOfDoctors.add(newStaff);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            arrayOfDoctors = null;
+        } finally {
+            close();
+        }
+        return arrayOfDoctors;
+
     }
     // You need to close the resultSet
     private static void close() {

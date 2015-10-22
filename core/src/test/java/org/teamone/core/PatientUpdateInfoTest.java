@@ -9,7 +9,6 @@ import org.teamone.core.SQL.HspSQL;
 import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.PersonUtils;
 
 import java.util.ArrayList;
 
@@ -79,7 +78,7 @@ public class PatientUpdateInfoTest {
         System.out.println(TestStrings.testEnd);
 
 
-        ArrayList<Patient> patientList = PersonUtils.getPatients("new");
+        ArrayList<Patient> patientList = PatientSQL.getPatientByPatient("new");
         System.out.println("\nTest========Searching for Patient with 'new' ");
         if(patientList.size()!=0) {
             System.out.println("*********************Find successful************************");
