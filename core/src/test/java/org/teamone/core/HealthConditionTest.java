@@ -21,9 +21,11 @@ public class HealthConditionTest {
     @Test
     public void updateHC() {
         System.out.println("\nTest========Update health conditions");
-        if(PatientSQL.updateHealthCondition(test))
+        Patient p = PatientSQL.updateHealthCondition(test);
+        if(p!=null)
         {
             System.out.println("Update successful");
+
         }
         else
             System.out.println("\nUpdate failed");

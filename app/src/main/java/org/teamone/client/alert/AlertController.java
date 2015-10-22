@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.teamone.core.SQL.PatientSQL;
+import org.teamone.core.SQL.AlertSQL;
 import org.teamone.core.users.Alert;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class AlertController {
         //System.out.println("alerts tagged:" + doctor);
         //request list of patients with optional doctor.
 
-        ArrayList<Alert> alertList = PatientSQL.getListAlerts();
+        ArrayList<Alert> alertList = AlertSQL.getListAlerts();
         System.out.println("returning list of alerts");
         return alertList; //return JSON object
     }
@@ -48,7 +48,7 @@ public class AlertController {
         Alert resolved = new Alert();
         try {
             resolved.setAlertID(Integer.parseInt(alertID));
-            PatientSQL.setAlertOff(resolved);
+            AlertSQL.setAlertOff(resolved);
             System.out.println("Resolved alert: " + alertID);
         } catch (Exception e) {
             e.printStackTrace();

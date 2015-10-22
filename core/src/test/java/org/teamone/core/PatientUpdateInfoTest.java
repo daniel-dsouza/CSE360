@@ -9,7 +9,6 @@ import org.teamone.core.SQL.HspSQL;
 import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.PersonUtils;
 
 import java.util.ArrayList;
 
@@ -24,12 +23,12 @@ public class PatientUpdateInfoTest {
 
         regis = new Patient();
         regis.patientInformation.setFirstName("newFirst");
-        regis.patientInformation.setLastName("new");
+        regis.patientInformation.setLastName("nw");
         regis.patientInformation.setAddress("Eastern Ocean");
         regis.patientInformation.setCity("Tempe");
         regis.patientInformation.setState("AZ");
         regis.patientInformation.setZipcode("85200");
-        regis.patientInformation.setEmail("luffy@asu.edu");
+        regis.patientInformation.setEmail("luffy@au.edu");
         regis.patientInformation.setHomePhone("13230932");
         regis.patientInformation.setSsn("987654321");
         regis.patientInformation.setInsurance("fight");
@@ -46,7 +45,7 @@ public class PatientUpdateInfoTest {
         update.patientInformation.setCity("Tempe");
         update.patientInformation.setState("AZ");
         update.patientInformation.setZipcode("85200");
-        update.patientInformation.setEmail("new@asu.edu");
+        update.patientInformation.setEmail("new@as.edu");
         update.patientInformation.setHomePhone("(480)-948-9940");
         update.patientInformation.setSsn("194-45-3453");
         update.patientInformation.setInsurance("newSrurnace");
@@ -59,16 +58,18 @@ public class PatientUpdateInfoTest {
     public void tester()
     {
         System.out.println("\nTest========Registering New Patient");
-        if(HspSQL.RegisterNewPatient(regis))
+        Patient p = HspSQL.RegisterNewPatient(regis);
+        if(p!=null)
         {
             System.out.println("*********************Register successful************************");
+            System.out.println("New patient has id: " + p.getPatientID());
         }
         else
             System.out.println("\n************************Register failed********************");
         System.out.println(TestStrings.testEnd);
 
        System.out.println("\nTest========Updating Patient Infomation");
-        if(PatientSQL.UpdatePersonalInfo(update))
+        if(PatientSQL.UpdatePersonalInfo(update) != null)
         {
             System.out.println("*********************Update successful************************");
         }
@@ -77,7 +78,7 @@ public class PatientUpdateInfoTest {
         System.out.println(TestStrings.testEnd);
 
 
-        ArrayList<Patient> patientList = PersonUtils.getPatients("new");
+        ArrayList<Patient> patientList = PatientSQL.getPatientByPatient("new");
         System.out.println("\nTest========Searching for Patient with 'new' ");
         if(patientList.size()!=0) {
             System.out.println("*********************Find successful************************");

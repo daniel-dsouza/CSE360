@@ -6,8 +6,10 @@ package org.teamone.core.SQL;
  */
 
 import org.teamone.core.appointments.Appointment;
+import org.teamone.core.users.Staff;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class AppointmentSQL {
@@ -236,7 +238,64 @@ public class AppointmentSQL {
         }
         return readMe;
     }
+    /**
+     * Returns a list of patients
+     * @param String: Find people
+     * @return ArrayList: Arraylist of Patient objects
+     */
+    public static ArrayList<Appointment> getPatientsAppointment(String patientName) {
 
+        ArrayList<Appointment> apptList = new ArrayList<Appointment>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            preparedStatement = connect.prepareStatement("select userID from person where name = ?");
+            preparedStatement.setString(1,patientName);
+            ResultSet rs2 = preparedStatement.executeQuery();
+            if(rs2.next()) {
+                int patientID = rs2.getInt("userID");
+
+
+                preparedStatement = connect.prepareStatement("select date, time, reason, doctorID, patientID from appointment where patientID = " + patientID);
+                //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+                ResultSet rs = preparedStatement.executeQuery();
+
+                while (rs.next()) {
+                    Appointment appt = new Appointment();
+                    appt.setDate(rs.getString("date"));
+                    appt.setTime(rs.getString("time"));
+                    appt.setReason(rs.getString("reason"));
+                    appt.setDoctorID(rs.getInt("doctorID"));
+                    appt.setPatientID(rs.getInt("patientID"));
+                    apptList.add(appt);
+                }
+            }
+            else
+            {
+                System.out.println("\nName not found.");
+                apptList =null;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            apptList = null;
+        } finally {
+            close();
+        }
+        return apptList;
+    }
+
+    /** Returns a list of patients
+    * @param Staff: Staff with patient ID filled in
+    * @return ArrayList: Arraylist of Patient objects
+    */
+    public static ArrayList<Appointment> getDoctorAppointment(Staff staff) {
+        //TODO: getPatientList implementation
+        return null;
+    }
     /**
      * Method used for closing the sql library functions
      */

@@ -2,9 +2,10 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.teamone.core.SQL.AppointmentSQL;
+import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.baseclasstests.TestStrings;
-import org.teamone.core.users.PersonUtils;
 import org.teamone.core.users.Staff;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class StaffListTest {
 
     @Test
     public void helpM() {
-        ArrayList<Staff> testArr = PersonUtils.getStaffList("Pediatrician");
+        ArrayList<Staff> testArr = DoctorSQL.getListDoctorSpecialty("Pediatrician");
         System.out.println("\nTest========Searching for Staff members 'Pediatrician' ");
         if(testArr!=null)
         {
@@ -38,7 +39,7 @@ public class StaffListTest {
         System.out.println(TestStrings.testEnd);
 
         System.out.println("\nTest========Searching for Patient's Appointments for 'Patien2' ");
-        ArrayList<Appointment> testAppoint = PersonUtils.getPatientsAppointment("Patien2");
+        ArrayList<Appointment> testAppoint = AppointmentSQL.getPatientsAppointment("Patien2");
 
         if(testAppoint!=null)
         {

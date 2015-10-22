@@ -6,7 +6,17 @@ import java.util.Date;
  * Created by daniel on 10/11/15.
  */
 public class Prescription {
-    private int patientID = 0;
+    private int patientID;
+
+    public int getStaffID() {
+        return staffID;
+    }
+
+    public void setStaffID(int staffID) {
+        this.staffID = staffID;
+    }
+
+    private int staffID;
     private String prescriptionType;
     private String quantity;
     private Date dateAndTime;
