@@ -19,8 +19,8 @@ public class HspSQL {
     private static PreparedStatement preparedStatementPerson = null;
     private static ResultSet resultSet = null;
 
-    public static boolean RegisterNewPatient(Patient patient)
-    { boolean boolResult;
+    public static Patient RegisterNewPatient(Patient patient)
+    { Patient Result;
         try {
             int checker, checker2;
             // This will load the MySQL driver, each DB has its own driver
@@ -84,20 +84,33 @@ public class HspSQL {
 
             System.out.println("checker1=============="+checker);
             System.out.println("checker2=============="+checker2);
+            System.out.println("Adding info into Patient obj");
+
+            Result = new Patient();
+            Result.setOccupation("patient");
+            Result.setName(name);
+            Result.setPatientID(patientID);
+            Result.setEmail(email);
+
+            Result.setAddress(address);
+            Result.setSSN(SSN);
+            Result.setGender(gender);
+            Result.setInsurance(insurance);
+            Result.setAge(age);
+            Result.setPhone(phone);
 
             if (checker==0 | checker2==0)
-                boolResult = false;
-            else
-                boolResult = true;
+                Result = null;
+
 
 
         } catch (Exception e) {
             System.out.println(e);
-            boolResult = false;
+            Result = null;
         } finally {
             close();
         }
-        return boolResult;
+        return Result;
 
     }
 
