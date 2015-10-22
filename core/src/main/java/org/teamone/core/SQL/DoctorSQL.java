@@ -119,13 +119,15 @@ public class DoctorSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
-            String mh = patient.toString();
+            //String mh = patient.toString();
 
-            preparedStatement = connect.prepareStatement("INSERT patient set medicalHistory = ? where patientID = ?");
+            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labType = ?, labReport = ? , date = ?");
 
-            preparedStatement.setString(1, mh);
-            preparedStatement.setInt(2, ID);
+            preparedStatement.setInt(1, patient.getPatientID());
+            preparedStatement.setInt(2, patient.getStaffID());
+            preparedStatement.setString(3, patient.getTestType());
+            preparedStatement.setString(4, patient.getLabReport());
+            preparedStatement.setString(5, patient.getStrDateAndTime());
             checker = preparedStatement.executeUpdate();
 
             if (checker == 0)
