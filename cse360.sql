@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `appointment` (
 CREATE TABLE IF NOT EXISTS `labtest` (
   `serialNumber` int(100) NOT NULL AUTO_INCREMENT,
   `patientID` int(10) NOT NULL,
+  `staffID` int(10) NOT NULL,
   `labType` varchar(500) DEFAULT NULL,
   `labReport` varchar(5000) DEFAULT NULL,
   `date` varchar(500) DEFAULT NULL,
@@ -129,6 +130,7 @@ INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VAL
 CREATE TABLE IF NOT EXISTS `prescription` (
   `serialNumber` int(100) NOT NULL AUTO_INCREMENT,
   `patientID` int(10) NOT NULL,
+  `staffID` int(10) NOT NULL,
   `type` varchar(500) DEFAULT NULL,
   `quantity` varchar(500) DEFAULT NULL,
   `date` varchar(500) DEFAULT NULL,
@@ -217,7 +219,8 @@ ALTER TABLE `appointment`
 -- Constraints for table `labtest`
 --
 ALTER TABLE `labtest`
-  ADD CONSTRAINT `labTest_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `labTest_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE,
+    ADD CONSTRAINT `labTest_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `patient`
@@ -229,7 +232,9 @@ ALTER TABLE `patient`
 -- Constraints for table `prescriptions`
 --
 ALTER TABLE `prescription`
-  ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE,
+    ADD CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON DELETE CASCADE;
+
 
 --
 -- Constraints for table `staff`

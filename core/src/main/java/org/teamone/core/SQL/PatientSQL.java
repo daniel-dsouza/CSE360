@@ -8,8 +8,8 @@ package org.teamone.core.SQL;
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
 
-import org.teamone.core.users.Alert;
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -145,38 +145,6 @@ public class PatientSQL {
         return Result;
     }
 
-    public static Patient getMedicalHistory(Patient patient) {
-        Patient medicalHistory = null;
-        String temp = null;
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
-            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-
-            // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
-            String mh = null;
-
-            preparedStatement = connect.prepareStatement("SELECT medicalhistory FROM patient where patientID = ?");
-            preparedStatement.setInt(1, ID);
-            resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            mh = resultSet.getString("medicalhistory");
-            patient.medicalHistory.toMapObj(mh);
-            patient.setPatientID(ID);
-
-        } catch (Exception e) {
-            System.out.println(e);
-            patient = null;
-        } finally {
-            close();
-        }
-
-        return patient;
-
-    }
     public static Patient getPatientComplete(Patient patient) {
         Patient medicalHistory = null;
         String temp = null;
@@ -203,8 +171,8 @@ public class PatientSQL {
             patient.setInsurance(resultSet.getString("p.insurance"));
             patient.setAge(resultSet.getString("p.age"));
             patient.setPhone(resultSet.getString("p.phone"));
-            patient.setName(resultSet.getString("p2.name"));
-            patient.setEmail(resultSet.getString("p2.email"));
+            patient.setName(resultSet.getString("person.name"));
+            patient.setEmail(resultSet.getString("person.email"));
             mh = resultSet.getString("medicalhistory");
             patient.medicalHistory.toMapObj(mh);
 
@@ -216,6 +184,40 @@ public class PatientSQL {
             patient.setPatientID(ID);
 
 
+
+        } catch (Exception e) {
+            System.out.println(e);
+            patient = null;
+        } finally {
+            close();
+        }
+
+        return patient;
+
+    }
+
+
+    public static Patient getMedicalHistory(Patient patient) {
+        Patient medicalHistory = null;
+        String temp = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int ID = patient.getPatientID();
+            String mh = null;
+
+            preparedStatement = connect.prepareStatement("SELECT medicalhistory FROM patient where patientID = ?");
+            preparedStatement.setInt(1, ID);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            mh = resultSet.getString("medicalhistory");
+            patient.medicalHistory.toMapObj(mh);
+            patient.setPatientID(ID);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -368,12 +370,15 @@ public class PatientSQL {
         }
         return boolResult;
     }
+    /**
+     * Returns a list of patients based on Patients.
+     * @param String: Given a string name
+     * @return ArrayList: List of Patients
+     */
+    public static ArrayList<Patient> getPatientByPatient(String queryName) {
 
-    public static Boolean setAlertOff(Alert alert) {
-        boolean boolResult;
-
+        ArrayList<Patient> patientList = new ArrayList<Patient>();
         try {
-            int checker;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
@@ -381,56 +386,36 @@ public class PatientSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int alertID = alert.getAlertID();
 
-            preparedStatement = connect.prepareStatement("UPDATE alerts set AlertActive = false where alert_id = ?");
-            preparedStatement.setInt(1, alertID);
-            checker = preparedStatement.executeUpdate();
+            preparedStatement = connect.prepareStatement("select userID, name from person where occupation = 'patient' and name like '%" + queryName + "%';");
+            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+            ResultSet rs = preparedStatement.executeQuery();
 
-            if (checker == 0)
-                boolResult = false;
-            else
-                boolResult = true;
-
-        } catch (Exception e) {
-            System.out.println(e);
-            boolResult = false;
-        } finally {
-            close();
-        }
-        return boolResult;
-    }
-
-    public static ArrayList<Alert> getListAlerts() {
-
-        ArrayList<Alert> alertList = new ArrayList<Alert>();
-        try {
-            // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.jdbc.Driver");
-            // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
-            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-
-            preparedStatement = connect.prepareStatement("SELECT alert_id,  alert_reason,  doctor_id,  patient_id, alertDateAndTime  FROM alerts WHERE AlertActive = 1;");
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Alert a = new Alert();
-                a.setAlertID(resultSet.getInt("alert_id"));
-                a.setReason(resultSet.getString("alert_reason"));
-                a.setDoctorID(resultSet.getInt("doctor_id"));
-                a.setPatientID(resultSet.getInt("patient_id"));
-                a.setAlertDateAndTime(resultSet.getString("alertDateAndTime"));
-                a.setAlertStatus(true);
-                alertList.add(a);
+            while (rs.next()) {
+                Patient patient = new Patient();
+                patient.setName(rs.getString("name"));
+                patient.setPatientID(rs.getInt("userID"));
+                patientList.add(patient);
             }
 
         } catch (Exception e) {
             System.out.println(e);
-            alertList = null;
+            patientList = null;
+
         } finally {
             close();
         }
-        return alertList;
+        return patientList;
+    }
+
+    /**
+     * Returns a list of patients based on doctors.
+     * @param staff: Given a staff object
+     * @return ArrayList: List of Patients
+     */
+    public ArrayList<Patient> getPatientByStaff (Staff staff) {
+        //TODO: getPatientByStaff
+        return null;
     }
 
     // You need to close the resultSet

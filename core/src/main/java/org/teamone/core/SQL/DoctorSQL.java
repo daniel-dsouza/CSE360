@@ -3,12 +3,13 @@ package org.teamone.core.SQL;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Created by Ryan on 10/21/2015.
+ * Created by Lin on 2015/10/19.
  */
 public class DoctorSQL {
     private static Connection connect = null;
@@ -36,13 +37,15 @@ public class DoctorSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
-            String mh = patient.toString();
+            //String mh = patient.toString();
 
-            preparedStatement = connect.prepareStatement("INSERT patient set medicalHistory = ? where patientID = ?");
+            preparedStatement = connect.prepareStatement("INSERT into prescription set patientID = ?, staffID = ?, type = ?, quantity = ? , date = ?");
 
-            preparedStatement.setString(1, mh);
-            preparedStatement.setInt(2, ID);
+            preparedStatement.setInt(1, patient.getPatientID());
+            preparedStatement.setInt(2, patient.getStaffID());
+            preparedStatement.setString(3, patient.getPrescriptionType());
+            preparedStatement.setString(4, patient.getQuantity());
+            preparedStatement.setString(5, patient.getStrDateAndTime());
             checker = preparedStatement.executeUpdate();
 
             if (checker == 0)
@@ -117,13 +120,15 @@ public class DoctorSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
-            String mh = patient.toString();
+            //String mh = patient.toString();
 
-            preparedStatement = connect.prepareStatement("INSERT patient set medicalHistory = ? where patientID = ?");
+            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labType = ?, labReport = ? , date = ?");
 
-            preparedStatement.setString(1, mh);
-            preparedStatement.setInt(2, ID);
+            preparedStatement.setInt(1, patient.getPatientID());
+            preparedStatement.setInt(2, patient.getStaffID());
+            preparedStatement.setString(3, patient.getTestType());
+            preparedStatement.setString(4, patient.getLabReport());
+            preparedStatement.setString(5, patient.getStrDateAndTime());
             checker = preparedStatement.executeUpdate();
 
             if (checker == 0)
@@ -176,6 +181,87 @@ public class DoctorSQL {
             close();
         }
         return LabTestList;
+    }
+    /**
+     *
+     * @param Patient p: given a patient with a valid patientID.
+     * @return String of just one report
+     */
+    public static String ViewLabReport(Patient patient)
+    {
+        String labReport = null;
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int patientID = patient.getPatientID();
+
+            String selectPatientLabReport = "select labReports from patient where patientID = ?";
+            preparedStatement = connect.prepareStatement(selectPatientLabReport);
+
+            //`patientID
+            preparedStatement.setInt(1, patientID);
+            resultSet = preparedStatement.executeQuery();
+
+
+            while (resultSet.next())
+            {
+                labReport = resultSet.getString("labReports");
+            }
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            close();
+        }
+        return labReport;
+    }
+
+    /**
+     * Method returns a list doctors.
+     * @param String: Specialty to find in sql
+     * @return ArrayList: Arraylist of staff objects
+     */
+    public static ArrayList<Staff> getListDoctorSpecialty (String specialty) {
+        ArrayList<Staff> arrayOfDoctors = new ArrayList<Staff>();
+        try {
+            int checker, checker2;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            //String specialty = staff.getSpecialty();
+
+            preparedStatement = connect.prepareStatement("SELECT person.name as name, person.userID as staffID FROM person WHERE person.userID IN (SELECT staff.staffID FROM staff WHERE staff.specialty = ?) ;");
+            preparedStatement.setString(1, specialty);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+                //Retrieve by column name
+
+                Staff newStaff = new Staff();
+                newStaff.setName(resultSet.getString("name"));
+                newStaff.setStaffID(resultSet.getInt("staffID"));
+
+                arrayOfDoctors.add(newStaff);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            arrayOfDoctors = null;
+        } finally {
+            close();
+        }
+        return arrayOfDoctors;
+
     }
     // You need to close the resultSet
     private static void close() {

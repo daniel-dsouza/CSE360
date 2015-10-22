@@ -7,10 +7,23 @@ import java.util.Date;
  */
 public class LabTest {
     private int patientID = 0;
+
+
+    private int staffID = 0;
+
     private String testType;
     private String labReport;
     private Date dateAndTime;
     private String strDateAndTime;
+
+    public int getStaffID() {
+        return staffID;
+    }
+
+    public void setStaffID(int staffID) {
+        this.staffID = staffID;
+    }
+
 
     public LabTest() {
     }

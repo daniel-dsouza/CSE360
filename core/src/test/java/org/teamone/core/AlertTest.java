@@ -2,6 +2,7 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.teamone.core.SQL.AlertSQL;
 import org.teamone.core.SQL.LoginSQL;
 import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
@@ -36,7 +37,7 @@ public class AlertTest {
     @Test
     public void updateHC() {
         System.out.println("\nTest========Alert off health conditions");
-        if(PatientSQL.setAlertOff(test))//turn off alertID, 2
+        if(AlertSQL.setAlertOff(test))//turn off alertID, 2
         {
             System.out.println("Off successful");
         }
@@ -55,7 +56,7 @@ public class AlertTest {
         System.out.println(TestStrings.testEnd);
 
 
-        ArrayList<Alert> testArr = PatientSQL.getListAlerts();
+        ArrayList<Alert> testArr = AlertSQL.getListAlerts();
         System.out.println("\nTest========Searching for Alerts ");
         if(testArr!=null)
         {

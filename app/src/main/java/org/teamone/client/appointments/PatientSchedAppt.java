@@ -1,15 +1,15 @@
 package org.teamone.client.appointments;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.teamone.core.users.*;
-import org.teamone.core.appointments.*;
+import org.teamone.core.SQL.DoctorSQL;
+import org.teamone.core.appointments.Appointment;
+import org.teamone.core.users.Staff;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 
@@ -35,7 +35,7 @@ public class PatientSchedAppt {
     public @ResponseBody
     ArrayList<Staff> findDoctors(@PathVariable String speciality) {
         ArrayList<Staff> doctorList = new ArrayList<Staff>(); //Hashing strikes again.
-        doctorList = PersonUtils.getStaffList(speciality);
+        doctorList = DoctorSQL.getListDoctorSpecialty(speciality);
         System.out.println(speciality); //DEBUG statements
         System.out.println("returning list");
         return doctorList; //return JSON object
