@@ -35,7 +35,8 @@ public class RegistrationController {
             System.out.println("Creating a Patient");
 
             //attempt.displayPatientPersonalInformation();
-            if(HspSQL.RegisterNewPatient(attempt))
+            attempt=HspSQL.RegisterNewPatient(attempt);
+            if(attempt!=null)
             {
                 System.out.println("*********************Register successful************************");
             }
