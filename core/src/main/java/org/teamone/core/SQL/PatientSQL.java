@@ -21,8 +21,8 @@ public class PatientSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
-    public static boolean updateHealthCondition(Patient patient) {
-        boolean boolResult;
+    public static Patient updateHealthCondition(Patient patient) {
+        Patient Result = new Patient();
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -33,30 +33,48 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
+            String name = patient.patientInformation.toStringName();
+            String SSN = patient.getSSN();
+            String address = patient.patientInformation.toStringAddress();
+            String email = patient.patientInformation.getEmail();
+            String phone = patient.getPhone();
+            String insurance = patient.getInsurance();
+            String age = patient.getAge();
+            String gender = patient.getGender();
+            String occupation = patient.getOccupation();
             String hc = patient.healthConditions.toString();
 
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
             preparedStatement.setString(1, hc);
             preparedStatement.setInt(2, ID);
             checker = preparedStatement.executeUpdate();
-            if (checker == 0)
-                boolResult = false;
-            else
-                boolResult = true;
 
+            Result.setOccupation(occupation);
+            Result.setName(name);
+            Result.setPatientID(ID);
+            Result.setEmail(email);
+
+            Result.setAddress(address);
+            Result.setSSN(SSN);
+            Result.setGender(gender);
+            Result.setInsurance(insurance);
+            Result.setAge(age);
+            Result.setPhone(phone);
+
+            if (checker == 0)
+                Result = null;
 
         } catch (Exception e) {
             System.out.println(e);
-            boolResult = false;
+            Result = null;
         } finally {
             close();
         }
-        return boolResult;
-
+        return Result;
     }
 
-    public static boolean UpdatePersonalInfo(Patient patient) {
-        boolean boolResult;
+    public static Patient UpdatePersonalInfo(Patient patient) {
+        Patient Result = new Patient();
         try {
             int checker, checker2;
             // This will load the MySQL driver, each DB has its own driver
@@ -79,6 +97,7 @@ public class PatientSQL {
             String insurance = patient.getInsurance();
             String age = patient.getAge();
             String gender = patient.getGender();
+            String occupation = patient.getOccupation();
 
             preparedStatementPatient = connect.prepareStatement("UPDATE patient set address = ?,phone = ?,SSN = ?,insurance = ?,age = ?,gender = ? where patientID = ? ;");
             preparedStatementPatient.setString(1, address);
@@ -101,19 +120,29 @@ public class PatientSQL {
             System.out.println("checker1==============" + checker);
             System.out.println("checker2==============" + checker2);
 
+            Result.setOccupation(occupation);
+            Result.setName(name);
+            Result.setPatientID(patientID);
+            Result.setEmail(email);
+
+            Result.setAddress(address);
+            Result.setSSN(SSN);
+            Result.setGender(gender);
+            Result.setInsurance(insurance);
+            Result.setAge(age);
+            Result.setPhone(phone);
+
             if (checker == 0 | checker2 == 0)
-                boolResult = false;
-            else
-                boolResult = true;
+                Result = null;
 
 
         } catch (Exception e) {
             System.out.println(e);
-            boolResult = false;
+            Result = null;
         } finally {
             close();
         }
-        return boolResult;
+        return Result;
     }
 
     public static Patient getMedicalHistory(Patient patient) {
