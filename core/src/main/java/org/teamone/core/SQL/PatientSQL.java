@@ -177,6 +177,56 @@ public class PatientSQL {
         return patient;
 
     }
+    public static Patient getPatientComplete(Patient patient) {
+        Patient medicalHistory = null;
+        String temp = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int ID = patient.getPatientID();
+            String mh = null;
+
+            preparedStatement = connect.prepareStatement("SELECT p2.name, p2.emailID, p.medicalhistory, p.occupation, p.address, p.SSN, p.gender, p.insurance, p.age, p.phone, p.healthConditions  FROM patient p, person p2 where patientID = ? and userID = ?");
+            preparedStatement.setInt(1, patient.getPatientID());
+            preparedStatement.setInt(2, patient.getPatientID());
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            patient.setOccupation(resultSet.getString("p.occupation"));
+            patient.setAddress(resultSet.getString("p.address"));
+            patient.setSSN(resultSet.getString("p.SSN"));
+            patient.setGender(resultSet.getString("p.gender"));
+            patient.setInsurance(resultSet.getString("p.insurance"));
+            patient.setAge(resultSet.getString("p.age"));
+            patient.setPhone(resultSet.getString("p.phone"));
+            patient.setName(resultSet.getString("p2.name"));
+            patient.setEmail(resultSet.getString("p2.email"));
+            mh = resultSet.getString("medicalhistory");
+            patient.medicalHistory.toMapObj(mh);
+
+
+            String hc = resultSet.getString("healthConditions");
+            patient.healthConditions.toMapObj(hc);
+
+
+            patient.setPatientID(ID);
+
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            patient = null;
+        } finally {
+            close();
+        }
+
+        return patient;
+
+    }
 
     public static Boolean setMedicalHistory(Patient patient) {
         boolean boolResult;
