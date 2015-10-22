@@ -1,11 +1,12 @@
 package org.teamone.core;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.LabStaffSQL;
+import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.labs.LabTest;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class LabStaffTest {
@@ -48,7 +49,7 @@ public class LabStaffTest {
         System.out.println(TestStrings.testEnd);
 
         System.out.println("\nTest========Viewing lab test");
-        if(LabStaffSQL.viewLabTest(test)!=null)
+        if(LabTestSQL.viewLabTest(test)!=null)
         {
             System.out.println("\nView successful");
             System.out.println("PatientID:\t" + test.getPatientID());
