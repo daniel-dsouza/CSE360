@@ -5,24 +5,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.teamone.core.SQL.HspSQL;
+import org.teamone.core.SQL.PatientSQL;
+import org.teamone.core.users.Patient;
 
 import java.util.Map;
 
 @Controller
 public class RegistrationController {
 
+    //Patient attempt = new Patient();
+
     //The web page that leads to this must direct to registration/, registration will return a 404 error
     @RequestMapping(value = "/registration/", method = RequestMethod.GET)
     public String createPatient(Map<String, Object> model) {
 
-        RegistrationAttempt attempt = new RegistrationAttempt();
+        Patient attempt = new Patient();
         model.put("userInput", attempt);
 
         return "/registration/hsp-registration";
     }
 
     @RequestMapping(value = "/registration/{page}",method = RequestMethod.POST)
-    public String processPatientInfo(@ModelAttribute("userInput") RegistrationAttempt attempt,
+    public String processPatientInfo(@ModelAttribute("userInput") Patient attempt,
                                      Map<String, Object> model,
                                      @PathVariable String page) {
 
@@ -30,12 +35,24 @@ public class RegistrationController {
             System.out.println("Creating a Patient");
 
             //attempt.displayPatientPersonalInformation();
+            if(HspSQL.RegisterNewPatient(attempt))
+            {
+                System.out.println("*********************Register successful************************");
+            }
+            else
+                System.out.println("\n************************Register failed********************");
 
             return "/registration/hsp-healthConditions";
         }else if(page.equalsIgnoreCase("page2")){
             System.out.println("Loading Health Conditions");
 
             //attempt.displayHealthConditions();
+            if(PatientSQL.setHealthConditions(attempt))
+            {
+                System.out.println("Set successful");
+            }
+            else
+                System.out.println("\nSet failed");
 
             //return "/registration/hsp-healthConditions"; //Used for debugging to make sure that check boxes functioned properly
             return "/registration/hsp-medicalHistory"; //This is the correct return
@@ -43,6 +60,12 @@ public class RegistrationController {
             System.out.println("Loading Medical Conditions");
 
             //attempt.displayMedicalHistory();
+            if(PatientSQL.setMedicalHistory(attempt))
+            {
+                System.out.println("Set successful");
+            }
+            else
+                System.out.println("\nSet failed");
 
             //return "/registration/hsp-medicalHistory"; //Used for debugging to make sure that check boxes functioned properly
             return "/registration/hsp-registration"; //This should be hsp-patients page or hsp-homepage or what ever the page that this should exit to is called
@@ -50,6 +73,7 @@ public class RegistrationController {
     }
 }
 
+/*
 class RegistrationAttempt {
 
     //Start of the Patient's Personal Information (13 strings)__________________________________________________________
@@ -581,3 +605,4 @@ class RegistrationAttempt {
 
     RegistrationAttempt(){}
 }
+*/
