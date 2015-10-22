@@ -70,7 +70,7 @@ public class PatientUpdateInfoTest {
         System.out.println(TestStrings.testEnd);
 
        System.out.println("\nTest========Updating Patient Infomation");
-        if(PatientSQL.UpdatePersonalInfo(update))
+        if(PatientSQL.UpdatePersonalInfo(update) != null)
         {
             System.out.println("*********************Update successful************************");
         }

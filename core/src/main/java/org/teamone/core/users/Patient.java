@@ -101,6 +101,13 @@ public class Patient extends Person {
         //this.phone = phone;
         this.patientInformation.setHomePhone(phone);
     }
+    public String getEmail() {
+        return patientInformation.getEmail();
+    }
+
+    public void setEmail(String email) {
+        this.patientInformation.setEmail(email);
+    }
 
     public HealthConditions getHealthConditions() {
         //return healthConditions;
