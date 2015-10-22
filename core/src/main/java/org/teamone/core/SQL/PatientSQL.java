@@ -21,8 +21,8 @@ public class PatientSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
-    public static boolean updateHealthCondition(Patient patient) {
-        boolean boolResult;
+    public static Patient updateHealthCondition(Patient patient) {
+        Patient Result = new Patient();
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -33,30 +33,48 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
+            String name = patient.patientInformation.toStringName();
+            String SSN = patient.getSSN();
+            String address = patient.patientInformation.toStringAddress();
+            String email = patient.patientInformation.getEmail();
+            String phone = patient.getPhone();
+            String insurance = patient.getInsurance();
+            String age = patient.getAge();
+            String gender = patient.getGender();
+            String occupation = patient.getOccupation();
             String hc = patient.healthConditions.toString();
 
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
             preparedStatement.setString(1, hc);
             preparedStatement.setInt(2, ID);
             checker = preparedStatement.executeUpdate();
-            if (checker == 0)
-                boolResult = false;
-            else
-                boolResult = true;
 
+            Result.setOccupation(occupation);
+            Result.setName(name);
+            Result.setPatientID(ID);
+            Result.setEmail(email);
+
+            Result.setAddress(address);
+            Result.setSSN(SSN);
+            Result.setGender(gender);
+            Result.setInsurance(insurance);
+            Result.setAge(age);
+            Result.setPhone(phone);
+
+            if (checker == 0)
+                Result = null;
 
         } catch (Exception e) {
             System.out.println(e);
-            boolResult = false;
+            Result = null;
         } finally {
             close();
         }
-        return boolResult;
-
+        return Result;
     }
 
-    public static boolean UpdatePersonalInfo(Patient patient) {
-        boolean boolResult;
+    public static Patient UpdatePersonalInfo(Patient patient) {
+        Patient Result = new Patient();
         try {
             int checker, checker2;
             // This will load the MySQL driver, each DB has its own driver
@@ -79,6 +97,7 @@ public class PatientSQL {
             String insurance = patient.getInsurance();
             String age = patient.getAge();
             String gender = patient.getGender();
+            String occupation = patient.getOccupation();
 
             preparedStatementPatient = connect.prepareStatement("UPDATE patient set address = ?,phone = ?,SSN = ?,insurance = ?,age = ?,gender = ? where patientID = ? ;");
             preparedStatementPatient.setString(1, address);
@@ -101,19 +120,29 @@ public class PatientSQL {
             System.out.println("checker1==============" + checker);
             System.out.println("checker2==============" + checker2);
 
+            Result.setOccupation(occupation);
+            Result.setName(name);
+            Result.setPatientID(patientID);
+            Result.setEmail(email);
+
+            Result.setAddress(address);
+            Result.setSSN(SSN);
+            Result.setGender(gender);
+            Result.setInsurance(insurance);
+            Result.setAge(age);
+            Result.setPhone(phone);
+
             if (checker == 0 | checker2 == 0)
-                boolResult = false;
-            else
-                boolResult = true;
+                Result = null;
 
 
         } catch (Exception e) {
             System.out.println(e);
-            boolResult = false;
+            Result = null;
         } finally {
             close();
         }
-        return boolResult;
+        return Result;
     }
 
     public static Patient getPatientComplete(Patient patient) {
@@ -189,6 +218,56 @@ public class PatientSQL {
             mh = resultSet.getString("medicalhistory");
             patient.medicalHistory.toMapObj(mh);
             patient.setPatientID(ID);
+
+        } catch (Exception e) {
+            System.out.println(e);
+            patient = null;
+        } finally {
+            close();
+        }
+
+        return patient;
+
+    }
+    public static Patient getPatientComplete(Patient patient) {
+        Patient medicalHistory = null;
+        String temp = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int ID = patient.getPatientID();
+            String mh = null;
+
+            preparedStatement = connect.prepareStatement("SELECT p2.name, p2.emailID, p.medicalhistory, p.occupation, p.address, p.SSN, p.gender, p.insurance, p.age, p.phone, p.healthConditions  FROM patient p, person p2 where patientID = ? and userID = ?");
+            preparedStatement.setInt(1, patient.getPatientID());
+            preparedStatement.setInt(2, patient.getPatientID());
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            patient.setOccupation(resultSet.getString("p.occupation"));
+            patient.setAddress(resultSet.getString("p.address"));
+            patient.setSSN(resultSet.getString("p.SSN"));
+            patient.setGender(resultSet.getString("p.gender"));
+            patient.setInsurance(resultSet.getString("p.insurance"));
+            patient.setAge(resultSet.getString("p.age"));
+            patient.setPhone(resultSet.getString("p.phone"));
+            patient.setName(resultSet.getString("p2.name"));
+            patient.setEmail(resultSet.getString("p2.email"));
+            mh = resultSet.getString("medicalhistory");
+            patient.medicalHistory.toMapObj(mh);
+
+
+            String hc = resultSet.getString("healthConditions");
+            patient.healthConditions.toMapObj(hc);
+
+
+            patient.setPatientID(ID);
+
+
 
         } catch (Exception e) {
             System.out.println(e);
