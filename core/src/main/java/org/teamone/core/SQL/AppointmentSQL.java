@@ -20,12 +20,11 @@ public class AppointmentSQL {
     private static ResultSet resultSet = null;
 
     /**
-     *
      * @param readMe Appointment Object to select information from database
      * @return readMe
      */
     public static List<Appointment> viewAppointmentDoctor(Appointment readMe) {
-        List<Appointment>  a1 = null;
+        List<Appointment> a1 = null;
 
         try {
 
@@ -44,13 +43,12 @@ public class AppointmentSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
 
-            do
-            {
+            do {
 
-            String date = resultSet.getString("date");
-            String time = resultSet.getString("time");
-            String reason = resultSet.getString("reason");
-            int patID = resultSet.getInt("patientID");
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+                int patID = resultSet.getInt("patientID");
 
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
@@ -64,8 +62,8 @@ public class AppointmentSQL {
 
                 a1.add(readMe);
 
-            } while(resultSet.next());
-} catch (Exception e) {
+            } while (resultSet.next());
+        } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
             readMe = null;
@@ -75,12 +73,11 @@ public class AppointmentSQL {
         return a1;
     }
 
-    /**
-     *
-     * @param readMe Appointment Object to select information from database
-     * @return
-     */
-    public static Appointment viewAppointmentPatient(Appointment readMe) {
+
+
+    public static List<Appointment> viewAppointmentPatient(Appointment readMe) {
+        List<Appointment>  a1 = null;
+
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -91,41 +88,43 @@ public class AppointmentSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int patID = readMe.getPatientID();
+            int patID = readMe.getDoctorID();
 
-            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID FROM appointment where patientID = ?");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID FROM appointment where staffID = ?");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
 
-            String date = resultSet.getString("date");
-            String time = resultSet.getString("time");
-            String reason = resultSet.getString("reason");
-            int docID = resultSet.getInt("doctorID");
-            if (!date.equals("null") &&  !time.equals(null) && !reason.equals("null") && patID != 0) {
+            do {
+
+
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+                int docID = resultSet.getInt("doctorID");
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
                 System.out.println("Reason:\t" + reason);
                 System.out.println("Doctor ID:\t" + docID);*///debugging
 
-                readMe.setDate(date);
-                readMe.setTime(time);
-                readMe.setReason(reason);
-                readMe.setPatientID(docID);
+                    readMe.setDate(date);
+                    readMe.setTime(time);
+                    readMe.setReason(reason);
+                    readMe.setPatientID(docID);
+
+                    a1.add(readMe);
+
+                }
+                while (resultSet.next()) ;
             }
-            else
-            {
-                System.out.println("===========EMPTY RESULT========RETURN NULL");
-                readMe = null;
-            }
-        } catch (Exception e) {
+          catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
             readMe = null;
         } finally {
             close();
         }
-        return readMe;
+            return a1;
 
     }
 

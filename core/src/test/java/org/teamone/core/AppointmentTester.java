@@ -42,6 +42,7 @@ public class AppointmentTester {
             System.out.println("Time:\t" + update.getTime());
             System.out.println("Reason:\t" + update.getReason());
             System.out.println("Doctor ID:\t" + update.getDoctorID());
+            System.out.println("");
         }
         else
             System.out.println("\nUpdate failed");
