@@ -10,6 +10,7 @@ import java.util.TreeMap;
 public class LabTestRequest {
 
     private int requestionID;
+    private int patientID;
 
     private Map<String, Boolean> labTestRequest;
     private Map<String, String> labTestRequestNames;
@@ -157,6 +158,10 @@ public class LabTestRequest {
     public int getRequestionID() { return requestionID; }
 
     public void setRequestionID(int requestionID) { this.requestionID = requestionID; }
+
+    public int getPatientID() { return patientID; }
+
+    public void setPatientID(int patientID) { this.patientID = patientID; }
 
     public Map<String, String> getLabTestRequestNames() { return labTestRequestNames; }
 
