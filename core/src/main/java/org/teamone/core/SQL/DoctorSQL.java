@@ -19,7 +19,6 @@ public class DoctorSQL {
 
 
     /**
-     *
      * @param Prescription patient: Prescription to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
@@ -64,7 +63,6 @@ public class DoctorSQL {
 
 
     /**
-     *
      * @param Patient p: given a patient with a valid patientID.
      * @return ArrayList of Prescriptions corresponding to Patient
      */
@@ -102,7 +100,6 @@ public class DoctorSQL {
 
 
     /**
-     *
      * @param Labtest patient: LabTest to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
@@ -146,14 +143,13 @@ public class DoctorSQL {
     }
 
 
-
-
     /**
      * Method returns a list doctors.
+     *
      * @param String: Specialty to find in sql
      * @return ArrayList: Arraylist of staff objects
      */
-    public static ArrayList<Staff> getListDoctorSpecialty (String specialty) {
+    public static ArrayList<Staff> getListDoctorSpecialty(String specialty) {
         ArrayList<Staff> arrayOfDoctors = new ArrayList<Staff>();
         try {
             int checker, checker2;
@@ -169,7 +165,7 @@ public class DoctorSQL {
             preparedStatement.setString(1, specialty);
             resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 //Retrieve by column name
 
                 Staff newStaff = new Staff();
@@ -187,6 +183,7 @@ public class DoctorSQL {
         return arrayOfDoctors;
 
     }
+
     // You need to close the resultSet
     private static void close() {
         try {
@@ -206,4 +203,38 @@ public class DoctorSQL {
         }
     }
 
+    public static Staff getStaffComplete(Staff staff) {
+        //Staff staff = null;
+        String temp = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int ID = staff.getStaffID();
+            String mh = null;
+
+            preparedStatement = connect.prepareStatement("SELECT p2.name, p2.emailID, p.occupation, p.specialty, p.patientID, p.schedule FROM staff p, person p2 where staffID = ? and userID = ?");
+            preparedStatement.setInt(1, staff.getStaffID());
+            preparedStatement.setInt(2, staff.getStaffID());
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            staff.setOccupation(resultSet.getString("p.occupation"));
+            staff.setSpecialty(resultSet.getString("p.specialty"));
+            staff.setPatientID(resultSet.getInt("p.patientID"));
+            staff.setSchedule(resultSet.getString("p.schedule"));
+            staff.setName(resultSet.getString("p2.name"));
+            staff.setEmail(resultSet.getString("p2.emailID"));
+
+        } catch (Exception e) {
+            System.out.println(e);
+            staff = null;
+        } finally {
+            close();
+        }
+        return staff;
+    }
 }
