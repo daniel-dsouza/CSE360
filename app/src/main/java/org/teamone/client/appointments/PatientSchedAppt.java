@@ -3,6 +3,7 @@ package org.teamone.client.appointments;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.users.Staff;
@@ -46,7 +47,7 @@ public class PatientSchedAppt {
         Appointment appointment1 = new Appointment(); //this is an example of a model attribute
 
         Map<String, String> doctorsList = new LinkedHashMap<String,String>(); //this is an example of a model attribute not in the appointment
-        doctorsList.put("EmergencyDoctor", "Emergency Doctor");//Internal value, user interface value
+        doctorsList.put("Emergency", "Emergency Doctor");//Internal value, user interface value
         doctorsList.put("Pediatrician", "Pediatrician");
         doctorsList.put("GeneralCare", "General Care");
         doctorsList.put("Neurologist", "Neurologist");
@@ -82,6 +83,7 @@ public class PatientSchedAppt {
         System.out.println(ap1.getDoctorName());
         System.out.println(ap1.getReason());
         System.out.println(ap1.getDate());//proof.
+        //AppointmentSQL.editAppointmentPatient(ap1); //This should create the Appointment in the database
         return "appointment/PatientSchedAppt"; //this will need to be "redirect:somesuccesspage" at some point.
     }
 }
