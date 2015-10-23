@@ -1,39 +1,50 @@
 package org.teamone.core.labs;
 
+import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
+
 import java.util.Date;
 
 /**
  * Created by daniel on 10/11/15.
  */
 public class LabTest {
-    private int patientID = 0;
+    private Patient patient;
+    private int labTestID = 0;
 
-
-    private int staffID = 0;
+    private Staff staff;
 
     private String testType;
     private String labReport;
     private Date dateAndTime;
     private String strDateAndTime;
-
-    public int getStaffID() {
-        return staffID;
-    }
-
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
-    }
-
-
     public LabTest() {
     }
 
+    public int getLabTestID() {
+        return labTestID;
+    }
+
+    public void setLabTestID(int labTestID) {
+        this.labTestID = labTestID;
+    }
+
+    public int getStaffID() {
+        return staff.getStaffID();
+    }
+
+    public void setStaffID(int staffID) {
+        this.staff.setStaffID(staffID);
+    }
+
+
+
     public int getPatientID() {
-        return patientID;
+        return patient.getPatientID();
     }
 
     public void setPatientID(int patientID) {
-        this.patientID = patientID;
+        this.patient.setPatientID(patientID);
     }
 
     public String getTestType() {

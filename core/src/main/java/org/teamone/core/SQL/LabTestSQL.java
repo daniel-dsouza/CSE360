@@ -14,6 +14,7 @@ public class LabTestSQL {
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
+
     public static LabTest viewLabTest(LabTest readMe) {
         try {
             int checker;

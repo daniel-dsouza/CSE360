@@ -1,6 +1,7 @@
 package org.teamone.core.SQL;
 
 import org.teamone.core.labs.LabTest;
+import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
@@ -39,13 +40,12 @@ public class DoctorSQL {
             // PreparedStatements can use variables and are more efficient
             //String mh = patient.toString();
 
-            preparedStatement = connect.prepareStatement("INSERT into prescription set patientID = ?, staffID = ?, type = ?, quantity = ? , date = ?");
+            preparedStatement = connect.prepareStatement("INSERT into prescription set patientID = ?, staffID = ?, type = ?, date = ?");
 
             preparedStatement.setInt(1, patient.getPatientID());
             preparedStatement.setInt(2, patient.getStaffID());
             preparedStatement.setString(3, patient.getPrescriptionType());
-            preparedStatement.setString(4, patient.getQuantity());
-            preparedStatement.setString(5, patient.getStrDateAndTime());
+            preparedStatement.setString(4, patient.getStrDateAndTime());
             checker = preparedStatement.executeUpdate();
 
             if (checker == 0)
@@ -103,6 +103,50 @@ public class DoctorSQL {
 
     /**
      *
+     * @param LabtestRequest test: LabTestRequest to be added.
+     * @return true or false: True if insert into SQL success. false otherwise
+     */
+    public static Boolean addLabRequest(LabTestRequest test) {
+        //only use INSERT sql.
+        boolean boolResult;
+        String temp = null;
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+
+            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labType = ?, labReport = ? , date = ?");
+
+            preparedStatement.setInt(1, test.getPatientID());
+            /*preparedStatement.setInt(2, test.getStaffID());
+            preparedStatement.setString(3, test.getTestType());
+            preparedStatement.setString(4, test.getLabReport());
+            preparedStatement.setString(5, test.getStrDateAndTime());*/
+            checker = preparedStatement.executeUpdate();
+
+            if (checker == 0)
+                boolResult = false;
+            else
+                boolResult = true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            boolResult = false;
+        } finally {
+            close();
+        }
+        return boolResult;
+    }
+
+    /**
+     *
      * @param Labtest patient: LabTest to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
@@ -120,7 +164,7 @@ public class DoctorSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            //String mh = patient.toString();
+
 
             preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labType = ?, labReport = ? , date = ?");
 

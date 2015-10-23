@@ -10,8 +10,17 @@ public class Appointment {
     private String doctorName;
     private String doctorSpec;
     private int doctorID = 0;
+    private int appointmentID = 0;
     private String reason;
     private int patientID = 0;
+
+    public int getAppointmentID() {
+        return appointmentID;
+    }
+
+    public void setAppointmentID(int appointmentID) {
+        this.appointmentID = appointmentID;
+    }
 
     public String getDoctorName() {
         return doctorName;

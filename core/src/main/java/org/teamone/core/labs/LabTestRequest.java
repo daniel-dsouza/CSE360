@@ -13,7 +13,7 @@ public class LabTestRequest {
     private int patientID;
 
     private Map<String, Boolean> labTestRequest;
-    private Map<String, String> labTestRequestNames;
+    private Map<String, String> labTestRequestNames;//frontend only
 
     public Set<String> getKeys() {
         return labTestRequest.keySet();
@@ -29,7 +29,7 @@ public class LabTestRequest {
 
     public LabTestRequest() {
         this(0, "");
-        this.requestionID = 0; //TODO: make this a random number.
+        this.requestionID = 0;
     }
 
     @Override
