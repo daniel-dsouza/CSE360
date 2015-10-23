@@ -16,7 +16,7 @@ import java.util.Map;
  */
 
 @Controller
-@Scope("Request")
+@Scope("request")
 @RequestMapping(value = "/**/request_test")
 public class RequestLabTestController {
 
@@ -37,16 +37,17 @@ public class RequestLabTestController {
     public String getList(Map<String, Object> model,
                           @ModelAttribute User user) {
         //they don't say they be who they are, but they don't
-        if(!user.getPerson().getOccupation().equals("Doctor"))
-            return "redirect:/user/" + user.person.getUserID();
+//        if(!user.getPerson().getOccupation().equals("Doctor"))
+//            return "redirect:/user/" + user.person.getUserID();
 
         LabTestRequest request = new LabTestRequest();
         model.put("request", request);
         return "lab/labtestrequest";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void submitTest (Map<String, Object> model ) {
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String submitTest (Map<String, Object> model ) {
         //TODO: submit values to database.
+        return "lab/labtestrequest"; //TODO: send back to Select Patient.
     }
 }

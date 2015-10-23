@@ -16,8 +16,23 @@
   </jsp:attribute>
 
   <jsp:body>
-    <div class="container-fluid" id="target">
-
-    </div>
+      <form:form method="post" commandName="request">
+          <div class="container-fluid" id="target">
+              <div class="row">
+                  <c:forEach var="test" items="${request.labTestRequestNames}">
+                      <div class="col-sm-4">
+                          <label class="checkbox">
+                              <form:checkbox path="${test.key}" />
+                              <span class="cr"></span>
+                                  ${test.value}
+                          </label>
+                      </div>
+                  </c:forEach>
+              </div>
+            <span class="group-btn">
+                <input type="submit" value="Request Test" class="btn btn-primary btn-md"/>
+            </span>
+          </div>
+      </form:form>
   </jsp:body>
 </t:userpage>
