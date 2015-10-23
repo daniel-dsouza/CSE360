@@ -1,5 +1,7 @@
 package org.teamone.core.labs;
 
+import org.teamone.core.users.Patient;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -10,7 +12,7 @@ import java.util.TreeMap;
 public class LabTestRequest {
 
     private int requestionID;
-    private int patientID;
+    private Patient patient;
 
     private Map<String, Boolean> labTestRequest;
     private Map<String, String> labTestRequestNames;
@@ -159,9 +161,9 @@ public class LabTestRequest {
 
     public void setRequestionID(int requestionID) { this.requestionID = requestionID; }
 
-    public int getPatientID() { return patientID; }
+    public Patient getPatient() { return patient; }
 
-    public void setPatientID(int patientID) { this.patientID = patientID; }
+    public void setPatient(Patient patientID) { this.patient = patientID; }
 
     public Map<String, String> getLabTestRequestNames() { return labTestRequestNames; }
 
