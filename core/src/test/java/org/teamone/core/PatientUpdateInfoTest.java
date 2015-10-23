@@ -14,27 +14,11 @@ import java.util.ArrayList;
 
 public class PatientUpdateInfoTest {
 
-    private Patient regis;
     private Patient update;
 
     @Before
     public void setUp()
     {
-
-        regis = new Patient();
-        regis.patientInformation.setFirstName("newFirst");
-        regis.patientInformation.setLastName("nw");
-        regis.patientInformation.setAddress("Eastern Ocean");
-        regis.patientInformation.setCity("Tempe");
-        regis.patientInformation.setState("AZ");
-        regis.patientInformation.setZipcode("85200");
-        regis.patientInformation.setEmail("luffy@au.edu");
-        regis.patientInformation.setHomePhone("13230932");
-        regis.patientInformation.setSsn("987654321");
-        regis.patientInformation.setInsurance("fight");
-        regis.patientInformation.setAge("21");
-        regis.patientInformation.setGender("male");
-        regis.setPassword("hiRyan");
 
         update = new Patient();
         update.setPatientID(1004);
@@ -57,17 +41,6 @@ public class PatientUpdateInfoTest {
     @Test
     public void tester()
     {
-        System.out.println("\nTest========Registering New Patient");
-        Patient p = HspSQL.RegisterNewPatient(regis);
-        if(p!=null)
-        {
-            System.out.println("*********************Register successful************************");
-            System.out.println("New patient has id: " + p.getPatientID());
-        }
-        else
-            System.out.println("\n************************Register failed********************");
-        System.out.println(TestStrings.testEnd);
-
        System.out.println("\nTest========Updating Patient Infomation");
         if(PatientSQL.UpdatePersonalInfo(update) != null)
         {
@@ -76,21 +49,6 @@ public class PatientUpdateInfoTest {
         else
             System.out.println("\n************************Update failed********************");
         System.out.println(TestStrings.testEnd);
-
-
-        ArrayList<Patient> patientList = PatientSQL.getPatientByPatient("new");
-        System.out.println("\nTest========Searching for Patient with 'new' ");
-        if(patientList.size()!=0) {
-            System.out.println("*********************Find successful************************");
-            Patient tempPat;
-            for (int i = 0; i < patientList.size(); i++) {
-                tempPat = patientList.get(i);
-                System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getPatientID());
-            }
-        }
-        System.out.println(TestStrings.testEnd);
-
-
     }
 
 }

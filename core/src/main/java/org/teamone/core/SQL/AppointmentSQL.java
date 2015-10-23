@@ -10,6 +10,7 @@ import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class AppointmentSQL {
@@ -23,8 +24,11 @@ public class AppointmentSQL {
      * @param readMe Appointment Object to select information from database
      * @return readMe
      */
-    public static Appointment viewAppointmentDoctor(Appointment readMe) {
+    public static List<Appointment> viewAppointmentDoctor(Appointment readMe) {
+        List<Appointment>  a1 = null;
+
         try {
+
             int checker;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
@@ -35,16 +39,19 @@ public class AppointmentSQL {
 
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
-
             preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID FROM appointment where doctorID = ?");
             preparedStatement.setInt(1, docID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
+
+            do
+            {
+
             String date = resultSet.getString("date");
             String time = resultSet.getString("time");
             String reason = resultSet.getString("reason");
             int patID = resultSet.getInt("patientID");
-            if (!date.equals("null") &&  !time.equals(null) && !reason.equals("null") && patID != 0) {
+
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
                 System.out.println("Reason:\t" + reason);
@@ -54,21 +61,18 @@ public class AppointmentSQL {
                 readMe.setTime(time);
                 readMe.setReason(reason);
                 readMe.setPatientID(patID);
-            }
-            else
-            {
-                System.out.println("===========EMPTY RESULT========RETURN NULL");
-                readMe = null;
-            }
-        } catch (Exception e) {
+
+                a1.add(readMe);
+
+            } while(resultSet.next());
+} catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
             readMe = null;
         } finally {
             close();
         }
-        return readMe;
-
+        return a1;
     }
 
     /**
