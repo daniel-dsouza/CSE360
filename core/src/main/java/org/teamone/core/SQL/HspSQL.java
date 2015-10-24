@@ -114,6 +114,10 @@ public class HspSQL {
 
     }
 
+    /**
+     * Extracts all persons in Person table
+     * @return ArrayList: of all persons
+     */
     public static ArrayList<Person> revealAll() {
 
         ArrayList<Person> adminList = new ArrayList<Person>();
@@ -140,6 +144,51 @@ public class HspSQL {
                 adminList.add(pers);
             }
 
+        } catch (Exception e) {
+            System.out.println(e);
+            adminList = null;
+
+        } finally {
+            close();
+        }
+        return adminList;
+    }
+    /**
+     * Deletes all persons in Person table with id above 1001. ids from 1001 to 1999 are reserved for patients.
+     * @return ArrayList: of all persons with id>1001
+     */
+    public static ArrayList<Person> deletePatients() {
+
+        ArrayList<Person> adminList = new ArrayList<Person>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+            preparedStatementPatient = connect.prepareStatement("select userID, name, occupation, password, emailID from person where userID > 1001;");
+            ResultSet rs = preparedStatementPatient.executeQuery();
+            preparedStatementPatient = connect.prepareStatement("delete from person where userID > 1001;");
+            int checker = preparedStatementPatient.executeUpdate();
+
+            while (rs.next()) {
+                Person pers = new Person();
+                pers.setUserID((rs.getInt("userID")));
+                pers.setName(rs.getString("name"));
+                pers.setOccupation(rs.getString("occupation"));
+                pers.setPassword(rs.getString("password"));
+                pers.setEmail(rs.getString("emailID"));
+                adminList.add(pers);
+            }
+            if(checker ==0) {
+                System.out.println("Delete failed");
+                adminList = null;
+            }
+            else
+                System.out.println("Delete success");
         } catch (Exception e) {
             System.out.println(e);
             adminList = null;

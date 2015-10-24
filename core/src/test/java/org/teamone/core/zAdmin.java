@@ -64,5 +64,6 @@ public class zAdmin {
             System.out.println("SEARCH FAILED");
         System.out.println(TestStrings.testEnd);
 
+        //HspSQL.deletePatients();//careful, make sure this is commented out
     }
 }

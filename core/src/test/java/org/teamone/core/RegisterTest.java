@@ -22,20 +22,55 @@ public class RegisterTest {
         regis = new Patient();
         Random randomGenerator = new Random();
             int randomInt = randomGenerator.nextInt(1000);
-        String lastRNG = Integer.toString(randomInt);
-        regis.patientInformation.setFirstName("Random generator");
+        String firstRNG ="RNG ";
+        for(int i = 0; i< 10; i++)//firstName
+        {
+            firstRNG += (char) (randomGenerator.nextInt(26) + 'a');
+        }
+        String lastRNG = Integer.toString(randomInt);//lastname
+        regis.patientInformation.setFirstName(firstRNG);
         regis.patientInformation.setLastName(lastRNG);
-        regis.patientInformation.setAddress("Eastern Ocean");
+
+       String random = "" + (char) (randomGenerator.nextInt(26) + 'A');
+        for(int i = 0; i< 10; i++)//address
+        {
+            random += (char) (randomGenerator.nextInt(26) + 'a');
+        }
+
+        regis.patientInformation.setAddress(random);
         regis.patientInformation.setCity("Tempe");
         regis.patientInformation.setState("AZ");
-        regis.patientInformation.setZipcode("85200");
-        regis.patientInformation.setEmail("luffy@au.edu");
-        regis.patientInformation.setHomePhone("13230932");
-        regis.patientInformation.setSsn("987654321");
-        regis.patientInformation.setInsurance("fight");
-        regis.patientInformation.setAge("21");
-        regis.patientInformation.setGender("male");
-        regis.setPassword("hiRyan");
+        random ="";
+        for(int i = 0; i< 5; i++)//zipcode
+        {
+            random += (char) (randomGenerator.nextInt(10) + '0');
+        }
+
+        regis.patientInformation.setZipcode(random);
+        regis.patientInformation.setEmail("new@asu.edu");
+        random ="";
+        for(int i = 0; i< 10; i++)//phone
+        {
+            random += (char) (randomGenerator.nextInt(10) + '0');
+        }
+        regis.patientInformation.setHomePhone(random);
+        random ="";
+        for(int i = 0; i < 9; i++)//SSN
+        {
+            random += (char) (randomGenerator.nextInt(10) + '0');
+        }
+        regis.patientInformation.setSsn(random);
+        random = "" + (char) (randomGenerator.nextInt(26) + 'A');
+        for(int i = 0; i< 10; i++)//insurance
+        {
+            random += (char) (randomGenerator.nextInt(26) + 'a');
+        }
+        regis.patientInformation.setInsurance(random);
+
+        int age = randomGenerator.nextInt(50);//age
+            random =Integer.toString(age);
+        regis.patientInformation.setAge(random);
+        regis.patientInformation.setGender("Male");
 
     }
         @Test
