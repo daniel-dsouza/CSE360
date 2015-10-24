@@ -18,6 +18,11 @@ public class Appointment {
     private String reason;
     private Patient patient;
 
+    public Appointment()
+    {
+        doctor = new Staff();
+        patient = new Patient();
+    }
     public String getDoctorName() {
         return doctor.getName();
     }
@@ -39,7 +44,7 @@ public class Appointment {
 
     public void setDoctor(Staff doctor) {
         this.doctor = doctor;
-        doctor = DoctorSQL.getStaffComplete(doctor);
+        this.doctor = DoctorSQL.getStaffComplete(doctor);
     }
 
     public Patient getPatient() {
@@ -48,7 +53,7 @@ public class Appointment {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
-       patient = PatientSQL.getPatientComplete(patient);
+       this.patient = PatientSQL.getPatientComplete(patient);
     }
 
     public String getDoctorSpec() {

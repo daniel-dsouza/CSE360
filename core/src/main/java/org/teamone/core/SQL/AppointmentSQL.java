@@ -6,6 +6,8 @@ package org.teamone.core.SQL;
  */
 
 import org.teamone.core.appointments.Appointment;
+import org.teamone.core.users.Doctor;
+import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
 import java.sql.*;
@@ -24,7 +26,7 @@ public class AppointmentSQL {
      * @return readMe
      */
     public static List<Appointment> viewAppointmentDoctor(Appointment readMe) {
-        List<Appointment> a1 = null;
+        List<Appointment> a1 = new ArrayList<Appointment>();
 
         try {
 
@@ -76,7 +78,7 @@ public class AppointmentSQL {
 
 
     public static List<Appointment> viewAppointmentPatient(Appointment readMe) {
-        List<Appointment>  a1 = null;
+        List<Appointment>  a1 = new ArrayList<Appointment>();
 
         try {
             int checker;
@@ -88,9 +90,9 @@ public class AppointmentSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int patID = readMe.getDoctorID();
+            int patID = readMe.getPatientID();
 
-            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID FROM appointment where staffID = ?");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID FROM appointment where patientID = ?");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
@@ -125,6 +127,66 @@ public class AppointmentSQL {
             close();
         }
             return a1;
+
+    }
+    public static List<Appointment> viewAppointmentAppt(Appointment readMe) {
+        List<Appointment>  a1 = new ArrayList<Appointment>();
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int appID = readMe.getAppointmentID();
+
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID, patientID FROM appointment where serialNumber = ?");
+            preparedStatement.setInt(1, appID);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();// ResultSet is initially before the first data set
+
+            do {
+
+
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+                int docID = resultSet.getInt("doctorID");
+                int patID = resultSet.getInt("patientID");
+                /*System.out.println("Date:\t" + date);
+                System.out.println("Time:\t" + time);
+                System.out.println("Reason:\t" + reason);
+                System.out.println("Doctor ID:\t" + docID);*///debugging
+                Patient temp = new Patient();
+                temp.setPatientID(patID);
+                readMe.setPatient(temp);
+
+                Doctor temp1 = new Doctor();
+                temp1.setStaffID(docID);
+                readMe.setDoctor(temp1);
+
+                readMe.setDate(date);
+                readMe.setTime(time);
+                readMe.setReason(reason);
+                readMe.setPatientID(patID);
+
+                a1.add(readMe);
+
+            }
+            while (resultSet.next()) ;
+        }
+        catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            readMe = null;
+        } finally {
+            close();
+        }
+        return a1;
 
     }
 
@@ -241,6 +303,55 @@ public class AppointmentSQL {
         }
         return readMe;
     }
+    public static Appointment editAppointmentAppt(Appointment readMe) {
+        Appointment  a1 =new Appointment();
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int appID = readMe.getAppointmentID();
+            int patID = readMe.getPatientID();
+            int docID = readMe.getDoctorID();
+            String date = readMe.getDate();
+            String time = readMe.getTime();
+            String reason = readMe.getReason();
+
+            String updateApp = "UPDATE appointment SET"
+                    + " date = ?, time = ?, reason = ?, doctorID = ?, patientID = ? WHERE serialNumber = ? ;";
+
+            preparedStatement = connect.prepareStatement(updateApp);
+            preparedStatement.setString(1, date);
+            preparedStatement.setString(2,time);
+            preparedStatement.setString(3, reason);
+            preparedStatement.setInt(4, docID);
+            preparedStatement.setInt(5,patID);
+            preparedStatement.setInt(6,appID);
+
+            checker = preparedStatement.executeUpdate();
+
+            if (checker == 0)
+                a1 = null;
+            else
+                a1 = readMe;
+        }
+        catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            readMe = null;
+        } finally {
+            close();
+        }
+        return a1;
+
+    }
+
     /**
      * Returns a list of patients
      * @param String: Find people
