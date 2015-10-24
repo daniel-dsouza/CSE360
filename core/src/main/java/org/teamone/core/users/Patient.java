@@ -11,8 +11,6 @@ public class Patient extends Person {
 
     private String occupation; //why do we care?
 
-
-
     public PatientInformation patientInformation;
     public HealthConditions healthConditions;
     public MedicalHistory medicalHistory;

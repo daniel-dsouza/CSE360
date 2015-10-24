@@ -157,7 +157,7 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
-            String mh = null;
+
 
             preparedStatement = connect.prepareStatement("SELECT p2.name, p2.emailID, p.medicalhistory, p.occupation, p.address, p.SSN, p.gender, p.insurance, p.age, p.phone, p.healthConditions  FROM patient p, person p2 where patientID = ? and userID = ?");
             preparedStatement.setInt(1, patient.getPatientID());
@@ -173,11 +173,20 @@ public class PatientSQL {
             patient.setPhone(resultSet.getString("p.phone"));
             patient.setName(resultSet.getString("p2.name"));
             patient.setEmail(resultSet.getString("p2.emailID"));
-            mh = resultSet.getString("medicalhistory");
-            patient.medicalHistory.toMapObj(mh);
+            String mh = resultSet.getString("p.medicalhistory");
+            if(mh ==null)
+            {
+                System.out.println("No medical history");
+            }
+            else
+                patient.medicalHistory.toMapObj(mh);
 
 
-            String hc = resultSet.getString("healthConditions");
+            String hc = resultSet.getString("p.healthConditions");
+            if(hc ==null)
+            {
+                System.out.println("No health conditions");
+            }else
             patient.healthConditions.toMapObj(hc);
 
 
@@ -395,6 +404,7 @@ public class PatientSQL {
                 Patient patient = new Patient();
                 patient.setName(rs.getString("name"));
                 patient.setPatientID(rs.getInt("userID"));
+                patient.setUserID(rs.getInt("userID"));
                 patientList.add(patient);
             }
 
@@ -407,7 +417,43 @@ public class PatientSQL {
         }
         return patientList;
     }
+    public static ArrayList<Patient> getAllPatient() {
 
+        ArrayList<Patient> PatientList = new ArrayList<Patient>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+            preparedStatement = connect.prepareStatement("select userID, name, password, emailID from person where occupation = ?;");
+            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+            preparedStatement.setString(1,"patient");
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Patient pers = new Patient();
+                pers.setUserID(rs.getInt("userID"));
+                pers.setPatientID(rs.getInt("userID"));
+
+                pers= PatientSQL.getPatientComplete(pers);
+                pers.setName(rs.getString("name"));
+                pers.setEmail(rs.getString("emailID"));
+                PatientList.add(pers);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            PatientList = null;
+
+        } finally {
+            close();
+        }
+        return PatientList;
+    }
     /**
      * Returns a list of patients based on doctors.
      * @param staff: Given a staff object
