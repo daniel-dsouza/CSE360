@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
 import org.teamone.core.labs.LabTestRequest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,34 +22,53 @@ import java.util.Map;
 @RequestMapping(value = "/**/request_test")
 public class RequestLabTestController {
 
+    @RequestMapping(method= RequestMethod.GET)
+    public String list (Map<String, Object> model,
+                        @ModelAttribute User user) {
+        List labRequestList = new ArrayList<LabTestRequest>(); //TODO: use CORE method.
+
+        LabTestRequest one = new LabTestRequest();
+        one.setRequestionID("001");
+
+        LabTestRequest two = new LabTestRequest();
+        one.setRequestionID("002");
+
+        labRequestList.add(one);
+        labRequestList.add(two);
+
+        model.put("list", labRequestList);
+        return "lab/listlabrequests";
+    }
+
     @RequestMapping(value = "/{id}/view", method = RequestMethod.GET)
     public String getList(Map<String, Object> model,
-                          @PathVariable String reportID,
+                          @PathVariable String id,
                           @ModelAttribute User user) {
         //they don't say they be who they are, but they don't
+        if(user.getPerson() == null)
+            return "redirect:/login";
         if(!user.getPerson().getOccupation().equals("Lab"))
             return "redirect:/user/" + user.person.getUserID();
 
-        LabTestRequest request = new LabTestRequest();
+        LabTestRequest request = new LabTestRequest(); //TODO: get request from database
         model.put("request", request);
-        return "lab/labtestrequest";
+        return "lab/editlabtestrequest";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String getList(Map<String, Object> model,
                           @ModelAttribute User user) {
-        //they don't say they be who they are, but they don't
-//        if(!user.getPerson().getOccupation().equals("Doctor"))
-//            return "redirect:/user/" + user.person.getUserID();
+        if(user.getPerson() == null)
+            return "redirect:/login";
 
         LabTestRequest request = new LabTestRequest();
         model.put("request", request);
-        return "lab/labtestrequest";
+        return "lab/editlabtestrequest";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String submitTest (Map<String, Object> model ) {
         //TODO: submit values to database.
-        return "lab/labtestrequest"; //TODO: send back to Select Patient.
+        return "auth/user"; //TODO: send back to Select Patient.
     }
 }

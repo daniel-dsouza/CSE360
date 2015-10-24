@@ -11,7 +11,7 @@ import java.util.TreeMap;
  */
 public class LabTestRequest {
 
-    private int requestionID;
+    private String requestionID;
     private Patient patient;
 
     private Map<String, Boolean> labTestRequest;
@@ -30,8 +30,8 @@ public class LabTestRequest {
     }
 
     public LabTestRequest() {
-        this(0, "");
-        this.requestionID = 0; //TODO: make this a random number.
+        this("0", "");
+        this.requestionID = "0"; //TODO: make this a random number.
     }
 
     @Override
@@ -43,7 +43,7 @@ public class LabTestRequest {
         return value;
     }
 
-    public LabTestRequest(int requestionID, String data) {
+    public LabTestRequest(String requestionID, String data) {
         this.requestionID = requestionID;
 
         labTestRequest = new TreeMap<String, Boolean>();
@@ -157,9 +157,9 @@ public class LabTestRequest {
 
     public void setLabTestRequest(Map<String, Boolean> labTestRequest) { this.labTestRequest = labTestRequest; }
 
-    public int getRequestionID() { return requestionID; }
+    public String getRequestionID() { return requestionID; }
 
-    public void setRequestionID(int requestionID) { this.requestionID = requestionID; }
+    public void setRequestionID(String requestionID) { this.requestionID = requestionID; }
 
     public Patient getPatient() { return patient; }
 

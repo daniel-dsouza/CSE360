@@ -1,3 +1,18 @@
-input {
+#page {
+    position: relative;
+    min-height: 100%;
+}
 
+#nav {
+    height: 55px;
+}
+
+#body {
+
+}
+
+#pagefooter {
+    padding-top: 1px;
+    height: 100px;
+    width: 100%;
 }
