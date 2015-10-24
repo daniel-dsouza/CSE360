@@ -15,6 +15,7 @@ public class LoginTest {
 
         test = new Person();
         test.setUserID(501);
+        test.setName("Dr. Ryan Ang");
         test.setPassword("go");
     }
 
@@ -34,5 +35,16 @@ public class LoginTest {
         else
             System.out.println("LOGIN FAILED");
         System.out.println(TestStrings.testEnd);
+
+        if(test!=null)
+        {
+            LoginSQL.getName(test.getUserID());
+            LoginSQL.getID(test.getName());
+
+        }
+
+
+
     }
+
 }

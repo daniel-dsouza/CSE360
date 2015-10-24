@@ -77,7 +77,9 @@ public class LoginSQL {
         return check;
 
     }
-    public static String getName(int userID) {
+
+
+    public static String getName(int patientID) {
 
         String username;
         try {
@@ -89,7 +91,7 @@ public class LoginSQL {
 
 
             preparedStatement = connect.prepareStatement("SELECT name from person WHERE userID = ?");
-            preparedStatement.setInt(1,userID);
+            preparedStatement.setInt(1,patientID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             username = resultSet.getString("name");
@@ -106,6 +108,35 @@ public class LoginSQL {
         return username;
 
     }
+
+    public static int getID(String patientName) {
+
+        int userID;
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql with root and pass");
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            preparedStatement = connect.prepareStatement("SELECT userID from person WHERE name = ?");
+            preparedStatement.setString(1,patientName);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            userID = resultSet.getInt("userID");
+            System.out.println("UserID is " + userID);
+
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            userID = 0;
+        } finally {
+            close();
+        }
+        return userID;
+
+    }
+
 
     private static boolean verify(ResultSet resultSet, String pass) throws SQLException {
         // ResultSet is initially before the first data set
