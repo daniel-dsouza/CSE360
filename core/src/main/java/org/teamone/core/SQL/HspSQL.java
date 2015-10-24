@@ -65,8 +65,8 @@ public class HspSQL {
             //INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES (1232, 'Ry;an', 'doctor', 'temporary', 'ryan@asu.edu');
 
             String insertTablePatient = "INSERT INTO patient"
-                    + "(patientID, occupation, address, SSN, gender, insurance, age, phone) VALUES"
-                    + "(?,?,?,?,?,?,?,?)";
+                    + "(patientID, occupation, address, SSN, gender, insurance, age, phone, medicalHistory, healthConditions) VALUES"
+                    + "(?,?,?,?,?,?,?,?,?,?)";
 
             preparedStatementPatient = connect.prepareStatement(insertTablePatient);
 
@@ -80,6 +80,8 @@ public class HspSQL {
             preparedStatementPatient.setString(6, insurance);
             preparedStatementPatient.setString(7, age);
             preparedStatementPatient.setString(8, phone);
+            preparedStatementPatient.setString(9, patient.healthConditions.toString());
+            preparedStatementPatient.setString(10, patient.medicalHistory.toString());
             checker = preparedStatementPatient.executeUpdate();
 
             System.out.println("checker1=============="+checker);

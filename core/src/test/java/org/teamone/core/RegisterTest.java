@@ -30,7 +30,8 @@ public class RegisterTest {
         String lastRNG = Integer.toString(randomInt);//lastname
         regis.patientInformation.setFirstName(firstRNG);
         regis.patientInformation.setLastName(lastRNG);
-
+        firstRNG += "@asu.edu";
+        regis.patientInformation.setEmail(firstRNG);
        String random = "" + (char) (randomGenerator.nextInt(26) + 'A');
         for(int i = 0; i< 10; i++)//address
         {
@@ -47,16 +48,26 @@ public class RegisterTest {
         }
 
         regis.patientInformation.setZipcode(random);
-        regis.patientInformation.setEmail("new@asu.edu");
+
         random ="";
-        for(int i = 0; i< 10; i++)//phone
+        for(int i = 0; i< 10; i++)//phone (480)-748-7374
         {
+            if( i==0)
+                random +="(";
+            if( i==3)
+                random +=")-";
+            if( i==6)
+                random +="-";
             random += (char) (randomGenerator.nextInt(10) + '0');
         }
         regis.patientInformation.setHomePhone(random);
         random ="";
-        for(int i = 0; i < 9; i++)//SSN
+        for(int i = 0; i < 9; i++)//SSN 000-00-0000
         {
+            if( i==3)
+                random +="-";
+            if( i==5)
+                random +="-";
             random += (char) (randomGenerator.nextInt(10) + '0');
         }
         regis.patientInformation.setSsn(random);
@@ -70,7 +81,13 @@ public class RegisterTest {
         int age = randomGenerator.nextInt(50);//age
             random =Integer.toString(age);
         regis.patientInformation.setAge(random);
-        regis.patientInformation.setGender("Male");
+
+        String gender ="";
+        if((randomGenerator.nextInt(10)%2)==0)//even
+            gender ="Female";
+        else
+            gender = "Male";
+        regis.patientInformation.setGender(gender);
 
     }
         @Test
