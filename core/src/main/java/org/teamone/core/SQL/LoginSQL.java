@@ -95,7 +95,8 @@ public class LoginSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             username = resultSet.getString("name");
-            System.out.println("Name is " + username);
+            System.out.println("Received User id: " + patientID);
+            System.out.println("The Name is: " + username);
 
 
 
@@ -119,11 +120,13 @@ public class LoginSQL {
             System.out.println("\nTrying to connect to mysql with root and pass");
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
             preparedStatement = connect.prepareStatement("SELECT userID from person WHERE name = ?");
-            preparedStatement.setString(1,patientName);
+            preparedStatement.setString(1, patientName);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             userID = resultSet.getInt("userID");
+            System.out.println("Received name: " + patientName);
             System.out.println("UserID is:" + userID);
+
 
 
 
