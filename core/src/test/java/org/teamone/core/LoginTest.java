@@ -43,6 +43,12 @@ public class LoginTest {
 
         }
 
+        else
+        {
+            System.out.println(" getName or getID FAILED");
+
+        }
+
 
 
     }

@@ -123,7 +123,7 @@ public class LoginSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             userID = resultSet.getInt("userID");
-            System.out.println("UserID is " + userID);
+            System.out.println("UserID is:" + userID);
 
 
 
