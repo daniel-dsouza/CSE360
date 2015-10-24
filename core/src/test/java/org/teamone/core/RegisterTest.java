@@ -22,20 +22,72 @@ public class RegisterTest {
         regis = new Patient();
         Random randomGenerator = new Random();
             int randomInt = randomGenerator.nextInt(1000);
-        String lastRNG = Integer.toString(randomInt);
-        regis.patientInformation.setFirstName("Random generator");
+        String firstRNG ="RNG ";
+        for(int i = 0; i< 10; i++)//firstName
+        {
+            firstRNG += (char) (randomGenerator.nextInt(26) + 'a');
+        }
+        String lastRNG = Integer.toString(randomInt);//lastname
+        regis.patientInformation.setFirstName(firstRNG);
         regis.patientInformation.setLastName(lastRNG);
-        regis.patientInformation.setAddress("Eastern Ocean");
+        firstRNG += "@asu.edu";
+        regis.patientInformation.setEmail(firstRNG);
+       String random = "" + (char) (randomGenerator.nextInt(26) + 'A');
+        for(int i = 0; i< 10; i++)//address
+        {
+            random += (char) (randomGenerator.nextInt(26) + 'a');
+        }
+
+        regis.patientInformation.setAddress(random);
         regis.patientInformation.setCity("Tempe");
         regis.patientInformation.setState("AZ");
-        regis.patientInformation.setZipcode("85200");
-        regis.patientInformation.setEmail("luffy@au.edu");
-        regis.patientInformation.setHomePhone("13230932");
-        regis.patientInformation.setSsn("987654321");
-        regis.patientInformation.setInsurance("fight");
-        regis.patientInformation.setAge("21");
-        regis.patientInformation.setGender("male");
-        regis.setPassword("hiRyan");
+        random ="";
+        for(int i = 0; i< 5; i++)//zipcode
+        {
+            random += (char) (randomGenerator.nextInt(10) + '0');
+        }
+
+        regis.patientInformation.setZipcode(random);
+
+        random ="";
+        for(int i = 0; i< 10; i++)//phone (480)-748-7374
+        {
+            if( i==0)
+                random +="(";
+            if( i==3)
+                random +=")-";
+            if( i==6)
+                random +="-";
+            random += (char) (randomGenerator.nextInt(10) + '0');
+        }
+        regis.patientInformation.setHomePhone(random);
+        random ="";
+        for(int i = 0; i < 9; i++)//SSN 000-00-0000
+        {
+            if( i==3)
+                random +="-";
+            if( i==5)
+                random +="-";
+            random += (char) (randomGenerator.nextInt(10) + '0');
+        }
+        regis.patientInformation.setSsn(random);
+        random = "" + (char) (randomGenerator.nextInt(26) + 'A');
+        for(int i = 0; i< 10; i++)//insurance
+        {
+            random += (char) (randomGenerator.nextInt(26) + 'a');
+        }
+        regis.patientInformation.setInsurance(random);
+
+        int age = randomGenerator.nextInt(50);//age
+            random =Integer.toString(age);
+        regis.patientInformation.setAge(random);
+
+        String gender ="";
+        if((randomGenerator.nextInt(10)%2)==0)//even
+            gender ="Female";
+        else
+            gender = "Male";
+        regis.patientInformation.setGender(gender);
 
     }
         @Test

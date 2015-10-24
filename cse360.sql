@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `password` varchar(100) NOT NULL,
   `emailID` varchar(100) NOT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1001 ;
 
 --
 -- Dumping data for table `person`
