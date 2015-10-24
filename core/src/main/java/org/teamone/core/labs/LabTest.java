@@ -7,8 +7,6 @@ import java.util.Date;
  */
 public class LabTest {
     private int patientID = 0;
-
-
     private int staffID = 0;
 
     private String testType;
