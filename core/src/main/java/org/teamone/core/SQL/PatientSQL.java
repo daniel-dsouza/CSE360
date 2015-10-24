@@ -171,8 +171,8 @@ public class PatientSQL {
             patient.setInsurance(resultSet.getString("p.insurance"));
             patient.setAge(resultSet.getString("p.age"));
             patient.setPhone(resultSet.getString("p.phone"));
-            patient.setName(resultSet.getString("person.name"));
-            patient.setEmail(resultSet.getString("person.email"));
+            patient.setName(resultSet.getString("p2.name"));
+            patient.setEmail(resultSet.getString("p2.emailID"));
             mh = resultSet.getString("medicalhistory");
             patient.medicalHistory.toMapObj(mh);
 
