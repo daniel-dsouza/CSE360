@@ -6,6 +6,8 @@ import org.teamone.core.SQL.HspSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 
+import java.util.Random;
+
 /**
  * Created by system on 10/22/15.
  */
@@ -18,8 +20,11 @@ public class RegisterTest {
     public void setUp() {
 
         regis = new Patient();
-        regis.patientInformation.setFirstName("newFirst");
-        regis.patientInformation.setLastName("nw");
+        Random randomGenerator = new Random();
+            int randomInt = randomGenerator.nextInt(1000);
+        String lastRNG = Integer.toString(randomInt);
+        regis.patientInformation.setFirstName("Random generator");
+        regis.patientInformation.setLastName(lastRNG);
         regis.patientInformation.setAddress("Eastern Ocean");
         regis.patientInformation.setCity("Tempe");
         regis.patientInformation.setState("AZ");

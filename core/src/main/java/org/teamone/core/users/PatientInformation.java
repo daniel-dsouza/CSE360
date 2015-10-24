@@ -127,7 +127,7 @@ public class PatientInformation {
     }
     public String toStringName()//to SQL
     {
-        name = lastName + ":" + firstName;
+        name = firstName + ":" + lastName;
         return name;
     }
     public void splitName(String nam)//from SQL
