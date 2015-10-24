@@ -3,7 +3,9 @@ package org.teamone.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.HspSQL;
+import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
+import org.teamone.core.users.Patient;
 import org.teamone.core.users.Person;
 import org.teamone.core.users.Staff;
 
@@ -41,6 +43,26 @@ public class zAdmin {
             System.out.println("SEARCH FAILED");
         System.out.println(TestStrings.testEnd);
 
+
+        ArrayList<Patient> patientArr = PatientSQL.getAllPatient();
+        System.out.println("\n======================================");
+        System.out.println("Getting all patients");
+        System.out.println("======================================");
+        if(patientArr!=null)
+        {
+
+            Patient temp;
+            for(int i = 0; i < patientArr.size(); i++) {
+                temp = patientArr.get(i);
+                System.out.println("Name: " + temp.getName());
+                System.out.println("Address: " + temp.getAddress());
+                System.out.println("SSN: " + temp.getSSN() + "\n");
+            }
+
+        }
+        else
+            System.out.println("SEARCH FAILED");
+        System.out.println(TestStrings.testEnd);
 
     }
 }
