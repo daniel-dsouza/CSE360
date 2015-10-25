@@ -18,7 +18,7 @@ public class AppointmentTester {
 
 
         update = new Appointment();
-        update.setPatientID(1000);
+        update.setPatientID(1001);
         update.setDoctorID(501);
         update.setReason("I want to see doctor");
         update.setTime("1:00 pm");
@@ -82,7 +82,7 @@ public class AppointmentTester {
         System.out.println(TestStrings.testEnd);
 
         //case 2, where user wants appoint through patientID
-        test.setPatientID(1000);
+        test.setPatientID(1001);
         System.out.println("\nTest========Viewing patient with patient ID");
         test1 = AppointmentSQL.viewAppointmentPatient(test);
         if(test1!=null)//view appoint returns a object Appointment
