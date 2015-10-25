@@ -1,7 +1,9 @@
 package org.teamone.core.labs;
 
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -11,9 +13,11 @@ import java.util.TreeMap;
  */
 public class LabTestRequest {
 
-    private String requestionID;
+    private int requestionID;
     private Patient patient;
-
+    private Staff staff;
+    private Date dateAndTime = null;
+    private String strDateAndTime;
     private Map<String, Boolean> labTestRequest;
     private Map<String, String> labTestRequestNames;
 
@@ -25,25 +29,55 @@ public class LabTestRequest {
         this.labTestRequest.put(test, state);
     }
 
-    public boolean isRequested(String test) {
-        return this.labTestRequest.get(test);
-    }
 
     public LabTestRequest() {
-        this("0", "");
-        this.requestionID = "0"; //TODO: make this a random number.
+        this(0, "");
+        this.requestionID = 0; //TODO: make this a random number.
+        patient = new Patient();
+        staff = new Staff();
+
     }
 
     @Override
     public String toString() {
         String value = "";
         for (String key : labTestRequest.keySet()) {
-            value += (key + ":" + labTestRequest.get(key) + ",");
+            value += (key + "," + labTestRequest.get(key) + ":");
         }
+        //System.out.println(value);
         return value;
+
+    }
+    public void toMapObj(String str){
+        Map<String, Boolean> labTestRequest = null;
+
+        String[] parts = str.split(":");
+        for(String temp2:parts)
+        {
+            String[] temp3 =  temp2.split(",");
+            boolean abcd = Boolean.parseBoolean(temp3[1]);
+            this.labTestRequest.put(temp3[0], abcd);
+        }
+
     }
 
-    public LabTestRequest(String requestionID, String data) {
+    public Date getDateAndTime() {
+        return dateAndTime;
+    }
+
+    public void setDateAndTime(Date dateAndTime) {
+        this.dateAndTime = dateAndTime;
+    }
+
+    public String getStrDateAndTime() {
+        return strDateAndTime;
+    }
+
+    public void setStrDateAndTime(String strDateAndTime) {
+        this.strDateAndTime = strDateAndTime;
+    }
+
+    public LabTestRequest(int requestionID, String data) {
         this.requestionID = requestionID;
 
         labTestRequest = new TreeMap<String, Boolean>();
@@ -157,13 +191,21 @@ public class LabTestRequest {
 
     public void setLabTestRequest(Map<String, Boolean> labTestRequest) { this.labTestRequest = labTestRequest; }
 
-    public String getRequestionID() { return requestionID; }
+    public int getRequestionID() { return requestionID; }
 
-    public void setRequestionID(String requestionID) { this.requestionID = requestionID; }
+    public void setRequestionID(int requestionID) { this.requestionID = requestionID; }
 
     public Patient getPatient() { return patient; }
 
     public void setPatient(Patient patientID) { this.patient = patientID; }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
 
     public Map<String, String> getLabTestRequestNames() { return labTestRequestNames; }
 

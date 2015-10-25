@@ -19,7 +19,6 @@ public class LabStaffTest {
         test = new LabTest();
         test.setPatientID(1001);
         test.setLabReport("Patient has negative results. The CT scan was clear.");
-        test.setTestType("CT Scan");
 
         Date dt = new Date();
         java.text.SimpleDateFormat sdf =
@@ -37,7 +36,6 @@ public class LabStaffTest {
 
             System.out.println("Update lab test successful");
             System.out.println("PatientID:\t" + test.getPatientID());
-            System.out.println("Lab Type:\t" + test.getTestType());
             System.out.println("Lab Report:\t" + test.getLabReport());
             System.out.println("Date:\t" + test.getStrDateAndTime());
 
@@ -53,7 +51,6 @@ public class LabStaffTest {
         {
             System.out.println("\nView successful");
             System.out.println("PatientID:\t" + test.getPatientID());
-            System.out.println("Lab Type:\t" + test.getTestType());
             System.out.println("Lab Report:\t" + test.getLabReport());
             System.out.println("Date:\t" + test.getStrDateAndTime());
 

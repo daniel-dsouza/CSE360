@@ -1,7 +1,9 @@
 package org.teamone.core.SQL;
 
 import org.teamone.core.labs.LabTest;
+import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +16,89 @@ public class LabTestSQL {
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
+
+    public static LabTestRequest viewLabRequest(LabTestRequest readMe) {
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int reqID = readMe.getRequestionID();
+
+            preparedStatement = connect.prepareStatement("SELECT labReport, date, patientID, staffID FROM labtest where serialNumber = ?");
+            preparedStatement.setInt(1, reqID);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();// ResultSet is initially before the first data set
+
+            String labReport = resultSet.getString("labReport");
+            String date = resultSet.getString("date");
+            int patID = resultSet.getInt("patientID");
+            int stafID = resultSet.getInt("staffID");
+
+            if (!date.equals("null") &&  !labReport.equals(null)) {
+                readMe.setStrDateAndTime(date);
+                readMe.toMapObj(labReport);
+                readMe.getPatient().setPatientID(patID);
+                readMe.getStaff().setStaffID(stafID);
+            }
+            else
+            {
+                System.out.println("===========EMPTY RESULT========RETURN NULL");
+                readMe = null;
+            }
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            readMe = null;
+        } finally {
+            close();
+        }
+        return readMe;
+
+    }
+    public static ArrayList<LabTestRequest> getAllLabRequests() {
+        ArrayList<LabTestRequest> LabTestRequestList = new ArrayList<LabTestRequest>();
+
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+
+            preparedStatement = connect.prepareStatement("SELECT serialNumber, labReport, date, patientID, staffID FROM labtest");
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                LabTestRequest new1 = new LabTestRequest();
+                new1.setRequestionID(resultSet.getInt("serialNumber"));
+                new1.toMapObj(resultSet.getString("labReport"));
+                Patient pat = new Patient();
+                pat.setPatientID(resultSet.getInt("patientID"));
+                new1.setPatient(PatientSQL.getPatientComplete(pat));
+                Staff sta = new Staff();
+                sta.setStaffID(resultSet.getInt("staffID"));
+                new1.setStaff(DoctorSQL.getStaffComplete(sta));
+                LabTestRequestList.add(new1);
+            }
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            LabTestRequestList = null;
+        } finally {
+            close();
+        }
+        return LabTestRequestList;
+
+    }
 
     public static LabTest viewLabTest(LabTest readMe) {
         try {
