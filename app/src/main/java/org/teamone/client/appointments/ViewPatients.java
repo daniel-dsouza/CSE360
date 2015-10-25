@@ -26,10 +26,11 @@ public class ViewPatients {
         //this is an example of a model attribute
         ArrayList<Patient> patientList = new ArrayList<Patient>();
         patientList = PatientSQL.getAllPatient();
-        
+
         model.put("patientList", patientList);
 
         System.out.println(model); //debug statement
         return "appointment/ViewAppt"; //return the view with linked model
 
+    }
 }
