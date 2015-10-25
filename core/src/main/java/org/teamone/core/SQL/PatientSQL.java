@@ -459,7 +459,7 @@ public class PatientSQL {
      * @param staff: Given a staff object
      * @return ArrayList: List of Patients
      */
-    public ArrayList<Patient> getPatientByStaff (Staff staff) {
+    public static ArrayList<Patient> getPatientByStaff (Staff staff) {
         //TODO: getPatientByStaff
         return null;
     }

@@ -5,9 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.teamone.client.generic.User;
 import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.appointments.Appointment;
+import org.teamone.core.users.Doctor;
+import org.teamone.core.users.HSP;
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -22,10 +26,21 @@ import java.util.Map;
 public class ViewPatients {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String viewUserHome(Map<String, Object> model) {
+    public String viewUserHome(Map<String, Object> model,
+                               @ModelAttribute("user") User user) {
         //this is an example of a model attribute
         ArrayList<Patient> patientList = new ArrayList<Patient>();
-        patientList = PatientSQL.getAllPatient();
+        if (user.person instanceof HSP)
+            patientList = PatientSQL.getAllPatient();
+        else if (user.person instanceof Doctor)
+        {
+            Staff temp = new Staff();
+            temp.setStaffID(user.person.getUserID());
+            patientList = PatientSQL.getPatientByStaff(temp); //getPatientByStaff not complete
+
+        }
+        else
+            return "redirect:/login";
 
         model.put("patientList", patientList);
 
@@ -33,4 +48,5 @@ public class ViewPatients {
         return "appointment/ViewAppt"; //return the view with linked model
 
     }
+
 }
