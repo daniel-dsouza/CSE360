@@ -22,7 +22,7 @@ public class Patient extends Person {
         healthConditions = new HealthConditions();
         medicalHistory = new MedicalHistory();
         prescription = new Prescription();
-        labReports = new LabTest();
+
     }
 
     public int getPatientID() {

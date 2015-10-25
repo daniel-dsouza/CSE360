@@ -1,36 +1,46 @@
 package org.teamone.core.prescriptions;
 
+import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
+
 import java.util.Date;
 
 /**
  * Created by daniel on 10/11/15.
  */
 public class Prescription {
-    private int patientID;
-
-    public int getStaffID() {
-        return staffID;
-    }
-
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
-    }
-
-    private int staffID;
+    private Patient patient;
+    private int prescriptionID = 0;
+    private Staff doctor;
     private String prescriptionType;
-    private String quantity;
     private Date dateAndTime;
     private String strDateAndTime;
 
     public Prescription() {
     }
 
+    public int getStaffID() {
+        return doctor.getStaffID();
+    }
+
+    public void setStaffID(int staffID) {
+        this.doctor.setStaffID(staffID);
+    }
+
+    public int getPrescriptionID() {
+        return prescriptionID;
+    }
+
+    public void setPrescriptionID(int prescriptionID) {
+        this.prescriptionID = prescriptionID;
+    }
+
     public int getPatientID() {
-        return patientID;
+        return patient.getPatientID();
     }
 
     public void setPatientID(int patientID) {
-        this.patientID = patientID;
+        this.patient.setPatientID(patientID);
     }
 
     public String getPrescriptionType() {
@@ -41,13 +51,6 @@ public class Prescription {
         this.prescriptionType = prescriptionType;
     }
 
-    public String getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
 
     public Date getDateAndTime() {
         return dateAndTime;

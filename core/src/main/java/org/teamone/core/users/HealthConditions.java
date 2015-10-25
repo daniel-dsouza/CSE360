@@ -44,7 +44,7 @@ public class HealthConditions {
             temp=entry.getKey()+","+entry.getValue()+":";
             str = str.concat(temp);
         }
-        System.out.println(str);
+        //System.out.println(str);
         return str;
     }
 

@@ -25,7 +25,7 @@ public class StaffListTest {
 
     @Test
     public void helpM() {
-        ArrayList<Staff> testArr = DoctorSQL.getListDoctorSpecialty("Pediatrician");
+        ArrayList<Staff> testArr = DoctorSQL.getListDoctorSpecialty("Emergency");
         System.out.println("\nTest========Searching for Staff members 'Pediatrician' ");
         if(testArr!=null)
         {

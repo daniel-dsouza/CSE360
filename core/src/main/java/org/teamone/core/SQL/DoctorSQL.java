@@ -1,6 +1,7 @@
 package org.teamone.core.SQL;
 
 import org.teamone.core.labs.LabTest;
+import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
@@ -19,6 +20,7 @@ public class DoctorSQL {
 
 
     /**
+     *
      * @param Prescription patient: Prescription to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
@@ -38,13 +40,12 @@ public class DoctorSQL {
             // PreparedStatements can use variables and are more efficient
             //String mh = patient.toString();
 
-            preparedStatement = connect.prepareStatement("INSERT into prescription set patientID = ?, staffID = ?, type = ?, quantity = ? , date = ?");
+            preparedStatement = connect.prepareStatement("INSERT into prescription set patientID = ?, staffID = ?, type = ?, date = ?");
 
             preparedStatement.setInt(1, patient.getPatientID());
             preparedStatement.setInt(2, patient.getStaffID());
             preparedStatement.setString(3, patient.getPrescriptionType());
-            preparedStatement.setString(4, patient.getQuantity());
-            preparedStatement.setString(5, patient.getStrDateAndTime());
+            preparedStatement.setString(4, patient.getStrDateAndTime());
             checker = preparedStatement.executeUpdate();
 
             if (checker == 0)
@@ -63,6 +64,7 @@ public class DoctorSQL {
 
 
     /**
+     *
      * @param Patient p: given a patient with a valid patientID.
      * @return ArrayList of Prescriptions corresponding to Patient
      */
@@ -100,6 +102,49 @@ public class DoctorSQL {
 
 
     /**
+     *
+     * @param LabtestRequest test: LabTestRequest to be added.
+     * @return true or false: True if insert into SQL success. false otherwise
+     */
+    public static Boolean addLabRequest(LabTestRequest test) {
+        //only use INSERT sql.
+        boolean boolResult;
+        String temp = null;
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+
+           preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labReport = ? , date = ?");
+            preparedStatement.setInt(1, test.getPatient().getPatientID());
+            preparedStatement.setInt(2, test.getStaff().getStaffID());
+            preparedStatement.setString(3, test.toString());
+            preparedStatement.setString(4, test.getStrDateAndTime());
+            checker = preparedStatement.executeUpdate();
+
+            if (checker == 0)
+                boolResult = false;
+            else
+                boolResult = true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            boolResult = false;
+        } finally {
+            close();
+        }
+        return boolResult;
+    }
+
+    /**
+     *
      * @param Labtest patient: LabTest to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
@@ -117,15 +162,14 @@ public class DoctorSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            //String mh = patient.toString();
 
-            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labType = ?, labReport = ? , date = ?");
 
-            preparedStatement.setInt(1, patient.getPatientID());
-            preparedStatement.setInt(2, patient.getStaffID());
-            preparedStatement.setString(3, patient.getTestType());
-            preparedStatement.setString(4, patient.getLabReport());
-            preparedStatement.setString(5, patient.getStrDateAndTime());
+            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labReport = ? , date = ?");
+
+            preparedStatement.setInt(1, patient.getPatient().getPatientID());
+            preparedStatement.setInt(2, patient.getStaff().getStaffID());
+            preparedStatement.setString(3, patient.toString());
+            preparedStatement.setString(4, patient.getDate());
             checker = preparedStatement.executeUpdate();
 
             if (checker == 0)
@@ -143,20 +187,21 @@ public class DoctorSQL {
     }
 
 
+
+
     /**
      * Method returns a list doctors.
-     *
      * @param String: Specialty to find in sql
      * @return ArrayList: Arraylist of staff objects
      */
-    public static ArrayList<Staff> getListDoctorSpecialty(String specialty) {
+    public static ArrayList<Staff> getListDoctorSpecialty (String specialty) {
         ArrayList<Staff> arrayOfDoctors = new ArrayList<Staff>();
         try {
             int checker, checker2;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\n\nTrying to connect to mysql with root and pass\n");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             //String specialty = staff.getSpecialty();
@@ -165,7 +210,7 @@ public class DoctorSQL {
             preparedStatement.setString(1, specialty);
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
+            while(resultSet.next()) {
                 //Retrieve by column name
 
                 Staff newStaff = new Staff();
@@ -183,26 +228,6 @@ public class DoctorSQL {
         return arrayOfDoctors;
 
     }
-
-    // You need to close the resultSet
-    private static void close() {
-        try {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (statement != null) {
-                statement.close();
-            }
-
-            if (connect != null) {
-                connect.close();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
     public static Staff getStaffComplete(Staff staff) {
         //Staff staff = null;
         String temp = null;
@@ -237,4 +262,24 @@ public class DoctorSQL {
         }
         return staff;
     }
+
+    // You need to close the resultSet
+    private static void close() {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            if (connect != null) {
+                connect.close();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 }

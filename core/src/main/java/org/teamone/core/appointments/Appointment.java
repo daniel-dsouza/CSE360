@@ -53,7 +53,7 @@ public class Appointment {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
-       this.patient = PatientSQL.getPatientComplete(patient);
+        this.patient = PatientSQL.getPatientComplete(patient);
     }
 
     public String getDoctorSpec() {
@@ -107,3 +107,4 @@ public class Appointment {
     }
 
 }
+

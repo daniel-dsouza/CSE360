@@ -28,10 +28,10 @@ public class RequestLabTestController {
         List labRequestList = new ArrayList<LabTestRequest>(); //TODO: use CORE method.
 
         LabTestRequest one = new LabTestRequest();
-        one.setRequestionID("001");
+        one.setRequestionID(1);
 
         LabTestRequest two = new LabTestRequest();
-        one.setRequestionID("002");
+        one.setRequestionID(2);
 
         labRequestList.add(one);
         labRequestList.add(two);

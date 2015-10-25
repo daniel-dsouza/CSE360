@@ -5,12 +5,9 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.HspSQL;
 import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
-
-import java.util.ArrayList;
 
 public class PatientUpdateInfoTest {
 
