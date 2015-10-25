@@ -25,9 +25,8 @@ public class ViewPatients {
     public String viewUserHome(Map<String, Object> model) {
         //this is an example of a model attribute
         ArrayList<Patient> patientList = new ArrayList<Patient>();
-        patientList = PatientSQL.getPatientList();
-
-
+        patientList = PatientSQL.getAllPatient();
+        
         model.put("patientList", patientList);
 
         System.out.println(model); //debug statement
