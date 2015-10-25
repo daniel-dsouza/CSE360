@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.PersonUtils;
 import org.teamone.core.users.Staff;
 //import org.teamone.client.generic.User;
 
@@ -24,7 +23,7 @@ public class AppointmentListController {
 
     @RequestMapping(method = RequestMethod.GET)
     void findPatients(Map<String, Object> model, @PathVariable String userID) {
-        ArrayList<Patient> patientList = new ArrayList<Patient>(); //Hashing strikes again.
+        List<Appointment> patientList; //Hashing strikes again.
         System.out.println(userID + "this works"); //DEBUG statements
         //TODO: get user appointments from the path variable.
         Appointment temp = new Appointment();
