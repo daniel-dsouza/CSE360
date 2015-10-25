@@ -17,7 +17,7 @@ public class LabStaffTest {
     public void setUp() {
 
         test = new LabTest();
-        test.setPatientID(1000);
+        test.setPatientID(1001);
         test.setLabReport("Patient has negative results. The CT scan was clear.");
         test.setTestType("CT Scan");
 

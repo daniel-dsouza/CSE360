@@ -24,7 +24,7 @@ public class LoginSQL {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
@@ -86,7 +86,7 @@ public class LoginSQL {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
 
@@ -117,7 +117,7 @@ public class LoginSQL {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
             preparedStatement = connect.prepareStatement("SELECT userID from person WHERE name = ?");
             preparedStatement.setString(1, patientName);
