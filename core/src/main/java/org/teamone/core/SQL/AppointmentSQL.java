@@ -6,10 +6,13 @@ package org.teamone.core.SQL;
  */
 
 import org.teamone.core.appointments.Appointment;
+import org.teamone.core.users.Doctor;
+import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class AppointmentSQL {
@@ -19,32 +22,36 @@ public class AppointmentSQL {
     private static ResultSet resultSet = null;
 
     /**
-     *
      * @param readMe Appointment Object to select information from database
      * @return readMe
      */
-    public static Appointment viewAppointmentDoctor(Appointment readMe) {
+    public static List<Appointment> viewAppointmentDoctor(Appointment readMe) {
+        List<Appointment> a1 = new ArrayList<Appointment>();
+
         try {
+
             int checker;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
-
             preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID FROM appointment where doctorID = ?");
             preparedStatement.setInt(1, docID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
-            String date = resultSet.getString("date");
-            String time = resultSet.getString("time");
-            String reason = resultSet.getString("reason");
-            int patID = resultSet.getInt("patientID");
-            if (!date.equals("null") &&  !time.equals(null) && !reason.equals("null") && patID != 0) {
+
+            do {
+
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+                int patID = resultSet.getInt("patientID");
+
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
                 System.out.println("Reason:\t" + reason);
@@ -54,12 +61,10 @@ public class AppointmentSQL {
                 readMe.setTime(time);
                 readMe.setReason(reason);
                 readMe.setPatientID(patID);
-            }
-            else
-            {
-                System.out.println("===========EMPTY RESULT========RETURN NULL");
-                readMe = null;
-            }
+
+                a1.add(readMe);
+
+            } while (resultSet.next());
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
@@ -67,22 +72,20 @@ public class AppointmentSQL {
         } finally {
             close();
         }
-        return readMe;
-
+        return a1;
     }
 
-    /**
-     *
-     * @param readMe Appointment Object to select information from database
-     * @return
-     */
-    public static Appointment viewAppointmentPatient(Appointment readMe) {
+
+
+    public static List<Appointment> viewAppointmentPatient(Appointment readMe) {
+        List<Appointment>  a1 = new ArrayList<Appointment>();
+
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
@@ -94,34 +97,96 @@ public class AppointmentSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
 
-            String date = resultSet.getString("date");
-            String time = resultSet.getString("time");
-            String reason = resultSet.getString("reason");
-            int docID = resultSet.getInt("doctorID");
-            if (!date.equals("null") &&  !time.equals(null) && !reason.equals("null") && patID != 0) {
+            do {
+
+
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+                int docID = resultSet.getInt("doctorID");
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
                 System.out.println("Reason:\t" + reason);
                 System.out.println("Doctor ID:\t" + docID);*///debugging
 
-                readMe.setDate(date);
-                readMe.setTime(time);
-                readMe.setReason(reason);
-                readMe.setPatientID(docID);
+                    readMe.setDate(date);
+                    readMe.setTime(time);
+                    readMe.setReason(reason);
+                    readMe.setPatientID(docID);
+
+                    a1.add(readMe);
+
+                }
+                while (resultSet.next()) ;
             }
-            else
-            {
-                System.out.println("===========EMPTY RESULT========RETURN NULL");
-                readMe = null;
-            }
-        } catch (Exception e) {
+          catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
             readMe = null;
         } finally {
             close();
         }
-        return readMe;
+            return a1;
+
+    }
+    public static List<Appointment> viewAppointmentAppt(Appointment readMe) {
+        List<Appointment>  a1 = new ArrayList<Appointment>();
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int appID = readMe.getAppointmentID();
+
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID, patientID FROM appointment where serialNumber = ?");
+            preparedStatement.setInt(1, appID);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();// ResultSet is initially before the first data set
+
+            do {
+
+
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+                int docID = resultSet.getInt("doctorID");
+                int patID = resultSet.getInt("patientID");
+                /*System.out.println("Date:\t" + date);
+                System.out.println("Time:\t" + time);
+                System.out.println("Reason:\t" + reason);
+                System.out.println("Doctor ID:\t" + docID);*///debugging
+                Patient temp = new Patient();
+                temp.setPatientID(patID);
+                readMe.setPatient(temp);
+
+                Doctor temp1 = new Doctor();
+                temp1.setStaffID(docID);
+                readMe.setDoctor(temp1);
+
+                readMe.setDate(date);
+                readMe.setTime(time);
+                readMe.setReason(reason);
+                readMe.setPatientID(patID);
+
+                a1.add(readMe);
+
+            }
+            while (resultSet.next()) ;
+        }
+        catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            readMe = null;
+        } finally {
+            close();
+        }
+        return a1;
 
     }
 
@@ -136,7 +201,7 @@ public class AppointmentSQL {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
@@ -193,7 +258,7 @@ public class AppointmentSQL {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
@@ -238,6 +303,55 @@ public class AppointmentSQL {
         }
         return readMe;
     }
+    public static Appointment editAppointmentAppt(Appointment readMe) {
+        Appointment  a1 =new Appointment();
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int appID = readMe.getAppointmentID();
+            int patID = readMe.getPatientID();
+            int docID = readMe.getDoctorID();
+            String date = readMe.getDate();
+            String time = readMe.getTime();
+            String reason = readMe.getReason();
+
+            String updateApp = "UPDATE appointment SET"
+                    + " date = ?, time = ?, reason = ?, doctorID = ?, patientID = ? WHERE serialNumber = ? ;";
+
+            preparedStatement = connect.prepareStatement(updateApp);
+            preparedStatement.setString(1, date);
+            preparedStatement.setString(2,time);
+            preparedStatement.setString(3, reason);
+            preparedStatement.setInt(4, docID);
+            preparedStatement.setInt(5,patID);
+            preparedStatement.setInt(6,appID);
+
+            checker = preparedStatement.executeUpdate();
+
+            if (checker == 0)
+                a1 = null;
+            else
+                a1 = readMe;
+        }
+        catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            readMe = null;
+        } finally {
+            close();
+        }
+        return a1;
+
+    }
+
     /**
      * Returns a list of patients
      * @param String: Find people
@@ -250,7 +364,7 @@ public class AppointmentSQL {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql with root and pass");
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             preparedStatement = connect.prepareStatement("select userID from person where name = ?");
