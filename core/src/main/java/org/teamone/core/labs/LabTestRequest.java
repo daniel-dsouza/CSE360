@@ -33,10 +33,7 @@ public class LabTestRequest {
     public LabTestRequest() {
         this(0, "");
         this.requestionID = 0; //TODO: make this a random number.
-        patient = new Patient();
-        staff = new Staff();
-
-    }
+     }
 
     @Override
     public String toString() {
@@ -79,6 +76,12 @@ public class LabTestRequest {
 
     public LabTestRequest(int requestionID, String data) {
         this.requestionID = requestionID;
+        patient = new Patient();
+        staff = new Staff();
+        dateAndTime= new java.util.Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        strDateAndTime = sdf.format(dateAndTime);
 
         labTestRequest = new TreeMap<String, Boolean>();
         labTestRequestNames = new TreeMap<String, String>();

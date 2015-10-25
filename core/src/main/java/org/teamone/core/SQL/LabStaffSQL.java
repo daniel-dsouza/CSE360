@@ -24,9 +24,9 @@ public class LabStaffSQL {
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
-            int patID = readMe.getPatientID();
-            String labReport = readMe.getLabReport();
-            String dateString = readMe.getStrDateAndTime();
+            int patID = readMe.getPatient().getPatientID();
+            String labReport = readMe.toString();
+            String dateString = readMe.getDate();
 
 
             String updateLab = "UPDATE labtest SET"

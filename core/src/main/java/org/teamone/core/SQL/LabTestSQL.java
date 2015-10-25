@@ -111,7 +111,7 @@ public class LabTestSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int patID = readMe.getPatientID();
+            int patID = readMe.getPatient().getPatientID();
 
             preparedStatement = connect.prepareStatement("SELECT labReport, date FROM labtest where patientID = ?");
             preparedStatement.setInt(1, patID);
@@ -127,8 +127,8 @@ public class LabTestSQL {
                 System.out.println("Reason:\t" + reason);
                 System.out.println("Doctor ID:\t" + docID);*///debugging
 
-                readMe.setStrDateAndTime(date);
-                readMe.setLabReport(labReport);
+                readMe.setDate(date);
+                readMe.toMapObj(labReport);
             }
             else
             {

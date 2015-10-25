@@ -7,8 +7,6 @@ import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.labs.LabTest;
 
-import java.util.Date;
-
 public class LabStaffTest {
 
     private LabTest test;
@@ -17,14 +15,8 @@ public class LabStaffTest {
     public void setUp() {
 
         test = new LabTest();
-        test.setPatientID(1001);
-        test.setLabReport("Patient has negative results. The CT scan was clear.");
-
-        Date dt = new Date();
-        java.text.SimpleDateFormat sdf =
-                new java.text.SimpleDateFormat("yyyy-MM-dd");
-        String time = sdf.format(dt);
-        test.setStrDateAndTime(time);
+        test.getPatient().setPatientID(1001);
+        test.toMapObj("potassium,Patient has enough potassium:");
 
     }
 
@@ -35,9 +27,9 @@ public class LabStaffTest {
         {
 
             System.out.println("Update lab test successful");
-            System.out.println("PatientID:\t" + test.getPatientID());
-            System.out.println("Lab Report:\t" + test.getLabReport());
-            System.out.println("Date:\t" + test.getStrDateAndTime());
+            System.out.println("PatientID:\t" + test.getPatient().getPatientID());
+            System.out.println("Lab Report:\t" + test.toString());
+            System.out.println("Date:\t" + test.getDate());
 
 
         }
@@ -50,9 +42,9 @@ public class LabStaffTest {
         if(LabTestSQL.viewLabTest(test)!=null)
         {
             System.out.println("\nView successful");
-            System.out.println("PatientID:\t" + test.getPatientID());
-            System.out.println("Lab Report:\t" + test.getLabReport());
-            System.out.println("Date:\t" + test.getStrDateAndTime());
+            System.out.println("PatientID:\t" + test.getPatient().getPatientID());
+            System.out.println("Lab Report:\t" + test.toString());
+            System.out.println("Date:\t" + test.getDate());
 
         }
         else

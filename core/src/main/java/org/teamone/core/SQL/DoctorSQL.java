@@ -120,11 +120,7 @@ public class DoctorSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            java.util.Date dt = new java.util.Date();
-            java.text.SimpleDateFormat sdf =
-                    new java.text.SimpleDateFormat("yyyy-MM-dd");
-            String time = sdf.format(dt);
-            test.setStrDateAndTime(time);
+
 
            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labReport = ? , date = ?");
             preparedStatement.setInt(1, test.getPatient().getPatientID());
@@ -170,10 +166,10 @@ public class DoctorSQL {
 
             preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labReport = ? , date = ?");
 
-            preparedStatement.setInt(1, patient.getPatientID());
-            preparedStatement.setInt(2, patient.getStaffID());
-            preparedStatement.setString(3, patient.getLabReport());
-            preparedStatement.setString(4, patient.getStrDateAndTime());
+            preparedStatement.setInt(1, patient.getPatient().getPatientID());
+            preparedStatement.setInt(2, patient.getStaff().getStaffID());
+            preparedStatement.setString(3, patient.toString());
+            preparedStatement.setString(4, patient.getDate());
             checker = preparedStatement.executeUpdate();
 
             if (checker == 0)
