@@ -2,13 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<t:userpage>
-    <jsp:attribute name="nav">
-        <jsp:include page="/WEB-INF/jsp/generic/navbar.jsp"/>
-    </jsp:attribute>
-    <jsp:attribute name="footer">
-        <jsp:include page="../generic/footer.jsp"/>
-    </jsp:attribute>
+<t:template>
   <jsp:body>
     <div class="container-fluid">
       <div class="jumbotron" style="background-color: deepskyblue">
@@ -17,6 +11,6 @@
       </div>
     </div>
   </jsp:body>
-</t:userpage>
+</t:template>
 
 

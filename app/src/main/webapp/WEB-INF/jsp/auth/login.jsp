@@ -5,17 +5,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
-<t:userpage>
+<t:template>
     <jsp:attribute name="head">
         <script type="text/javascript" src="<c:url value="/webjars/jquery-maskedinput/1.4.0/jquery.maskedinput.min.js" />"></script>
-    </jsp:attribute>
-
-    <jsp:attribute name="nav">
-        <jsp:include page="/WEB-INF/jsp/generic/navbar.jsp"/>
-    </jsp:attribute>
-
-    <jsp:attribute name="footer">
-        <jsp:include page="../generic/footer.jsp"/>
     </jsp:attribute>
 
     <jsp:body>
@@ -50,4 +42,4 @@
             </div>
         </form:form>
     </jsp:body>
-</t:userpage>
+</t:template>

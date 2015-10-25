@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
-<t:userpage>
+<t:template>
     <jsp:attribute name="head">
         <script type="text/javascript" src="js/alerts.js"></script>
         <script type="text/javascript">
@@ -18,17 +18,9 @@
         </script>
     </jsp:attribute>
 
-    <jsp:attribute name="nav">
-        <jsp:include page="/WEB-INF/jsp/generic/navbar.jsp"/>
-    </jsp:attribute>
-
-    <jsp:attribute name="footer">
-        <jsp:include page="../generic/footer.jsp"/>
-    </jsp:attribute>
-
-  <jsp:body>
+    <jsp:body>
     <div class="container-fluid" id="target">
 
     </div>
-  </jsp:body>
-</t:userpage>
+    </jsp:body>
+</t:template>
