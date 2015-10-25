@@ -31,7 +31,7 @@ public class LabTestRequest {
 
 
     public LabTestRequest() {
-        this(0, "");
+        this(0, "", null, null);
         this.requestionID = 0; //TODO: make this a random number.
      }
 
@@ -74,10 +74,11 @@ public class LabTestRequest {
         this.strDateAndTime = strDateAndTime;
     }
 
-    public LabTestRequest(int requestionID, String data) {
+    public LabTestRequest(int requestionID, String data, Patient pat, Staff sta) {
         this.requestionID = requestionID;
-        patient = new Patient();
-        staff = new Staff();
+        patient = pat;
+        staff = sta;
+
         dateAndTime= new java.util.Date();
         java.text.SimpleDateFormat sdf =
                 new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
