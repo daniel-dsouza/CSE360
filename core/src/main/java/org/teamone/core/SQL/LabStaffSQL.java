@@ -25,33 +25,30 @@ public class LabStaffSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             int patID = readMe.getPatientID();
-            String labTest = readMe.getTestType();
             String labReport = readMe.getLabReport();
             String dateString = readMe.getStrDateAndTime();
 
 
             String updateLab = "UPDATE labtest SET"
-                    + " labType = ? , labReport = ?, date = ? WHERE patientID = ? ;";
+                    + " labReport = ?, date = ? WHERE patientID = ? ;";
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect.prepareStatement(updateLab);
-            preparedStatement.setString(1, labTest);
-            preparedStatement.setString(2,labReport);
-            preparedStatement.setString(3, dateString);
-            preparedStatement.setInt(4, patID);
+            preparedStatement.setString(1,labReport);
+            preparedStatement.setString(2, dateString);
+            preparedStatement.setInt(3, patID);
 
             checker = preparedStatement.executeUpdate();
             System.out.println("checker for doctor=============="+checker);
             //If no data was manipulated insert new appointment
             if (checker == 0) {
                 String insertApp = "INSERT INTO labtest"
-                        + "(patientID, labType, labReport, date) VALUES"
+                        + "(patientID, labReport, date) VALUES"
                         + "(?,?,?,?);";
                 // PreparedStatements can use variables and are more efficient
                 preparedStatement = connect.prepareStatement(insertApp);
                 preparedStatement.setInt(1, patID);
-                preparedStatement.setString(2,labTest);
-                preparedStatement.setString(3,labReport);
-                preparedStatement.setString(4, dateString);
+                preparedStatement.setString(2,labReport);
+                preparedStatement.setString(3, dateString);
                 preparedStatement.executeUpdate();
             }
 

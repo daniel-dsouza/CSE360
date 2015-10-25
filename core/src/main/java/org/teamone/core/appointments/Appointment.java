@@ -1,49 +1,77 @@
 package org.teamone.core.appointments;
 
 
+import org.teamone.core.SQL.DoctorSQL;
+import org.teamone.core.SQL.PatientSQL;
+import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
+
 /**
  * Created by Ryan on 10/7/2015.
  */
 public class Appointment {
+
+    private int appointmentID;
     private String date;//date is 01/01/2001
     private String time;//time is 3:00 PM
-    private String doctorName;
-    private String doctorSpec;
-    private int doctorID = 0;
-    private int appointmentID = 0;
+    private Staff doctor;
     private String reason;
-    private int patientID = 0;
+    private Patient patient;
+
+    public Appointment()
+    {
+        doctor = new Staff();
+        patient = new Patient();
+    }
+    public String getDoctorName() {
+        return doctor.getName();
+    }
+    public void setAppointmentID(int appointmentID) {
+        this.appointmentID = appointmentID;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctor.setName(doctorName);
+    }
 
     public int getAppointmentID() {
         return appointmentID;
     }
 
-    public void setAppointmentID(int appointmentID) {
-        this.appointmentID = appointmentID;
+    public Staff getDoctor() {
+        return doctor;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public void setDoctor(Staff doctor) {
+        this.doctor = doctor;
+        this.doctor = DoctorSQL.getStaffComplete(doctor);
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+        this.patient = PatientSQL.getPatientComplete(patient);
     }
 
     public String getDoctorSpec() {
-        return doctorSpec;
+        return doctor.getSpecialty();
     }
 
-    public void setDoctorSpec(String doctorSpec) {
-        this.doctorSpec = doctorSpec;
+    public void setDoctorSpec(String doctorSpec)
+    {
+        this.doctor.setSpecialty(doctorSpec);
     }
 
     public int getPatientID() {
-        return patientID;
+        return patient.getPatientID();
     }
 
-    public void setPatientID(int patientID) {
-        this.patientID = patientID;
+    public void setPatientID(int patientID)
+    {
+        this.patient.setPatientID(patientID);
     }
 
     public String getDate() {
@@ -63,11 +91,11 @@ public class Appointment {
     }
 
     public int getDoctorID() {
-        return doctorID;
+        return doctor.getStaffID();
     }
 
     public void setDoctorID(int doctorID) {
-        this.doctorID = doctorID;
+        this.doctor.setStaffID(doctorID);
     }
 
     public String getReason() {
@@ -78,6 +106,5 @@ public class Appointment {
         this.reason = reason;
     }
 
-
-
 }
+

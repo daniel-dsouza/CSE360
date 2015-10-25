@@ -28,7 +28,7 @@ public class LabTestSQL {
             // PreparedStatements can use variables and are more efficient
             int patID = readMe.getPatientID();
 
-            preparedStatement = connect.prepareStatement("SELECT labType, labReport, date FROM labtest where patientID = ?");
+            preparedStatement = connect.prepareStatement("SELECT labReport, date FROM labtest where patientID = ?");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
@@ -44,7 +44,6 @@ public class LabTestSQL {
 
                 readMe.setStrDateAndTime(date);
                 readMe.setLabReport(labReport);
-                readMe.setTestType(labType);
             }
             else
             {

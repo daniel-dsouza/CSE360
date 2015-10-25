@@ -124,7 +124,7 @@ public class DoctorSQL {
 
             preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labType = ?, labReport = ? , date = ?");
 
-            preparedStatement.setInt(1, test.getPatientID());
+            preparedStatement.setInt(1, test.getPatient().getPatientID());
             /*preparedStatement.setInt(2, test.getStaffID());
             preparedStatement.setString(3, test.getTestType());
             preparedStatement.setString(4, test.getLabReport());
@@ -166,13 +166,12 @@ public class DoctorSQL {
             // PreparedStatements can use variables and are more efficient
 
 
-            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labType = ?, labReport = ? , date = ?");
+            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labReport = ? , date = ?");
 
             preparedStatement.setInt(1, patient.getPatientID());
             preparedStatement.setInt(2, patient.getStaffID());
-            preparedStatement.setString(3, patient.getTestType());
-            preparedStatement.setString(4, patient.getLabReport());
-            preparedStatement.setString(5, patient.getStrDateAndTime());
+            preparedStatement.setString(3, patient.getLabReport());
+            preparedStatement.setString(4, patient.getStrDateAndTime());
             checker = preparedStatement.executeUpdate();
 
             if (checker == 0)
@@ -231,6 +230,41 @@ public class DoctorSQL {
         return arrayOfDoctors;
 
     }
+    public static Staff getStaffComplete(Staff staff) {
+        //Staff staff = null;
+        String temp = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int ID = staff.getStaffID();
+            String mh = null;
+
+            preparedStatement = connect.prepareStatement("SELECT p2.name, p2.emailID, p.occupation, p.specialty, p.patientID, p.schedule FROM staff p, person p2 where staffID = ? and userID = ?");
+            preparedStatement.setInt(1, staff.getStaffID());
+            preparedStatement.setInt(2, staff.getStaffID());
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            staff.setOccupation(resultSet.getString("p.occupation"));
+            staff.setSpecialty(resultSet.getString("p.specialty"));
+            staff.setPatientID(resultSet.getInt("p.patientID"));
+            staff.setSchedule(resultSet.getString("p.schedule"));
+            staff.setName(resultSet.getString("p2.name"));
+            staff.setEmail(resultSet.getString("p2.emailID"));
+
+        } catch (Exception e) {
+            System.out.println(e);
+            staff = null;
+        } finally {
+            close();
+        }
+        return staff;
+    }
+
     // You need to close the resultSet
     private static void close() {
         try {

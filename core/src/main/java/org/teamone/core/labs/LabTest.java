@@ -14,7 +14,6 @@ public class LabTest {
 
     private Staff staff;
 
-    private String testType;
     private String labReport;
     private Date dateAndTime;
     private String strDateAndTime;
@@ -47,13 +46,6 @@ public class LabTest {
         this.patient.setPatientID(patientID);
     }
 
-    public String getTestType() {
-        return testType;
-    }
-
-    public void setTestType(String testType) {
-        this.testType = testType;
-    }
 
     public String getLabReport() {
         return labReport;
