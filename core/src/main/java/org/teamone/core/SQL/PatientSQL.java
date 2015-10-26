@@ -22,8 +22,8 @@ public class PatientSQL {
     private static ResultSet resultSet = null;
 
     /**
-     * update health conditions
-     * @param patient with valid patient ID
+     * update health conditions.
+     * @param patient with valid patient ID and filled in health conditions
      * @return
      */
     public static Patient updateHealthCondition(Patient patient) {
@@ -38,33 +38,13 @@ public class PatientSQL {
 
             // PreparedStatements can use variables and are more efficient
             int ID = patient.getPatientID();
-            String name = patient.patientInformation.toStringName();
-            String SSN = patient.getSSN();
-            String address = patient.patientInformation.toStringAddress();
-            String email = patient.patientInformation.getEmail();
-            String phone = patient.getPhone();
-            String insurance = patient.getInsurance();
-            String age = patient.getAge();
-            String gender = patient.getGender();
-            String occupation = patient.getOccupation();
+
             String hc = patient.healthConditions.toString();
 
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
             preparedStatement.setString(1, hc);
             preparedStatement.setInt(2, ID);
             checker = preparedStatement.executeUpdate();
-
-            Result.setOccupation(occupation);
-            Result.setName(name);
-            Result.setPatientID(ID);
-            Result.setEmail(email);
-
-            Result.setAddress(address);
-            Result.setSSN(SSN);
-            Result.setGender(gender);
-            Result.setInsurance(insurance);
-            Result.setAge(age);
-            Result.setPhone(phone);
 
             if (checker == 0)
                 Result = null;

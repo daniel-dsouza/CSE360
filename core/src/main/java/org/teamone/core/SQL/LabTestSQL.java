@@ -278,7 +278,7 @@ public class LabTestSQL {
             System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
             int patID = p.getPatientID();
-            preparedStatement = connect.prepareStatement("SELECT labReport, date FROM labtest where patientID = ?;");
+            preparedStatement = connect.prepareStatement("SELECT labReport, date, serialNumber FROM labtest where patientID = ?;");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -288,6 +288,7 @@ public class LabTestSQL {
                 a.setPatient(PatientSQL.getPatientComplete(pat));
                 a.setDate(resultSet.getString("date"));
                 a.toMapObj(resultSet.getString("labReport"));
+                a.setRequestionID(resultSet.getInt("serialNumber"));
                 LabTestList.add(a);
             }
 
