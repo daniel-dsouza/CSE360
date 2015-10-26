@@ -30,6 +30,7 @@ public class LabTest {
         this.requestionID = requestionID;
         patient = new Patient();
         staff = new Staff();
+        updateDate = new Date();
 
         labTest = new TreeMap<String, String>();
         labTestNames = new TreeMap<String, String>();

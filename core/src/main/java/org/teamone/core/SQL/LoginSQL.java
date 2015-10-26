@@ -18,6 +18,11 @@ public class LoginSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
+    /**
+     * check if ID and password is correct
+     * @param check person object with ID and password loaded
+     * @return Person object
+     */
     public static Person authenticate(Person check) {
 
         try {
@@ -78,7 +83,11 @@ public class LoginSQL {
 
     }
 
-
+    /**
+     * converts an ID into an name
+     * @param patientID
+     * @return string name with associated id
+     */
     public static String getName(int patientID) {
 
         String username;
@@ -109,7 +118,11 @@ public class LoginSQL {
         return username;
 
     }
-
+    /**
+     * converts an name into an ID
+     * @param patientID
+     * @return int ID with associated name
+     */
     public static int getID(String patientName) {
 
         int userID;

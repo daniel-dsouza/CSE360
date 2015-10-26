@@ -19,6 +19,11 @@ public class HspSQL {
     private static PreparedStatement preparedStatementPerson = null;
     private static ResultSet resultSet = null;
 
+    /**
+     * Register a new patient
+     * @param patient
+     * @return Patient
+     */
     public static Patient RegisterNewPatient(Patient patient)
     { Patient Result;
         try {

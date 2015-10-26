@@ -14,6 +14,11 @@ public class LabStaffSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
+    /**
+     *
+     * @param LabTest with valid RequestionID and patient ID
+     * @return
+     */
     public static LabTest updateLabTest(LabTest readMe) {
         try {
             int checker;
@@ -30,12 +35,13 @@ public class LabStaffSQL {
 
 
             String updateLab = "UPDATE labtest SET"
-                    + " labReport = ?, date = ? WHERE patientID = ? ;";
+                    + " labReport = ?, date = ? WHERE patientID = ? and serialNumber = ? ;";
             // PreparedStatements can use variables and are more efficient
             preparedStatement = connect.prepareStatement(updateLab);
             preparedStatement.setString(1,labReport);
             preparedStatement.setString(2, dateString);
             preparedStatement.setInt(3, patID);
+            preparedStatement.setInt(4, readMe.getRequestionID());
 
             checker = preparedStatement.executeUpdate();
             System.out.println("checker for doctor=============="+checker);

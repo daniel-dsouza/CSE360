@@ -186,9 +186,6 @@ public class DoctorSQL {
         return boolResult;
     }
 
-
-
-
     /**
      * Method returns a list doctors.
      * @param String: Specialty to find in sql
@@ -228,6 +225,11 @@ public class DoctorSQL {
         return arrayOfDoctors;
 
     }
+    /**
+     * get all data from SQL with a staff ID
+     * @param staff staff Object with valid staff ID
+     * @return staff object with all data filled in
+     */
     public static Staff getStaffComplete(Staff staff) {
         //Staff staff = null;
         String temp = null;

@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.labs.LabTestRequest;
+import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.Staff;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class LabRequestTest {
 
         Patient pat = new Patient();
         pat.setPatientID(1001);
-        Staff sta = new Staff();
+        Doctor sta = new Doctor();
         sta.setStaffID(501);
         test = new LabTestRequest(0, "vitaminD,true:potassium,true:", pat, sta);
 

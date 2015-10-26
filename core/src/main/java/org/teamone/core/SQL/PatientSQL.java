@@ -21,6 +21,11 @@ public class PatientSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
+    /**
+     * update health conditions
+     * @param patient with valid patient ID
+     * @return
+     */
     public static Patient updateHealthCondition(Patient patient) {
         Patient Result = new Patient();
         try {
@@ -73,6 +78,11 @@ public class PatientSQL {
         return Result;
     }
 
+    /**
+     * update personal info
+     * @param patient with valid PatientID
+     * @return
+     */
     public static Patient UpdatePersonalInfo(Patient patient) {
         Patient Result = new Patient();
         try {
@@ -144,7 +154,11 @@ public class PatientSQL {
         }
         return Result;
     }
-
+    /**
+     * get all data from SQL with a patient ID
+     * @param Patient Patient Object with valid patient ID
+     * @return Patient object with all data filled in
+     */
     public static Patient getPatientComplete(Patient patient) {
         Patient medicalHistory = null;
         String temp = null;
@@ -205,7 +219,11 @@ public class PatientSQL {
 
     }
 
-
+    /**
+     * gets medical history
+     * @param patient with valid patient ID
+     * @return
+     */
     public static Patient getMedicalHistory(Patient patient) {
         Patient medicalHistory = null;
         String temp = null;
@@ -238,7 +256,11 @@ public class PatientSQL {
         return patient;
 
     }
-
+    /**
+     * sets medical history
+     * @param patient with valid patient ID
+     * @return
+     */
     public static Boolean setMedicalHistory(Patient patient) {
         boolean boolResult;
         String temp = null;
@@ -275,7 +297,11 @@ public class PatientSQL {
         return boolResult;
     }
 
-
+    /**
+     * gets health conditions
+     * @param patient with valid patient ID
+     * @return
+     */
     public static Patient getHealthConditions(Patient patient) {
         Patient healthConditions = null;
         String temp = null;
@@ -308,7 +334,11 @@ public class PatientSQL {
         return patient;
 
     }
-
+    /**
+     * set health conditions
+     * @param patient with valid patient ID
+     * @return
+     */
     public static Boolean setHealthConditions(Patient patient) {
         boolean boolResult;
         String temp = null;
@@ -417,6 +447,11 @@ public class PatientSQL {
         }
         return patientList;
     }
+    /**
+     * gets all patients
+     * @param
+     * @return Arraylist of patients
+     */
     public static ArrayList<Patient> getAllPatient() {
 
         ArrayList<Patient> PatientList = new ArrayList<Patient>();

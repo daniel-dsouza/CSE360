@@ -6,6 +6,9 @@ import org.teamone.core.SQL.LabStaffSQL;
 import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.labs.LabTest;
+import org.teamone.core.users.Patient;
+
+import java.util.ArrayList;
 
 public class LabStaffTest {
 
@@ -16,7 +19,8 @@ public class LabStaffTest {
 
         test = new LabTest();
         test.getPatient().setPatientID(1001);
-        test.toMapObj("potassium,Patient has enough potassium:");
+        test.setRequestionID(1);
+        test.toMapObj("potassium,WHAT WHT WHAT:");
 
     }
 
@@ -52,6 +56,21 @@ public class LabStaffTest {
         System.out.println(TestStrings.testEnd);
 
 
+        System.out.println("\nTest========Extract all lab requests");
+        Patient new1= new Patient();
+        new1.setPatientID(1001);
+        ArrayList<LabTest> tempList = LabTestSQL.getListLabTest(new1);
+        if(tempList!=null)
+        {
+            LabTest tempRequest;
+            for(LabTest l : tempList)
+            {
+                System.out.println(l.getPatient().getName());
+            }
+        }
+        else
+            System.out.println("\nExtract failed");
+        System.out.println(TestStrings.testEnd);
 
     }
 }

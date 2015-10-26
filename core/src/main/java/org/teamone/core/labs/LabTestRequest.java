@@ -1,5 +1,6 @@
 package org.teamone.core.labs;
 
+import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
@@ -74,7 +75,7 @@ public class LabTestRequest {
         this.strDateAndTime = strDateAndTime;
     }
 
-    public LabTestRequest(int requestionID, String data, Patient pat, Staff sta) {
+    public LabTestRequest(int requestionID, String data, Patient pat, Doctor sta) {
         this.requestionID = requestionID;
         patient = pat;
         staff = sta;

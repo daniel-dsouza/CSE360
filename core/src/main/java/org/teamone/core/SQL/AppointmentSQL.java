@@ -22,8 +22,8 @@ public class AppointmentSQL {
     private static ResultSet resultSet = null;
 
     /**
-     * @param readMe Appointment Object to select information from database
-     * @return readMe
+     * @param readMe Appointment Object with valid doctorID
+     * @return list of appointments by doctor
      */
     public static List<Appointment> viewAppointmentDoctor(Appointment readMe) {
         List<Appointment> a1 = new ArrayList<Appointment>();
@@ -75,7 +75,10 @@ public class AppointmentSQL {
         return a1;
     }
 
-
+    /**
+     * @param readMe Appointment Object with valid patientID
+     * @return list of appointments by patient
+     */
 
     public static List<Appointment> viewAppointmentPatient(Appointment readMe) {
         List<Appointment>  a1 = new ArrayList<Appointment>();
@@ -129,6 +132,10 @@ public class AppointmentSQL {
             return a1;
 
     }
+    /**
+     * @param readMe Appointment Object with valid appointmentID
+     * @return list of appointments by appointment ID
+     */
     public static List<Appointment> viewAppointmentAppt(Appointment readMe) {
         List<Appointment>  a1 = new ArrayList<Appointment>();
 
@@ -192,8 +199,8 @@ public class AppointmentSQL {
 
     /**
      *
-     * @param readMe Appointment Object to extract appointment info and update database
-     * @return
+     * @param readMe Appointment Object with valid doctorID
+     * @return Appointment
      */
     public static Appointment editAppointmentDoctor(Appointment readMe) {
         try {
@@ -249,7 +256,7 @@ public class AppointmentSQL {
 
     /**
      *
-     * @param readMe Appointment Object to extract appointment info and update database
+     * @param readMe Appointment Object valid patientID
      * @return Appointment Object
      */
     public static Appointment editAppointmentPatient(Appointment readMe) {
@@ -303,6 +310,10 @@ public class AppointmentSQL {
         }
         return readMe;
     }
+    /**
+     * @param readMe Appointment Object with valid appointmentID
+     * @return appointment object
+     */
     public static Appointment editAppointmentAppt(Appointment readMe) {
         Appointment  a1 =new Appointment();
 
@@ -354,7 +365,7 @@ public class AppointmentSQL {
 
     /**
      * Returns a list of patients
-     * @param String: Find people
+     * @param String: Find people with a similar name
      * @return ArrayList: Arraylist of Patient objects
      */
     public static ArrayList<Appointment> getPatientsAppointment(String patientName) {
