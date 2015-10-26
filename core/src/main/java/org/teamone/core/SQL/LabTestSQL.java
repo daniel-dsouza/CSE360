@@ -59,7 +59,8 @@ public class LabTestSQL {
             }
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
-            System.out.println(e);
+            //System.out.println(e);
+            e.printStackTrace();
             readMe = null;
         } finally {
             close();

@@ -22,7 +22,7 @@ public class LabRequestTest {
         pat.setPatientID(1005);
         Person per = new Person();
         per.setUserID(506);
-        test = new LabTestRequest(0, "vitaminD,true:potassium,true:", pat, per);
+        test = new LabTestRequest(0, "Hemoglobin,true:vitaminD,true:potassium,true:", pat, per);
 
     }
 
