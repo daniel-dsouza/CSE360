@@ -8,8 +8,8 @@ package org.teamone.core.SQL;
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
 
+import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -494,9 +494,39 @@ public class PatientSQL {
      * @param staff: Given a staff object
      * @return ArrayList: List of Patients
      */
-    public ArrayList<Patient> getPatientByStaff (Staff staff) {
-        //TODO: getPatientByStaff
-        return null;
+    public static ArrayList<Patient> getPatientByStaff (Doctor doc) {
+        ArrayList<Patient> PatientList = new ArrayList<Patient>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            int docID = doc.getStaffID();
+            // PreparedStatements can use variables and are more efficient
+
+            preparedStatement = connect.prepareStatement("select patientID from appointment where doctorID = ? and patientID IS NOT NULL;");
+            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+            preparedStatement.setInt(1,docID);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Patient pers = new Patient();
+                pers.setUserID(rs.getInt("patientID"));
+                pers.setPatientID(rs.getInt("patientID"));
+
+                pers= PatientSQL.getPatientComplete(pers);
+                PatientList.add(pers);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            PatientList = null;
+
+        } finally {
+            close();
+        }
+        return PatientList;
     }
 
     // You need to close the resultSet
