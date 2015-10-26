@@ -124,7 +124,7 @@ public class DoctorSQL {
 
            preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labReport = ? , date = ?");
             preparedStatement.setInt(1, test.getPatient().getPatientID());
-            preparedStatement.setInt(2, test.getStaff().getStaffID());
+            preparedStatement.setInt(2, test.getPerson().getUserID());
             preparedStatement.setString(3, test.toString());
             preparedStatement.setString(4, test.getStrDateAndTime());
             checker = preparedStatement.executeUpdate();
@@ -145,7 +145,7 @@ public class DoctorSQL {
 
     /**
      *
-     * @param Labtest patient: LabTest to be added.
+     * @param labtest patient: LabTest to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
     public static Boolean addLabTest(LabTest patient) {
@@ -186,12 +186,9 @@ public class DoctorSQL {
         return boolResult;
     }
 
-
-
-
     /**
      * Method returns a list doctors.
-     * @param String: Specialty to find in sql
+     * @param string: Specialty to find in sql
      * @return ArrayList: Arraylist of staff objects
      */
     public static ArrayList<Staff> getListDoctorSpecialty (String specialty) {
@@ -228,6 +225,11 @@ public class DoctorSQL {
         return arrayOfDoctors;
 
     }
+    /**
+     * get all data from SQL with a staff ID
+     * @param staff staff Object with valid staff ID
+     * @return staff object with all data filled in
+     */
     public static Staff getStaffComplete(Staff staff) {
         //Staff staff = null;
         String temp = null;

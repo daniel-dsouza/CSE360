@@ -13,6 +13,12 @@ public class AlertSQL {
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
+
+    /**
+     * This is will set alert to be false
+     * @param Alert: Alert with valid alertID.
+     * @return true or false
+     */
     public static Boolean setAlertOff(Alert alert) {
         boolean boolResult;
 
@@ -45,6 +51,10 @@ public class AlertSQL {
         return boolResult;
     }
 
+    /**
+     * get list of alerts
+     * @return arraylist
+     */
     public static ArrayList<Alert> getListAlerts() {
 
         ArrayList<Alert> alertList = new ArrayList<Alert>();

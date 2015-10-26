@@ -2,11 +2,12 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.Staff;
+import org.teamone.core.users.Person;
 
 import java.util.ArrayList;
 
@@ -18,16 +19,16 @@ public class LabRequestTest {
     public void setUp() {
 
         Patient pat = new Patient();
-        pat.setPatientID(1001);
-        Staff sta = new Staff();
-        sta.setStaffID(501);
-        test = new LabTestRequest(0, "vitaminD,true:potassium,true:", pat, sta);
+        pat.setPatientID(1005);
+        Person per = new Person();
+        per.setUserID(506);
+        test = new LabTestRequest(0, "vitaminD,true:potassium,true:", pat, per);
 
     }
 
     @Test
     public void updateLabReport() {
-        /*System.out.println("\nTest========add lab request");
+        System.out.println("\nTest========add lab request");
         if(DoctorSQL.addLabRequest(test)!=null)
         {
 
@@ -38,7 +39,7 @@ public class LabRequestTest {
         }
         else
             System.out.println("\nadd lab requestfailed");
-*/
+
         System.out.println(TestStrings.testEnd);
 
         System.out.println("\nTest========Viewing lab request through ID");
