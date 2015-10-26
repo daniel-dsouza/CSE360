@@ -3,6 +3,7 @@ package org.teamone.core.SQL;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.prescriptions.Prescription;
+import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
@@ -265,6 +266,46 @@ public class DoctorSQL {
         return staff;
     }
 
+    /**
+     * Method returns a list doctors.
+     * @param Doctor: doctor with valid id
+     * @return ArrayList: Arraylist of patients objects
+     */
+    public static ArrayList<Patient> getDoctorPatientsList (Doctor doc) {
+        ArrayList<Patient> arrayOfPatient = new ArrayList<Patient>();
+        try {
+            int checker, checker2;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            int docID = doc.getStaffID();
+
+            preparedStatement = connect.prepareStatement("SELECT patientID from appointment where doctorID = ? and patientID IS NOT NULL;");
+            preparedStatement.setInt(1, docID);
+            resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+                //Retrieve by column name
+
+                Patient new1 = new Patient();
+                new1.setUserID(resultSet.getInt("patientID"));
+                new1.setPatientID(resultSet.getInt("patientID"));
+                new1 = PatientSQL.getPatientComplete(new1);
+
+                arrayOfPatient.add(new1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            arrayOfPatient = null;
+        } finally {
+            close();
+        }
+        return arrayOfPatient;
+
+    }
     // You need to close the resultSet
     private static void close() {
         try {

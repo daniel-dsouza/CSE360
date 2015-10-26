@@ -70,13 +70,16 @@ public class HspSQL {
             //INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES (1232, 'Ry;an', 'doctor', 'temporary', 'ryan@asu.edu');
 
             String insertTablePatient = "INSERT INTO patient"
-                    + "(patientID, occupation, address, SSN, gender, insurance, age, phone, medicalHistory, healthConditions) VALUES"
-                    + "(?,?,?,?,?,?,?,?,?,?)";
+                    + "(patientID, occupation, address, SSN, gender, insurance, age, phone, medicalHistory, healthConditions, date) VALUES"
+                    + "(?,?,?,?,?,?,?,?,?,?,?)";
 
             preparedStatementPatient = connect.prepareStatement(insertTablePatient);
 
             //`serialNumber`, `patientID`, `medicalHistory`, `occupation`, `address`, `SSN`, `gender`, `insurance`, `age`, `phone`, `healthConditions`, `labReports`, `alertDateAndTime`, `alertStatus`, `prescriptions`
-
+            java.util.Date dateAndTime= new java.util.Date();
+            java.text.SimpleDateFormat sdf =
+                    new java.text.SimpleDateFormat("yyyy-MM-dd");
+            String strDateAndTime = sdf.format(dateAndTime);
             preparedStatementPatient.setInt(1, patientID);
             preparedStatementPatient.setString(2, "patient");
             preparedStatementPatient.setString(3, address);
@@ -87,6 +90,7 @@ public class HspSQL {
             preparedStatementPatient.setString(8, phone);
             preparedStatementPatient.setString(9, patient.healthConditions.toString());
             preparedStatementPatient.setString(10, patient.medicalHistory.toString());
+            preparedStatementPatient.setString(11,strDateAndTime);
             checker = preparedStatementPatient.executeUpdate();
 
             System.out.println("checker1=============="+checker);
