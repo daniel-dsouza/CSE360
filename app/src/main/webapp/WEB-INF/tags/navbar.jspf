@@ -26,6 +26,13 @@
                     </a>
                 </li>
             </c:forEach>
+            <c:forEach var="item" items="${pageactions}">
+                <li>
+                    <a href="${pageContext.request.contextPath}/${item.value}">
+                        <c:out value="${item.key}" />
+                    </a>
+                </li>
+            </c:forEach>
         </ul>
     </div>
 </div>
