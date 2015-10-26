@@ -24,7 +24,7 @@ public class AppointmentSQL {
      * @param readMe Appointment Object with valid doctorID
      * @return list of appointments by doctor
      */
-    public static List<Appointment> viewAppointmentDoctor(Appointment readMe) {
+    public static List<Appointment> viewAppointmentByDoctor(Appointment readMe) {
         List<Appointment> a1 = new ArrayList<Appointment>();
 
         try {
@@ -39,7 +39,7 @@ public class AppointmentSQL {
 
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
-            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID FROM appointment where doctorID = ?");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID FROM appointment where doctorID = ? AND patientID IS NOT NULL");
             preparedStatement.setInt(1, docID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
@@ -80,7 +80,7 @@ public class AppointmentSQL {
      * @param readMe Appointment Object with valid  doctorID, Time, PatientID, and Date,
      * @return appoint with appointmentID
      */
-    public static Appointment getAppointment(Appointment readMe) {
+    public static Appointment getAppointmentID(Appointment readMe) {
 
         try {
 
@@ -122,7 +122,7 @@ public class AppointmentSQL {
      * @return list of appointments by patient
      */
 
-    public static List<Appointment> viewAppointmentPatient(Appointment readMe) {
+    public static List<Appointment> viewAppointmentByPatient(Appointment readMe) {
         List<Appointment> a1 = new ArrayList<Appointment>();
 
         try {
@@ -178,7 +178,7 @@ public class AppointmentSQL {
      * @param readMe Appointment Object with valid appointmentID
      * @return list of appointments by appointment ID
      */
-    public static List<Appointment> viewAppointmentAppt(Appointment readMe) {
+    public static List<Appointment> viewAppointmentByApptID(Appointment readMe) {
         List<Appointment> a1 = new ArrayList<Appointment>();
 
         try {
@@ -193,7 +193,7 @@ public class AppointmentSQL {
             // PreparedStatements can use variables and are more efficient
             int appID = readMe.getAppointmentID();
 
-            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID, patientID FROM appointment where serialNumber = ?");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID, patientID FROM appointment where serialNumber = ? AND patientID IS NOT NULL");
             preparedStatement.setInt(1, appID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set

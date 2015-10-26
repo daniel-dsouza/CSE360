@@ -169,7 +169,9 @@ public class HspSQL {
      * @return ArrayList: of all persons with id>1001
      */
     public static ArrayList<Person> deletePatients() {
-
+        System.out.println("===================================");
+        System.out.println("WARNING DELETING ALL PATIENTS");
+        System.out.println("===================================");
         ArrayList<Person> adminList = new ArrayList<Person>();
         try {
             // This will load the MySQL driver, each DB has its own driver

@@ -64,7 +64,7 @@ public class AppointmentTester {
 
         //case 1, where user wants appoint through doctorID
         System.out.println("\nTest========Viewing patient with doctor ID");
-        List<Appointment> test1 = AppointmentSQL.viewAppointmentDoctor(test);
+        List<Appointment> test1 = AppointmentSQL.viewAppointmentByDoctor(test);
         if(test1 !=null)//view appoint returns a list Appointment
         {
             Appointment tempAp;
@@ -84,7 +84,7 @@ public class AppointmentTester {
         //case 2, where user wants appoint through patientID
         test.setPatientID(1001);
         System.out.println("\nTest========Viewing patient with patient ID");
-        test1 = AppointmentSQL.viewAppointmentPatient(test);
+        test1 = AppointmentSQL.viewAppointmentByPatient(test);
         if(test1!=null)//view appoint returns a object Appointment
         { Appointment tempAp;
             for(int i = 0; i < test1.size(); i++) {
@@ -104,7 +104,7 @@ public class AppointmentTester {
        //case 1
         update.setAppointmentID(1);
         System.out.println("\nTest========Viewing Appointment with appt ID");
-        test1 = AppointmentSQL.viewAppointmentAppt(update);
+        test1 = AppointmentSQL.viewAppointmentByApptID(update);
         if(test1!=null)//view appoint returns a object Appointment
         { Appointment tempAp;
             for(int i = 0; i < test1.size(); i++) {
@@ -144,7 +144,7 @@ public class AppointmentTester {
 
         update.setAppointmentID(5);
         System.out.println("\nTest========Viewing Appointment with appt ID");
-        Appointment new1 = AppointmentSQL.getAppointment(update);
+        Appointment new1 = AppointmentSQL.getAppointmentID(update);
         if(new1!=null)//view appoint returns a object Appointment
         {
                 System.out.println("\nView successful");

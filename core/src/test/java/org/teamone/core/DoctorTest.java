@@ -38,7 +38,7 @@ public class DoctorTest {
             System.out.println("\nFind failed");
         System.out.println(TestStrings.testEnd);
 
-        System.out.println("\nTest========Searching for Avaiable Doctor Times ");
+        System.out.println("\nTest========Searching for Available Doctor Times ");
         ArrayList<Appointment> timesList = AppointmentSQL.getAvailableDoctorTimes(new1);
         if(timesList.size()!=0) {
             System.out.println("*********************Find successful************************");
