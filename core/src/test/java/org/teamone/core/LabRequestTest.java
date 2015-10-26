@@ -19,9 +19,9 @@ public class LabRequestTest {
     public void setUp() {
 
         Patient pat = new Patient();
-        pat.setPatientID(1005);
+        pat.setPatientID(1002);
         Person per = new Person();
-        per.setUserID(506);
+        per.setUserID(502);
         test = new LabTestRequest(0, "vitaminD,true:potassium,true:", pat, per);
 
     }
@@ -43,7 +43,8 @@ public class LabRequestTest {
         System.out.println(TestStrings.testEnd);
 
         System.out.println("\nTest========Viewing lab request through ID");
-        test.setRequestionID(1);
+        test = new LabTestRequest();
+        test.setRequestionID(13);
         if(LabTestSQL.viewLabRequest(test)!=null)
         {
             System.out.println("\nView successful");
