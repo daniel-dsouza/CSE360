@@ -30,6 +30,12 @@ CREATE TABLE IF NOT EXISTS `alerts` (
   KEY `patient_id` (`patient_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2000 ;
 
+INSERT INTO `appointment`(`date`, `time`, `doctorID`) VALUES
+("2015-10-25","9:00 AM",501),
+("2015-10-25","11:00 AM",501),
+("2015-10-25","1:00 PM",501),
+("2015-10-25","3:00 PM",501),
+("2015-10-25","5:00 PM",501);
 -- --------------------------------------------------------
 
 --
@@ -41,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   `date` varchar(100) NOT NULL,
   `time` varchar(100) NOT NULL,
   `doctorID` int(10) NOT NULL,
-  `reason` varchar(500) NOT NULL,
-  `patientID` int(10) NOT NULL,
+  `reason` varchar(500) DEFAULT NULL,
+  `patientID` int(10) DEFAULT NULL,
   PRIMARY KEY (`serialNumber`),
   KEY `doctorID` (`doctorID`),
   KEY `patientID` (`patientID`)
@@ -83,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `age` varchar(10) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
   `healthConditions` varchar(5000) DEFAULT NULL,
+  `date` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`serialNumber`),
   UNIQUE KEY `patientID` (`patientID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -213,7 +220,7 @@ ALTER TABLE `alerts`
 --
 ALTER TABLE `appointment`
   ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE;
+    ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `labtest`
