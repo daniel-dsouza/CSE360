@@ -74,12 +74,8 @@ public class RequestLabTestController {
                           @ModelAttribute User user) {
         if(user.getPerson() == null)
             return "redirect:/login";
-
-
-        if (user.getPerson() == null)
-            System.err.println("Person is null");
-        else
-            System.err.println("Person is ok");
+        else if (!(user.getPerson() instanceof Doctor))
+            return "redirect:/user/" + user.person.getUserID();
 
         LabTestRequest request = new LabTestRequest();
         model.put("request", request);
@@ -89,10 +85,6 @@ public class RequestLabTestController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String submitTest (Map<String, Object> model,
                               @ModelAttribute("request") LabTestRequest request) {
-        for(String key : request.getLabTestRequest().keySet()) {
-            if (request.getLabTestRequest().get(key))
-                System.out.println(key + " ");
-        }
 
         request.setRequestionID(0);
         Patient test = new Patient();

@@ -46,12 +46,27 @@ public class LabTestSQL {
             int patID = resultSet.getInt("patientID");
             int stafID = resultSet.getInt("staffID");
 
+            if (patID != 0) //if it does not equal zero, great, we can set it
+            {
+                if(readMe.getPatient() == null)//uh oh, patient does not yet exists so, create one
+                {
+                    Patient new1= new Patient();
+                    readMe.setPatient(new1);
+                }
+                readMe.getPatient().setPatientID(patID);
+            }
+
             if (!date.equals("null") &&  !labReport.equals(null)) {
                 readMe.setStrDateAndTime(date);
                 readMe.toMapObj(labReport);
-                readMe.getPatient().setPatientID(patID);
+                if(readMe.getPerson() == null)//uh oh, person does not yet exists so, create one
+                {
+                    Person new1 = new Person();
+                    readMe.setPerson(new1);
+                }
                 readMe.getPerson().setUserID(stafID);
             }
+
             else
             {
                 System.out.println("===========EMPTY RESULT========RETURN NULL");
@@ -59,8 +74,7 @@ public class LabTestSQL {
             }
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
-            //System.out.println(e);
-            e.printStackTrace();
+            System.out.println(e);
             readMe = null;
         } finally {
             close();
