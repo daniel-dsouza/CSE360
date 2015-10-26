@@ -9,6 +9,8 @@ import org.teamone.core.users.Patient;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertTrue;
+
 public class PatientListTest {
 
     private Doctor test;
@@ -21,19 +23,16 @@ public class PatientListTest {
     }
 
     @Test
-    public void helpM() {
+    public void getPatientByStaf() {
+        System.out.println("\\nTest========Searching for Patients by staff ID ");
         ArrayList<Patient> testArr = PatientSQL.getPatientByStaff(test);
-        System.out.println("\nTest========Searching for Patients by staff ID ");
-        if(testArr!=null)
-        {
-            Patient temppat;
-            for(int i = 0; i < testArr.size(); i++) {
-                temppat = testArr.get(i);
-                System.out.println("Name: " + temppat.getName() + "\tPatient ID: " + temppat.getPatientID());
-            }
+        assertTrue("Failed to get patients by staff", !testArr.isEmpty());
+
+        Patient temppat;
+        for (int i = 0; i < testArr.size(); i++) {
+            temppat = testArr.get(i);
+            System.out.println("Name: " + temppat.getName() + "\tPatient ID: " + temppat.getPatientID());
         }
-        else
-            System.out.println("SEARCH FAILED");
         System.out.println(TestStrings.testEnd);
     }
 

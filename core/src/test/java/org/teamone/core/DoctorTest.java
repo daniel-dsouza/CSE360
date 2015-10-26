@@ -11,6 +11,8 @@ import org.teamone.core.users.Patient;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertTrue;
+
 public class DoctorTest {
 
 
@@ -20,35 +22,36 @@ public class DoctorTest {
     }
 
     @Test
-    public void viewAppointment() {
-
-
+    public void getListofPatients() {
         Doctor new1 = new Doctor();
         new1.setStaffID(501);
-        ArrayList<Patient> patientList = DoctorSQL.getDoctorPatientsList(new1);
         System.out.println("\nTest========Searching for Patients with doctor id ");
-        if(patientList.size()!=0) {
-            System.out.println("*********************Find successful************************");
-            Patient tempPat;
-            for (int i = 0; i < patientList.size(); i++) {
-                tempPat = patientList.get(i);
-                System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getPatientID());
-            }
-        } else
-            System.out.println("\nFind failed");
-        System.out.println(TestStrings.testEnd);
+        ArrayList<Patient> patientList = DoctorSQL.getDoctorPatientsList(new1);
+        assertTrue("Could not get list of patients by doctor", !patientList.isEmpty());
 
+        Patient tempPat;
+        for (int i = 0; i < patientList.size(); i++) {
+            tempPat = patientList.get(i);
+            System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getPatientID());
+        }
+
+        System.out.println(TestStrings.testEnd);
+    }
+    @Test
+    public void getAvailableTimes() {
         System.out.println("\nTest========Searching for Available Doctor Times ");
+        Doctor new1 = new Doctor();
+        new1.setStaffID(501);
         ArrayList<Appointment> timesList = AppointmentSQL.getAvailableDoctorTimes(new1);
-        if(timesList.size()!=0) {
+        assertTrue("Could not get Available Doctor Times", !timesList.isEmpty());
+
             System.out.println("*********************Find successful************************");
             Appointment tempApp;
             for (int i = 0; i < timesList.size(); i++) {
                 tempApp = timesList.get(i);
                 System.out.println("Available Date: " + tempApp.getDate() + "\tTime: " + tempApp.getTime());
             }
-        } else
-            System.out.println("\nFind failed");
+
         System.out.println(TestStrings.testEnd);
 
 

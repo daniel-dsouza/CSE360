@@ -9,13 +9,14 @@ import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 
+import static org.junit.Assert.assertTrue;
+
 public class PatientUpdateInfoTest {
 
     private Patient update;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
 
         update = new Patient();
         update.setPatientID(1004);
@@ -36,15 +37,13 @@ public class PatientUpdateInfoTest {
     }
 
     @Test
-    public void tester()
-    {
-       System.out.println("\nTest========Updating Patient Infomation");
-        if(PatientSQL.UpdatePersonalInfo(update) != null)
-        {
-            System.out.println("*********************Update successful************************");
-        }
-        else
-            System.out.println("\n************************Update failed********************");
+    public void tester() {
+        System.out.println("\nTest========Updating Patient Infomation");
+        Patient p = PatientSQL.UpdatePersonalInfo(update);
+        assertTrue("Failed to update personal info", p != null);
+
+        System.out.println("*********************Update successful************************");
+
         System.out.println(TestStrings.testEnd);
     }
 
