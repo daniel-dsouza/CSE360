@@ -1,8 +1,7 @@
 package org.teamone.core.labs;
 
-import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.Staff;
+import org.teamone.core.users.Person;
 
 import java.util.Date;
 import java.util.Map;
@@ -16,7 +15,7 @@ public class LabTestRequest {
 
     private int requestionID;
     private Patient patient;
-    private Staff staff;
+    private Person person;
     private Date dateAndTime = null;
     private String strDateAndTime;
     private Map<String, Boolean> labTestRequest;
@@ -75,10 +74,10 @@ public class LabTestRequest {
         this.strDateAndTime = strDateAndTime;
     }
 
-    public LabTestRequest(int requestionID, String data, Patient pat, Doctor sta) {
+    public LabTestRequest(int requestionID, String data, Patient pat, Person per) {
         this.requestionID = requestionID;
         patient = pat;
-        staff = sta;
+        person = per;
 
         dateAndTime= new java.util.Date();
         java.text.SimpleDateFormat sdf =
@@ -204,12 +203,12 @@ public class LabTestRequest {
 
     public void setPatient(Patient patientID) { this.patient = patientID; }
 
-    public Staff getStaff() {
-        return staff;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setStaff(Staff staff) {
-        this.staff = staff;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public Map<String, String> getLabTestRequestNames() { return labTestRequestNames; }

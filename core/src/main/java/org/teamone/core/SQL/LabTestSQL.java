@@ -3,6 +3,7 @@ package org.teamone.core.SQL;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Person;
 import org.teamone.core.users.Staff;
 
 import java.sql.*;
@@ -49,7 +50,7 @@ public class LabTestSQL {
                 readMe.setStrDateAndTime(date);
                 readMe.toMapObj(labReport);
                 readMe.getPatient().setPatientID(patID);
-                readMe.getStaff().setStaffID(stafID);
+                readMe.getPerson().setUserID(stafID);
             }
             else
             {
@@ -144,9 +145,9 @@ public class LabTestSQL {
                 Patient pat = new Patient();
                 pat.setPatientID(resultSet.getInt("patientID"));
                 new1.setPatient(PatientSQL.getPatientComplete(pat));
-                Staff sta = new Staff();
-                sta.setStaffID(resultSet.getInt("staffID"));
-                new1.setStaff(DoctorSQL.getStaffComplete(sta));
+                Person per = new Person();
+                per.setUserID(resultSet.getInt("staffID"));
+                new1.setPerson(per);
                 LabTestRequestList.add(new1);
             }
         } catch (Exception e) {
