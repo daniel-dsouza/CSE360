@@ -9,6 +9,7 @@ public class LabStaff extends Staff {
     public LabStaff() {
         super();
         agentActions = new TreeMap<String, String>() {};
-        agentActions.put("Start Test", "lab/listtests");
+        agentActions.put("View Requests", "request_test");
+        agentActions.put("View Reports", "lab_report");
     }
 }

@@ -299,19 +299,4 @@ public class LabTest {
         this.staff = staff;
     }
 
-    public Map<String, String> getLabTest() {
-        return labTest;
-    }
-
-    public void setLabTest(Map<String, String> labTest) {
-        this.labTest = labTest;
-    }
-
-    public Map<String, String> getLabTestNames() {
-        return labTestNames;
-    }
-
-    public void setLabTestNames(Map<String, String> labTestNames) {
-        this.labTestNames = labTestNames;
-    }
 }

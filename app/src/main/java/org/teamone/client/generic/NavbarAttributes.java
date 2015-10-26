@@ -22,7 +22,6 @@ public class NavbarAttributes {
     @ModelAttribute
     public void setNavbar(Map<String, Object> model) { //
         System.out.println("loading navbar");
-        model.put("message", "message");
         model.put("user", user);
         model.put("pageactions", new TreeMap<String, String>());
     }
