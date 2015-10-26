@@ -6,13 +6,15 @@ import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.baseclasstests.TestStrings;
 
-import java.util.Date;
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 public class AppointmentTester {
 
     private Appointment test;
     private Appointment update;
+
     @Before
     public void setUp() {
 
@@ -21,141 +23,125 @@ public class AppointmentTester {
         update.setPatientID(1003);
         update.setDoctorID(501);
         update.setReason("I want to see doctor");
-        update.setTime("1:00 pm");
-        Date dt = new Date();
-        java.text.SimpleDateFormat sdf =
-                new java.text.SimpleDateFormat("yyyy-MM-dd");
-        String time = sdf.format(dt);
-        update.setDate(time);
+        update.setTime("1:00 PM");
+        update.setDate("2015-10-25");
 
         test = new Appointment();
         test.setDoctorID(501);
     }
 
     @Test
-    public void viewAppointment() {
-        //case 1, where user wants appoint through PatientID
-        /*System.out.println("\nTest========Updating patient with patient ID");
-        if(AppointmentSQL.editAppointmentPatient(update)!=null)//edit appoint returns a object Appointment
-        {
-            System.out.println("\nUpdate successful");
-            System.out.println("Date:\t" + update.getDate());
-            System.out.println("Time:\t" + update.getTime());
-            System.out.println("Reason:\t" + update.getReason());
-            System.out.println("Doctor ID:\t" + update.getDoctorID());
-        }
-        else
-            System.out.println("\nUpdate failed");
+    public void editAppt() {
+        System.out.println("\nTest========Updating appointment");
+        update = AppointmentSQL.editAppointment(update);
+        assertTrue("editing appointment by patient ID failed ", update != null);
+        System.out.println("\nUpdate successful");
+        System.out.println("Date:\t" + update.getDate());
+        System.out.println("Time:\t" + update.getTime());
+        System.out.println("Reason:\t" + update.getReason());
+        System.out.println("Doctor ID:\t" + update.getDoctorID());
+
         System.out.println(TestStrings.testEnd);
+    }
 
-        //case 2, where user wants appoint through DoctorID
-        System.out.println("\nTest========Updating patient with doctor ID");
-        if(AppointmentSQL.editAppointmentDoctor(update)!=null)//edit appoint returns a object Appointment
-        {
-            System.out.println("\nUpdate successful");
-            System.out.println("Date:\t" + update.getDate());
-            System.out.println("Time:\t" + update.getTime());
-            System.out.println("Reason:\t" + update.getReason());
-            System.out.println("Patient ID:\t" + update.getPatientID());
-        }
-        else
-            System.out.println("\nUpdate failed");
-        System.out.println(TestStrings.testEnd);*/
-
+    @Test
+    public void viewApptByDocID() {
         //case 1, where user wants appoint through doctorID
         System.out.println("\nTest========Viewing patient with doctor ID");
         List<Appointment> test1 = AppointmentSQL.viewAppointmentByDoctor(test);
-        if(test1 !=null)//view appoint returns a list Appointment
-        {
-            Appointment tempAp;
-            for(int i = 0; i < test1.size(); i++) {
-                tempAp = test1.get(i);
-                System.out.println("\nView successful");
-                System.out.println("Date:\t" + tempAp.getDate());
-                System.out.println("Time:\t" + tempAp.getTime());
-                System.out.println("Reason:\t" + tempAp.getReason());
-                System.out.println("Patient ID:\t" + tempAp.getPatientID());
-            }
-        }
-        else
-            System.out.println("\nView failed");
-        System.out.println(TestStrings.testEnd);
+        assertTrue("No appointments by doctor ID", !test1.isEmpty());
 
+        Appointment tempAp;
+        for (int i = 0; i < test1.size(); i++) {
+            tempAp = test1.get(i);
+            System.out.println("\nView successful");
+            System.out.println("Date:\t" + tempAp.getDate());
+            System.out.println("Time:\t" + tempAp.getTime());
+            System.out.println("Reason:\t" + tempAp.getReason());
+            System.out.println("Patient ID:\t" + tempAp.getPatientID());
+        }
+
+        System.out.println(TestStrings.testEnd);
+    }
+
+    @Test
+    public void viewApptByPatID() {
         //case 2, where user wants appoint through patientID
-        test.setPatientID(1001);
+        test.setPatientID(1003);
         System.out.println("\nTest========Viewing patient with patient ID");
-        test1 = AppointmentSQL.viewAppointmentByPatient(test);
-        if(test1!=null)//view appoint returns a object Appointment
-        { Appointment tempAp;
-            for(int i = 0; i < test1.size(); i++) {
-                tempAp = test1.get(i);
-                System.out.println("\nView successful");
-                System.out.println("Date:\t" + tempAp.getDate());
-                System.out.println("Time:\t" + tempAp.getTime());
-                System.out.println("Reason:\t" + tempAp.getReason());
-                System.out.println("Doctor ID:\t" + tempAp.getDoctorID());
-            }
+        List<Appointment> test1 = AppointmentSQL.viewAppointmentByPatient(test);
+        assertTrue("No appointments by patient ID", !test1.isEmpty());
+        Appointment tempAp;
+        for (int i = 0; i < test1.size(); i++) {
+            tempAp = test1.get(i);
+            System.out.println("\nView successful");
+            System.out.println("Date:\t" + tempAp.getDate());
+            System.out.println("Time:\t" + tempAp.getTime());
+            System.out.println("Reason:\t" + tempAp.getReason());
+            System.out.println("Doctor ID:\t" + tempAp.getDoctorID());
         }
-        else
-            System.out.println("\nView failed");
+
         System.out.println(TestStrings.testEnd);
+    }
 
-
-       //case 1
-        update.setAppointmentID(1);
+    @Test
+    public void viewApptByAppID() {
+        //case 1
+        update.setAppointmentID(6);
         System.out.println("\nTest========Viewing Appointment with appt ID");
-        test1 = AppointmentSQL.viewAppointmentByApptID(update);
-        if(test1!=null)//view appoint returns a object Appointment
-        { Appointment tempAp;
-            for(int i = 0; i < test1.size(); i++) {
-                tempAp = test1.get(i);
-                System.out.println("\nView successful");
-                System.out.println("Date:\t" + tempAp.getDate());
-                System.out.println("Time:\t" + tempAp.getTime());
-                System.out.println("Reason:\t" + tempAp.getReason());
-                System.out.println("Doctor ID:\t" + tempAp.getDoctorID());
-                System.out.println("Patient ID:\t" + tempAp.getPatientID());
-                System.out.println("Patient address:\t" + tempAp.getPatient().getAddress());
-            }
-        }
-        else
-            System.out.println("\nView failed");
-        System.out.println(TestStrings.testEnd);
+        Appointment test1 = AppointmentSQL.viewAppointmentByApptID(update);
+        assertTrue("No appointment by appointment ID", test1 != null);
 
+        System.out.println("\nView successful");
+        System.out.println("Date:\t" + test1.getDate());
+        System.out.println("Time:\t" + test1.getTime());
+        System.out.println("Reason:\t" + test1.getReason());
+        System.out.println("Doctor ID:\t" + test1.getDoctorID());
+        System.out.println("Patient ID:\t" + test1.getPatientID());
+        System.out.println("Patient address:\t" + test1.getPatient().getAddress());
+
+        System.out.println(TestStrings.testEnd);
+    }
+
+    @Test
+    public void editApptByApptID() {
         //case 2
         update.setReason("I need a new reason");
+        update.setAppointmentID(6);
         System.out.println("\nTest========updating Appointment with appt ID");
 
         Appointment newTest = AppointmentSQL.editAppointmentAppt(update);
-        if(newTest!=null)//view appoint returns a object Appointment
-        {
-                System.out.println("\nupdate successful");
-                System.out.println("Date:\t" + newTest.getDate());
-                System.out.println("Time:\t" + newTest.getTime());
-                System.out.println("Reason:\t" + newTest.getReason());
-                System.out.println("Doctor ID:\t" + newTest.getDoctorID());
-                System.out.println("Patient ID:\t" + newTest.getPatientID());
-                System.out.println("Patient address:\t" + newTest.getPatient().getAddress());
-        }
-        else
-            System.out.println("\nupdate failed");
-        System.out.println(TestStrings.testEnd);
+        assertTrue("Could not edit appointment by appt id", newTest != null);//view appoint returns a object Appointment
 
+        System.out.println("\nupdate successful");
+        System.out.println("Date:\t" + newTest.getDate());
+        System.out.println("Time:\t" + newTest.getTime());
+        System.out.println("Reason:\t" + newTest.getReason());
+        System.out.println("Doctor ID:\t" + newTest.getDoctorID());
+        System.out.println("Patient ID:\t" + newTest.getPatientID());
 
-        update.setAppointmentID(5);
-        System.out.println("\nTest========Viewing Appointment with appt ID");
-        Appointment new1 = AppointmentSQL.getAppointmentID(update);
-        if(new1!=null)//view appoint returns a object Appointment
-        {
-                System.out.println("\nView successful");
-                System.out.println("Date:\t" + new1.getDate());
-                System.out.println("Time:\t" + new1.getTime());
-                System.out.println("Reason:\t" + new1.getReason());
-            System.out.println("Appointment ID:\t" + new1.getAppointmentID());
-
-        }
-        else
-            System.out.println("\nView failed");
         System.out.println(TestStrings.testEnd);
     }
+
+    @Test
+    public void zGetAppointmentID() {
+        Appointment view = new Appointment();//doctorID, Time, PatientID, and Date,
+        view.setDate("2015-10-25");
+        view.setTime("1:00 PM");
+        view.setDoctorID(501);
+        view.setPatientID(1003);
+        System.out.println("\nTest========Getting Appointment ID");
+        Appointment new1 = AppointmentSQL.getAppointmentID(view);
+        assertTrue("Could not get appointment ID", new1 != null);
+
+        System.out.println("\nView successful");
+        System.out.println("Date:\t" + new1.getDate());
+        System.out.println("Time:\t" + new1.getTime());
+        System.out.println("Reason:\t" + new1.getReason());
+        System.out.println("Appointment ID:\t" + new1.getAppointmentID());
+
+
+        System.out.println(TestStrings.testEnd);
+    }
+
 }
