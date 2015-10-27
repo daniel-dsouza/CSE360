@@ -42,8 +42,8 @@ public class StaffListTest {
 
     @Test
     public void getPatientsAppointmentByName() {
-        System.out.println("\nTest========Searching for Patient's Appointments for 'RNG xzkcnmbeaz:894' ");
-        ArrayList<Appointment> testAppoint = AppointmentSQL.getPatientsAppointment("Bruce:Wayne");
+        System.out.println("\nTest========Searching for Patient's Appointments for 'Ryan:Syani' ");
+        ArrayList<Appointment> testAppoint = AppointmentSQL.getPatientsAppointment("Ryan:Syani");
         assertTrue("Failed to get appointments by name", !testAppoint.isEmpty());
 
         Appointment tempStaff;

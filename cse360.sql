@@ -3,13 +3,13 @@
 --
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET time_zone = "-07:00";
 
 --
 -- Database: `cse360`   remote is `sql393597`
 --
-CREATE DATABASE IF NOT EXISTS `cse360` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `cse360`;
+CREATE DATABASE IF NOT EXISTS `sql393597` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `sql393597`;
 
 -- --------------------------------------------------------
 
@@ -30,12 +30,6 @@ CREATE TABLE IF NOT EXISTS `alerts` (
   KEY `patient_id` (`patient_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2000 ;
 
-INSERT INTO `appointment`(`date`, `time`, `doctorID`) VALUES
-("2015-10-25","9:00 AM",501),
-("2015-10-25","11:00 AM",501),
-("2015-10-25","1:00 PM",501),
-("2015-10-25","3:00 PM",501),
-("2015-10-25","5:00 PM",501);
 -- --------------------------------------------------------
 
 --
@@ -115,19 +109,26 @@ CREATE TABLE IF NOT EXISTS `person` (
 
 INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES
 (501, 'Dr. Ryan Ang', 'doctor', 'go', 'ryan@asu.edu'),
-(502, 'Mr. Daniel', 'doctor', 'go', 'Dan1@asu.edu'),
+(502, 'Dr. Daniel', 'doctor', 'go', 'Dan1@asu.edu'),
 (503, 'Dr. James', 'doctor', 'go', 'james1@asu.edu'),
-(504, 'Cameron', 'hsp', 'go', 'cameron1@asu.edu'),
-(505, 'Haisheng', 'hsp', 'go', 'Haishen1@asu.edu'),
-(506, 'Jaime', 'hsp', 'go', 'Jaime@asu.edu'),
-(507, 'Vince', 'labstaff', 'go', 'Vrose@asu.edu'),
-(508, 'Aby', 'labstaff', 'go', 'Aby@asu.edu'),
+(504, 'Dr. Cameron', 'doctor', 'go', 'cameron1@asu.edu'),
+(505, 'Dr. Haisheng', 'doctor', 'go', 'Haishen1@asu.edu'),
+(506, 'Dr. Jaime', 'doctor', 'go', 'Jaime@asu.edu'),
+(507, 'Dr. Vince', 'doctor', 'go', 'Vrose@asu.edu'),
+(508, 'Dr. Aby', 'doctor', 'go', 'Aby@asu.edu'),
 (509, 'Dr. Rie', 'doctor', 'go', 'Rie12@asu.edu'),
 (510, 'Dr. Stephanie', 'doctor', 'go', 'Steph@asu.edu'),
-(511, 'Dr. Eric', 'doctor', 'go', 'eric@asu.edu'),
-(512, 'Dr. Get', 'doctor', 'go', 'ryaaan@asu.edu'),
-(513, 'Dr. Ryan', 'doctor', 'go', 'ryanad@asu.edu');
-
+(511, 'Dr. Ryan', 'doctor', 'go', 'rya@asu.edu'),
+(512, 'Hannah', 'hsp', 'go', 'ryaaan@asu.edu'),
+(513, 'Rick', 'hsp', 'go', 'ryanad@asu.edu'),
+(514, 'Try Hard', 'hsp', 'go', 'ryanad@asu.edu'),
+(515, 'Eric', 'hsp', 'go', 'ryanad@asu.edu'),
+(516, 'John', 'hsp', 'go', 'ryanad@asu.edu'),
+(517, 'Gabriela', 'labstaff', 'go', 'ryanad@asu.edu'),
+(518, 'Troy', 'labstaff', 'go', 'ryanad@asu.edu'),
+(519, 'Derrick', 'labstaff', 'go', 'ryanad@asu.edu'),
+(520, 'Terrence', 'labstaff', 'go', 'ryanad@asu.edu'),
+(521, 'Dr. Dre', 'labstaff', 'go', 'ryanad@asu.edu');
 -- --------------------------------------------------------
 
 --
@@ -171,17 +172,25 @@ CREATE TABLE IF NOT EXISTS `staff` (
 INSERT INTO `staff` (`serialNumber`, `staffID`, `occupation`, `specialty`, `patientID`, `schedule`, `emergencyWardDoctor`) VALUES
 (1, 501, 'doctor', 'Pediatrician', NULL, NULL, 'no'),
 (2, 502, 'doctor', 'GeneralCare', NULL, NULL, 'no'),
-(3, 503, 'doctor', 'GeneralCare', NULL, NULL, 'no'),
-(4, 504, 'hsp', 'hsp', NULL, NULL, 'no'),
-(5, 505, 'hsp', 'hsp', NULL, NULL, 'no'),
-(6, 506, 'hsp', 'hsp', NULL, NULL, 'no'),
-(7, 507, 'labstaff', 'labstaff', NULL, NULL, 'no'),
-(8, 508, 'labstaff', 'labstaff', NULL, NULL, 'no'),
+(3, 503, 'doctor', 'Neurologist', NULL, NULL, 'no'),
+(4, 504, 'doctor', 'GeneralCare', NULL, NULL, 'no'),
+(5, 505, 'doctor', 'GeneralCare', NULL, NULL, 'no'),
+(6, 506, 'doctor', 'X-Ray', NULL, NULL, 'no'),
+(7, 507, 'doctor', 'X-Ray', NULL, NULL, 'no'),
+(8, 508, 'doctor', 'Pediatrician', NULL, NULL, 'no'),
 (9, 509, 'doctor', 'Emergency', NULL, NULL, 'yes'),
 (10, 510, 'doctor', 'Emergency', NULL, NULL, 'yes'),
 (11, 511, 'doctor', 'Pediatrician', NULL, NULL, 'no'),
-(12, 512, 'doctor', 'GeneralCare', NULL, NULL, 'no'),
-(13, 513, 'doctor', 'X-ray', NULL, NULL, 'no');
+(12, 512, 'hsp', 'hsp', NULL, NULL, 'no'),
+(13, 513, 'hsp', 'hsp', NULL, NULL, 'no'),
+(14, 514, 'hsp', 'hsp', NULL, NULL, 'no'),
+(15, 515, 'hsp', 'hsp', NULL, NULL, 'no'),
+(16, 516, 'hsp', 'hsp', NULL, NULL, 'no'),
+(17, 517, 'labstaff', 'labstaff', NULL, NULL, 'no'),
+(18, 518, 'labstaff', 'labstaff', NULL, NULL, 'no'),
+(19, 519, 'labstaff', 'labstaff', NULL, NULL, 'no'),
+(20, 520, 'labstaff', 'labstaff', NULL, NULL, 'no'),
+(21, 521, 'labstaff', 'labstaff', NULL, NULL, 'no');
 
 -- --------------------------------------------------------
 
@@ -195,6 +204,7 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   `patientType` varchar(500) DEFAULT NULL,
   `admissionRates` double DEFAULT NULL,
   `healthOutcomes` varchar(500) DEFAULT NULL,
+  `date` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`serialNumber`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -213,21 +223,21 @@ INSERT INTO `statistics` (`serialNumber`, `patientPopulation`, `patientType`, `a
 -- Constraints for table `alerts`
 --
 ALTER TABLE `alerts`
-  ADD CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patientID`);
 
 --
 -- Constraints for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`) ON DELETE CASCADE,
-    ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`),
+    ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);
 
 --
 -- Constraints for table `labtest`
 --
 ALTER TABLE `labtest`
-  ADD CONSTRAINT `labTest_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE,
-    ADD CONSTRAINT `labTest_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `labTest_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`),
+    ADD CONSTRAINT `labTest_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`);
 
 --
 -- Constraints for table `patient`
@@ -239,8 +249,8 @@ ALTER TABLE `patient`
 -- Constraints for table `prescriptions`
 --
 ALTER TABLE `prescription`
-  ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE,
-    ADD CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`),
+    ADD CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`);
 
 
 --

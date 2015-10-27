@@ -36,7 +36,7 @@ public class LabRequestTest {
     public void createEmptyLabRequest() {
         System.out.println("Test========Attempting to add lab request with empty string");
         Patient pat = new Patient();
-        pat.setUserID(1003);
+        pat.setUserID(1002);
         Person per = new Person();
         per.setUserID(505);
         LabTestRequest new1 = new LabTestRequest(0, "", pat, per);
