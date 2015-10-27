@@ -18,6 +18,8 @@ public class Prescription {
     private String quantity;
 
     public Prescription() {
+        patient = new Patient();
+        doctor = new Staff();
     }
 
     public int getStaffID() {

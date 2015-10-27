@@ -38,7 +38,7 @@ public class DoctorSQL {
 
             // PreparedStatements can use variables and are more efficient
             //String mh = patient.toString();
-
+            patient.convertDate();
             preparedStatement = connect.prepareStatement("INSERT into prescription set patientID = ?, staffID = ?, type = ?, date = ?, quantity = ?");
 
             preparedStatement.setInt(1, patient.getPatientID());
@@ -103,6 +103,12 @@ public class DoctorSQL {
         return PrescriptionList;
     }
 
+    /**
+     * Given a valid staffID, date, type, patientID and quantity, return ID
+     *
+     * @param Prescription p: given a patient with a valid staffID, date, type, patientID and quantity,.
+     * @return Prescriptions with ID corresponding to Patient
+     */
     public static Prescription getPrescriptionID(Prescription readMe) {
 
         try {
@@ -121,7 +127,7 @@ public class DoctorSQL {
             String type = readMe.getPrescriptionType();
             String quantity = readMe.getQuantity();
 
-            preparedStatement = connect.prepareStatement("SELECT serialNumber FROM appointment where staffID = ? and date = ? and type = ? and patientID = ? and quantity = ?");
+            preparedStatement = connect.prepareStatement("SELECT serialNumber FROM prescription where staffID = ? and date = ? and type = ? and patientID = ? and quantity = ?");
             preparedStatement.setInt(1, staffID);
             preparedStatement.setString(2, date);
             preparedStatement.setString(3, type);
@@ -142,6 +148,11 @@ public class DoctorSQL {
         return readMe;
     }
 
+    /**
+     *
+     * @param Prescription p: given a patient with a valid serialnumber
+     * @return Prescription object
+     */
     public static Prescription viewPrescriptonByID(Prescription readMe) {
         try {
             int checker;
@@ -155,7 +166,7 @@ public class DoctorSQL {
             // PreparedStatements can use variables and are more efficient
             int presID = readMe.getPrescriptionID();
 
-            preparedStatement = connect.prepareStatement("SELECT date, type, quantity, staffID, patientID FROM appointment where serialNumber = ? AND patientID IS NOT NULL");
+            preparedStatement = connect.prepareStatement("SELECT date, type, quantity, staffID, patientID FROM prescription where serialNumber = ? AND patientID IS NOT NULL");
             preparedStatement.setInt(1, presID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set

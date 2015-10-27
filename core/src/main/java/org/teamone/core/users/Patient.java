@@ -19,7 +19,6 @@ public class Patient extends Person {
         patientInformation = new PatientInformation();
         healthConditions = new HealthConditions();
         medicalHistory = new MedicalHistory();
-        prescription = new Prescription();
 
     }
 
