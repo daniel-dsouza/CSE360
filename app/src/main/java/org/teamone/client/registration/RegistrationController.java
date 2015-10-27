@@ -13,6 +13,7 @@ import org.teamone.core.users.Patient;
 import java.util.Map;
 
 @Controller
+//@Scope("request")//This breaks userID
 public class RegistrationController {
 
     //Patient attempt = new Patient();
