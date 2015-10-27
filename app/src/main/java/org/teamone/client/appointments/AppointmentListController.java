@@ -29,7 +29,7 @@ public class AppointmentListController {
         Appointment temp = new Appointment();
         int intUserID = Integer.parseInt(userID);
         temp.setPatientID(intUserID);
-        patientList = AppointmentSQL.viewAppointmentPatient(temp);
+        patientList = AppointmentSQL.viewAppointmentByPatient(temp);
         //TODO: this controller will display a list of the user appointments. for each, the user can select whether to create a new appointment, or edit/delete one. Delete not necessary.
     }
 }
