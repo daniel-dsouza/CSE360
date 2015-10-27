@@ -19,8 +19,8 @@ public class LabTestTester {
     public void setUp() {
 
         test = new LabTest();
-        test.getPatient().setUserID(1005);
-        test.setRequestionID(11);
+        test.getPatient().setUserID(1002);
+        test.setRequestionID(14);
         test.toMapObj("potassium,WHAT WHT WHAT:");
 
     }
