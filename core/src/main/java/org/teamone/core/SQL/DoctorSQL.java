@@ -1,5 +1,6 @@
 package org.teamone.core.SQL;
 
+import org.teamone.core.appointments.Appointment;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Patient;
@@ -136,6 +137,48 @@ public class DoctorSQL {
         return arrayOfDoctors;
 
     }
+
+    /**
+     * Method returns a list Appointments for doctor specialty.
+     *
+     * @param string: Specialty to find in sql.
+     * @return ArrayList: Arraylist of appointment objects
+     */
+    public static ArrayList<Appointment> getListSpecialtyPatient(String specialty) {
+        ArrayList<Appointment> arrayOfAppt = new ArrayList<Appointment>();
+        try {
+            ArrayList<Staff> arrayOfDoctors = getListDoctorSpecialty(specialty);//first search for specialty
+
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            for (int i = 0; i < arrayOfDoctors.size(); i++) {
+                preparedStatement = connect.prepareStatement("SELECT date, patientID FROM appointment WHERE doctorID = ? AND patientID IS NOT NULL;");
+                preparedStatement.setInt(1, arrayOfDoctors.get(i).getUserID());
+                resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    //Retrieve by column name
+
+                    Appointment new1 = new Appointment();
+                    new1.setDate(resultSet.getString("date"));
+                    new1.setPatientID(resultSet.getInt("patientID"));
+                    new1.setDoctorID(arrayOfDoctors.get(i).getUserID());
+                    arrayOfAppt.add(new1);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            arrayOfAppt = null;
+        } finally {
+            close();
+        }
+        return arrayOfAppt;
+
+    }
+
     /**
      * get all data from SQL with a staff ID
      * @param staff staff Object with valid staff ID

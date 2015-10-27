@@ -53,7 +53,20 @@ public class DoctorTest {
             }
 
         System.out.println(TestStrings.testEnd);
+    }
 
+    @Test
+    public void getListofPatientsBySpecialty() {
+        System.out.println("\nTest========Searching for Patients for doctor specialty 'Pediatrician' ");
+        ArrayList<Appointment> apptList = DoctorSQL.getListSpecialtyPatient("Pediatrician");
+        assertTrue("Could not get list of patients by doctor", !apptList.isEmpty());
 
+        Appointment temp;
+        for (int i = 0; i < apptList.size(); i++) {
+            temp = apptList.get(i);
+            System.out.println("Patient ID: " + temp.getPatientID() + "\tDate: " + temp.getDate());
+        }
+
+        System.out.println(TestStrings.testEnd);
     }
 }
