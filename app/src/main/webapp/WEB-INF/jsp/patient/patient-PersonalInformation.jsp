@@ -17,7 +17,7 @@
       Patient: Edit Personal Information
     </h2>
     <!-- used http://bootsnipp.com/snippets/featured/styled-table && http://www.web4j.com/web4j/javadoc/hirondelle/web4j/ui/tag/Populate.html -->
-    <form:form action="editPersonal" method="post" commandName="userInput" onsubmit="return checkPersonalInformation()" name="test"> <!-- action="<name>" <!-- this does /<name> on POST -->
+    <form:form action="personal" method="post" commandName="userInput" onsubmit="return checkPersonalInformation()" name="test"> <!-- action="<name>" <!-- this does /<name> on POST -->
       <div class="span8">
         <div class="widget-content" style="padding: 0"> <!-- Border around table and Table -->
           <table class="table" style="margin-bottom: 0;border: none"> <!-- Rows and cols of the table -->
