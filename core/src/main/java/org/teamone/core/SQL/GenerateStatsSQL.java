@@ -31,7 +31,6 @@ public class GenerateStatsSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-
             preparedStatement = connect.prepareStatement("SELECT alert_id, alertDateAndTime  FROM alerts WHERE AlertActive = 1;");
             resultSet = preparedStatement.executeQuery();
 
