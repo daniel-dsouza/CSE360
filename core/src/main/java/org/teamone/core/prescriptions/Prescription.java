@@ -15,8 +15,11 @@ public class Prescription {
     private String prescriptionType;
     private Date dateAndTime;
     private String strDateAndTime;
+    private String quantity;
 
     public Prescription() {
+        patient = new Patient();
+        doctor = new Staff();
     }
 
     public int getStaffID() {
@@ -51,6 +54,29 @@ public class Prescription {
         this.prescriptionType = prescriptionType;
     }
 
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Staff getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Staff doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
 
     public Date getDateAndTime() {
         return dateAndTime;
