@@ -18,86 +18,103 @@
     </h2>
     <!-- used http://bootsnipp.com/snippets/featured/styled-table -->
     <form:form action="page1" method="post" commandName="userInput" onsubmit="return checkFormRegistration()" name="test"> <!-- action="<name>" <!-- this does /registration/<name> on POST -->
-    <div class="span8">
-      <div class="widget-content" style="padding: 0"> <!-- Border around table and Table -->
-        <table class="table" style="margin-bottom: 0;border: none"> <!-- Rows and cols of the table -->
-          <tbody>
-          <tr> <!-- Row 1 -->
-            <td>First Name*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="firstName" id="firstName" required="true" /> <!-- name can only be letters -->
-            </td>
-            <td>Last Name*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="lastName" id="lastName" required="true" /> <!-- name can only be letters -->
-            </td>
-          </tr>
-          <tr> <!-- Row 2 -->
-            <td>Age*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="age" id="age" required="true" /> <!-- age must be a number -->
-            </td>
-            <td>Address*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="address" required="true" /> <!-- only checked to see if it is empty -->
-            </td>
-          </tr>
-          <tr> <!-- Row 3 -->
-            <td>City*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="city" required="true" /> <!-- only checked to see if it is empty -->
-            </td>
-            <td>State*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="state" required="true" /> <!-- only checked to see if it is empty -->
-            </td>
-          </tr>
-          <tr> <!-- Row 4 -->
-            <td>Zipcode*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="zipcode" id="zipcode" required="true" /> <!-- must be of form ##### or #####-#### to pass -->
-            </td>
-            <td>Home Phone #*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="homePhone" id="phone" required="true" /> <!-- must be of form (###)-###-#### -->
-            </td>
-          </tr>
-          <tr> <!-- Row 5 -->
-            <td>Email*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="email" id="email" required="true" /> <!-- must be (any char)@(any two or more char).(any two or more char) to pass -->
-            </td>
-            <td>Insurance*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="insurance" required="true" /> <!-- only checked to see if it is empty -->
-            </td>
-          </tr>
-          <tr> <!-- Row 6 -->
-            <td>Social Security #*: </td>
-            <td>
-              <form:input class='form-control' size='4' type='text' path="ssn" id="ssn" required="true" /> <!-- must be ###-##-#### -->
-            </td>
-            <td>Gender*: </td>
-            <td>
-              <form:select path="gender" class="selectpicker" name="gender" > <!-- one of the other options than "select one" must be selected -->
-                <option>select one</option>
-                <option>Male</option>
-                <option>Female</option>
-              </form:select>
-            </td>
-          </tbody>
-        </table> <!-- End of table -->
-      </div> <!-- End of widget-content -->
-      <br/>
-      <div class="button_holder" style="text-align: center;">
+      <div class="span8">
+        <div class="widget-content" style="padding: 0"> <!-- Border around table and Table -->
+          <table class="table" style="margin-bottom: 0;border: none"> <!-- Rows and cols of the table -->
+            <tbody>
+            <tr> <!-- Row 1 -->
+              <td>First Name*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.firstName" id="firstName"
+                            required="true"/> <!-- name can only be letters -->
+              </td>
+              <td>Last Name*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.lastName" id="lastName"
+                            required="true"/> <!-- name can only be letters -->
+              </td>
+            </tr>
+            <tr> <!-- Row 2 -->
+              <td>Age*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.age" id="age"
+                            required="true"/> <!-- age must be a number -->
+              </td>
+              <td>Address*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.address"
+                            required="true"/> <!-- only checked to see if it is empty -->
+              </td>
+            </tr>
+            <tr> <!-- Row 3 -->
+              <td>City*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.city" required="true"/>
+                <!-- only checked to see if it is empty -->
+              </td>
+              <td>State*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.state" required="true"/>
+                <!-- only checked to see if it is empty -->
+              </td>
+            </tr>
+            <tr> <!-- Row 4 -->
+              <td>Zipcode*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.zipcode" id="zipcode"
+                            required="true"/> <!-- must be of form ##### or #####-#### to pass -->
+              </td>
+              <td>Phone Number*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.homePhone" id="phone"
+                            required="true"/> <!-- must be of form (###)-###-#### -->
+              </td>
+            </tr>
+            <tr> <!-- Row 5 -->
+              <td>Email*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.email" id="email"
+                            required="true"/>
+                <!-- must be (any char)@(any two or more char).(any two or more char) to pass -->
+              </td>
+              <td>Insurance*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.insurance"
+                            required="true"/> <!-- only checked to see if it is empty -->
+              </td>
+            </tr>
+            <tr> <!-- Row 6 -->
+              <td>Social Security #*:</td>
+              <td>
+                <form:input class='form-control' size='4' type='text' path="patientInformation.ssn" id="ssn"
+                            required="true"/> <!-- must be ###-##-#### -->
+              </td>
+              <td>Gender*:</td>
+              <td>
+                <form:select path="patientInformation.gender" class="selectpicker"
+                             id="gender"> <!-- one of the other options than "select one" must be selected -->
+                  <option>select one</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </form:select>
+              </td>
+            </tbody>
+          </table>
+          <!-- End of table -->
+        </div>
+        <!-- End of widget-content -->
+        <br/>
+
+        <div class="button_holder" style="text-align: center;">
         <span class="group-btn">
             <input type="submit" value="Next" class="btn btn-primary btn-md"/>
         </span>
+        </div>
+        <h4 style="Color: #FF0000">
+          * = Required
+        </h4>
       </div>
-      <h4 style="Color: #FF0000">
-        * = Required
-      </h4>
-    </div> <!-- /widget -->
+      <!-- /widget -->
     </form:form>
   </jsp:body>
 </t:userpage>
@@ -118,7 +135,7 @@
       alert("Please enter a valid email");
       return false;
     }
-    if (gender == "select one"){
+    if (gender == "select one" || gender == null) {
       alert("Please select a gender");
       return false;
     }

@@ -8,10 +8,10 @@ public class PatientInformation {
     private String firstName ="";
     private String lastName ="";
     private String age;
-    private String address=" ";
-    private String city=" ";
-    private String state=" ";
-    private String zipcode=" ";
+    private String address = "";
+    private String city = "";
+    private String state = "";
+    private String zipcode = "";
     private String homePhone;
     private String email;
     private String insurance;
