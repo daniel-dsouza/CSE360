@@ -2,7 +2,6 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.LabStaffSQL;
 import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.labs.LabTest;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 
-public class LabStaffTest {
+public class LabTestTester {
 
     private LabTest test;
 
@@ -29,7 +28,7 @@ public class LabStaffTest {
     @Test
     public void updateLabReport() {
         System.out.println("\nTest========update lab report");
-        test = LabStaffSQL.updateLabTest(test);
+        test = LabTestSQL.updateLabTest(test);
         assertTrue("Could not update lab report", test != null);
 
         System.out.println("Update lab test successful");
@@ -59,7 +58,7 @@ public class LabStaffTest {
         System.out.println("\nTest========Extract all lab tests for a patient");
         Patient new1 = new Patient();
         new1.setPatientID(1002);
-        ArrayList<LabTest> tempList = LabTestSQL.getListLabTest(new1);
+        ArrayList<LabTest> tempList = LabTestSQL.getListLabTestByPatient(new1);
         assertTrue("No lab tests by patient ID", !tempList.isEmpty());
         LabTest tempRequest;
         for (LabTest l : tempList) {

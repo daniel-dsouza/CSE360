@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
-import org.teamone.core.SQL.LabStaffSQL;
 import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.labs.LabTestRequest;
