@@ -5,21 +5,12 @@ package org.teamone.core.users;
  */
 public class Staff extends Person {
 
-    private int staffID = 0;
     private String occupation ;
     private String specialty ;
     private int patientID = 0;
     private String schedule ;
 
     private String emergencyWardDoctor = "yes";
-
-    public int getStaffID() {
-        return staffID;
-    }
-
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
-    }
 
     public String getOccupation() {
         return occupation;

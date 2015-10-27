@@ -66,12 +66,12 @@ public class Appointment {
     }
 
     public int getPatientID() {
-        return patient.getPatientID();
+        return patient.getUserID();
     }
 
     public void setPatientID(int patientID)
     {
-        this.patient.setPatientID(patientID);
+        this.patient.setUserID(patientID);
     }
 
     public String getDate() {
@@ -91,11 +91,11 @@ public class Appointment {
     }
 
     public int getDoctorID() {
-        return doctor.getStaffID();
+        return doctor.getUserID();
     }
 
     public void setDoctorID(int doctorID) {
-        this.doctor.setStaffID(doctorID);
+        this.doctor.setUserID(doctorID);
     }
 
     public String getReason() {

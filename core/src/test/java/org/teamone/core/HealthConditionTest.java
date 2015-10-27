@@ -16,7 +16,7 @@ public class HealthConditionTest {
     public void setUp() {
 
         test = new Patient();
-        test.setPatientID(1004);
+        test.setUserID(1004);
         test.healthConditions.toMapObj("anklePain,true:");
     }
 

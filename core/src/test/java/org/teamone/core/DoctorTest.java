@@ -24,7 +24,7 @@ public class DoctorTest {
     @Test
     public void getListofPatients() {
         Doctor new1 = new Doctor();
-        new1.setStaffID(501);
+        new1.setUserID(501);
         System.out.println("\nTest========Searching for Patients with doctor id ");
         ArrayList<Patient> patientList = DoctorSQL.getDoctorPatientsList(new1);
         assertTrue("Could not get list of patients by doctor", !patientList.isEmpty());
@@ -32,7 +32,7 @@ public class DoctorTest {
         Patient tempPat;
         for (int i = 0; i < patientList.size(); i++) {
             tempPat = patientList.get(i);
-            System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getPatientID());
+            System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getUserID());
         }
 
         System.out.println(TestStrings.testEnd);
@@ -41,7 +41,7 @@ public class DoctorTest {
     public void getAvailableTimes() {
         System.out.println("\nTest========Searching for Available Doctor Times ");
         Doctor new1 = new Doctor();
-        new1.setStaffID(501);
+        new1.setUserID(501);
         ArrayList<Appointment> timesList = AppointmentSQL.getAvailableDoctorTimes(new1);
         assertTrue("Could not get Available Doctor Times", !timesList.isEmpty());
 

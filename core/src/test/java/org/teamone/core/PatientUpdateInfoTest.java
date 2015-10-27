@@ -19,7 +19,6 @@ public class PatientUpdateInfoTest {
     public void setUp() {
 
         update = new Patient();
-        update.setPatientID(1004);
         update.setUserID(1004);
         update.patientInformation.setFirstName("Ryan");
         update.patientInformation.setLastName("Syani");

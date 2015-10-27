@@ -70,7 +70,7 @@ public class StaffListTest {
         Patient tempPat;
         for (int i = 0; i < patientList.size(); i++) {
             tempPat = patientList.get(i);
-            System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getPatientID());
+            System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getUserID());
         }
 
         System.out.println(TestStrings.testEnd);
