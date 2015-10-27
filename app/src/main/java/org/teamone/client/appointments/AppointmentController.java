@@ -47,13 +47,15 @@ public class AppointmentController {
      */
     @RequestMapping(value = "/getappointments/{doctor}", method = RequestMethod.GET)
     public @ResponseBody
-    ArrayList<Staff> findAppointments(@PathVariable String doctor) {
+    ArrayList<Appointment> findAppointments(@PathVariable String doctor) {
 //        ArrayList<Staff> doctorList = new ArrayList<Staff>(); //Hashing strikes again.
         //doctorList = PersonUtils.getStaffList(speciality);
         //System.out.println(speciality); //DEBUG statements
         ArrayList<Appointment> timesList = new ArrayList<Appointment>();
-        int docId = LoginSQL.getID(doctor);                     //NEEDS THIS
-        timesList = DoctorSQL.getDoctorsAppointment(docId); // TODO: method needs to be created in backend
+        int docId = LoginSQL.getID(doctor);
+        Doctor temp = new Doctor();
+        temp.setUserID(docId);
+        timesList = AppointmentSQL.getAvailableDoctorTimes(temp); // TODO: method needs to be created in backend
         System.out.println(doctor); //DEBUG statements
         System.out.println("returning times list");
         return timesList;   //NEEDS THIS
@@ -72,9 +74,12 @@ public class AppointmentController {
 
     @RequestMapping(value = "/view/{appointmentID}", method = RequestMethod.GET)    //views one specific appt
     public String viewAppointment(Map<String, Object> model,
-                                      @PathVariable String appointmentID) {
+                                      @PathVariable int appointmentID) {
         System.out.println("view an appointment");
-        Appointment appointment = AppointmentSQL.viewAppointmentAppt(appointmentID); //TODO: method needs to return just one appt in backend
+        Appointment appt = new Appointment();
+
+        appt.setAppointmentID(appointmentID);
+        Appointment appointment = AppointmentSQL.viewAppointmentByApptID(appt); //TODO: method needs to return just one appt in backend
 
         //TODO: add extra stuff here.
         model.put("appointment", appointment);
@@ -84,9 +89,12 @@ public class AppointmentController {
 
     @RequestMapping(value = "/edit/{appointmentID}", method = RequestMethod.GET)
     public String editAppointment(Map<String, Object> model,
-                                  @PathVariable String appointmentID) {
+                                  @PathVariable int appointmentID) {
         System.out.println("edit an appointment");
-        Appointment appointment = AppointmentSQL.viewAppointmentAppt(appointmentID); //TODO: method needs to return just one appt in backend
+        Appointment appt = new Appointment();
+
+        appt.setAppointmentID(appointmentID);
+        Appointment appointment = AppointmentSQL.viewAppointmentByApptID(appt); //TODO: method needs to return just one appt in backend
 
         //TODO: add extra stuff here.
         model.put("appointment", appointment);
