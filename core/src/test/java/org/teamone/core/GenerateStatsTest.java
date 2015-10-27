@@ -35,7 +35,7 @@ public class GenerateStatsTest {
     @Test
     public void updateHC(){
 
-        //GenerateStatsSQL.getNumOfPatientType(test3);
+        //Ge//nerateStatsSQL.getNumOfPatientType(test3);
         System.out.println("Number of Alerts within this Month: " + GenerateStatsSQL.getNumOfAlerts(test));
         System.out.println("Number of New Patients within this Month: " + GenerateStatsSQL.getNumOfNewPatients(test2));
         System.out.println("Male Population: " + String.format("%.2f",GenerateStatsSQL.getMalePopulation(test2)) + "%");
