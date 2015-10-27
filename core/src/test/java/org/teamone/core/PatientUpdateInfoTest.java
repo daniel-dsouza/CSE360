@@ -31,7 +31,7 @@ public class PatientUpdateInfoTest {
         update.patientInformation.setSsn("194-45-3453");
         update.patientInformation.setInsurance("newSrurnace");
         update.patientInformation.setAge("22");
-        update.patientInformation.setGender("male");
+        update.patientInformation.setGender("Male");
 
     }
 
