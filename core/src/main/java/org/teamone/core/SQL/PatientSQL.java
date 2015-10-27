@@ -22,43 +22,6 @@ public class PatientSQL {
     private static ResultSet resultSet = null;
 
     /**
-     * update health conditions.
-     * @param patient with valid patient ID and filled in health conditions
-     * @return
-     */
-    public static Patient updateHealthCondition(Patient patient) {
-        Patient Result = new Patient();
-        try {
-            int checker;
-            // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.jdbc.Driver");
-            // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-
-            // PreparedStatements can use variables and are more efficient
-            int ID = patient.getUserID();
-
-            String hc = patient.healthConditions.toString();
-
-            preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
-            preparedStatement.setString(1, hc);
-            preparedStatement.setInt(2, ID);
-            checker = preparedStatement.executeUpdate();
-
-            if (checker == 0)
-                Result = null;
-
-        } catch (Exception e) {
-            System.out.println(e);
-            Result = null;
-        } finally {
-            close();
-        }
-        return Result;
-    }
-
-    /**
      * update personal info
      * @param patient with valid PatientID
      * @return

@@ -236,7 +236,8 @@ public class AppointmentSQL {
 
     /**
      * Edit the appointment. Can be used by patients, doctors, and HSP
-     *  This is will use doctorID, date and time to edit the SQL.
+     * This is will use doctorID, date and time to edit the SQL.
+     *
      * @param readMe Appointment Object with valid doctorID, date and time
      * @return Appointment
      */
@@ -289,6 +290,51 @@ public class AppointmentSQL {
             readMe = null;
         }
         return readMe;
+    }
+
+    /**
+     * Preloads the database with appointments
+     * NO FRONTEND SHOULD CALL THIS
+     *
+     * @param readMe Appointment Object
+     * @return boolean
+     */
+    public static boolean preloadAppointment(Appointment readMe) {
+        boolean result = false;
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            int docID = readMe.getDoctorID();
+            String date = readMe.getDate();
+            String time = readMe.getTime();
+
+
+            String insertApp = "INSERT INTO appointment "
+                    + "(doctorID, date, time) VALUES"
+                    + "(?,?,?);";
+            // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect.prepareStatement(insertApp);
+            preparedStatement.setInt(1, docID);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, time);
+            checker = preparedStatement.executeUpdate();
+            if (checker == 0)
+                result = false;
+            else
+                result = true;
+
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            readMe = null;
+        }
+        return result;
     }
 
     /**
@@ -349,6 +395,7 @@ public class AppointmentSQL {
 
     /**
      * Same as editAppointment, but will only use appointmentID
+     *
      * @param readMe Appointment Object with valid appointmentID
      * @return appointment object
      */
