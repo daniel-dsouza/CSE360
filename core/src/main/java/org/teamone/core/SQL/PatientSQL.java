@@ -317,8 +317,8 @@ public class PatientSQL {
                     System.out.println("Alert in alerts table is present. Updating now");
                     preparedStatement = connect.prepareStatement("UPDATE alerts set alert_reason = ?, AlertActive=TRUE, alertDateAndTime = ? where patient_id = ?");
                     preparedStatement.setString(1, patient.healthConditions.alertReason);
-                    preparedStatement.setInt(2, patient.getUserID());
-                    preparedStatement.setString(3, alertTime);
+                    preparedStatement.setString(2, alertTime);
+                    preparedStatement.setInt(3, patient.getUserID());
                     preparedStatement.executeUpdate();
 
                 }
