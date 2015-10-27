@@ -5,13 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
-<t:userpage>
-    <jsp:attribute name="nav">
-        <jsp:include page="/WEB-INF/jsp/generic/navbar.jsp"/>
-    </jsp:attribute>
-    <jsp:attribute name="footer">
-        <jsp:include page="../generic/footer.jsp"/>
-    </jsp:attribute>
+<t:template>
   <jsp:body>
     <h2 style="text-align: center;">
       HSP: New Patient
@@ -117,7 +111,7 @@
       <!-- /widget -->
     </form:form>
   </jsp:body>
-</t:userpage>
+</t:template>
 
 
 <!-- http://stackoverflow.com/questions/16134733/html-javascript-simple-form-validation-on-submit -->

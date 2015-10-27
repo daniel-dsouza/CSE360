@@ -16,13 +16,7 @@
   }
 </style>
 
-<t:userpage>
-    <jsp:attribute name="nav">
-        <jsp:include page="/WEB-INF/jsp/generic/navbar.jsp"/>
-    </jsp:attribute>
-    <jsp:attribute name="footer">
-        <jsp:include page="../generic/footer.jsp"/>
-    </jsp:attribute>
+<t:template>
   <jsp:body>
     <h2 style="text-align: center;">
       Edit Medical History
@@ -403,4 +397,4 @@
       </div>
     </form:form>
   </jsp:body>
-</t:userpage>
+</t:template>
