@@ -9,6 +9,8 @@ import org.teamone.core.users.Patient;
 
 import java.util.Random;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by system on 10/22/15.
  */
@@ -22,18 +24,15 @@ public class AARegisterTest {
 
     }
     @Test
-    public void tester()
+    public void RegisterTest()
         {
             for(int i = 0; i < 1; i++) {//change this into how many runs u want.
                 System.out.println("\nTest========Registering New Patient");
                 random();//call this to random
                 Patient p = HspSQL.RegisterNewPatient(regis);
-                if (p != null) {
+                assertTrue("Failed to register", p!=null);//if p!=null returns false, display message
                     System.out.println("*********************Register successful************************");
-                    System.out.println("New patient has id: " + p.getPatientID());
-                } else
-                    System.out.println("\n************************Register failed********************");
-
+                System.out.println("New patient has id: " + p.getUserID());
                 System.out.println(TestStrings.testEnd);
 
                 p.healthConditions.toMapObj("redFace,true:");
@@ -41,14 +40,8 @@ public class AARegisterTest {
                 //"impotence", "protrudingEyes", "redFace", "stomachPain", "swelling", "testiclePain", "vomitting"};
 
                 System.out.println("\nTest========Update health conditions");
-                if(PatientSQL.setHealthConditions(p))
-                {
-                    System.out.println("Update successful");
-
-                }
-                else
-                    System.out.println("\nUpdate failed");
-
+                boolean check =PatientSQL.setHealthConditions(p);
+                assertTrue("Failed to set health conditions", check);
                 System.out.println(TestStrings.testEnd);
             }
 

@@ -11,6 +11,8 @@ import org.teamone.core.users.Patient;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertTrue;
+
 public class AlertTest {
 
     private Alert test;
@@ -20,60 +22,52 @@ public class AlertTest {
     public void setUp() {
 
         test = new Alert();
-        test.setAlertID(2);
+        test.setAlertID(2001);
 
 
     }
+
     @Before
     public void setUpPatient() {
 
         test2 = new Patient();
-        test2.setPatientID(1001);
+        test2.setUserID(1001);
         test2.healthConditions.toMapObj("anxiety,true:discoloredUrine,true");
         test2.medicalHistory.toMapObj(":");
 
     }
 
     @Test
-    public void updateHC() {
+    public void setAlertOf() {
         System.out.println("\nTest========Alert off health conditions");
-        if(AlertSQL.setAlertOff(test))//turn off alertID, 2
-        {
-            System.out.println("Off successful");
-        }
-        else
-            System.out.println("\nOff failed");
-
+        boolean check = AlertSQL.setAlertOff(test);
+        //assertTrue("Failed to set alert off", check);//uncomment when read to test
+        System.out.println("Off successful");
         System.out.println(TestStrings.testEnd);
+    }
 
-        PatientSQL.setMedicalHistory(test2);
-        if(PatientSQL.setHealthConditions(test2)) {
-            System.out.println("Set/Update successful");
-        }
-        else {
-            System.out.println("Set/Update failed");
-        }
+    @Test
+    public void setMH() {
+        boolean check = PatientSQL.setMedicalHistory(test2);
+        assertTrue("Failed to set medical history", check);
+        System.out.println("Set/Update successful");
         System.out.println(TestStrings.testEnd);
+    }
 
-
-        ArrayList<Alert> testArr = AlertSQL.getListAlerts();
+    @Test
+    public void getListofAlerts() {
         System.out.println("\nTest========Searching for Alerts ");
-        if(testArr!=null)
-        {
+        ArrayList<Alert> testArr = AlertSQL.getListAlerts();
 
-            Alert tempAlert;
-            for(int i = 0; i < testArr.size(); i++) {
-                tempAlert = testArr.get(i);
-                System.out.println("Name " + LoginSQL.getName(tempAlert.getPatientID()) + " has reason "+tempAlert.getReason());
-                System.out.println("Alert ID: " + tempAlert.getAlertID());
-                System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());
-            }
+        assertTrue("There were no alerts, subsequent tests will fail", !testArr.isEmpty());
+
+        Alert tempAlert;
+        for (int i = 0; i < testArr.size(); i++) {
+            tempAlert = testArr.get(i);
+            System.out.println("Name " + LoginSQL.getName(tempAlert.getPatientID()) + " has reason " + tempAlert.getReason());
+            System.out.println("Alert ID: " + tempAlert.getAlertID());
+            System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());
         }
-        else
-            System.out.println("SEARCH FAILED");
         System.out.println(TestStrings.testEnd);
-
-
-
     }
 }

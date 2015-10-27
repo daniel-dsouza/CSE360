@@ -8,8 +8,8 @@ package org.teamone.core.SQL;
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
 
+import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,8 +22,8 @@ public class PatientSQL {
     private static ResultSet resultSet = null;
 
     /**
-     * update health conditions
-     * @param patient with valid patient ID
+     * update health conditions.
+     * @param patient with valid patient ID and filled in health conditions
      * @return
      */
     public static Patient updateHealthCondition(Patient patient) {
@@ -37,34 +37,14 @@ public class PatientSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
-            String name = patient.patientInformation.toStringName();
-            String SSN = patient.getSSN();
-            String address = patient.patientInformation.toStringAddress();
-            String email = patient.patientInformation.getEmail();
-            String phone = patient.getPhone();
-            String insurance = patient.getInsurance();
-            String age = patient.getAge();
-            String gender = patient.getGender();
-            String occupation = patient.getOccupation();
+            int ID = patient.getUserID();
+
             String hc = patient.healthConditions.toString();
 
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
             preparedStatement.setString(1, hc);
             preparedStatement.setInt(2, ID);
             checker = preparedStatement.executeUpdate();
-
-            Result.setOccupation(occupation);
-            Result.setName(name);
-            Result.setPatientID(ID);
-            Result.setEmail(email);
-
-            Result.setAddress(address);
-            Result.setSSN(SSN);
-            Result.setGender(gender);
-            Result.setInsurance(insurance);
-            Result.setAge(age);
-            Result.setPhone(phone);
 
             if (checker == 0)
                 Result = null;
@@ -98,7 +78,7 @@ public class PatientSQL {
 
 
             // PreparedStatements can use variables and are more efficient
-            int patientID = patient.getPatientID();
+            int patientID = patient.getUserID();
             String name = patient.patientInformation.toStringName();
             String SSN = patient.getSSN();
             String address = patient.patientInformation.toStringAddress();
@@ -132,7 +112,7 @@ public class PatientSQL {
 
             Result.setOccupation(occupation);
             Result.setName(name);
-            Result.setPatientID(patientID);
+            Result.setUserID(patientID);
             Result.setEmail(email);
 
             Result.setAddress(address);
@@ -170,12 +150,12 @@ public class PatientSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
+            int ID = patient.getUserID();
 
 
             preparedStatement = connect.prepareStatement("SELECT p2.name, p2.emailID, p.medicalhistory, p.occupation, p.address, p.SSN, p.gender, p.insurance, p.age, p.phone, p.healthConditions  FROM patient p, person p2 where patientID = ? and userID = ?");
-            preparedStatement.setInt(1, patient.getPatientID());
-            preparedStatement.setInt(2, patient.getPatientID());
+            preparedStatement.setInt(1, patient.getUserID());
+            preparedStatement.setInt(2, patient.getUserID());
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             patient.setOccupation(resultSet.getString("p.occupation"));
@@ -204,7 +184,7 @@ public class PatientSQL {
             patient.healthConditions.toMapObj(hc);
 
 
-            patient.setPatientID(ID);
+            patient.setUserID(ID);
 
 
 
@@ -235,7 +215,7 @@ public class PatientSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
+            int ID = patient.getUserID();
             String mh = null;
 
             preparedStatement = connect.prepareStatement("SELECT medicalhistory FROM patient where patientID = ?");
@@ -244,7 +224,7 @@ public class PatientSQL {
             resultSet.next();
             mh = resultSet.getString("medicalhistory");
             patient.medicalHistory.toMapObj(mh);
-            patient.setPatientID(ID);
+            patient.setUserID(ID);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -274,7 +254,7 @@ public class PatientSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
+            int ID = patient.getUserID();
             String mh = patient.medicalHistory.toString();
 
             preparedStatement = connect.prepareStatement("UPDATE patient set medicalHistory = ? where patientID = ?");
@@ -313,7 +293,7 @@ public class PatientSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
+            int ID = patient.getUserID();
             String hc = null;
 
             preparedStatement = connect.prepareStatement("SELECT healthConditions FROM patient where patientID = ?");
@@ -322,7 +302,7 @@ public class PatientSQL {
             resultSet.next();
             hc = resultSet.getString("healthConditions");
             patient.healthConditions.toMapObj(hc);
-            patient.setPatientID(ID);
+            patient.setUserID(ID);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -352,7 +332,7 @@ public class PatientSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int ID = patient.getPatientID();
+            int ID = patient.getUserID();
 
             String hc = patient.healthConditions.toString();
 //checking alert
@@ -370,11 +350,11 @@ public class PatientSQL {
                         new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String alertTime = sdf.format(dt);
 
-                if (myList.contains(patient.getPatientID())) {
+                if (myList.contains(patient.getUserID())) {
                     System.out.println("Alert in alerts table is present. Updating now");
                     preparedStatement = connect.prepareStatement("UPDATE alerts set alert_reason = ?, AlertActive=TRUE, alertDateAndTime = ? where patient_id = ?");
                     preparedStatement.setString(1, patient.healthConditions.alertReason);
-                    preparedStatement.setInt(2, patient.getPatientID());
+                    preparedStatement.setInt(2, patient.getUserID());
                     preparedStatement.setString(3, alertTime);
                     preparedStatement.executeUpdate();
 
@@ -384,7 +364,7 @@ public class PatientSQL {
                     //INSERT INTO alerts(alert_reason, patient_id,AlertActive) VALUES (":anklePain", 1234,1) ;
                     preparedStatement = connect.prepareStatement("INSERT INTO alerts(alert_reason, patient_id, alertDateAndTime, AlertActive) VALUES (?, ?, ?, TRUE) ;");
                     preparedStatement.setString(1, patient.healthConditions.alertReason);
-                    preparedStatement.setInt(2, patient.getPatientID());
+                    preparedStatement.setInt(2, patient.getUserID());
                     preparedStatement.setString(3, alertTime);
 
                     preparedStatement.executeUpdate();
@@ -433,7 +413,6 @@ public class PatientSQL {
             while (rs.next()) {
                 Patient patient = new Patient();
                 patient.setName(rs.getString("name"));
-                patient.setPatientID(rs.getInt("userID"));
                 patient.setUserID(rs.getInt("userID"));
                 patientList.add(patient);
             }
@@ -472,7 +451,6 @@ public class PatientSQL {
             while (rs.next()) {
                 Patient pers = new Patient();
                 pers.setUserID(rs.getInt("userID"));
-                pers.setPatientID(rs.getInt("userID"));
 
                 pers= PatientSQL.getPatientComplete(pers);
                 pers.setName(rs.getString("name"));
@@ -494,9 +472,38 @@ public class PatientSQL {
      * @param staff: Given a staff object
      * @return ArrayList: List of Patients
      */
-    public ArrayList<Patient> getPatientByStaff (Staff staff) {
-        //TODO: getPatientByStaff
-        return null;
+    public static ArrayList<Patient> getPatientByStaff (Doctor doc) {
+        ArrayList<Patient> PatientList = new ArrayList<Patient>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            int docID = doc.getUserID();
+            // PreparedStatements can use variables and are more efficient
+
+            preparedStatement = connect.prepareStatement("select patientID from appointment where doctorID = ? and patientID IS NOT NULL;");
+            //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
+            preparedStatement.setInt(1,docID);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Patient pers = new Patient();
+                pers.setUserID(rs.getInt("patientID"));
+
+                pers= PatientSQL.getPatientComplete(pers);
+                PatientList.add(pers);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            PatientList = null;
+
+        } finally {
+            close();
+        }
+        return PatientList;
     }
 
     // You need to close the resultSet

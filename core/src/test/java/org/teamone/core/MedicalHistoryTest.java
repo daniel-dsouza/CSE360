@@ -6,6 +6,8 @@ import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 
+import static org.junit.Assert.assertTrue;
+
 public class MedicalHistoryTest {
 
     private Patient test;
@@ -14,30 +16,27 @@ public class MedicalHistoryTest {
     public void setUp() {
 
         test = new Patient();
-        test.setPatientID(1004);
+        test.setUserID(1004);
         test.medicalHistory.toMapObj("aidsHIVPositive,true:");
     }
 
     @Test
-    public void updateHC() {
+    public void updateMH() {
         System.out.println("\nTest========setting list medical history");
-        if(PatientSQL.setMedicalHistory(test))
-        {
-            System.out.println("Set successful");
-        }
-        else
-            System.out.println("\nSet failed");
-
+        boolean check = PatientSQL.setMedicalHistory(test);
+        assertTrue("Failed to set medical history", check);
+        System.out.println("Set successful");
         System.out.println(TestStrings.testEnd);
 
-        System.out.println("\nTest========Get list health conditions");
-        if(PatientSQL.getMedicalHistory(test)!=null)
-        {
-            System.out.println("Get successful");
-        }
-        else
-            System.out.println("\nGet failed");
+    }
 
+    @Test
+    public void viewMH() {
+        System.out.println("\nTest========Get list health conditions");
+        Patient p = PatientSQL.getMedicalHistory(test);
+        assertTrue("Failed to view medical history", p != null);
+
+        System.out.println("Get successful");
         System.out.println(TestStrings.testEnd);
     }
 }

@@ -20,11 +20,11 @@ public class Prescription {
     }
 
     public int getStaffID() {
-        return doctor.getStaffID();
+        return doctor.getUserID();
     }
 
     public void setStaffID(int staffID) {
-        this.doctor.setStaffID(staffID);
+        this.doctor.setUserID(staffID);
     }
 
     public int getPrescriptionID() {
@@ -36,11 +36,11 @@ public class Prescription {
     }
 
     public int getPatientID() {
-        return patient.getPatientID();
+        return patient.getUserID();
     }
 
     public void setPatientID(int patientID) {
-        this.patient.setPatientID(patientID);
+        this.patient.setUserID(patientID);
     }
 
     public String getPrescriptionType() {
