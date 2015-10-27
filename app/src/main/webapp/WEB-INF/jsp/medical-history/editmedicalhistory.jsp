@@ -397,7 +397,7 @@
         <br/>
         <div class="button_holder" style="text-align: center;"> <!-- Cause an error -->
                   <span class="group-btn">
-                      <input type="submit" value="Done" class="btn btn-primary btn-md"/>
+                      <input type="submit" value="Update" class="btn btn-primary btn-md"/>
                   </span>
         </div>
       </div>
