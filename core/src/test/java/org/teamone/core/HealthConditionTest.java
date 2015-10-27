@@ -23,8 +23,8 @@ public class HealthConditionTest {
     @Test
     public void updateHC() {
         System.out.println("\nTest========Update health conditions");
-        Patient p = PatientSQL.updateHealthCondition(test);
-        assertTrue("Could not update health conditions", p != null);
+        Boolean p = PatientSQL.setHealthConditions(test);
+        assertTrue("Could not update health conditions", p);
 
         System.out.println("Update successful");
         System.out.println(TestStrings.testEnd);
