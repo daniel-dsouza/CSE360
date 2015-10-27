@@ -19,7 +19,7 @@ public class PatientUpdateInfoTest {
     public void setUp() {
 
         update = new Patient();
-        update.setUserID(1004);
+        update.setUserID(1002);
         update.patientInformation.setFirstName("Ryan");
         update.patientInformation.setLastName("Syani");
         update.patientInformation.setAddress("Eastern Ocean");

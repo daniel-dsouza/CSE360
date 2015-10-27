@@ -24,7 +24,7 @@ public class PrescriptionTest {
         add = new Prescription();
         add.setPatientID(1002);
         add.setStaffID(501);
-        add.setPrescriptionType("new type");
+        add.setPrescriptionType("Allergies");
         add.setQuantity("50mg");
         Date date = new Date();
         add.setDateAndTime(date);
@@ -69,9 +69,9 @@ public class PrescriptionTest {
         Prescription getID = new Prescription();
         getID.setPatientID(1002);
         getID.setStaffID(501);
-        getID.setPrescriptionType("new type");
+        getID.setPrescriptionType("Allergies");
         getID.setQuantity("50mg");
-        getID.setStrDateAndTime("2015-10-27 14:09:01");
+        getID.setStrDateAndTime("2015-10-27 16:10:11");
         System.out.println("\nTest========Getting ID");
         getID = DoctorSQL.getPrescriptionID(getID);
         assertTrue("Could not get ID", getID != null);

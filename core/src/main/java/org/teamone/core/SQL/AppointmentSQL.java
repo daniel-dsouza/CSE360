@@ -333,6 +333,8 @@ public class AppointmentSQL {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
             readMe = null;
+        } finally {
+            close();
         }
         return result;
     }

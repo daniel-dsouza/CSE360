@@ -20,11 +20,11 @@ public class AppointmentTester {
 
 
         update = new Appointment();
-        update.setPatientID(1003);
+        update.setPatientID(1002);
         update.setDoctorID(501);
         update.setReason("I want to see doctor");
-        update.setTime("1:00 PM");
-        update.setDate("2015-10-25");
+        update.setTime("10:00 PM");
+        update.setDate("2015-11-27");
 
         test = new Appointment();
         test.setDoctorID(501);
@@ -67,7 +67,7 @@ public class AppointmentTester {
     @Test
     public void viewApptByPatID() {
         //case 2, where user wants appoint through patientID
-        test.setPatientID(1003);
+        test.setPatientID(1002);
         System.out.println("\nTest========Viewing patient with patient ID");
         List<Appointment> test1 = AppointmentSQL.viewAppointmentByPatient(test);
         assertTrue("No appointments by patient ID", !test1.isEmpty());
@@ -126,10 +126,10 @@ public class AppointmentTester {
     @Test
     public void zGetAppointmentID() {
         Appointment view = new Appointment();//doctorID, Time, PatientID, and Date,
-        view.setDate("2015-10-25");
-        view.setTime("1:00 PM");
-        view.setDoctorID(501);
-        view.setPatientID(1003);
+        view.setDate("2015-12-24");
+        view.setTime("9:00 PM");
+        view.setDoctorID(502);
+        view.setPatientID(1002);
         System.out.println("\nTest========Getting Appointment ID");
         Appointment new1 = AppointmentSQL.getAppointmentID(view);
         assertTrue("Could not get appointment ID", new1 != null);
