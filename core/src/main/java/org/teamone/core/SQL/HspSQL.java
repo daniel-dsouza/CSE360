@@ -78,7 +78,7 @@ public class HspSQL {
             //`serialNumber`, `patientID`, `medicalHistory`, `occupation`, `address`, `SSN`, `gender`, `insurance`, `age`, `phone`, `healthConditions`, `labReports`, `alertDateAndTime`, `alertStatus`, `prescriptions`
             java.util.Date dateAndTime= new java.util.Date();
             java.text.SimpleDateFormat sdf =
-                    new java.text.SimpleDateFormat("yyyy-MM-dd");
+                    new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String strDateAndTime = sdf.format(dateAndTime);
             preparedStatementPatient.setInt(1, patientID);
             preparedStatementPatient.setString(2, "patient");
@@ -88,8 +88,8 @@ public class HspSQL {
             preparedStatementPatient.setString(6, insurance);
             preparedStatementPatient.setString(7, age);
             preparedStatementPatient.setString(8, phone);
-            preparedStatementPatient.setString(9, patient.healthConditions.toString());
-            preparedStatementPatient.setString(10, patient.medicalHistory.toString());
+            preparedStatementPatient.setString(9, patient.medicalHistory.toString());
+            preparedStatementPatient.setString(10, patient.healthConditions.toString());
             preparedStatementPatient.setString(11,strDateAndTime);
             checker = preparedStatementPatient.executeUpdate();
 
