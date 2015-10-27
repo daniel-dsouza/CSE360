@@ -19,11 +19,11 @@ USE `cse360`;
 
 CREATE TABLE IF NOT EXISTS `alerts` (
   `alert_id` int(11) NOT NULL AUTO_INCREMENT,
-  `alert_reason` varchar(45) DEFAULT NULL,
+  `AlertActive` tinyint(1) NOT NULL DEFAULT '1',
+  `alert_reason` varchar(5000) DEFAULT NULL,
   `doctor_id` int(11) NOT NULL DEFAULT '0',
   `patient_id` int(11) NOT NULL,
   `alertDateAndTime` varchar(255) DEFAULT NULL,
-  `AlertActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`alert_id`),
   UNIQUE KEY `alertId_UNIQUE` (`alert_id`),
   UNIQUE KEY `patient_id_UNIQUE` (`patient_id`),

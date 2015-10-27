@@ -356,7 +356,6 @@ public class PatientSQL {
                     preparedStatement.setString(1, patient.healthConditions.alertReason);
                     preparedStatement.setString(2, alertTime);
                     preparedStatement.setInt(3, patient.getUserID());
-
                     preparedStatement.executeUpdate();
 
                 }
