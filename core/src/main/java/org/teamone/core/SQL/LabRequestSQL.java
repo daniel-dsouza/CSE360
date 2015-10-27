@@ -39,7 +39,7 @@ public class LabRequestSQL {
 
 
             preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labReport = ? , date = ?");
-            preparedStatement.setInt(1, test.getPatient().getPatientID());
+            preparedStatement.setInt(1, test.getPatient().getUserID());
             preparedStatement.setInt(2, test.getPerson().getUserID());
             preparedStatement.setString(3, test.toString());
             preparedStatement.setString(4, test.getStrDateAndTime());
@@ -94,7 +94,7 @@ public class LabRequestSQL {
                     Patient new1= new Patient();
                     readMe.setPatient(new1);
                 }
-                readMe.getPatient().setPatientID(patID);
+                readMe.getPatient().setUserID(patID);
             }
 
             if (!date.equals("null") &&  !labReport.equals(null)) {
@@ -148,7 +148,7 @@ public class LabRequestSQL {
                 new1.setRequestionID(resultSet.getInt("serialNumber"));
                 new1.toMapObj(resultSet.getString("labReport"));
                 Patient pat = new Patient();
-                pat.setPatientID(resultSet.getInt("patientID"));
+                pat.setUserID(resultSet.getInt("patientID"));
                 new1.setPatient(PatientSQL.getPatientComplete(pat));
                 Person per = new Person();
                 per.setUserID(resultSet.getInt("staffID"));

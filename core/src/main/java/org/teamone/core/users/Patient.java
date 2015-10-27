@@ -7,8 +7,6 @@ import org.teamone.core.prescriptions.Prescription;
  * Created by Ryan on 10/7/2015.
  */
 public class Patient extends Person {
-    private int patientID = 0;
-
     private String occupation; //why do we care?
 
     public PatientInformation patientInformation;
@@ -23,14 +21,6 @@ public class Patient extends Person {
         medicalHistory = new MedicalHistory();
         prescription = new Prescription();
 
-    }
-
-    public int getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(int patientID) {
-        this.patientID = patientID;
     }
 
     public PatientInformation getPatientInformation() {

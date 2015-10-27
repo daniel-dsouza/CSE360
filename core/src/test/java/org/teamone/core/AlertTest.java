@@ -31,7 +31,7 @@ public class AlertTest {
     public void setUpPatient() {
 
         test2 = new Patient();
-        test2.setPatientID(1001);
+        test2.setUserID(1001);
         test2.healthConditions.toMapObj("anxiety,true:discoloredUrine,true");
         test2.medicalHistory.toMapObj(":");
 

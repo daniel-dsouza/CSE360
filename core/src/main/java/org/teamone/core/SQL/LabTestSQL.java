@@ -40,8 +40,8 @@ public class LabTestSQL {
 
             preparedStatement = connect.prepareStatement("INSERT into labtest set patientID = ?, staffID = ?, labReport = ? , date = ?");
 
-            preparedStatement.setInt(1, patient.getPatient().getPatientID());
-            preparedStatement.setInt(2, patient.getStaff().getStaffID());
+            preparedStatement.setInt(1, patient.getPatient().getUserID());
+            preparedStatement.setInt(2, patient.getStaff().getUserID());
             preparedStatement.setString(3, patient.toString());
             preparedStatement.setString(4, patient.getDate());
             checker = preparedStatement.executeUpdate();
@@ -74,7 +74,7 @@ public class LabTestSQL {
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
-            int patID = readMe.getPatient().getPatientID();
+            int patID = readMe.getPatient().getUserID();
             String labReport = readMe.toString();
             String dateString = readMe.getDate();
 
@@ -145,8 +145,8 @@ public class LabTestSQL {
             if (!date.equals("null") &&  !labReport.equals(null)) {
                 readMe.setDate(date);
                 readMe.toMapObj(labReport);
-                readMe.getPatient().setPatientID(patID);
-                readMe.getStaff().setStaffID(stafID);
+                readMe.getPatient().setUserID(patID);
+                readMe.getStaff().setUserID(stafID);
             }
             else
             {
@@ -190,10 +190,10 @@ public class LabTestSQL {
                 new1.setRequestionID(resultSet.getInt("serialNumber"));
                 new1.toMapObj(resultSet.getString("labReport"));
                 Patient pat = new Patient();
-                pat.setPatientID(resultSet.getInt("patientID"));
+                pat.setUserID(resultSet.getInt("patientID"));
                 new1.setPatient(PatientSQL.getPatientComplete(pat));
                 Staff sta = new Staff();
-                sta.setStaffID(resultSet.getInt("staffID"));
+                sta.setUserID(resultSet.getInt("staffID"));
                 new1.setStaff(DoctorSQL.getStaffComplete(sta));
                 LabTestList.add(new1);
             }
@@ -223,7 +223,7 @@ public class LabTestSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int patID = readMe.getPatient().getPatientID();
+            int patID = readMe.getPatient().getUserID();
 
             preparedStatement = connect.prepareStatement("SELECT labReport, date FROM labtest where patientID = ?");
             preparedStatement.setInt(1, patID);
@@ -267,14 +267,14 @@ public class LabTestSQL {
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-            int patID = p.getPatientID();
+            int patID = p.getUserID();
             preparedStatement = connect.prepareStatement("SELECT labReport, date, serialNumber FROM labtest where patientID = ?;");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 LabTest a = new LabTest();
                 Patient pat = new Patient();
-                pat.setPatientID(patID);
+                pat.setUserID(patID);
                 a.setPatient(PatientSQL.getPatientComplete(pat));
                 a.setDate(resultSet.getString("date"));
                 a.toMapObj(resultSet.getString("labReport"));

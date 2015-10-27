@@ -19,7 +19,7 @@ public class PatientListTest {
     public void setUp() {
 
         test = new Doctor();
-        test.setStaffID(501);
+        test.setUserID(501);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class PatientListTest {
         Patient temppat;
         for (int i = 0; i < testArr.size(); i++) {
             temppat = testArr.get(i);
-            System.out.println("Name: " + temppat.getName() + "\tPatient ID: " + temppat.getPatientID());
+            System.out.println("Name: " + temppat.getName() + "\tPatient ID: " + temppat.getUserID());
         }
         System.out.println(TestStrings.testEnd);
     }

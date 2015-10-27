@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
-import org.teamone.core.SQL.DoctorSQL;
-import org.teamone.core.SQL.LabTestSQL;
+import org.teamone.core.SQL.LabRequestSQL;
 import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.Doctor;
 import org.teamone.core.users.LabStaff;
@@ -30,7 +29,7 @@ public class RequestLabTestController {
     @RequestMapping(method= RequestMethod.GET)
     public String list (Map<String, Object> model,
                         @ModelAttribute User user) {
-        List labRequestList = LabTestSQL.getAllLabRequests();
+        List labRequestList = LabRequestSQL.getAllLabRequests();
         model.put("list", labRequestList);
         return "lab/listlabrequests";
     }
@@ -53,7 +52,7 @@ public class RequestLabTestController {
             //TODO: redirect to error page.
         }
 
-        LabTestRequest request = LabTestSQL.viewLabRequest(testID);
+        LabTestRequest request = LabRequestSQL.viewLabRequest(testID);
         model.put("request", request);
 
         if (request == null) {
@@ -88,13 +87,13 @@ public class RequestLabTestController {
 
         request.setRequestionID(0);
         Patient test = new Patient();
-        test.setPatientID(1005);
+        test.setUserID(1005);
         request.setPatient(test);
         Person per = new Person();
         per.setUserID(506);
         request.setPerson(per);
 
-        DoctorSQL.addLabRequest(request);
+        LabRequestSQL.addLabRequest(request);
         return "auth/user"; //TODO: send back to Select Patient.
     }
 }

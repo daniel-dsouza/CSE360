@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
+import org.teamone.core.SQL.LabRequestSQL;
 import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.labs.LabTestRequest;
@@ -72,7 +73,7 @@ public class LabTestController {
 
         LabTestRequest testID = new LabTestRequest();
         testID.setRequestionID(id);
-        LabTestRequest input = LabTestSQL.viewLabRequest(testID); //get the labrequest.
+        LabTestRequest input = LabRequestSQL.viewLabRequest(testID); //get the labrequest.
 
         LabTest newReport = new LabTest(id, ""); //only put the needed fields in the report.
         for(String test : input.getLabTestRequest().keySet()) {

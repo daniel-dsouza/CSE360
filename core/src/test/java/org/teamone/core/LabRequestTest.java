@@ -19,7 +19,7 @@ public class LabRequestTest {
     @Before
     public void setUp() {
         Patient pat = new Patient();
-        pat.setPatientID(1002);
+        pat.setUserID(1002);
         Person per = new Person();
         per.setUserID(506);
         test = new LabTestRequest(0, "Hemoglobin,true:vitaminD,true:potassium,true:", pat, per);
@@ -36,7 +36,7 @@ public class LabRequestTest {
     public void createEmptyLabRequest() {
         System.out.println("Test========Attempting to add lab request with empty string");
         Patient pat = new Patient();
-        pat.setPatientID(1003);
+        pat.setUserID(1003);
         Person per = new Person();
         per.setUserID(505);
         LabTestRequest new1 = new LabTestRequest(0, "", pat, per);

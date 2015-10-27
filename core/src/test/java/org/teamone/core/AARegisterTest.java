@@ -32,7 +32,7 @@ public class AARegisterTest {
                 Patient p = HspSQL.RegisterNewPatient(regis);
                 assertTrue("Failed to register", p!=null);//if p!=null returns false, display message
                     System.out.println("*********************Register successful************************");
-                    System.out.println("New patient has id: " + p.getPatientID());
+                System.out.println("New patient has id: " + p.getUserID());
                 System.out.println(TestStrings.testEnd);
 
                 p.healthConditions.toMapObj("redFace,true:");

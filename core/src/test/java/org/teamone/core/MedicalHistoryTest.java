@@ -16,7 +16,7 @@ public class MedicalHistoryTest {
     public void setUp() {
 
         test = new Patient();
-        test.setPatientID(1004);
+        test.setUserID(1004);
         test.medicalHistory.toMapObj("aidsHIVPositive,true:");
     }
 

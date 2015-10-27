@@ -100,7 +100,7 @@ public class HspSQL {
             Result = new Patient();
             Result.setOccupation("patient");
             Result.setName(name);
-            Result.setPatientID(patientID);
+            Result.setUserID(patientID);
             Result.setEmail(email);
 
             Result.setAddress(address);
