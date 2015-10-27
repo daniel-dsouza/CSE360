@@ -22,7 +22,7 @@ import java.util.Map;
 public class AppointmentListController {
 
     @RequestMapping(method = RequestMethod.GET)
-    void findPatients(Map<String, Object> model, @PathVariable String userID) {
+    List<Appointment> findPatients(Map<String, Object> model, @PathVariable String userID) {
         List<Appointment> patientList; //Hashing strikes again.
         System.out.println(userID + "this works"); //DEBUG statements
         //TODO: get user appointments from the path variable.
@@ -30,6 +30,7 @@ public class AppointmentListController {
         int intUserID = Integer.parseInt(userID);
         temp.setPatientID(intUserID);
         patientList = AppointmentSQL.viewAppointmentByPatient(temp);
+        return patientList;
         //TODO: this controller will display a list of the user appointments. for each, the user can select whether to create a new appointment, or edit/delete one. Delete not necessary.
     }
 }
