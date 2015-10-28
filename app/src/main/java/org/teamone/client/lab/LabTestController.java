@@ -12,6 +12,7 @@ import org.teamone.core.SQL.LabTestSQL;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.LabStaff;
+import org.teamone.core.users.Patient;
 
 import java.util.List;
 import java.util.Map;
@@ -78,7 +79,7 @@ public class LabTestController {
                             @ModelAttribute("report") LabTest report,
                             @ModelAttribute("user") User user) {
 
-        //report.setPerson(user.getPerson()); //TODO: make this method work.
+        report.setPerson(user.getPerson()); //TODO: make this method work.
         report.setPatient(user.getPatient());
         LabTestSQL.updateLabTest(report);
         return "redirect:/lab_report";
@@ -126,8 +127,10 @@ public class LabTestController {
                               @ModelAttribute("report") LabTest report,
                               @ModelAttribute("user") User user) {
 
-        //report.setPerson(user.getPerson()); //TODO: make this method work.
-        report.setPatient(user.getPatient());
+        Patient p = new Patient();
+        p.setUserID(1002);
+        report.setPerson(user.getPerson()); //TODO: make this method work.
+        report.setPatient(p);
         LabTestSQL.updateLabTest(report);
         return "redirect:/lab_report";
     }
