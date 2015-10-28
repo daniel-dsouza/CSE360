@@ -3,6 +3,8 @@ package org.teamone.core.users;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.prescriptions.Prescription;
 
+import java.util.TreeMap;
+
 /**
  * Created by Ryan on 10/7/2015.
  */
@@ -19,6 +21,9 @@ public class Patient extends Person {
         patientInformation = new PatientInformation();
         healthConditions = new HealthConditions();
         medicalHistory = new MedicalHistory();
+        agentActions = new TreeMap<String, String>() {
+        };
+        agentActions.put("Schedule an appointment", "appointment");
 
     }
 

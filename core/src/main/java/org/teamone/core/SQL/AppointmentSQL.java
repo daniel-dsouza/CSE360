@@ -456,7 +456,7 @@ public class AppointmentSQL {
             System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
             int docID = doc.getUserID();
-            preparedStatement = connect.prepareStatement("select date, time from appointment where doctorID  = ? and patientID IS NULL");
+            preparedStatement = connect.prepareStatement("select serialNumber, date, time from appointment where doctorID  = ? and patientID IS NULL");
             preparedStatement.setInt(1, docID);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -465,6 +465,7 @@ public class AppointmentSQL {
                 appt.setDate(rs.getString("date"));
                 appt.setTime(rs.getString("time"));
                 appt.setDoctorID(docID);
+                appt.setAppointmentID(rs.getInt("serialNumber"));
                 apptList.add(appt);
             }
 
