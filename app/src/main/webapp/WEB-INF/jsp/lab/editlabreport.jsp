@@ -11,8 +11,36 @@
 </jsp:attribute>
 
 <jsp:body>
-  <div class="container-fluid" id="target">
+<div class="container-fluid" id="target">
 
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>${createoreditorview} Lab Report</h1>
+    </div>
   </div>
+
+  <form:form method="post" commandName="report">
+    <c:forEach var="test" items="${report.labTestNames}">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4>Test: ${test.value}</h4>
+
+          <div>
+            <form:textarea path="${test.key}" rows="3" class="readonly" />
+          </div>
+          <br/>
+        </div>
+      </div>
+    </c:forEach>
+
+    <div class="row hiddenonreadonly">
+      <div class="col-lg-12">
+        <br/>
+        <input type="submit" class="btn btn-info" value="${createoreditorview} Lab Test">
+      </div>
+    </div>
+
+  </form:form>
+</div>
 </jsp:body>
 </t:template>

@@ -16,14 +16,14 @@
                   <c:forEach var="test" items="${request.labTestRequestNames}">
                       <div class="col-sm-4">
                           <label class="checkbox">
-                              <form:checkbox path="${test.key}" />
+                              <form:checkbox path="${test.key}" class="readonly" />
                               <span class="cr"></span>
                                   ${test.value}
                           </label>
                       </div>
                   </c:forEach>
               </div>
-            <span class="group-btn" style="margin: 0px 10px 0px">
+            <span class="group-btn hiddenonreadonly" style="margin: 0px 10px 0px">
                 <input type="submit" value="Request Test" class="btn btn-primary btn-md"/>
             </span>
           </div>

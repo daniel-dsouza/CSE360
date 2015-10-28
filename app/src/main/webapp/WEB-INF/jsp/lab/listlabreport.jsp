@@ -20,10 +20,10 @@
         <div class="col-lg-12" style="border-bottom-style: solid; border-width: 1px">
           <div style="float: left; padding: 5px 5px 5px"> #${test.requestionID}</div>
           <div style="float: right; padding: 5px 5px 5px">
-            <a href="${pageContext.request.contextPath}/request_test/${test.requestionID}/view" class="btn btn-info" role="button">View</a>
+            <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/view" class="btn btn-info" role="button">View</a>
           </div>
           <div style="float: right; padding: 5px 5px 5px">
-            <a href="${pageContext.request.contextPath}/lab_report/${request.requestionID}/edit" class="btn btn-info" role="button">Edit</a>
+            <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/edit" class="btn btn-info" role="button">Edit</a>
           </div>
         </div>
       </c:forEach>

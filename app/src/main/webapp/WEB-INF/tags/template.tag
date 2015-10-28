@@ -10,6 +10,9 @@
     <script type="text/javascript" src="<c:url value="/webjars/jquery/3.0.0-alpha1/jquery.min.js" />"></script>
     <script type="text/javascript" src="<c:url value="/webjars/bootstrap/3.3.5/js/bootstrap.min.js" />"></script>
     <script type="text/javascript" src="/js/maxlength.js"></script>
+    <c:if test="${readonly}" >
+        <script type="text/javascript" src="/js/readonly.js "></script>
+    </c:if>
     <jsp:invoke fragment="head"/>
 </head>
 
