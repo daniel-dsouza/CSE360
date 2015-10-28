@@ -137,13 +137,13 @@ public class AppointmentSQL {
             // PreparedStatements can use variables and are more efficient
             int patID = readMe.getPatientID();
 
-            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID FROM appointment where patientID = ?");
+            preparedStatement = connect.prepareStatement("SELECT serialNumber, date, time, reason, doctorID FROM appointment where patientID = ?");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
 
             do {
-
+                Appointment temp = new Appointment();
 
                 String date = resultSet.getString("date");
                 String time = resultSet.getString("time");
@@ -154,12 +154,13 @@ public class AppointmentSQL {
                 System.out.println("Reason:\t" + reason);
                 System.out.println("Doctor ID:\t" + docID);*///debugging
 
-                readMe.setDate(date);
-                readMe.setTime(time);
-                readMe.setReason(reason);
-                readMe.setPatientID(docID);
+                temp.setDate(date);
+                temp.setTime(time);
+                temp.setReason(reason);
+                temp.setPatientID(docID);
+                temp.setAppointmentID(resultSet.getInt("serialNumber"));
 
-                a1.add(readMe);
+                a1.add(temp);
 
             }
             while (resultSet.next());
@@ -210,7 +211,7 @@ public class AppointmentSQL {
                 System.out.println("Doctor ID:\t" + docID);*///debugging
             Patient temp = new Patient();
             temp.setUserID(patID);
-            temp = PatientSQL.getPatientComplete(temp);
+            //temp = PatientSQL.getPatientComplete(temp);
             readMe.setPatient(temp);
 
             Doctor temp1 = new Doctor();

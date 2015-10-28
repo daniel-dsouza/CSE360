@@ -23,7 +23,8 @@ public class Patient extends Person {
         medicalHistory = new MedicalHistory();
         agentActions = new TreeMap<String, String>() {
         };
-        agentActions.put("Schedule an appointment", "appointment");
+        agentActions.put("Schedule an appointment", "appointment/new");
+        agentActions.put("View appointments", "appointment/list");
 
     }
 
