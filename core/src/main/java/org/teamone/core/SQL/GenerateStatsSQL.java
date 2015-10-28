@@ -1,13 +1,15 @@
 package org.teamone.core.SQL;
 
-import org.teamone.core.users.Alert;
-import org.teamone.core.users.Patient;
-import org.teamone.core.users.Staff;
 
+import org.teamone.core.appointments.Appointment;
+
+import javax.print.Doc;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Created by Stephanie on 10/24/2015.
@@ -19,7 +21,7 @@ public class GenerateStatsSQL {
     private static ResultSet resultSet = null;
 
 
-    public static int getNumOfAlerts(Alert alert) {
+    public static int getNumOfAlerts() {
         int numOfAlerts = 0;
         String date;
         try {
@@ -36,8 +38,18 @@ public class GenerateStatsSQL {
 
             while (resultSet.next()) {
 
+
                 date = getDate(resultSet.getString("alertdateAndTime"));
-                SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
+
+                if(is1MonthRange(date))
+                {
+
+                    numOfAlerts++;
+
+                }
+
+
+                /*SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
                 Calendar dateAfter1Month = Calendar.getInstance();
 
                 Date finalDate = convertToDate.parse(date);
@@ -52,7 +64,7 @@ public class GenerateStatsSQL {
 
                     numOfAlerts++;
 
-                }
+                }*/
 
 
 
@@ -68,7 +80,39 @@ public class GenerateStatsSQL {
     }
 
 
-    public static int getNumOfNewPatients(Patient patient)
+    public static boolean is1MonthRange(String date1) {
+
+        boolean oneMonth = false;
+
+        try {
+
+
+                SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar dateAfter1Month = Calendar.getInstance();
+
+                Date finalDate = convertToDate.parse(date1);
+
+                dateAfter1Month.add(Calendar.MONTH, 1);
+
+                Calendar dateBefore1Month = Calendar.getInstance();
+                dateBefore1Month.add(Calendar.MONTH, -1);
+
+                if(finalDate.before(dateAfter1Month.getTime()) && finalDate.after(dateBefore1Month.getTime()))
+                {
+
+                    oneMonth = true;
+
+                }
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            oneMonth = false;
+        }
+        return oneMonth;
+    }
+
+    public static int getNumOfNewPatients()
     {
 
         int patientCount = 0;
@@ -89,10 +133,11 @@ public class GenerateStatsSQL {
             while (resultSet.next()) {
 
                 date = resultSet.getString("date");
+                String newDate = getDate(date);
                 SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
                 Calendar dateAfter1Month = Calendar.getInstance();
 
-                Date finalDate = convertToDate.parse(date);
+                Date finalDate = convertToDate.parse(newDate);
 
                 dateAfter1Month.add(Calendar.MONTH, 1);
 
@@ -121,7 +166,7 @@ public class GenerateStatsSQL {
 
     }
 
-    public static double getMalePopulation(Patient patient)
+    public static double getMalePopulation()
     {
         double male = 0;
         double totalNumOfPatients = 0;
@@ -166,7 +211,7 @@ public class GenerateStatsSQL {
         return malePercentage;
     }
 
-    public static double getFemalePopulation(Patient patient)
+    public static double getFemalePopulation()
     {
         double female = 0;
         double totalNumOfPatients = 0;
@@ -213,7 +258,7 @@ public class GenerateStatsSQL {
     }
 
 
-    public static void getAgePopulation(Patient patient)
+    public static void getAgePopulation()
     {
         double ag1 = 0;
         double ag2 = 0;
@@ -342,7 +387,7 @@ public class GenerateStatsSQL {
 
     }
 
-    public static void getNumOfPatientType(Staff staff)
+    public static void getNumOfPatientType()
     {
         //INCOMPLETE METHOD STILL NEED TO FINISH ONCE MISSING METHOD HAS BEEN IMPLEMENTED
 
@@ -350,14 +395,16 @@ public class GenerateStatsSQL {
         double generalCare = 0;
         double emergency = 0;
         double xRay = 0;
+        double neurologist = 0;
 
         double totalNumOfPatients = 0;
-        String specialty = "";
+        String listSpecialty = "";
 
         double pedsPercentage = 0;
         double genPercentage = 0;
         double emergPercentage = 0;
         double xRayPercentage = 0;
+        double neurologistPercentage = 0;
 
 
         try {
@@ -369,60 +416,86 @@ public class GenerateStatsSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            String test = "patient";
 
+            List<String> myList = new ArrayList<String>();
             preparedStatement = connect.prepareStatement("SELECT specialty FROM staff WHERE occupation != 'hsp' and occupation!= 'labstaff';");
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
 
-
-               specialty = resultSet.getString("specialty");
-
-                if(specialty.equals("Pediatrician"))
-                {
-
-                    //resultSet.get
-
-                        pediatrician++;
+                listSpecialty = resultSet.getString("specialty");
+                if (myList.contains(listSpecialty)) {
+                    //do nothing
 
                 }
-
-                else if(specialty.equals("GeneralCare"))
-                {
-
-                    generalCare++;
-
+                else {
+                    myList.add(listSpecialty);
+                    //System.out.println(listSpecialty);
                 }
-                else if(specialty.equals("Emergency"))
-                {
-
-                    emergency++;
-
-                }
-                else if(specialty.equals("X-ray"))
-                {
-
-                    xRay++;
-
-                }
-
-
-
             }
 
-                totalNumOfPatients = pediatrician+generalCare+emergency+xRay;
+          for(int j =0; j < myList.size(); j++)
+            {
+
+                String specialty = myList.get(j);
+                //System.out.println("The current specialty is: " + specialty);
+                ArrayList<Appointment> doctorSpecialty = DoctorSQL.getListSpecialtyPatient(specialty);
+                int arraySize = doctorSpecialty.size();
+                    if (specialty.equals("Pediatrician")) {
+
+                        for (int i = 0; i < arraySize; i++) {
+                            String date = doctorSpecialty.get(i).getDate();
+                            //System.out.println(date);
+                            if (is1MonthRange(date)) {
+                                pediatrician++;
+                            }
+
+                        }
+
+                    } else if (specialty.equals("GeneralCare")) {
+
+                        for (int i = 0; i < arraySize; i++) {
+                            //System.out.println(doctorSpecialty.get(i).getDate());
+                            generalCare++;
+                        }
+
+                    } else if (specialty.equals("Emergency")) {
+
+                        for (int i = 0; i < arraySize; i++) {
+                            //System.out.println(doctorSpecialty.get(i).getDate());
+                            emergency++;
+                        }
+
+                    } else if (specialty.equals("X-ray")) {
+                        for (int i = 0; i < arraySize; i++) {
+                            //System.out.println(doctorSpecialty.get(i).getDate());
+                            xRay++;
+                        }
+
+                    } else if (specialty.equals("Neurologist")) {
+                        for (int i = 0; i < arraySize; i++) {
+                            //System.out.println(doctorSpecialty.get(i).getDate());
+                            neurologist++;
+                        }
+
+                    }
+
+                }
+
+
+            totalNumOfPatients = pediatrician+generalCare+emergency+xRay+neurologist;
 
             pedsPercentage = (pediatrician/totalNumOfPatients)*100;
             genPercentage = (generalCare/totalNumOfPatients)*100;
-            emergPercentage = (emergPercentage/totalNumOfPatients)*100;
+            emergPercentage = (emergency/totalNumOfPatients)*100;
             xRayPercentage = (xRay/totalNumOfPatients)*100;
+            neurologistPercentage = (neurologist/totalNumOfPatients)*100;
 
-            System.out.println("Pediatrician: " + pedsPercentage + "%");
-            System.out.println("General Care: " + genPercentage + "%");
-            System.out.println("Emergency: " + emergPercentage + "%");
-            System.out.println("X-ray: " + xRayPercentage + "%");
-
+            System.out.println("Pediatric Patients: " + String.format("%.2f", pedsPercentage) + "%");
+            System.out.println("General Care Patients: " + String.format("%.2f", genPercentage) + "%");
+            System.out.println("Emergency Patients: " + String.format("%.2f", emergPercentage) + "%");
+            System.out.println("Radiology (X-ray) Patients: " + String.format("%.2f", xRayPercentage) + "%");
+            System.out.println("Neurology Patients: " + String.format("%.2f", neurologistPercentage) + "%");
 
 
         } catch (Exception e) {
@@ -450,9 +523,6 @@ public class GenerateStatsSQL {
         return date;
 
     }
-
-
-
 
     /**
      * get list of alerts
