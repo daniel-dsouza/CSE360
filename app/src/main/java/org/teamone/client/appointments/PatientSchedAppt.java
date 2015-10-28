@@ -48,7 +48,6 @@ public class PatientSchedAppt {
     public
     @ResponseBody
     ArrayList<Appointment> findTimes(@PathVariable String name) {
-        System.out.println("Sending User name: " + name);
         int id = LoginSQL.getID(name);
         Doctor new1 = new Doctor();
         new1.setUserID(id);
