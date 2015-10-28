@@ -339,61 +339,6 @@ public class AppointmentSQL {
         return result;
     }
 
-    /**
-     * depreciated. replaced by editAppointment
-     * @param readMe Appointment Object valid patientID
-     * @return Appointment Object
-     */
-    /*public static Appointment editAppointmentPatient(Appointment readMe) {
-        try {
-            int checker;
-            // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.jdbc.Driver");
-            // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-
-            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-
-            int patID = readMe.getPatientID();
-            int docID = readMe.getDoctorID();
-            String date = readMe.getDate();
-            String time = readMe.getTime();
-            String reason = readMe.getReason();
-
-            String updateApp = "UPDATE appointment SET"
-                    + " date = ?, time = ?, reason = ?, doctorID = ? WHERE patientID = ? ;";
-            // PreparedStatements can use variables and are more efficient
-            preparedStatement = connect.prepareStatement(updateApp);
-            preparedStatement.setString(1, date);
-            preparedStatement.setString(2, time);
-            preparedStatement.setString(3, reason);
-            preparedStatement.setInt(4, docID);
-            preparedStatement.setInt(5, patID);
-
-            checker = preparedStatement.executeUpdate();
-            System.out.println("checker for patient==============" + checker);
-            //If no data was manipulated insert new appointment
-            if (checker == 0) {
-                String insertApp = "INSERT INTO appointment "
-                        + "(date, time, reason, doctorID, patientID) VALUES"
-                        + "(?,?,?,?,?);";
-                // PreparedStatements can use variables and are more efficient
-                preparedStatement = connect.prepareStatement(insertApp);
-                preparedStatement.setString(1, date);
-                preparedStatement.setString(2, time);
-                preparedStatement.setString(3, reason);
-                preparedStatement.setInt(4, docID);
-                preparedStatement.setInt(5, patID);
-                preparedStatement.executeUpdate();
-            }
-
-        } catch (Exception e) {
-            System.out.println("===========EMPTY RESULT========RETURN NULL");
-            System.out.println(e);
-            readMe = null;
-        }
-        return readMe;
-    }*/
 
     /**
      * Same as editAppointment, but will only use appointmentID

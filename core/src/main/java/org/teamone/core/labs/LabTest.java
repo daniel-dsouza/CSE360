@@ -1,7 +1,7 @@
 package org.teamone.core.labs;
 
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.Staff;
+import org.teamone.core.users.Person;
 
 import java.text.ParsePosition;
 import java.util.Date;
@@ -16,7 +16,7 @@ public class LabTest {
     private Patient patient;
 
     private Date updateDate;
-    private Staff staff;
+    private Person person;
 
     private Map<String, String> labTest;
     private Map<String, String> labTestNames;
@@ -29,7 +29,7 @@ public class LabTest {
     public LabTest(int requestionID, String data) {
         this.requestionID = requestionID;
         patient = new Patient();
-        staff = new Staff();
+        person = new Person();
         updateDate = new Date();
 
         labTest = new TreeMap<String, String>();
@@ -291,12 +291,11 @@ public class LabTest {
         this.updateDate = updateDate;
     }
 
-    public Staff getStaff() {
-        return staff;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setStaff(Staff staff) {
-        this.staff = staff;
+    public void setPerson(Person person) {
+        this.person = person;
     }
-
 }
