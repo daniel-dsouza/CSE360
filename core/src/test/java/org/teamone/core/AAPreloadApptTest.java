@@ -3,7 +3,6 @@ package org.teamone.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.appointments.Appointment;
-import org.teamone.core.baseclasstests.TestStrings;
 
 import java.util.Random;
 
@@ -33,8 +32,8 @@ public class AAPreloadApptTest {
 
 
             }
-            System.out.println("*********************Preload successful************************");
-            System.out.println(TestStrings.testEnd);
+            // System.out.println("*********************Preload successful************************");
+            // System.out.println(TestStrings.testEnd);
         }
 
     }
