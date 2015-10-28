@@ -354,7 +354,7 @@ public class PatientSQL {
     }
     /**
      * Returns a list of patients based on Patients.
-     * @param String: Given a string name
+     * @param queryName: Given a string name
      * @return ArrayList: List of Patients
      */
     public static ArrayList<Patient> getPatientByPatient(String queryName) {
