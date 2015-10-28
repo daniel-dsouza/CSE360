@@ -299,31 +299,30 @@ public class AppointmentSQL {
      * @param readMe Appointment Object
      * @return boolean
      */
-    public static boolean preloadAppointment(Appointment readMe) {
+    public static boolean preloadAppointment(ArrayList<Appointment> readList) {
         boolean result = false;
         try {
-            int checker;
+            int checker = 0;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-
-            int docID = readMe.getDoctorID();
-            String date = readMe.getDate();
-            String time = readMe.getTime();
-
-
-            String insertApp = "INSERT INTO appointment "
-                    + "(doctorID, date, time) VALUES"
-                    + "(?,?,?);";
-            // PreparedStatements can use variables and are more efficient
-            preparedStatement = connect.prepareStatement(insertApp);
-            preparedStatement.setInt(1, docID);
-            preparedStatement.setString(2, date);
-            preparedStatement.setString(3, time);
-            checker = preparedStatement.executeUpdate();
+            for (Appointment readMe : readList) {
+                int docID = readMe.getDoctorID();
+                String date = readMe.getDate();
+                String time = readMe.getTime();
+                String insertApp = "INSERT INTO appointment "
+                        + "(doctorID, date, time) VALUES"
+                        + "(?,?,?);";
+                // PreparedStatements can use variables and are more efficient
+                preparedStatement = connect.prepareStatement(insertApp);
+                preparedStatement.setInt(1, docID);
+                preparedStatement.setString(2, date);
+                preparedStatement.setString(3, time);
+                checker = preparedStatement.executeUpdate();
+            }
             if (checker == 0)
                 result = false;
             else
@@ -332,7 +331,7 @@ public class AppointmentSQL {
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
-            readMe = null;
+            result = false;
         } finally {
             close();
         }

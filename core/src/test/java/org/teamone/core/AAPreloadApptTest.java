@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.appointments.Appointment;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -12,10 +13,12 @@ import java.util.Random;
 public class AAPreloadApptTest {
 
     private Appointment appt;
+    private ArrayList<Appointment> readList;
 
     @Before
     public void setUp() {
         appt = new Appointment();
+        readList = new ArrayList<Appointment>();
     }
 
     @Test
@@ -27,15 +30,13 @@ public class AAPreloadApptTest {
 
                 //appt.setDoctorID(docID);
                 //random();//call this to random
-                //boolean p = AppointmentSQL.preloadAppointment(appt);
-                //assertTrue("Failed to preload", p);//if p!=null returns false, display message
-
-
+                //readList.add(appt);
             }
-            // System.out.println("*********************Preload successful************************");
-            // System.out.println(TestStrings.testEnd);
         }
-
+        // System.out.println("*********************Preload successful************************");
+        // System.out.println(TestStrings.testEnd);
+        //boolean p = AppointmentSQL.preloadAppointment(readList);
+        //assertTrue("Failed to preload", p);//if p!=null returns false, display message
     }
 
     public void random()//randomizer so we can loop multiple
