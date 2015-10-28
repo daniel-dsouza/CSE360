@@ -3,12 +3,11 @@ package org.teamone.core.SQL;
 
 import org.teamone.core.appointments.Appointment;
 
-import javax.print.Doc;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -451,7 +450,6 @@ public class GenerateStatsSQL {
                             }
 
                         }
-
                     } else if (specialty.equals("GeneralCare")) {
 
                         for (int i = 0; i < arraySize; i++) {
