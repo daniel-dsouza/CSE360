@@ -83,15 +83,14 @@ public class RequestLabTestController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String submitTest (Map<String, Object> model,
-                              @ModelAttribute("request") LabTestRequest request) {
+                              @ModelAttribute("request") LabTestRequest request,
+                              @ModelAttribute("user") User user) {
 
         request.setRequestionID(0);
         Patient test = new Patient();
-        test.setUserID(1005);
+        test.setUserID(1002);
         request.setPatient(test);
-        Person per = new Person();
-        per.setUserID(506);
-        request.setPerson(per);
+        request.setPerson(user.getPerson());
 
         LabRequestSQL.addLabRequest(request);
         return "auth/user"; //TODO: send back to Select Patient.
