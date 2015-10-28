@@ -42,8 +42,9 @@ public class LabTestController {
                         @PathVariable String reportID,
                         @ModelAttribute("user") User user) {
         if (user.getPerson() == null)
-            return "login/login";
+            return "redirect:/login";
 
+        //TODO
         return "lab/viewlabreport";
     }
 
@@ -51,6 +52,14 @@ public class LabTestController {
     public String editGet (Map<String, Object> model,
                         @PathVariable String reportID,
                         @ModelAttribute("user") User user) {
+        if (user.getPerson() == null)
+            return "redirect:/login";
+        else if (!(user.getPerson() instanceof LabStaff))
+            return "redirect:/user/" + user.person.getUserID();
+
+        //TODO
+
+        model.put("createoredit", "Edit");
         return "lab/editlabreport";
     }
 
@@ -58,6 +67,7 @@ public class LabTestController {
     public String editPost (Map<String, Object> model,
                             @PathVariable String reportID,
                             @ModelAttribute("user") User user) {
+        //TODO
         return "lab/editlabreport";
     }
 
@@ -65,6 +75,11 @@ public class LabTestController {
     public String createGet (Map<String, Object> model,
                         @PathVariable String reportID,
                         @ModelAttribute("user") User user) {
+        if (user.getPerson() == null)
+            return "redirect:/login";
+        else if (!(user.getPerson() instanceof LabStaff))
+            return "redirect:/user/" + user.person.getUserID();
+
         int id = 0;
         String testString = "";
         try {
@@ -79,8 +94,15 @@ public class LabTestController {
         for(String test : input.getLabTestRequest().keySet()) {
             if (input.getLabTestRequest().get(test)) {
                 newReport.getlabTest().put(test, "");
+                newReport.getlabTestNames().put(test, input.getLabTestRequestNames().get(test));
+                System.out.print(newReport.getlabTestNames().get(test));
+            }
+            else {
+                newReport.getlabTestNames().remove(test);
             }
         }
+
+        model.put("createoredit", "Create");
         model.put("report", newReport);
         return "lab/editlabreport";
     }
@@ -90,7 +112,9 @@ public class LabTestController {
                               @PathVariable String reportID,
                               @ModelAttribute("report") LabTest report,
                               @ModelAttribute("user") User user) {
-        //report.setStaff()
-        return "lab/editlabreport";
+
+        report.setStaff(user.getPerson());
+        report.setPatient(user.getPatient());
+        return "redirect:/lab_report";
     }
 }

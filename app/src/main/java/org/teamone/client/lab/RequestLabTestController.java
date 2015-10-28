@@ -12,7 +12,6 @@ import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.Doctor;
 import org.teamone.core.users.LabStaff;
 import org.teamone.core.users.Patient;
-import org.teamone.core.users.Person;
 
 import java.util.List;
 import java.util.Map;
