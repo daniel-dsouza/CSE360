@@ -24,5 +24,6 @@ public class NavbarAttributes {
         System.out.println("loading navbar");
         model.put("user", user);
         model.put("pageactions", new TreeMap<String, String>());
+        model.put("readonly", false);
     }
 }

@@ -2,10 +2,7 @@ package org.teamone.client.lab;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.teamone.client.generic.User;
 import org.teamone.core.SQL.LabRequestSQL;
 import org.teamone.core.labs.LabTestRequest;
@@ -23,6 +20,7 @@ import java.util.Map;
 @Controller
 @Scope("request")
 @RequestMapping(value = "/**/request_test")
+@SessionAttributes("request")
 public class RequestLabTestController {
 
     @RequestMapping(method= RequestMethod.GET)
@@ -64,6 +62,7 @@ public class RequestLabTestController {
                 System.out.println(key + " ");
         }
 
+        model.put("readonly", true);
         return "lab/editlabtestrequest";
     }
 
@@ -85,7 +84,7 @@ public class RequestLabTestController {
                               @ModelAttribute("request") LabTestRequest request,
                               @ModelAttribute("user") User user) {
 
-        request.setRequestionID(0);
+        request.setRequestionID(0); //TODO: remove this once select person is complete
         Patient test = new Patient();
         test.setUserID(1002);
         request.setPatient(test);
