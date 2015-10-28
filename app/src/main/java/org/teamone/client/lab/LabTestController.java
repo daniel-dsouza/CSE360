@@ -57,8 +57,17 @@ public class LabTestController {
         else if (!(user.getPerson() instanceof LabStaff))
             return "redirect:/user/" + user.person.getUserID();
 
-        //TODO
+        int id = 0;
+        String testString = "";
+        try {
+            id = Integer.parseInt(reportID);
+        } catch (Exception e) { e.printStackTrace(); }
 
+        LabTest testID = new LabTest();
+        testID.setRequestionID(id);
+        LabTest editReport = LabTestSQL.viewLabTestByRequestion(testID); //get the labrequest.
+
+        model.put("report", editReport);
         model.put("createoredit", "Edit");
         return "lab/editlabreport";
     }
@@ -66,9 +75,13 @@ public class LabTestController {
     @RequestMapping(value="/{reportID}/edit", method= RequestMethod.POST)
     public String editPost (Map<String, Object> model,
                             @PathVariable String reportID,
+                            @ModelAttribute("report") LabTest report,
                             @ModelAttribute("user") User user) {
-        //TODO
-        return "lab/editlabreport";
+
+        //report.setPerson(user.getPerson()); //TODO: make this method work.
+        report.setPatient(user.getPatient());
+        LabTestSQL.updateLabTest(report);
+        return "redirect:/lab_report";
     }
 
     @RequestMapping(value="/{reportID}/create", method= RequestMethod.GET)
@@ -113,8 +126,9 @@ public class LabTestController {
                               @ModelAttribute("report") LabTest report,
                               @ModelAttribute("user") User user) {
 
-        report.setStaff(user.getPerson());
+        //report.setPerson(user.getPerson()); //TODO: make this method work.
         report.setPatient(user.getPatient());
+        LabTestSQL.updateLabTest(report);
         return "redirect:/lab_report";
     }
 }
