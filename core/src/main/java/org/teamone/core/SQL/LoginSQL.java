@@ -65,6 +65,7 @@ public class LoginSQL {
                     check = new Person();
                 }
                 check.setName(resultSet.getString("name"));
+                check.splitName(check.getName());//splits name into first and last
                 check.setOccupation(resultSet.getString("occupation"));
                 check.setEmail(resultSet.getString("emailID"));
                 check.setUserID(ID);

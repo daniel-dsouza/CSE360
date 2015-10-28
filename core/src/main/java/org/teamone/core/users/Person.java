@@ -96,6 +96,9 @@ public class Person {
     public void splitName(String nam) {
         String[] data = nam.split(":");
         firstName = data[0];
-        lastName = data[1];
+        if (data.length == 2)
+            lastName = data[1];
+        else
+            lastName = "";
     }
 }
