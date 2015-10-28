@@ -90,7 +90,7 @@ public class LoginSQL {
      * @return string name with associated id
      */
     public static String getName(int patientID) {
-
+        System.out.println("Received User id: " + patientID);
         String username;
         try {
             // This will load the MySQL driver, each DB has its own driver
@@ -105,7 +105,7 @@ public class LoginSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             username = resultSet.getString("name");
-            System.out.println("Received User id: " + patientID);
+
             System.out.println("The Name is: " + username);
 
 
@@ -125,7 +125,7 @@ public class LoginSQL {
      * @return int ID with associated name
      */
     public static int getID(String patientName) {
-
+        System.out.println("Received name: " + patientName);
         int userID;
         try {
             // This will load the MySQL driver, each DB has its own driver
@@ -138,7 +138,7 @@ public class LoginSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             userID = resultSet.getInt("userID");
-            System.out.println("Received name: " + patientName);
+
             System.out.println("UserID is:" + userID);
 
 

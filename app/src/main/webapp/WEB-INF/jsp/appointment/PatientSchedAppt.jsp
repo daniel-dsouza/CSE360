@@ -24,6 +24,27 @@
                         $('#doctor').html(outputHTML)
                     },
                     error: function() {
+
+                        alert("error getting list.")
+                    }
+                })
+            }
+
+            function loadTimes() {
+                $.ajax('/appointment/gettimes/' + $("#doctor").val(), {
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        var outputHTML = '<option value="">List of Times</option>';
+                        var len = data.length;
+                        for (var i = 0; i < len; i++) {
+                            outputHTML += '<option value="' + data[i].date + ' ' + data[i].time + '">' + data[i].date + ' ' + data[i].time + '</option>';
+                        }
+                        outputHTML += '</option>';
+
+                        $('#date').html(outputHTML)
+                    },
+                    error: function () {
                         alert("error getting list.")
                     }
                 })
@@ -43,14 +64,14 @@
                 <!-- method is what do when done, commandName is what object from the model to put stuff into, action should be the name of your jsp. -->
                 <form:form method="post" commandName="appointment">
                     <!-- path is where in the object specified by command name to store the result, items is the list of results -->
-                    Specialty:<br/><form:select id="special" path="doctorSpec" items="${doctorlist}" onchange="loadDoctors()"/><br/>
+                    Specialty:<br/><form:select id="special" path="doctorSpec" items="${speclist}"
+                                                onchange="loadDoctors()"/><br/>
                     <!-- path is where in the object specified by command name to store the result, items is the list of results -->
                     <!-- Doctor: -->
 
                     <!-- id is how jquery get the element. -->
-                    Doctor:<br/><form:select id="doctor" path="doctorName">
-                         <form:option value="">List of Doctors</form:option>
-                    </form:select><br/>
+                    Doctor:<br/><form:select id="doctor" path="doctorName" items="${doctorlist}"
+                                             onchange="loadTimes()"/><br/>
                     Time:<br/><form:select id="date" path="date" items="${dateList}"/><br/>
 
 
