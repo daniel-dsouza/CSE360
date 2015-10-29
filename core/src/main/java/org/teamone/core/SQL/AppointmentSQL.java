@@ -210,7 +210,7 @@ public class AppointmentSQL {
                 System.out.println("Doctor ID:\t" + docID);*///debugging
             Patient temp = new Patient();
             temp.setUserID(patID);
-            temp = PatientSQL.getPatientComplete(temp);
+            //temp = PatientSQL.getPatientComplete(temp);
             readMe.setPatient(temp);
 
             Doctor temp1 = new Doctor();
@@ -299,7 +299,7 @@ public class AppointmentSQL {
      * @param readMe Appointment Object
      * @return boolean
      */
-    public static boolean preloadAppointment(ArrayList<Appointment> readList) {
+    public static boolean preloadAppointment(Appointment readMe) {
         boolean result = false;
         try {
             int checker = 0;
@@ -309,20 +309,20 @@ public class AppointmentSQL {
             System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-            for (Appointment readMe : readList) {
-                int docID = readMe.getDoctorID();
-                String date = readMe.getDate();
-                String time = readMe.getTime();
-                String insertApp = "INSERT INTO appointment "
-                        + "(doctorID, date, time) VALUES"
-                        + "(?,?,?);";
-                // PreparedStatements can use variables and are more efficient
-                preparedStatement = connect.prepareStatement(insertApp);
-                preparedStatement.setInt(1, docID);
-                preparedStatement.setString(2, date);
-                preparedStatement.setString(3, time);
-                checker = preparedStatement.executeUpdate();
-            }
+
+            int docID = readMe.getDoctorID();
+            String date = readMe.getDate();
+            String time = readMe.getTime();
+            String insertApp = "INSERT INTO appointment "
+                    + "(doctorID, date, time) VALUES"
+                    + "(?,?,?);";
+            // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect.prepareStatement(insertApp);
+            preparedStatement.setInt(1, docID);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, time);
+            checker = preparedStatement.executeUpdate();
+
             if (checker == 0)
                 result = false;
             else

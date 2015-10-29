@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.appointments.Appointment;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -13,12 +12,10 @@ import java.util.Random;
 public class AAPreloadApptTest {
 
     private Appointment appt;
-    private ArrayList<Appointment> readList;
 
     @Before
     public void setUp() {
         appt = new Appointment();
-        readList = new ArrayList<Appointment>();
     }
 
     @Test
@@ -30,13 +27,15 @@ public class AAPreloadApptTest {
 
                 //appt.setDoctorID(docID);
                 //random();//call this to random
-                //readList.add(appt);
+                //boolean p = AppointmentSQL.preloadAppointment(appt);
+                //assertTrue("Failed to preload", p);//if p!=null returns false, display message
+
+
             }
+            // System.out.println("*********************Preload successful************************");
+            // System.out.println(TestStrings.testEnd);
         }
-        // System.out.println("*********************Preload successful************************");
-        // System.out.println(TestStrings.testEnd);
-        //boolean p = AppointmentSQL.preloadAppointment(readList);
-        //assertTrue("Failed to preload", p);//if p!=null returns false, display message
+
     }
 
     public void random()//randomizer so we can loop multiple
@@ -51,18 +50,26 @@ public class AAPreloadApptTest {
         date += Integer.toString(date1) + "-";
         date1 = randomGenerator.nextInt((28 - 1) + 1) + 1;//day
         date += Integer.toString(date1);
-
         String time = "";
         //nextInt((max - min) + 1) + min
         int time1 = randomGenerator.nextInt((12 - 0) + 1) + 0;//12 hour clock
-        time += Integer.toString(time1) + ":00 ";
-
         String time2 = "";
-        if ((randomGenerator.nextInt(10) % 2) == 0)//even
-            time2 = "AM";
-        else
+        if (time1 >= 0 && time1 <= 6 || time1 == 12)//if generator is between midnight and 6:00, then this must be set to PM since no doctors wake up.
+        {
+            if (time1 == 0)//if this is 0, we cant have 0:00 PM, so we set that 12:00
+            {
+                time1 = 12;
+            }
             time2 = "PM";
+        } else {
+            if ((randomGenerator.nextInt(10) % 2) == 0)//time between 7 AM to 11:00 AM could be either AM or PM.
+                time2 = "AM";
+            else
+                time2 = "PM";
+        }
+        time += Integer.toString(time1) + ":00 ";
         time += time2;
+
         appt.setDate(date);
         appt.setTime(time);
     }

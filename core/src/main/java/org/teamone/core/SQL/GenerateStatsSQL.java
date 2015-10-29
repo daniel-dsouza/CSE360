@@ -388,7 +388,6 @@ public class GenerateStatsSQL {
 
     public static void getNumOfPatientType()
     {
-        //INCOMPLETE METHOD STILL NEED TO FINISH ONCE MISSING METHOD HAS BEEN IMPLEMENTED
 
         double pediatrician = 0;
         double generalCare = 0;

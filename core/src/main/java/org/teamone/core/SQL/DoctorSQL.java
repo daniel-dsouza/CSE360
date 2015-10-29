@@ -184,7 +184,7 @@ public class DoctorSQL {
                 System.out.println("PatientID:\t" + patID);*///debugging
             Patient temp = new Patient();
             temp.setUserID(patID);
-            temp = PatientSQL.getPatientComplete(temp);
+            //temp = PatientSQL.getPatientComplete(temp);
             readMe.setPatient(temp);
 
             Doctor temp1 = new Doctor();
@@ -354,7 +354,7 @@ public class DoctorSQL {
 
                 Patient new1 = new Patient();
                 new1.setUserID(resultSet.getInt("patientID"));
-                new1 = PatientSQL.getPatientComplete(new1);
+                //new1 = PatientSQL.getPatientComplete(new1);
 
                 arrayOfPatient.add(new1);
             }
