@@ -415,7 +415,7 @@ public class PatientSQL {
                 Patient pers = new Patient();
                 pers.setUserID(rs.getInt("userID"));
 
-                pers= PatientSQL.getPatientComplete(pers);
+                //pers= PatientSQL.getPatientComplete(pers);
                 pers.setName(rs.getString("name"));
                 pers.setEmail(rs.getString("emailID"));
                 PatientList.add(pers);
@@ -455,7 +455,7 @@ public class PatientSQL {
                 Patient pers = new Patient();
                 pers.setUserID(rs.getInt("patientID"));
 
-                pers= PatientSQL.getPatientComplete(pers);
+                //pers= PatientSQL.getPatientComplete(pers);
                 PatientList.add(pers);
             }
 

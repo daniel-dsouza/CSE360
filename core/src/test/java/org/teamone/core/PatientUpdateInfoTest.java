@@ -21,7 +21,7 @@ public class PatientUpdateInfoTest {
         update = new Patient();
         update.setUserID(1002);
         update.patientInformation.setFirstName("Ryan");
-        update.patientInformation.setLastName("Syani");
+        update.patientInformation.setLastName("The Diva");
         update.patientInformation.setAddress("Eastern Ocean");
         update.patientInformation.setCity("Tempe");
         update.patientInformation.setState("AZ");

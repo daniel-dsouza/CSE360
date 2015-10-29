@@ -32,9 +32,7 @@ public class zAdmin {
         ArrayList<Person> testArr = HspSQL.revealAll();
         assertTrue("Failed to dump person table", !testArr.isEmpty());
 
-        Person temp;
-        for (int i = 0; i < testArr.size(); i++) {
-            temp = testArr.get(i);
+        for (Person temp : testArr) {
             System.out.print("UserID: " + temp.getUserID() + "\t\tName: " + temp.getName() + "\t\tOccupation: " + temp.getOccupation());
             System.out.println("\t\tpassword: " + temp.getPassword() + "\t\temail: " + temp.getEmail());
         }
@@ -50,9 +48,7 @@ public class zAdmin {
         ArrayList<Patient> patientArr = PatientSQL.getAllPatient();
         assertTrue("Failed to get all patients", !patientArr.isEmpty());
 
-        Patient temp;
-        for (int i = 0; i < patientArr.size(); i++) {
-            temp = patientArr.get(i);
+        for (Patient temp : patientArr) {
             System.out.println("Name: " + temp.getName());
             System.out.println("Address: " + temp.getAddress());
             System.out.println("SSN: " + temp.getSSN() + "\n");

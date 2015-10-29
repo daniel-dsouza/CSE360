@@ -29,14 +29,13 @@ public class DoctorTest {
         ArrayList<Patient> patientList = DoctorSQL.getDoctorPatientsList(new1);
         assertTrue("Could not get list of patients by doctor", !patientList.isEmpty());
 
-        Patient tempPat;
-        for (int i = 0; i < patientList.size(); i++) {
-            tempPat = patientList.get(i);
+        for (Patient tempPat : patientList) {
             System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getUserID());
         }
 
         System.out.println(TestStrings.testEnd);
     }
+
     @Test
     public void getAvailableTimes() {
         System.out.println("\nTest========Searching for Available Doctor Times ");
@@ -45,12 +44,10 @@ public class DoctorTest {
         ArrayList<Appointment> timesList = AppointmentSQL.getAvailableDoctorTimes(new1);
         assertTrue("Could not get Available Doctor Times", !timesList.isEmpty());
 
-            System.out.println("*********************Find successful************************");
-            Appointment tempApp;
-            for (int i = 0; i < timesList.size(); i++) {
-                tempApp = timesList.get(i);
-                System.out.println("Available Date: " + tempApp.getDate() + "\tTime: " + tempApp.getTime());
-            }
+        System.out.println("*********************Find successful************************");
+        for (Appointment tempApp : timesList) {
+            System.out.println("Available Date: " + tempApp.getDate() + "\tTime: " + tempApp.getTime());
+        }
 
         System.out.println(TestStrings.testEnd);
     }
@@ -61,9 +58,7 @@ public class DoctorTest {
         ArrayList<Appointment> apptList = DoctorSQL.getListSpecialtyPatient("Pediatrician");
         assertTrue("Could not get list of patients by doctor", !apptList.isEmpty());
 
-        Appointment temp;
-        for (int i = 0; i < apptList.size(); i++) {
-            temp = apptList.get(i);
+        for (Appointment temp : apptList) {
             System.out.println("Patient ID: " + temp.getPatientID() + "\tDate: " + temp.getDate());
         }
 

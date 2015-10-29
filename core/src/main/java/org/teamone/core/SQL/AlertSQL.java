@@ -1,6 +1,7 @@
 package org.teamone.core.SQL;
 
 import org.teamone.core.users.Alert;
+import org.teamone.core.users.Patient;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -73,6 +74,46 @@ public class AlertSQL {
                 a.setReason(resultSet.getString("alert_reason"));
                 a.setDoctorID(resultSet.getInt("doctor_id"));
                 a.setPatientID(resultSet.getInt("patient_id"));
+                a.setAlertDateAndTime(resultSet.getString("alertDateAndTime"));
+                a.setAlertStatus(true);
+                alertList.add(a);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            alertList = null;
+        } finally {
+            close();
+        }
+        return alertList;
+    }
+
+    /**
+     * get list of alerts by patient ID
+     *
+     * @param patient with a valid ID.
+     * @return arraylist
+     */
+    public static ArrayList<Alert> getListAlertsByPatient(Patient pat1) {
+
+        ArrayList<Alert> alertList = new ArrayList<Alert>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            int patID = pat1.getUserID();
+
+            preparedStatement = connect.prepareStatement("SELECT alert_id,  alert_reason,  doctor_id,  alertDateAndTime  FROM alerts WHERE AlertActive = 1 and patient_id = ?;");
+            preparedStatement.setInt(1, patID);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Alert a = new Alert();
+                a.setAlertID(resultSet.getInt("alert_id"));
+                a.setReason(resultSet.getString("alert_reason"));
+                a.setDoctorID(resultSet.getInt("doctor_id"));
+                a.setPatientID(patID);
                 a.setAlertDateAndTime(resultSet.getString("alertDateAndTime"));
                 a.setAlertStatus(true);
                 alertList.add(a);

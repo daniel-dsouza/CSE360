@@ -98,7 +98,7 @@ public class AppointmentTester {
         System.out.println("Reason:\t" + test1.getReason());
         System.out.println("Doctor ID:\t" + test1.getDoctorID());
         System.out.println("Patient ID:\t" + test1.getPatientID());
-        System.out.println("Patient address:\t" + test1.getPatient().getAddress());
+        //System.out.println("Patient address:\t" + test1.getPatient().getAddress());
 
         System.out.println(TestStrings.testEnd);
     }
