@@ -86,7 +86,7 @@ public class Person {
      * //to SQL
      */
     public void toStringName(){
-        name = lastName + ":" +firstName;
+        name = firstName + ":" +lastName;
     }
 
     /**

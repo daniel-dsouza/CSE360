@@ -3,9 +3,9 @@
  */
 function getPersonalInfo(patientID, callback) {
     $.ajax('/select_patient/getpatientinfo/' + patientID, {
-        type:'GET',
-        dataType:'json',
-        success:function(data) {
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
             var outputHTML =
                 'Name: ' + data.name + '</br>' +
                 'Age: ' + data.age + '</br>' +
@@ -13,7 +13,7 @@ function getPersonalInfo(patientID, callback) {
                 'Gender: ' + data.gender + '</br>';
             callback(outputHTML);
         },
-        error: function() {
+        error: function () {
             alert("error getting list.")
         }
     });
@@ -21,24 +21,24 @@ function getPersonalInfo(patientID, callback) {
 
 function getAppointments(patientID, callback) {
     $.ajax('/select_patient/getpatientappointments/' + patientID, {
-        type:'GET',
-        dataType:'json',
-        success:function(data) {
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
             var outputHTML = '';
             var len = data.length;
             for (var i = 0; i < len; i++) {
                 outputHTML +=
                     '<div class="mini_appointment"><div style="float: left; margin-right: 5px;">' +
-                        '<a href="${pageContext.request.contextPath}/appointment/' + data[i].appointmentID + '" class="btn btn-info" role="button">Edit</a>' +
+                    '<a href="${pageContext.request.contextPath}/appointment/' + data[i].appointmentID + '" class="btn btn-info" role="button">Edit</a>' +
                     '</div>' +
                     '<div>' +
-                        'Date: ' + data[i].date + '</br>' +
-                        'Doctor: ' + data[i].doctorID + '</br>' +
+                    'Date: ' + data[i].date + '</br>' +
+                    'Doctor: ' + data[i].doctorID + '</br>' +
                     '</div></div>';
             }
             callback(outputHTML);
         },
-        error: function() {
+        error: function () {
             alert("error getting list.")
         }
     });
@@ -46,9 +46,9 @@ function getAppointments(patientID, callback) {
 
 function getAlerts(patientID, callback) {
     $.ajax('/select_patient/getpatientalerts/' + patientID, {
-        type:'GET',
-        dataType:'json',
-        success:function(data) {
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
             var outputHTML = '';
             var len = data.length;
             for (var i = 0; i < len; i++) {
@@ -59,23 +59,23 @@ function getAlerts(patientID, callback) {
             }
             callback(outputHTML);
         },
-        error: function() {
+        error: function () {
             alert("error getting list.")
         }
     });
 };
 
-$(document).ready(function(){
-    $('.panel-collapse').on('shown.bs.collapse', function(e){
+$(document).ready(function () {
+    $('.panel-collapse').on('shown.bs.collapse', function (e) {
         //alert('Collapsible element ' + e.currentTarget.id + 'has been completely opened .');
         var patientid = e.currentTarget.id;
-        getPersonalInfo(patientid, function(result) {
+        getPersonalInfo(patientid, function (result) {
             $(e.currentTarget).find("#personal_info_" + e.currentTarget.id).html(result);
         });
-        getAppointments(patientid, function(result) {
+        getAppointments(patientid, function (result) {
             $(e.currentTarget).find("#appointments_" + e.currentTarget.id).html(result);
         });
-        getAlerts(patientid, function(result) {
+        getAlerts(patientid, function (result) {
             $(e.currentTarget).find("#alerts_" + e.currentTarget.id).html(result);
         });
 

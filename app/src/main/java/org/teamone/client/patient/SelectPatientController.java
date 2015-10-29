@@ -21,18 +21,19 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
-@RequestMapping(value="/**/select_patient")
+@RequestMapping(value = "/**/select_patient")
 public class SelectPatientController {
 
     /**
      * This method handles the redirects for the buttons.
+     *
      * @param model
      * @param user
      * @param action
      * @param patientID
      * @return
      */
-    @RequestMapping(value="/{patientID}/{action}")
+    @RequestMapping(value = "/{patientID}/{action}")
     public String processAction(Map<String, Object> model,
                                 @ModelAttribute("user") User user,
                                 @PathVariable("action") String action,
@@ -55,11 +56,11 @@ public class SelectPatientController {
         }
     }
 
-    @RequestMapping(method=RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String renderOptions(Map<String, Object> model,
                                 @ModelAttribute("user") User user) {
         //and i would have gotten away with if it weren't for those meddling kids.
-        if(user.getPerson() == null)
+        if (user.getPerson() == null)
             return "redirect:/login";
         if (!(user.getPerson() instanceof Doctor) && !(user.getPerson() instanceof HSP))
             return "redirect:/user/" + user.person.getUserID();
@@ -70,12 +71,12 @@ public class SelectPatientController {
         actions.put("health_conditions", "Health Conditions"); //TODO: create link above
         actions.put("medical_history", "Medical History"); //TODO: create link above
 
-        if(user.getPerson() instanceof Doctor) {
+        if (user.getPerson() instanceof Doctor) {
             actions.put("e_prescribe", "E-Prescribe Prescription"); //TODO: create link above.
             actions.put("lab_test", "E-Prescribe Lab Tests");
         }
 
-        if(user.getPerson() instanceof HSP) {
+        if (user.getPerson() instanceof HSP) {
             actions.put("edit_info", "Update Personal"); //TODO: create link above.
         }
 
@@ -86,10 +87,12 @@ public class SelectPatientController {
 
     /**
      * AJAX handler to return patient object
+     *
      * @return list of alerts as JSON objects
      */
-    @RequestMapping(value="/getpatientinfo/{patientID}", method = RequestMethod.GET)
-    public @ResponseBody
+    @RequestMapping(value = "/getpatientinfo/{patientID}", method = RequestMethod.GET)
+    public
+    @ResponseBody
     PatientInformation getPatientInformation(@PathVariable("patientID") int patientID) {
         Patient p = new Patient();
         p.setUserID(patientID);
@@ -99,10 +102,12 @@ public class SelectPatientController {
 
     /**
      * AJAX handler to return a patient's appointments.
+     *
      * @return list of alerts as JSON objects
      */
-    @RequestMapping(value="/getpatientappointments/{patientID}", method = RequestMethod.GET)
-    public @ResponseBody
+    @RequestMapping(value = "/getpatientappointments/{patientID}", method = RequestMethod.GET)
+    public
+    @ResponseBody
     List<Appointment> getPatientAppointments(@PathVariable("patientID") int patientID) {
 //        Patient p = new Patient();
 //        p.setUserID(patientID);
@@ -114,14 +119,16 @@ public class SelectPatientController {
 
     /**
      * AJAX handler to return a patients alerts.
+     *
      * @return list of alerts as JSON objects
      */
-    @RequestMapping(value="/getpatientalerts/{patientID}", method = RequestMethod.GET)
-    public @ResponseBody
+    @RequestMapping(value = "/getpatientalerts/{patientID}", method = RequestMethod.GET)
+    public
+    @ResponseBody
     ArrayList<Alert> getPatientAlerts(@PathVariable("patientID") int patientID) {
         Patient p = new Patient();
         p.setUserID(patientID);
         ArrayList<Alert> patientAlerts = AlertSQL.getListAlertsByPatient(p);
-        return  patientAlerts;
+        return patientAlerts;
     }
 }

@@ -234,6 +234,7 @@ public class DoctorSQL {
                 Staff newStaff = new Staff();
                 newStaff.setName(resultSet.getString("name"));
                 newStaff.setUserID(resultSet.getInt("staffID"));
+                newStaff.splitName(resultSet.getString("name"));
 
                 arrayOfDoctors.add(newStaff);
             }
@@ -319,7 +320,9 @@ public class DoctorSQL {
             staff.setPatientID(resultSet.getInt("p.patientID"));
             staff.setSchedule(resultSet.getString("p.schedule"));
             staff.setName(resultSet.getString("p2.name"));
+            staff.splitName(resultSet.getString("p2.name"));
             staff.setEmail(resultSet.getString("p2.emailID"));
+
 
         } catch (Exception e) {
             System.out.println(e);
