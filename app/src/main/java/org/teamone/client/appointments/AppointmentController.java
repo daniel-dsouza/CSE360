@@ -152,17 +152,24 @@ public class AppointmentController {
         return "appointment/PatientSchedAppt"; //return the view with linked model
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = {"/new", "/edit/{appointmentID}"}, method = RequestMethod.POST)
     public String handlePost(Map<String, Object> model,
                              @ModelAttribute("appointment") Appointment ap1,
+                             @PathVariable int appointmentID,
                              @ModelAttribute("user") User user) { //this tells the method that there will be a field named appointment in the model
+
         System.out.println(ap1.getDoctorSpec());
         System.out.println(ap1.getDoctorName());
         System.out.println(ap1.getReason());
         System.out.println(ap1.getAppointmentID());
         System.out.println(user.getPerson().getUserID());
         ap1.setPatientID(user.getPerson().getUserID());
-
+        if (appointmentID != 0) {
+            int oldID = ap1.getAppointmentID();
+            ap1.setAppointmentID(appointmentID);//set new one from URL
+            //TODO: add update appointmend by appt. second parameter is oldID and that iw update the row to be NULL. pretty much swap
+            //AppointmentSQL.editAppointmentAppt(ap1,oldID);
+        }//else just use newAppointmentAppt
         AppointmentSQL.editAppointmentAppt(ap1);//just need patient ID and reason to be updated. appointmentID will be used to find the SQL row
         return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
     }
