@@ -8,7 +8,6 @@ import org.teamone.core.SQL.LabRequestSQL;
 import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.Doctor;
 import org.teamone.core.users.LabStaff;
-import org.teamone.core.users.Patient;
 
 import java.util.List;
 import java.util.Map;
@@ -85,12 +84,12 @@ public class RequestLabTestController {
                               @ModelAttribute("user") User user) {
 
         request.setRequestionID(0); //TODO: remove this once select person is complete
-        Patient test = new Patient();
-        test.setUserID(1002);
-        request.setPatient(test);
+        //Patient test = new Patient();
+        //test.setUserID(1002);
+        request.setPatient(user.getPatient());
         request.setPerson(user.getPerson());
 
         LabRequestSQL.addLabRequest(request);
-        return "auth/user"; //TODO: send back to Select Patient.
+        return "redirect:/select_patient"; //TODO: send back to Select Patient.
     }
 }

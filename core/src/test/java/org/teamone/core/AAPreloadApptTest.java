@@ -51,8 +51,8 @@ public class AAPreloadApptTest {
         date1 = randomGenerator.nextInt((28 - 1) + 1) + 1;//day
         date += Integer.toString(date1);
         String time = "";
-        //nextInt((max - min) + 1) + min
-        int time1 = randomGenerator.nextInt((12 - 0) + 1) + 0;//12 hour clock
+        //nextInt((max - min) + 1)
+        int time1 = randomGenerator.nextInt((12 - 0) + 1);//12 hour clock
         String time2 = "";
         if (time1 >= 0 && time1 <= 6 || time1 == 12)//if generator is between midnight and 6:00, then this must be set to PM since no doctors wake up.
         {

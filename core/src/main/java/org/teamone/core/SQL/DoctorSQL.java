@@ -20,7 +20,7 @@ public class DoctorSQL {
 
     /**
      *
-     * @param Prescription patient: Prescription to be added.
+     * @param patient: Prescription to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
     public static Boolean addPrescription(Prescription patient) {
@@ -64,7 +64,7 @@ public class DoctorSQL {
 
     /**
      *
-     * @param Patient p: given a patient with a valid patientID.
+     * @param patient: given a patient with a valid patientID.
      * @return ArrayList of Prescriptions corresponding to Patient
      */
     public static ArrayList<Prescription> getListPrescription(Patient patient) {
@@ -106,7 +106,7 @@ public class DoctorSQL {
     /**
      * Given a valid staffID, date, type, patientID and quantity, return ID
      *
-     * @param Prescription p: given a patient with a valid staffID, date, type, patientID and quantity,.
+     * @param readMe: Prescription given a patient with a valid staffID, date, type, patientID and quantity,.
      * @return Prescriptions with ID corresponding to Patient
      */
     public static Prescription getPrescriptionID(Prescription readMe) {
@@ -150,7 +150,7 @@ public class DoctorSQL {
 
     /**
      *
-     * @param Prescription p: given a patient with a valid serialnumber
+     * @param readMe: Prescription given a patient with a valid serialnumber
      * @return Prescription object
      */
     public static Prescription viewPrescriptonByID(Prescription readMe) {
@@ -209,7 +209,7 @@ public class DoctorSQL {
 
     /**
      * Method returns a list doctors.
-     * @param string: Specialty to find in sql
+     * @param specialty: String to find in sql
      * @return ArrayList: Arraylist of staff objects
      */
     public static ArrayList<Staff> getListDoctorSpecialty (String specialty) {
@@ -250,7 +250,7 @@ public class DoctorSQL {
     /**
      * Method returns a list Appointments for doctor specialty.
      *
-     * @param string: Specialty to find in sql.
+     * @param specialty: String Specialty to find in sql.
      * @return ArrayList: Arraylist of appointment objects
      */
     public static ArrayList<Appointment> getListSpecialtyPatient(String specialty) {
@@ -264,7 +264,7 @@ public class DoctorSQL {
             //System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
             for (int i = 0; i < arrayOfDoctors.size(); i++) {
-                preparedStatement = connect.prepareStatement("SELECT date, patientID FROM appointment WHERE doctorID = ? AND patientID IS NOT NULL;");
+                preparedStatement = connect.prepareStatement("SELECT date, time, patientID, serialNumber FROM appointment WHERE doctorID = ? AND patientID IS NOT NULL;");
                 preparedStatement.setInt(1, arrayOfDoctors.get(i).getUserID());
                 resultSet = preparedStatement.executeQuery();
 
@@ -273,8 +273,10 @@ public class DoctorSQL {
 
                     Appointment new1 = new Appointment();
                     new1.setDate(resultSet.getString("date"));
+                    new1.setTime(resultSet.getString("time"));
                     new1.setPatientID(resultSet.getInt("patientID"));
                     new1.setDoctorID(arrayOfDoctors.get(i).getUserID());
+                    new1.setAppointmentID(resultSet.getInt("serialNumber"));
                     arrayOfAppt.add(new1);
                 }
             }
@@ -330,7 +332,7 @@ public class DoctorSQL {
 
     /**
      * Method returns a list doctors.
-     * @param Doctor: doctor with valid id
+     * @param doc: Doctor with valid id
      * @return ArrayList: Arraylist of patients objects
      */
     public static ArrayList<Patient> getDoctorPatientsList (Doctor doc) {

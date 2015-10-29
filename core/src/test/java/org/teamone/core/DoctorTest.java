@@ -54,12 +54,12 @@ public class DoctorTest {
 
     @Test
     public void getListofPatientsBySpecialty() {
-        System.out.println("\nTest========Searching for Patients for doctor specialty 'Pediatrician' ");
-        ArrayList<Appointment> apptList = DoctorSQL.getListSpecialtyPatient("Pediatrician");
+        System.out.println("\nTest========Searching for Patients for doctor specialty 'Emergency' ");
+        ArrayList<Appointment> apptList = DoctorSQL.getListSpecialtyPatient("Emergency");
         assertTrue("Could not get list of patients by doctor", !apptList.isEmpty());
 
         for (Appointment temp : apptList) {
-            System.out.println("Patient ID: " + temp.getPatientID() + "\tDate: " + temp.getDate());
+            System.out.println("Patient ID: " + temp.getPatientID() + "\tDate: " + temp.getDate() + "\tTime: " + temp.getTime());
         }
 
         System.out.println(TestStrings.testEnd);

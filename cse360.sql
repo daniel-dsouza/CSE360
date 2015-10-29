@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
 --
 
 INSERT INTO `staff` (`serialNumber`, `staffID`, `occupation`, `specialty`, `patientID`, `schedule`, `emergencyWardDoctor`) VALUES
-(1, 501, 'doctor', 'Pediatrician', NULL, NULL, 'no'),
+(1, 501, 'doctor', 'Emergency', NULL, NULL, 'no'),
 (2, 502, 'doctor', 'GeneralCare', NULL, NULL, 'no'),
 (3, 503, 'doctor', 'Neurologist', NULL, NULL, 'no'),
 (4, 504, 'doctor', 'GeneralCare', NULL, NULL, 'no'),
@@ -179,7 +179,7 @@ INSERT INTO `staff` (`serialNumber`, `staffID`, `occupation`, `specialty`, `pati
 (7, 507, 'doctor', 'X-Ray', NULL, NULL, 'no'),
 (8, 508, 'doctor', 'Pediatrician', NULL, NULL, 'no'),
 (9, 509, 'doctor', 'Emergency', NULL, NULL, 'yes'),
-(10, 510, 'doctor', 'Emergency', NULL, NULL, 'yes'),
+(10, 510, 'doctor', 'Pediatrician', NULL, NULL, 'yes'),
 (11, 511, 'doctor', 'Pediatrician', NULL, NULL, 'no'),
 (12, 512, 'hsp', 'hsp', NULL, NULL, 'no'),
 (13, 513, 'hsp', 'hsp', NULL, NULL, 'no'),

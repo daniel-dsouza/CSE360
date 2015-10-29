@@ -99,7 +99,7 @@ public class PatientSQL {
     }
     /**
      * get all data from SQL with a patient ID
-     * @param Patient Patient Object with valid patient ID
+     * @param patient Patient Object with valid patient ID
      * @return Patient object with all data filled in
      */
     public static Patient getPatientComplete(Patient patient) {
@@ -354,7 +354,7 @@ public class PatientSQL {
     }
     /**
      * Returns a list of patients based on Patients.
-     * @param String: Given a string name
+     * @param queryName: Given a string name
      * @return ArrayList: List of Patients
      */
     public static ArrayList<Patient> getPatientByPatient(String queryName) {
@@ -432,7 +432,7 @@ public class PatientSQL {
     }
     /**
      * Returns a list of patients based on doctors.
-     * @param staff: Given a staff object
+     * @param doc: Given a staff object
      * @return ArrayList: List of Patients
      */
     public static ArrayList<Patient> getPatientByStaff (Doctor doc) {

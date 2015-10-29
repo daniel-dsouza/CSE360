@@ -39,13 +39,13 @@ public class AppointmentSQL {
 
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
-            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID FROM appointment where doctorID = ? AND patientID IS NOT NULL");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID, serialNumber FROM appointment where doctorID = ? AND patientID IS NOT NULL");
             preparedStatement.setInt(1, docID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
 
             do {
-
+                Appointment new1 = new Appointment();
                 String date = resultSet.getString("date");
                 String time = resultSet.getString("time");
                 String reason = resultSet.getString("reason");
@@ -56,18 +56,18 @@ public class AppointmentSQL {
                 System.out.println("Reason:\t" + reason);
                 System.out.println("Patient ID:\t" + patID);*///debugging
 
-                readMe.setDate(date);
-                readMe.setTime(time);
-                readMe.setReason(reason);
-                readMe.setPatientID(patID);
-
-                a1.add(readMe);
+                new1.setDate(date);
+                new1.setTime(time);
+                new1.setReason(reason);
+                new1.setPatientID(patID);
+                new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                a1.add(new1);
 
             } while (resultSet.next());
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
-            readMe = null;
+            a1 = null;
         } finally {
             close();
         }
@@ -137,13 +137,13 @@ public class AppointmentSQL {
             // PreparedStatements can use variables and are more efficient
             int patID = readMe.getPatientID();
 
-            preparedStatement = connect.prepareStatement("SELECT serialNumber, date, time, reason, doctorID FROM appointment where patientID = ?");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID, serialNumber FROM appointment where patientID = ?");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();// ResultSet is initially before the first data set
 
             do {
-                Appointment temp = new Appointment();
+                Appointment new1 = new Appointment();
 
                 String date = resultSet.getString("date");
                 String time = resultSet.getString("time");
@@ -154,20 +154,19 @@ public class AppointmentSQL {
                 System.out.println("Reason:\t" + reason);
                 System.out.println("Doctor ID:\t" + docID);*///debugging
 
-                temp.setDate(date);
-                temp.setTime(time);
-                temp.setReason(reason);
-                temp.setPatientID(docID);
-                temp.setAppointmentID(resultSet.getInt("serialNumber"));
-
-                a1.add(temp);
+                new1.setDate(date);
+                new1.setTime(time);
+                new1.setReason(reason);
+                new1.setPatientID(docID);
+                new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                a1.add(new1);
 
             }
             while (resultSet.next());
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
-            readMe = null;
+            a1 = null;
         } finally {
             close();
         }
@@ -236,13 +235,14 @@ public class AppointmentSQL {
     }
 
     /**
-     * Edit the appointment. Can be used by patients, doctors, and HSP
+     * Create appointment used by doctors
      * This is will use doctorID, date and time to edit the SQL.
      *
      * @param readMe Appointment Object with valid doctorID, date and time
      * @return Appointment
      */
-    public static Appointment editAppointment(Appointment readMe) {
+    public static Boolean createAppointment(Appointment readMe) {
+        Boolean Result;
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -252,45 +252,32 @@ public class AppointmentSQL {
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
-            int patID = readMe.getPatientID();
             int docID = readMe.getDoctorID();
             String date = readMe.getDate();
             String time = readMe.getTime();
-            String reason = readMe.getReason();
 
-            String updateApp = "UPDATE appointment SET"
-                    + " reason = ?, patientID = ? WHERE doctorID = ? and date = ? and time = ?;";
+            String insertApp = "INSERT INTO appointment "
+                    + "(doctorID, date, time) VALUES"
+                    + "(?,?,?);";
             // PreparedStatements can use variables and are more efficient
-            preparedStatement = connect.prepareStatement(updateApp);
-            preparedStatement.setString(1, reason);
-            preparedStatement.setInt(2, patID);
-            preparedStatement.setInt(3, docID);
-            preparedStatement.setString(4, date);
-            preparedStatement.setString(5, time);
-
+            preparedStatement = connect.prepareStatement(insertApp);
+            preparedStatement.setInt(1, docID);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, time);
             checker = preparedStatement.executeUpdate();
-            System.out.println("checker for doctor==============" + checker);
-            //If no data was manipulated insert new appointment
+
             if (checker == 0) {
-                String insertApp = "INSERT INTO appointment "
-                        + "(reason, patientID) VALUES"
-                        + "(?,?) WHERE doctorID = ? and date = ? and time = ? ;";
-                // PreparedStatements can use variables and are more efficient
-                preparedStatement = connect.prepareStatement(insertApp);
-                preparedStatement.setString(1, reason);
-                preparedStatement.setInt(2, patID);
-                preparedStatement.setInt(3, docID);
-                preparedStatement.setString(4, date);
-                preparedStatement.setString(5, time);
-                preparedStatement.executeUpdate();
-            }
+                Result = false;
+            } else
+                Result = true;
 
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
-            readMe = null;
+            Result = false;
+
         }
-        return readMe;
+        return Result;
     }
 
     /**
@@ -341,14 +328,65 @@ public class AppointmentSQL {
 
 
     /**
-     * Same as editAppointment, but will only use appointmentID
+     * given an Appointment with valid info, and the old appointmentID,  this is "swap" appointments.
+     * This is because the oldID needs to have the reason and patientID set to NULL. Thus "swapping" occurs.
      *
      * @param readMe Appointment Object with valid appointmentID
-     * @return appointment object
+     * @return Boolean
      */
-    public static Appointment editAppointmentAppt(Appointment readMe) {
-        Appointment a1 = new Appointment();
+    public static Boolean swapAppointmentAppt(Appointment readMe, int oldID) {
+        Boolean Result;
+        try {
+            int checker, checker2;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int appID = readMe.getAppointmentID();
+            int patID = readMe.getPatientID();
+            String reason = readMe.getReason();
+
+            String updateApp = "UPDATE appointment SET"
+                    + " reason = ?, patientID = ? WHERE serialNumber = ? ;";
+
+            preparedStatement = connect.prepareStatement(updateApp);
+            preparedStatement.setString(1, reason);
+            preparedStatement.setInt(2, patID);
+            preparedStatement.setInt(3, appID);
+
+            checker = preparedStatement.executeUpdate();
+            String nullApp = "UPDATE appointment SET reason = NULL, patientID = NULL WHERE serialNumber = ?;";
+            preparedStatement = connect.prepareStatement(nullApp);
+            preparedStatement.setInt(1, oldID);
+            checker2 = preparedStatement.executeUpdate();
+
+            if (checker == 0 | checker2 == 0)
+                Result = false;
+            else
+                Result = true;
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            Result = false;
+        } finally {
+            close();
+        }
+        return Result;
+
+    }
+
+    /**
+     * Schedule an existing appointment by Appointment ID. This is because SQL is preloaded with patientID set to NULL
+     *
+     * @param readMe Appointment Object with valid appointmentID
+     * @return Boolean
+     */
+    public static Boolean schedAppointmentAppt(Appointment readMe) {
+        Boolean Result;
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -373,28 +411,28 @@ public class AppointmentSQL {
             preparedStatement.setString(1, reason);
             preparedStatement.setInt(2, patID);
             preparedStatement.setInt(3, appID);
-
             checker = preparedStatement.executeUpdate();
 
+
             if (checker == 0)
-                a1 = null;
+                Result = false;
             else
-                a1 = readMe;
+                Result = true;
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
-            readMe = null;
+            Result = false;
         } finally {
             close();
         }
-        return a1;
+        return Result;
 
     }
 
     /**
      * Returns a list of patients' appointment
      *
-     * @param String: Name must be exact
+     * @param patientName: String Name must be exact
      * @return ArrayList: Arraylist of Patient objects
      */
     public static ArrayList<Appointment> getPatientsAppointment(String patientName) {
@@ -444,7 +482,7 @@ public class AppointmentSQL {
     /**
      * Returns a list of Appointments available to doctor
      *
-     * @param Doctor: Staff with staff ID filled in
+     * @param doc: Doctor with staff ID filled in
      * @return ArrayList: Arraylist of Appointment objects
      */
     public static ArrayList<Appointment> getAvailableDoctorTimes(Doctor doc) {
@@ -456,7 +494,7 @@ public class AppointmentSQL {
             System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
             int docID = doc.getUserID();
-            preparedStatement = connect.prepareStatement("select serialNumber, date, time from appointment where doctorID  = ? and patientID IS NULL");
+            preparedStatement = connect.prepareStatement("select date, time, serialNumber from appointment where doctorID  = ? and patientID IS NULL");
             preparedStatement.setInt(1, docID);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -464,8 +502,8 @@ public class AppointmentSQL {
                 Appointment appt = new Appointment();
                 appt.setDate(rs.getString("date"));
                 appt.setTime(rs.getString("time"));
-                appt.setDoctorID(docID);
                 appt.setAppointmentID(rs.getInt("serialNumber"));
+                appt.setDoctorID(docID);
                 apptList.add(appt);
             }
 
@@ -497,7 +535,7 @@ public class AppointmentSQL {
                 connect.close();
             }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
 }
