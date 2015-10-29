@@ -1,4 +1,4 @@
-<div class="container-fluid bg-1 text-center" style="background-color: blueviolet">
+<div class="container-fluid bg-1 text-center" style="background-color: rgb(0, 255, 201)">
     <h3>Who Am I?</h3>
     <h3>I'm an adventurer</h3>
     <h6><c:out value="${user.person.occupation}"/></h6>

@@ -8,6 +8,7 @@ package org.teamone.core.SQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -140,15 +141,18 @@ public class AppointmentSQL {
             preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID, serialNumber FROM appointment where patientID = ?");
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
-            resultSet.next();// ResultSet is initially before the first data set
 
-            do {
+            while (resultSet.next()){
                 Appointment new1 = new Appointment();
 
                 String date = resultSet.getString("date");
                 String time = resultSet.getString("time");
                 String reason = resultSet.getString("reason");
                 int docID = resultSet.getInt("doctorID");
+                Staff temp = new Staff();
+                temp.setUserID(docID);
+                Staff doc1 = DoctorSQL.getStaffComplete(temp);
+
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
                 System.out.println("Reason:\t" + reason);
@@ -159,10 +163,11 @@ public class AppointmentSQL {
                 new1.setReason(reason);
                 new1.setPatientID(docID);
                 new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                new1.setDoctor(doc1);
                 a1.add(new1);
 
             }
-            while (resultSet.next());
+
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
@@ -325,7 +330,43 @@ public class AppointmentSQL {
         }
         return result;
     }
+    /**
+     * NULLS out the patientID and reason for an appointment
+     *
+     * @param oldID:  appointmentID to be nulled out
+     * @return Boolean
+     */
+    public static Boolean delAppointmentAppt(int oldID) {
+        Boolean Result;
+        try {
+            int checker2;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+
+            String nullApp = "UPDATE appointment SET reason = NULL, patientID = NULL WHERE serialNumber = ?;";
+            preparedStatement = connect.prepareStatement(nullApp);
+            preparedStatement.setInt(1, oldID);
+            checker2 = preparedStatement.executeUpdate();
+
+            if (checker2 == 0)
+                Result = false;
+            else
+                Result = true;
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            Result = false;
+        } finally {
+            close();
+        }
+        return Result;
+
+    }
 
     /**
      * given an Appointment with valid info, and the old appointmentID,  this is "swap" appointments.

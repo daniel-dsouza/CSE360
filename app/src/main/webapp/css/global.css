@@ -21,13 +21,6 @@ textarea {
     width:100%
 }
 
-.row {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
-
 .mini_appointment {
     border-bottom: solid #ddd;
     margin: 1px;
