@@ -5,38 +5,54 @@ package org.teamone.core;
  */
 public class Statistics {
 
-    private String healthOutcomes ;
+    private float healthOutcomes ;
 
-    private String patientType ;
+    private double[] patientType ;
 
-    private int patientPopulation = 0;
+    private double[] patientAge;
+
+    private double patientFemalePopulation = 0;
+
+    private double patientMalePopulation = 0;
 
     private float admissionRates  =  0;
 
 
-    public String getHealthOutcomes() {
+    public float getHealthOutcomes() {
         return healthOutcomes;
     }
 
-    public void setHealthOutcomes(String healthOutcomes) {
+    public void setHealthOutcomes(float healthOutcomes) {
         this.healthOutcomes = healthOutcomes;
     }
 
-    public String getPatientType() {
+    public double[] getPatientType() {
         return patientType;
     }
 
-    public void setPatientType(String patientType) {
+    public void setPatientType(double[] patientType) {
         this.patientType = patientType;
     }
 
-    public int getPatientPopulation() {
-        return patientPopulation;
+    public double getFemalePatientPopulation() {
+        return patientFemalePopulation;
     }
 
-    public void setPatientPopulation(int patientPopulation) {
-        this.patientPopulation = patientPopulation;
+    public void setFemalePatientPopulation(double patientFemalePopulation) {
+        this.patientFemalePopulation = patientFemalePopulation;
     }
+
+    public double getMalePatientPopulation() {
+        return patientMalePopulation;
+    }
+
+    public void setMalePatientPopulation(double patientMalePopulation) {
+        this.patientMalePopulation = patientMalePopulation;
+    }
+
+    public double[] getPatientAgePopulation(){ return patientAge; }
+
+    public void setPatientAgePopulation(double[] patientAge){ this.patientAge = patientAge; }
 
     public float getAdmissionRates() {
         return admissionRates;

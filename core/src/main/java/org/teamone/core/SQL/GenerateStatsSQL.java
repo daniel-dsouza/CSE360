@@ -1,6 +1,7 @@
 package org.teamone.core.SQL;
 
 
+import org.teamone.core.Statistics;
 import org.teamone.core.appointments.Appointment;
 
 import java.sql.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.text.DecimalFormat;
 
 /**
  * Created by Stephanie on 10/24/2015.
@@ -19,7 +21,25 @@ public class GenerateStatsSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
+public static Statistics main ()
+{
 
+    Statistics stats = new Statistics();
+
+    stats.setHealthOutcomes(getNumOfAlerts());
+    stats.setAdmissionRates(getNumOfNewPatients());
+    stats.setFemalePatientPopulation(getFemalePopulation());
+    stats.setMalePatientPopulation(getMalePopulation());
+    stats.setPatientType(getNumOfPatientType());
+    stats.setPatientAgePopulation(getAgePopulation());
+
+
+    return stats;
+
+
+
+
+}
     public static int getNumOfAlerts() {
         int numOfAlerts = 0;
         String date;
@@ -199,6 +219,7 @@ public class GenerateStatsSQL {
 
             malePercentage = (male/totalNumOfPatients)*100;
 
+            malePercentage = RoundTo2Decimals(malePercentage);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -244,7 +265,7 @@ public class GenerateStatsSQL {
             }
 
             femalePercentage = (female/totalNumOfPatients)*100;
-
+            femalePercentage = RoundTo2Decimals(femalePercentage);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -257,8 +278,10 @@ public class GenerateStatsSQL {
     }
 
 
-    public static void getAgePopulation()
+    public static double[] getAgePopulation()
     {
+        double[] groups = new double[8];
+
         double ag1 = 0;
         double ag2 = 0;
         double ag3 = 0;
@@ -358,14 +381,34 @@ public class GenerateStatsSQL {
             ag7Percentage = (ag7/totalNumOfPatients)*100;
             ag8Percentage = (ag8/totalNumOfPatients)*100;
 
-            System.out.println("Ages 0-12: " + String.format("%.2f", ag1Percentage) + "%");
-            System.out.println("Ages 13-18: " + String.format("%.2f", ag2Percentage) + "%");
-            System.out.println("Ages 19-26: " + String.format("%.2f", ag3Percentage) + "%");
-            System.out.println("Ages 27-40: " + String.format("%.2f", ag4Percentage) + "%");
-            System.out.println("Ages 41-50: " + String.format("%.2f", ag5Percentage) + "%");
-            System.out.println("Ages 51-60: " + String.format("%.2f", ag6Percentage) + "%");
-            System.out.println("Ages 61-74: " + String.format("%.2f", ag7Percentage) + "%");
-            System.out.println("Ages 75 & Up: " + String.format("%.2f", ag8Percentage) + "%");
+
+            ag1Percentage = RoundTo2Decimals(ag1Percentage);
+            ag2Percentage = RoundTo2Decimals(ag2Percentage);
+            ag3Percentage = RoundTo2Decimals(ag3Percentage);
+            ag4Percentage = RoundTo2Decimals(ag4Percentage);
+            ag5Percentage = RoundTo2Decimals(ag5Percentage);
+            ag6Percentage = RoundTo2Decimals(ag6Percentage);
+            ag7Percentage = RoundTo2Decimals(ag7Percentage);
+            ag8Percentage = RoundTo2Decimals(ag8Percentage);
+
+
+            groups[0] = ag1Percentage;
+            groups[1] = ag2Percentage;
+            groups[2] = ag3Percentage;
+            groups[3] = ag4Percentage;
+            groups[4] = ag5Percentage;
+            groups[5] = ag6Percentage;
+            groups[6] = ag7Percentage;
+            groups[7] = ag8Percentage;
+
+            System.out.println("Ages 0-12: " + ag1Percentage + "%");
+            System.out.println("Ages 13-18: " + ag2Percentage+ "%");
+            System.out.println("Ages 19-26: " + ag3Percentage + "%");
+            System.out.println("Ages 27-40: " + ag4Percentage + "%");
+            System.out.println("Ages 41-50: " + ag5Percentage + "%");
+            System.out.println("Ages 51-60: " + ag6Percentage + "%");
+            System.out.println("Ages 61-74: " + ag7Percentage + "%");
+            System.out.println("Ages 75 & Up: " + ag8Percentage + "%");
 
 
 
@@ -384,10 +427,18 @@ public class GenerateStatsSQL {
             close();
         }
 
+        return groups;
+
     }
 
-    public static void getNumOfPatientType()
+   public static double RoundTo2Decimals(double val) {
+        DecimalFormat df2 = new DecimalFormat("###.##");
+        return Double.valueOf(df2.format(val));
+    }
+
+    public static double[] getNumOfPatientType()
     {
+        double[] types = new double[5];
 
         double pediatrician = 0;
         double generalCare = 0;
@@ -488,11 +539,27 @@ public class GenerateStatsSQL {
             xRayPercentage = (xRay/totalNumOfPatients)*100;
             neurologistPercentage = (neurologist/totalNumOfPatients)*100;
 
-            System.out.println("Pediatric Patients: " + String.format("%.2f", pedsPercentage) + "%");
-            System.out.println("General Care Patients: " + String.format("%.2f", genPercentage) + "%");
-            System.out.println("Emergency Patients: " + String.format("%.2f", emergPercentage) + "%");
-            System.out.println("Radiology (X-ray) Patients: " + String.format("%.2f", xRayPercentage) + "%");
-            System.out.println("Neurology Patients: " + String.format("%.2f", neurologistPercentage) + "%");
+
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.format(pedsPercentage);
+            df.format(genPercentage);
+            df.format(emergPercentage);
+            df.format(xRayPercentage);
+            df.format(neurologistPercentage);
+
+
+            types[0]=pedsPercentage;
+            types[1] = genPercentage;
+            types[2] = emergPercentage;
+            types[3]= xRayPercentage;
+            types[4] = neurologistPercentage;
+
+
+            System.out.println("Pediatric Patients: " + pedsPercentage + "%");
+            System.out.println("General Care Patients: " + genPercentage + "%");
+            System.out.println("Emergency Patients: " + emergPercentage + "%");
+            System.out.println("Radiology (X-ray) Patients: " + xRayPercentage + "%");
+            System.out.println("Neurology Patients: " + neurologistPercentage + "%");
 
 
         } catch (Exception e) {
@@ -505,6 +572,8 @@ public class GenerateStatsSQL {
         } finally {
             close();
         }
+
+        return types;
 
     }
 
