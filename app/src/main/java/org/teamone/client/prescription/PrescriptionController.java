@@ -10,6 +10,7 @@ import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.prescriptions.Prescription;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,8 +18,18 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping(value = "/{patientID}/prescription")
+@RequestMapping(value = "/**/prescription")
 public class PrescriptionController {
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String viewPatient(@ModelAttribute("user") User user,
+                              Map<String, Object> model){
+        List prescriptionList = DoctorSQL.getListPrescription(user.getPatient());
+        model.put("prescriptions",prescriptionList);
+
+        return "prescription/viewprescription";
+    }
+
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createPatient(Map<String, Object> model) {
@@ -33,11 +44,10 @@ public class PrescriptionController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String processPatientInfo(@ModelAttribute("userInput") Prescription attempt,
                                      Map<String, Object> model,
-                                     @ModelAttribute("user") User user,
-                                     @PathVariable int patientID) {
+                                     @ModelAttribute("user") User user) {
         Date date = new Date();
         attempt.setStaffID(user.person.getUserID());
-        attempt.setPatientID(patientID); // This needs to be changed to the way we intend to get patient ID
+        attempt.setPatientID(user.getPatient().getUserID()); // This needs to be changed to the way we intend to get patient ID
         attempt.setDateAndTime(date);
 
         DoctorSQL.addPrescription(attempt);
