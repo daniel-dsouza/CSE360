@@ -5,9 +5,9 @@ package org.teamone.core;
  */
 public class Statistics {
 
-    private float healthOutcomes ;
+    private float healthOutcomes;
 
-    private double[] patientType ;
+    private double[] patientType;
 
     private double[] patientAge;
 

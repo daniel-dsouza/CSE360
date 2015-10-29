@@ -33,7 +33,6 @@ public static Statistics main ()
     stats.setPatientType(getNumOfPatientType());
     stats.setPatientAgePopulation(getAgePopulation());
 
-
     return stats;
 
 
