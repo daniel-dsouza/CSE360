@@ -36,9 +36,9 @@ public class AppointmentTester {
         update.setPatientID(1002);
         update.setDoctorID(501);
         update.setReason("Changing dates");
-        update.setTime("10:00 AM");
-        update.setDate("2015-12-27");
-        update.setAppointmentID(59);//new id. frontend extracts the oldID with "getAppointmentID" and uses as second parameter
+        update.setTime("11:00 AM");
+        update.setDate("2015-12-26");
+        update.setAppointmentID(5);//new id. frontend extracts the oldID with "getAppointmentID" and uses as second parameter
 
 
     }
@@ -124,7 +124,7 @@ public class AppointmentTester {
     @Test
     public void viewApptByAppID() {
         //case 1
-        update.setAppointmentID(6);
+        update.setAppointmentID(5);
         System.out.println("\nTest========Viewing Appointment with appt ID");
         Appointment test1 = AppointmentSQL.viewAppointmentByApptID(update);
         assertTrue("No appointment by appointment ID", test1 != null);
@@ -143,7 +143,7 @@ public class AppointmentTester {
 
 
 
-    @Test
+    /*@Test
     public void zGetAppointmentID() {
         Appointment view = new Appointment();//doctorID, Time, PatientID, and Date,
         view.setDate("2015-12-26");
@@ -162,6 +162,6 @@ public class AppointmentTester {
 
 
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
 }
