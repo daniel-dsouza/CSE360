@@ -210,7 +210,7 @@ public class AppointmentSQL {
                 System.out.println("Doctor ID:\t" + docID);*///debugging
             Patient temp = new Patient();
             temp.setUserID(patID);
-            temp = PatientSQL.getPatientComplete(temp);
+            //temp = PatientSQL.getPatientComplete(temp);
             readMe.setPatient(temp);
 
             Doctor temp1 = new Doctor();
@@ -302,7 +302,7 @@ public class AppointmentSQL {
     public static boolean preloadAppointment(Appointment readMe) {
         boolean result = false;
         try {
-            int checker;
+            int checker = 0;
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
@@ -313,8 +313,6 @@ public class AppointmentSQL {
             int docID = readMe.getDoctorID();
             String date = readMe.getDate();
             String time = readMe.getTime();
-
-
             String insertApp = "INSERT INTO appointment "
                     + "(doctorID, date, time) VALUES"
                     + "(?,?,?);";
@@ -324,6 +322,7 @@ public class AppointmentSQL {
             preparedStatement.setString(2, date);
             preparedStatement.setString(3, time);
             checker = preparedStatement.executeUpdate();
+
             if (checker == 0)
                 result = false;
             else
@@ -332,7 +331,7 @@ public class AppointmentSQL {
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
-            readMe = null;
+            result = false;
         } finally {
             close();
         }

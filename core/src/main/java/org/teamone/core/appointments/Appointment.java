@@ -1,8 +1,6 @@
 package org.teamone.core.appointments;
 
 
-import org.teamone.core.SQL.DoctorSQL;
-import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
@@ -44,7 +42,7 @@ public class Appointment {
 
     public void setDoctor(Staff doctor) {
         this.doctor = doctor;
-        this.doctor = DoctorSQL.getStaffComplete(doctor);
+        //this.doctor = DoctorSQL.getStaffComplete(doctor);
     }
 
     public Patient getPatient() {
@@ -53,7 +51,7 @@ public class Appointment {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
-        this.patient = PatientSQL.getPatientComplete(patient);
+        //this.patient = PatientSQL.getPatientComplete(patient);
     }
 
     public String getDoctorSpec() {

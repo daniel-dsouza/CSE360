@@ -31,9 +31,8 @@ public class StaffListTest {
         ArrayList<Staff> testArr = DoctorSQL.getListDoctorSpecialty("Emergency");
         assertTrue("Failed to get doctor specialty", !testArr.isEmpty());
 
-        Staff tempStaff;
-        for (int i = 0; i < testArr.size(); i++) {
-            tempStaff = testArr.get(i);
+        for (Staff tempStaff : testArr) {
+
             System.out.println(tempStaff.getName());
         }
 
@@ -42,14 +41,11 @@ public class StaffListTest {
 
     @Test
     public void getPatientsAppointmentByName() {
-        System.out.println("\nTest========Searching for Patient's Appointments for 'Ryan:Syani' ");
-        ArrayList<Appointment> testAppoint = AppointmentSQL.getPatientsAppointment("Ryan:Syani");
+        System.out.println("\nTest========Searching for Patient's Appointments for 'Ryan:The Diva' ");
+        ArrayList<Appointment> testAppoint = AppointmentSQL.getPatientsAppointment("Ryan:The Diva");
         assertTrue("Failed to get appointments by name", !testAppoint.isEmpty());
 
-        Appointment tempStaff;
-        for (int i = 0; i < testAppoint.size(); i++) {
-            tempStaff = testAppoint.get(i);
-
+        for (Appointment tempStaff : testAppoint) {
             System.out.println("Date:\t" + tempStaff.getDate());
             System.out.println("Time:\t" + tempStaff.getTime());
             System.out.println("Reason:\t" + tempStaff.getReason());
@@ -67,9 +63,7 @@ public class StaffListTest {
         assertTrue("Failed to get Patient list by name", !patientList.isEmpty());
 
         System.out.println("*********************Find successful************************");
-        Patient tempPat;
-        for (int i = 0; i < patientList.size(); i++) {
-            tempPat = patientList.get(i);
+        for (Patient tempPat : patientList) {
             System.out.println("Patient Name: " + tempPat.getName() + "\tPatient id: " + tempPat.getUserID());
         }
 

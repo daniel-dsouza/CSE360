@@ -22,7 +22,7 @@ public class AlertTest {
     public void setUp() {
 
         test = new Alert();
-        test.setAlertID(2001);
+        test.setAlertID(2005);
 
 
     }
@@ -31,9 +31,8 @@ public class AlertTest {
     public void setUpPatient() {
 
         test2 = new Patient();
-        test2.setUserID(1001);
+        test2.setUserID(1002);
         test2.healthConditions.toMapObj("anxiety,true:discoloredUrine,true");
-        test2.medicalHistory.toMapObj(":");
 
     }
 
@@ -47,9 +46,9 @@ public class AlertTest {
     }
 
     @Test
-    public void setMH() {
-        boolean check = PatientSQL.setMedicalHistory(test2);
-        assertTrue("Failed to set medical history", check);
+    public void setHC() {
+        boolean check = PatientSQL.setHealthConditions(test2);
+        assertTrue("Failed to set health conditions", check);
         System.out.println("Set/Update successful");
         System.out.println(TestStrings.testEnd);
     }
@@ -61,9 +60,24 @@ public class AlertTest {
 
         assertTrue("There were no alerts, subsequent tests will fail", !testArr.isEmpty());
 
-        Alert tempAlert;
-        for (int i = 0; i < testArr.size(); i++) {
-            tempAlert = testArr.get(i);
+        for (Alert tempAlert : testArr) {
+            System.out.println("Name " + LoginSQL.getName(tempAlert.getPatientID()) + " has reason " + tempAlert.getReason());
+            System.out.println("Alert ID: " + tempAlert.getAlertID());
+            System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());
+        }
+        System.out.println(TestStrings.testEnd);
+    }
+
+    @Test
+    public void getListByPatient() {
+        System.out.println("\nTest========Searching for Alerts by patient ID 1002 ");
+        Patient pat1 = new Patient();
+        pat1.setUserID(1002);
+        ArrayList<Alert> testArr = AlertSQL.getListAlertsByPatient(pat1);
+
+        assertTrue("There were no alerts, subsequent tests will fail", !testArr.isEmpty());
+
+        for (Alert tempAlert : testArr) {
             System.out.println("Name " + LoginSQL.getName(tempAlert.getPatientID()) + " has reason " + tempAlert.getReason());
             System.out.println("Alert ID: " + tempAlert.getAlertID());
             System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());

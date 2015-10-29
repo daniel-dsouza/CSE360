@@ -50,10 +50,7 @@ public class PrescriptionTest {
         List<Prescription> test1 = DoctorSQL.getListPrescription(new1);
         assertTrue("No prescriptions by patient ID", !test1.isEmpty());
         System.out.println("\nView successful");
-        Prescription tempAp;
-        for (int i = 0; i < test1.size(); i++) {
-            tempAp = test1.get(i);
-
+        for (Prescription tempAp : test1) {
             System.out.println("Prescription ID:\t" + tempAp.getPrescriptionID());
             System.out.println("Time:\t" + tempAp.getStrDateAndTime());
             System.out.println("Type:\t" + tempAp.getPrescriptionType());
