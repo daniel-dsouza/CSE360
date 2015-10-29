@@ -28,6 +28,7 @@ dependencies {
     compile group: "org.webjars", name: "jquery", version: "2.1.4"
     compile group: "org.webjars", name: "jquery-maskedinput", version: "1.4.0"
     compile group: "org.webjars", name: "bootstrap", version: "3.3.5"
+    compile group: "org.webjars", name: "highcharts", version: "4.1.9"
 
     compile group: "org.springframework.boot", name: "spring-boot-starter-web"
     compile group: "org.springframework.boot", name: "spring-boot-starter-tomcat"
