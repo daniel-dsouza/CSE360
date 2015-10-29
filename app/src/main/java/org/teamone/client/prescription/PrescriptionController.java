@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
 import org.teamone.core.SQL.DoctorSQL;
+import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.prescriptions.Prescription;
+import org.teamone.core.users.Patient;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,10 +27,22 @@ public class PrescriptionController {
     @RequestMapping(method = RequestMethod.GET)
     public String viewPatient(@ModelAttribute("user") User user,
                               Map<String, Object> model){
-        List prescriptionList = DoctorSQL.getListPrescription(user.getPatient());
+        Patient p = new Patient();
+        p.setUserID(1002);
+        p = PatientSQL.getPatientComplete(p);
+        ArrayList<Prescription> prescriptionList = DoctorSQL.getListPrescription(p);
+
+        int i = 0;
+        for(Prescription pP : prescriptionList){
+            System.out.println(i);
+            i++;
+            System.out.println(pP.getPrescriptionType());
+        }
+
+        //List prescriptionList = DoctorSQL.getListPrescription(user.getPatient());
         model.put("prescriptions",prescriptionList);
 
-        return "prescription/viewprescription";
+        return "prescription/editprescription";
     }
 
 
