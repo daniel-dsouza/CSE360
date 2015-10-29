@@ -13,11 +13,9 @@
 
 <jsp:body>
   <!-- Page header -->
-  <div class="row">
-    <div class="col-lg-12">
-      <h1>Select Patient</h1>
+    <div style="margin-left: 20px">
+        <h1>Select Patient</h1>
     </div>
-  </div>
 
   <!--Display list of partial-patient-->
   <div style="margin: 20px">
@@ -37,7 +35,7 @@
               </div>
               <div class="container" style="float:left">
                 <div class="row">
-                  <div class="col-sm-3" >
+                  <div class="col-sm-4" >
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h6 class="panel-title">Personal Info</h6>
@@ -45,7 +43,7 @@
                       <div class="panel-body" id="personal_info_${patient.userID}"> some content here </div>
                     </div>
                   </div>
-                  <div class="col-sm-3">
+                  <div class="col-sm-4">
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h6 class="panel-title">Appointments</h6>
@@ -53,7 +51,7 @@
                       <div class="panel-body" id="appointments_${patient.userID}"> some content here </div>
                     </div>
                   </div>
-                  <div class="col-sm-3" >
+                  <div class="col-sm-4" >
                     <div class="panel panel-default">
                       <div class="panel-heading">
                         <h6 class="panel-title">Alerts</h6>
