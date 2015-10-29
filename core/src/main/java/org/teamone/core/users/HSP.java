@@ -1,6 +1,6 @@
 package org.teamone.core.users;
 
-import java.util.TreeMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Ryan on 10/16/2015.
@@ -8,9 +8,10 @@ import java.util.TreeMap;
 public class HSP extends Staff {
     public HSP() {
         super();
-        agentActions = new TreeMap<String, String>() {};
+        agentActions = new LinkedHashMap<String, String>() {};
         agentActions.put("Select Patient", "select_patient");
         String registration ="user/" + getUserID() + "/registration/";//TODO: Almost working. need from session userID
-        agentActions.put("Registration", registration);
+        agentActions.put("Register Patient", registration); //TODO: assign this
+        agentActions.put("Generate Statistics", "#"); //TODO: assign this.
     }
 }
