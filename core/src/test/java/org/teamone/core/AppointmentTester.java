@@ -12,48 +12,87 @@ import static org.junit.Assert.assertTrue;
 
 public class AppointmentTester {
 
-    private Appointment test;
-    private Appointment update;
+    private Appointment create;//doctor creates one
+    private Appointment sched;//Patient gets to picka  list of NULL values. fill in row
+    private Appointment update;//swap values
 
     @Before
     public void setUp() {
+        create = new Appointment();
+        create.setDoctorID(501);
+        create.setTime("9:00 AM");
+        create.setDate("2015-12-13");
+
+        sched = new Appointment();
+        sched.setDoctorID(501);
+        sched.setTime("9:00 AM");
+        sched.setDate("2015-12-13");
+        sched.setAppointmentID(56);
+        sched.setPatientID(1002);
+        sched.setReason("I want to see doctor");
 
 
         update = new Appointment();
         update.setPatientID(1002);
         update.setDoctorID(501);
-        update.setReason("I want to see doctor");
-        update.setTime("10:00 PM");
-        update.setDate("2015-11-27");
+        update.setReason("Changing dates");
+        update.setTime("10:00 AM");
+        update.setDate("2015-12-27");
+        update.setAppointmentID(59);//new id. frontend extracts the oldID with "getAppointmentID" and uses as second parameter
 
-        test = new Appointment();
-        test.setDoctorID(501);
+
     }
 
     @Test
-    public void editAppt() {
-        System.out.println("\nTest========Updating appointment");
-        update = AppointmentSQL.editAppointment(update);
-        assertTrue("editing appointment by patient ID failed ", update != null);
-        System.out.println("\nUpdate successful");
-        System.out.println("Date:\t" + update.getDate());
-        System.out.println("Time:\t" + update.getTime());
-        System.out.println("Reason:\t" + update.getReason());
-        System.out.println("Doctor ID:\t" + update.getDoctorID());
+    public void createAppt() //doctor calls this
+    {
+        System.out.println("\nTest========Creating appointment");
+        Boolean check = AppointmentSQL.createAppointment(create);
+        assertTrue("Create appointment failed ", check);
+        System.out.println("\nCreate successful");
+        System.out.println("Date:\t" + create.getDate());
+        System.out.println("Time:\t" + create.getTime());
+        System.out.println("Reason:\t" + create.getReason());
+        System.out.println("Doctor ID:\t" + create.getDoctorID());
 
         System.out.println(TestStrings.testEnd);
     }
 
     @Test
+    public void dSchedAppt() //patient calls this when updating an existing one
+    {
+        System.out.println("\nTest========Scheduling appointment");
+        Boolean check = AppointmentSQL.schedAppointmentAppt(sched);
+        assertTrue("editing appointment by patient ID failed ", check);
+        System.out.println("\nUpdate successful");
+        System.out.println("Date:\t" + sched.getDate());
+        System.out.println("Time:\t" + sched.getTime());
+        System.out.println("Reason:\t" + sched.getReason());
+        System.out.println("Doctor ID:\t" + sched.getDoctorID());
+
+        System.out.println(TestStrings.testEnd);
+    }
+
+    @Test
+    public void editApptByApptID() //edit an already filled appointment. This must be the old time is now free for other users
+    {
+        System.out.println("\nTest========updating Appointment with appt ID");
+
+        Boolean newTest = AppointmentSQL.swapAppointmentAppt(update, 56);
+        assertTrue("Could not edit appointment by appt id", newTest);
+
+        System.out.println("\nupdate successful");
+
+        System.out.println(TestStrings.testEnd);
+    }
+    @Test
     public void viewApptByDocID() {
         //case 1, where user wants appoint through doctorID
         System.out.println("\nTest========Viewing patient with doctor ID");
-        List<Appointment> test1 = AppointmentSQL.viewAppointmentByDoctor(test);
+        List<Appointment> test1 = AppointmentSQL.viewAppointmentByDoctor(update);
         assertTrue("No appointments by doctor ID", !test1.isEmpty());
 
-        Appointment tempAp;
-        for (int i = 0; i < test1.size(); i++) {
-            tempAp = test1.get(i);
+        for (Appointment tempAp : test1) {
             System.out.println("\nView successful");
             System.out.println("Date:\t" + tempAp.getDate());
             System.out.println("Time:\t" + tempAp.getTime());
@@ -67,13 +106,11 @@ public class AppointmentTester {
     @Test
     public void viewApptByPatID() {
         //case 2, where user wants appoint through patientID
-        test.setPatientID(1002);
+        update.setPatientID(1002);
         System.out.println("\nTest========Viewing patient with patient ID");
-        List<Appointment> test1 = AppointmentSQL.viewAppointmentByPatient(test);
+        List<Appointment> test1 = AppointmentSQL.viewAppointmentByPatient(update);
         assertTrue("No appointments by patient ID", !test1.isEmpty());
-        Appointment tempAp;
-        for (int i = 0; i < test1.size(); i++) {
-            tempAp = test1.get(i);
+        for (Appointment tempAp : test1) {
             System.out.println("\nView successful");
             System.out.println("Date:\t" + tempAp.getDate());
             System.out.println("Time:\t" + tempAp.getTime());
@@ -103,31 +140,14 @@ public class AppointmentTester {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
-    public void editApptByApptID() {
-        //case 2
-        update.setReason("I need a new reason");
-        update.setAppointmentID(6);
-        System.out.println("\nTest========updating Appointment with appt ID");
 
-        Appointment newTest = AppointmentSQL.editAppointmentAppt(update);
-        assertTrue("Could not edit appointment by appt id", newTest != null);//view appoint returns a object Appointment
 
-        System.out.println("\nupdate successful");
-        System.out.println("Date:\t" + newTest.getDate());
-        System.out.println("Time:\t" + newTest.getTime());
-        System.out.println("Reason:\t" + newTest.getReason());
-        System.out.println("Doctor ID:\t" + newTest.getDoctorID());
-        System.out.println("Patient ID:\t" + newTest.getPatientID());
-
-        System.out.println(TestStrings.testEnd);
-    }
 
     @Test
     public void zGetAppointmentID() {
         Appointment view = new Appointment();//doctorID, Time, PatientID, and Date,
-        view.setDate("2015-12-24");
-        view.setTime("9:00 PM");
+        view.setDate("2015-12-26");
+        view.setTime("11:00 AM");
         view.setDoctorID(502);
         view.setPatientID(1002);
         System.out.println("\nTest========Getting Appointment ID");
