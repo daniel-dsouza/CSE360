@@ -15,8 +15,9 @@
             <div class="row" style="margin: 5px">
                 <h1>Appointments</h1>
             </div>
-            <div class="row" style="margin: 10px">
-                <c:forEach var="appt" items="${patientList}">
+
+            <c:forEach var="appt" items="${patientList}">
+                <div class="row" style="margin: 10px">
                     <div class="col-lg-12" style="border-bottom-style: solid; border-width: 1px">
                         <div style="float: left; padding: 5px 5px 5px"> ${appt.reason}</div>
                         <div style="float: left; padding: 5px 5px 5px"> ${appt.date}</div>
@@ -26,8 +27,9 @@
                                class="btn btn-info" role="button">Edit appointment</a>
                         </div>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+            </c:forEach>
+
         </div>
     </jsp:body>
 </t:template>
