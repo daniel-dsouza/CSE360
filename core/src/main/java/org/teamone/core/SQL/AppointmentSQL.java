@@ -42,9 +42,8 @@ public class AppointmentSQL {
             preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID, serialNumber FROM appointment where doctorID = ? AND patientID IS NOT NULL");
             preparedStatement.setInt(1, docID);
             resultSet = preparedStatement.executeQuery();
-            resultSet.next();// ResultSet is initially before the first data set
 
-            do {
+            while (resultSet.next()) {
                 Appointment new1 = new Appointment();
                 String date = resultSet.getString("date");
                 String time = resultSet.getString("time");
@@ -63,7 +62,7 @@ public class AppointmentSQL {
                 new1.setAppointmentID(resultSet.getInt("serialNumber"));
                 a1.add(new1);
 
-            } while (resultSet.next());
+            }
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
