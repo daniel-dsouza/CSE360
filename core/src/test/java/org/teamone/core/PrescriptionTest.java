@@ -61,7 +61,7 @@ public class PrescriptionTest {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
+    /*@Test
     public void getPrescriptionID() {
         Prescription getID = new Prescription();
         getID.setPatientID(1002);
@@ -76,14 +76,14 @@ public class PrescriptionTest {
         System.out.println("\nView successful");
         System.out.println("Prescription ID:\t" + getID.getPrescriptionID());
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
     @Test
     public void viewByID() {
 
         System.out.println("\nTest========get one prescription by prescription ID");
         Prescription new2 = new Prescription();
-        new2.setPrescriptionID(1);
+        new2.setPrescriptionID(2);
         Prescription test1 = DoctorSQL.viewPrescriptonByID(new2);
         assertTrue("No prescription by prescription ID", test1 != null);
         System.out.println("\nView successful");

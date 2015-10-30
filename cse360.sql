@@ -6,10 +6,10 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "-07:00";
 
 --
--- Database: `cse360`   remote is `sql393597`
+-- Database: `cse360`
 --
-CREATE DATABASE IF NOT EXISTS `sql393597` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `sql393597`;
+CREATE DATABASE IF NOT EXISTS `cse360` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `cse360`;
 
 -- --------------------------------------------------------
 
@@ -108,17 +108,17 @@ CREATE TABLE IF NOT EXISTS `person` (
 --
 
 INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES
-(501, 'Dr. Ryan:Ang', 'doctor', 'go', 'ryan@asu.edu'),
-(502, 'Dr. Daniel:', 'doctor', 'go', 'Dan1@asu.edu'),
-(503, 'Dr. James:', 'doctor', 'go', 'james1@asu.edu'),
-(504, 'Dr. Cameron:', 'doctor', 'go', 'cameron1@asu.edu'),
-(505, 'Dr. Haisheng:', 'doctor', 'go', 'Haishen1@asu.edu'),
-(506, 'Dr. Jaime:', 'doctor', 'go', 'Jaime@asu.edu'),
-(507, 'Dr. Vince:', 'doctor', 'go', 'Vrose@asu.edu'),
-(508, 'Dr. Aby:', 'doctor', 'go', 'Aby@asu.edu'),
-(509, 'Dr. Rie:', 'doctor', 'go', 'Rie12@asu.edu'),
-(510, 'Dr. Stephanie:', 'doctor', 'go', 'Steph@asu.edu'),
-(511, 'Dr. Ryan:', 'doctor', 'go', 'rya@asu.edu'),
+(501, 'Doctor Ryan:Ang', 'doctor', 'go', 'ryan@asu.edu'),
+(502, 'Doctor Daniel:', 'doctor', 'go', 'Dan1@asu.edu'),
+(503, 'Doctor James:', 'doctor', 'go', 'james1@asu.edu'),
+(504, 'Doctor Cameron:', 'doctor', 'go', 'cameron1@asu.edu'),
+(505, 'Doctor Haisheng:', 'doctor', 'go', 'Haishen1@asu.edu'),
+(506, 'Doctor Jaime:', 'doctor', 'go', 'Jaime@asu.edu'),
+(507, 'Doctor Vince:', 'doctor', 'go', 'Vrose@asu.edu'),
+(508, 'Doctor Aby:', 'doctor', 'go', 'Aby@asu.edu'),
+(509, 'Doctor Rie:', 'doctor', 'go', 'Rie12@asu.edu'),
+(510, 'Doctor Stephanie:', 'doctor', 'go', 'Steph@asu.edu'),
+(511, 'Doctor Ryan:', 'doctor', 'go', 'rya@asu.edu'),
 (512, 'Hannah:', 'hsp', 'go', 'ryaaan@asu.edu'),
 (513, 'Rick:', 'hsp', 'go', 'ryanad@asu.edu'),
 (514, 'Try:Hard', 'hsp', 'go', 'ryanad@asu.edu'),
@@ -128,7 +128,7 @@ INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VAL
 (518, 'Troy:', 'labstaff', 'go', 'ryanad@asu.edu'),
 (519, 'Derrick:', 'labstaff', 'go', 'ryanad@asu.edu'),
 (520, 'Terrence:', 'labstaff', 'go', 'ryanad@asu.edu'),
-(521, 'Dr. Dre:', 'labstaff', 'go', 'ryanad@asu.edu');
+(521, 'Doctor Dre:', 'labstaff', 'go', 'ryanad@asu.edu');
 -- --------------------------------------------------------
 
 --
