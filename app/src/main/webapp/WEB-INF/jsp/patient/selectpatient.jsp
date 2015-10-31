@@ -44,7 +44,7 @@
                       <div class="panel-heading">
                         <h6 class="panel-title">Personal Info</h6>
                       </div>
-                      <div class="panel-body" id="personal_info_${patient.userID}"> Nothing found </div>
+                      <div class="panel-body" id="personal_info_${patient.userID}"> Loading... </div>
                     </div>
                   </div>
                   <div class="col-lg-3">
@@ -52,7 +52,7 @@
                       <div class="panel-heading">
                         <h6 class="panel-title">Appointments</h6>
                       </div>
-                      <div class="panel-body" id="appointments_${patient.userID}"> Nothing found </div>
+                      <div class="panel-body" id="appointments_${patient.userID}"> Loading... </div>
                     </div>
                   </div>
                   <div class="col-lg-3" >
@@ -60,13 +60,14 @@
                       <div class="panel-heading">
                         <h6 class="panel-title">Alerts</h6>
                       </div>
-                      <div class="panel-body" id="alerts_${patient.userID}"> Nothing found </div>
+                      <div class="panel-body" id="alerts_${patient.userID}"> Loading... </div>
                     </div>
-                </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         </div>
       </c:forEach>
     </div>
