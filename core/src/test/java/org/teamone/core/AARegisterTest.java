@@ -29,7 +29,7 @@ public class AARegisterTest {
     @Test
     public void RegisterTest()
         {
-            for(int i = 0; i < 1; i++) {//change this into how many runs u want.
+            for(int i = 0; i < 10; i++) {//change this into how many runs u want.
                 System.out.println("\nTest========Registering New Patient");
                 random();//call this to random
                 Patient p = HspSQL.RegisterNewPatient(regis);
@@ -110,7 +110,7 @@ public class AARegisterTest {
         catch(Exception e){System.out.println(e);
 
         }
-        regis.patientInformation.setAddress(firstNames.get(randomGenerator.nextInt(streets.size())));
+        regis.patientInformation.setAddress(streets.get(randomGenerator.nextInt(streets.size())));
         regis.patientInformation.setCity("Phoenix");
         regis.patientInformation.setState("AZ");
         random ="";
@@ -143,12 +143,21 @@ public class AARegisterTest {
             random += (char) (randomGenerator.nextInt(10) + '0');
         }
         regis.patientInformation.setSsn(random);
-        random = "" + (char) (randomGenerator.nextInt(26) + 'A');
-        for(int i = 0; i< 10; i++)//insurance
-        {
-            random += (char) (randomGenerator.nextInt(26) + 'a');
+
+        //Insurance array
+        String insureFile = "src/test/java/org/teamone/core/Insurance.txt";
+        ArrayList<String> insure = new ArrayList<String>();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(insureFile));
+            while (in.ready()) {
+                insure.add(in.readLine());
+            }
+            in.close();
         }
-        regis.patientInformation.setInsurance(random);
+        catch(Exception e){System.out.println(e);
+
+        }
+        regis.patientInformation.setInsurance((insure.get(randomGenerator.nextInt(insure.size()))));
 
         int age = randomGenerator.nextInt(100);//age
         random =Integer.toString(age);
