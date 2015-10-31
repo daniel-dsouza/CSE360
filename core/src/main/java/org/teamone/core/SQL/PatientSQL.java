@@ -129,6 +129,7 @@ public class PatientSQL {
             patient.setAge(resultSet.getString("p.age"));
             patient.setPhone(resultSet.getString("p.phone"));
             patient.setName(resultSet.getString("p2.name"));
+            patient.splitName(resultSet.getString("p2.name"));
             patient.setEmail(resultSet.getString("p2.emailID"));
             String mh = resultSet.getString("p.medicalhistory");
             if(mh ==null)

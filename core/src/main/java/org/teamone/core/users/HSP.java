@@ -9,6 +9,8 @@ public class HSP extends Staff {
     public HSP() {
         super();
         agentActions = new TreeMap<String, String>() {};
-        agentActions.put("Select Patient", "patient/patientselect");
+        agentActions.put("Select Patient", "select_patient");
+        String registration ="user/" + getUserID() + "/registration/";//TODO: Almost working. need from session userID
+        agentActions.put("Registration", registration);
     }
 }
