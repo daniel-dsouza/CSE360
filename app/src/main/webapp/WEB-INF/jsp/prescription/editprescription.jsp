@@ -32,6 +32,10 @@
         </script>
     </jsp:attribute>
     <jsp:body>
+        <h1 style="text-align: center;">
+            Prescriptions <!-- Want to add Patients name here -->
+        </h1>
+        <br/>
         <div class="container">
             <c:forEach var="prescript" items="${prescriptions}">
                 <div class="row">
@@ -45,6 +49,15 @@
                     </div>
                 </div>
             </c:forEach>
+            <br/>
+            <br/>
+            <form:form method="post" commandName="gotoCreate">
+                <div class="button_holder" style="text-align: center;">
+                    <span class="group-btn">
+                        <input type="submit" value="Create Prescription" class="btn btn-primary btn-md"/>
+                    </span>
+                </div>
+            </form:form>
         </div>
     </jsp:body>
 </t:template>

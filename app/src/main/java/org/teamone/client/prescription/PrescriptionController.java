@@ -25,18 +25,25 @@ import java.util.Map;
 public class PrescriptionController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String viewPatient(@ModelAttribute("user") User user,
-                              Map<String, Object> model){
-        Patient p = new Patient();
-        p.setUserID(1002);
-        p = PatientSQL.getPatientComplete(p);
-        ArrayList<Prescription> prescriptionList = DoctorSQL.getListPrescription(p);
+     public String viewPatient(@ModelAttribute("user") User user,
+                               Map<String, Object> model){
 
-        //List prescriptionList = DoctorSQL.getListPrescription(user.getPatient());
+        List prescriptionList = DoctorSQL.getListPrescription(user.getPatient());
         model.put("prescriptions",prescriptionList);
 
         return "prescription/editprescription";
     }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String moveToCreatePatient(@ModelAttribute("user") User user,
+                                      Map<String, Object> model){
+
+
+        return "redirect:/user/" + user.person.getUserID() + "/prescription/create";
+    }
+
+
+
 
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -55,11 +62,11 @@ public class PrescriptionController {
                                      @ModelAttribute("user") User user) {
         Date date = new Date();
         attempt.setStaffID(user.person.getUserID());
-        attempt.setPatientID(user.getPatient().getUserID()); // This needs to be changed to the way we intend to get patient ID
+        attempt.setPatientID(user.getPatient().getUserID());
         attempt.setDateAndTime(date);
 
         DoctorSQL.addPrescription(attempt);
 
-        return "redirect:/user/" + user.person.getUserID();
+        return "redirect:/user/" + user.person.getUserID() + "/prescription";
     }
 }
