@@ -58,8 +58,8 @@ public class StaffListTest {
 
     @Test
     public void getPatientsByName() {
-        System.out.println("\nTest========Searching for Patient with 'RNG' ");
-        ArrayList<Patient> patientList = PatientSQL.getPatientByPatient("RNG");
+        System.out.println("\nTest========Searching for Patient with 'Ryan' ");
+        ArrayList<Patient> patientList = PatientSQL.getPatientByPatient("Ryan");
         assertTrue("Failed to get Patient list by name", !patientList.isEmpty());
 
         System.out.println("*********************Find successful************************");

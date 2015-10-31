@@ -20,7 +20,7 @@ public class GenerateStatsTest {
         System.out.println("Female Population: " + GenerateStatsSQL.getFemalePopulation() +  "%");
         GenerateStatsSQL.getAgePopulation();*/
 
-        System.out.println("Number of Alerts within this Month: " + new1.getHealthOutcomes());
+        System.out.println("\n\n==EXAMPLE HOW TO GET FROM OBJECT====\nNumber of Alerts within this Month: " + new1.getHealthOutcomes());
         System.out.println("Number of New Patients within this Month: " + new1.getAdmissionRates());
         System.out.println("Male Population: " + new1.getMalePatientPopulation() + "%");
         System.out.println("Female Population: "+new1.getFemalePatientPopulation() + "%\n");

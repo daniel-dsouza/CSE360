@@ -7,7 +7,7 @@ function getPersonalInfo(patientID, callback) {
         dataType: 'json',
         success: function (data) {
             var outputHTML =
-                'Name: ' + data.name + '</br>' +
+                'Name: ' + data.firstName + ' ' + data.lastName + '</br>' +
                 'Age: ' + data.age + '</br>' +
                 'Insurance: ' + data.insurance + '</br>' +
                 'Gender: ' + data.gender + '</br>';
