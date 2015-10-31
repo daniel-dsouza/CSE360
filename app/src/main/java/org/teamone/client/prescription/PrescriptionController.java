@@ -9,6 +9,9 @@ import org.teamone.client.generic.User;
 import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.prescriptions.Prescription;
+import org.teamone.core.users.Doctor;
+import org.teamone.core.users.HSP;
+import org.teamone.core.users.LabStaff;
 import org.teamone.core.users.Patient;
 
 import java.util.ArrayList;
@@ -27,6 +30,16 @@ public class PrescriptionController {
     @RequestMapping(method = RequestMethod.GET)
      public String viewPatient(@ModelAttribute("user") User user,
                                Map<String, Object> model){
+        if (user.getPerson() == null)
+            return "redirect:/login";
+        else if(user.getPerson() instanceof HSP)    // If the person is HSP they can only see and not create prescriptions
+            model.put("readonly", true);
+        else if (!(user.getPerson() instanceof Doctor))
+            return "redirect:/user/" + user.person.getUserID();
+
+        if(user.getPatient() == null)               // If patient has not been initialized send them to patient select
+            return "redirect:/select_patient";
+
 
         List prescriptionList = DoctorSQL.getListPrescription(user.getPatient());
         model.put("prescriptions",prescriptionList);
@@ -47,7 +60,18 @@ public class PrescriptionController {
 
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createPatient(Map<String, Object> model) {
+    public String createPatient(@ModelAttribute("user") User user,
+                                Map<String, Object> model) {
+
+        if (user.getPerson() == null)
+            return "redirect:/login";
+        else if (!(user.getPerson() instanceof Doctor))
+            return "redirect:/user/" + user.person.getUserID();
+
+        if(user.getPatient() == null)
+            return "redirect:/select_patient";
+
+
 
         Prescription attempt = new Prescription();
         model.put("userInput", attempt);

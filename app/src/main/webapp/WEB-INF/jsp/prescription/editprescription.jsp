@@ -51,7 +51,7 @@
             </c:forEach>
             <br/>
             <br/>
-            <form:form method="post" commandName="gotoCreate">
+            <form:form method="post" commandName="gotoCreate" class="hiddenonreadonly">
                 <div class="button_holder" style="text-align: center;">
                     <span class="group-btn">
                         <input type="submit" value="Create Prescription" class="btn btn-primary btn-md"/>
