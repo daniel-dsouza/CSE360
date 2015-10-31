@@ -61,6 +61,24 @@ public class PrescriptionTest {
         System.out.println(TestStrings.testEnd);
     }
 
+    @Test
+    public void getAll() {
+
+        System.out.println("\nTest========get a list of all prescriptions ");
+        List<Prescription> test1 = DoctorSQL.getAllPrescriptions();
+        assertTrue("No prescriptions by patient ID", !test1.isEmpty());
+        System.out.println("\nView successful");
+        for (Prescription tempAp : test1) {
+            System.out.println("Prescription ID:\t" + tempAp.getPrescriptionID());
+            System.out.println("Time:\t" + tempAp.getStrDateAndTime());
+            System.out.println("Type:\t" + tempAp.getPrescriptionType());
+            System.out.println("Quantity:\t" + tempAp.getQuantity());
+            System.out.println("Patient ID:\t" + tempAp.getPatientID());
+        }
+
+        System.out.println(TestStrings.testEnd);
+    }
+
     /*@Test
     public void getPrescriptionID() {
         Prescription getID = new Prescription();
