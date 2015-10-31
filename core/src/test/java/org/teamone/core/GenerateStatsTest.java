@@ -1,11 +1,8 @@
 package org.teamone.core;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.GenerateStatsSQL;
-import org.teamone.core.users.Alert;
-import org.teamone.core.users.Patient;
-import org.teamone.core.users.Staff;
+import org.teamone.core.Statistics.Statistics;
 
 public class GenerateStatsTest {
 

@@ -1,7 +1,7 @@
 package org.teamone.core.SQL;
 
 
-import org.teamone.core.Statistics;
+import org.teamone.core.Statistics.Statistics;
 import org.teamone.core.appointments.Appointment;
 
 import java.sql.*;
