@@ -32,13 +32,6 @@ public class PrescriptionController {
         p = PatientSQL.getPatientComplete(p);
         ArrayList<Prescription> prescriptionList = DoctorSQL.getListPrescription(p);
 
-        int i = 0;
-        for(Prescription pP : prescriptionList){
-            System.out.println(i);
-            i++;
-            System.out.println(pP.getPrescriptionType());
-        }
-
         //List prescriptionList = DoctorSQL.getListPrescription(user.getPatient());
         model.put("prescriptions",prescriptionList);
 

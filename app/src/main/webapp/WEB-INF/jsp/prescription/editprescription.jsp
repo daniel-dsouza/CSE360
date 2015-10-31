@@ -6,24 +6,45 @@
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
 
-
 <t:template>
-  <jsp:body>
-    <form:form method="post" commandName="prescriptions">
-      <c:forEach var="prescript" items="${prescriptions}">
-        <div class="row" style="margin: 30px; text-align: center">
-            Prescription Type:
-            <form:input class='form-control' type='text' path="prescriptionType" id="prescriptionType" items="${prescript}" required="true"/>
-          <br/>
-          Quantity:
-          <form:input class='form-control' type='text' path="quantity" id="quantity" required="true"/>
+    <jsp:attribute name="head">
+        <!-- http://stackoverflow.com/a/1484514 -->
+        <script type="text/javascript">
+            function getRandomColor() {
+                var letters = '56789A'.split('');
+                var color = '#';
+                for (var i = 0; i < 6; i++ ) {
+                    color += letters[Math.floor(Math.random() * 6)];
+                }
+                return color;
+            }
+
+            function setRandomColors(){
+                $(".row").each(function(){
+                    $(this).css("background-color",getRandomColor());
+                });
+            }
+
+            $( document ).ready(function() {
+                setRandomColors();
+                setInterval("setRandomColors()", 50);
+            });
+        </script>
+    </jsp:attribute>
+    <jsp:body>
+        <div class="container">
+            <c:forEach var="prescript" items="${prescriptions}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        Prescription Type:
+                            ${prescript.prescriptionType}
+                    </div>
+                    <div class="col-lg-6">
+                        Quantity:
+                            ${prescript.quantity}
+                    </div>
+                </div>
+            </c:forEach>
         </div>
-      </c:forEach>
-      <div class="button_holder" style="text-align: center;"> <!-- Cause an error -->
-          <span class="group-btn">
-            <input type="submit" value="Update" class="btn btn-primary btn-md"/>
-          </span>
-      </div>
-    </form:form>
-  </jsp:body>
+    </jsp:body>
 </t:template>
