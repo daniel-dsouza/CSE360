@@ -9,11 +9,7 @@
 CREATE DATABASE IF NOT EXISTS `cse360` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `cse360`;
 
--- --------------------------------------------------------
-
---
 -- Table structure for table `alerts'
---
 
 CREATE TABLE IF NOT EXISTS `alerts` (
   `alert_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -24,17 +20,10 @@ CREATE TABLE IF NOT EXISTS `alerts` (
   `alertDateAndTime` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`alert_id`),
   UNIQUE KEY `alertId_UNIQUE` (`alert_id`),
-  UNIQUE KEY `patient_id_UNIQUE` (`patient_id`),
   KEY `patient_id` (`patient_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2000 ;
 
-
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `appointment`
---
 
 CREATE TABLE IF NOT EXISTS `appointment` (
   `serialNumber` int(100) NOT NULL AUTO_INCREMENT,
@@ -48,9 +37,7 @@ CREATE TABLE IF NOT EXISTS `appointment` (
   KEY `patientID` (`patientID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
 
---
 -- Dumping data for table `appointment`
---
 
 INSERT INTO `appointment` (`serialNumber`, `date`, `time`, `doctorID`, `reason`, `patientID`) VALUES
 (1, '2015-11-19', '5:00 PM', 501, NULL, NULL),
@@ -113,11 +100,8 @@ INSERT INTO `appointment` (`serialNumber`, `date`, `time`, `doctorID`, `reason`,
 (58, '2015-11-21', '3:00 PM', 501, NULL, NULL),
 (59, '2015-12-20', '12:00 PM', 501, NULL, NULL);
 
--- --------------------------------------------------------
 
---
 -- Table structure for table `labtest`
---
 
 CREATE TABLE IF NOT EXISTS `labtest` (
   `serialNumber` int(100) NOT NULL AUTO_INCREMENT,
@@ -131,10 +115,7 @@ CREATE TABLE IF NOT EXISTS `labtest` (
   KEY `labTest_ibfk_2` (`staffID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-
---
 -- Table structure for table `patient`
---
 
 CREATE TABLE IF NOT EXISTS `patient` (
   `serialNumber` int(100) NOT NULL AUTO_INCREMENT,
@@ -153,11 +134,7 @@ CREATE TABLE IF NOT EXISTS `patient` (
   UNIQUE KEY `patientID` (`patientID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
----------------------------------------------------
-
---
 -- Table structure for table `person`
---
 
 CREATE TABLE IF NOT EXISTS `person` (
   `userID` int(10) NOT NULL AUTO_INCREMENT,
@@ -168,9 +145,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1001 ;
 
---
 -- Dumping data for table `person`
---
 
 INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VALUES
 (501, 'Doctor Ryan:Ang', 'doctor', 'go', 'ryan@asu.edu'),
@@ -195,11 +170,7 @@ INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VAL
 (520, 'Terrence:', 'labstaff', 'go', 'ryanad@asu.edu'),
 (521, 'Doctor Dre:', 'labstaff', 'go', 'ryanad@asu.edu');
 
--- --------------------------------------------------------
-
---
 -- Table structure for table `prescription`
---
 
 CREATE TABLE IF NOT EXISTS `prescription` (
   `serialNumber` int(100) NOT NULL AUTO_INCREMENT,
@@ -214,10 +185,7 @@ CREATE TABLE IF NOT EXISTS `prescription` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
-
---
 -- Table structure for table `staff`
---
 
 CREATE TABLE IF NOT EXISTS `staff` (
   `serialNumber` int(100) NOT NULL AUTO_INCREMENT,
@@ -232,9 +200,7 @@ CREATE TABLE IF NOT EXISTS `staff` (
   KEY `patientID` (`patientID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
---
 -- Dumping data for table `staff`
---
 
 INSERT INTO `staff` (`serialNumber`, `staffID`, `occupation`, `specialty`, `patientID`, `schedule`, `emergencyWardDoctor`) VALUES
 (1, 501, 'doctor', 'Emergency', NULL, NULL, 'no'),
@@ -259,11 +225,7 @@ INSERT INTO `staff` (`serialNumber`, `staffID`, `occupation`, `specialty`, `pati
 (20, 520, 'labstaff', 'labstaff', NULL, NULL, 'no'),
 (21, 521, 'labstaff', 'labstaff', NULL, NULL, 'no');
 
--- --------------------------------------------------------
-
---
 -- Table structure for table `statistics`
---
 
 CREATE TABLE IF NOT EXISTS `statistics` (
   `serialNumber` int(10) NOT NULL AUTO_INCREMENT,
@@ -275,55 +237,47 @@ CREATE TABLE IF NOT EXISTS `statistics` (
   PRIMARY KEY (`serialNumber`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
 -- Dumping data for table `statistics`
---
 
 INSERT INTO `statistics` (`serialNumber`, `patientPopulation`, `patientType`, `admissionRates`, `healthOutcomes`, `date`) VALUES
 (1, 25, NULL, 2.2, 'positive', NULL);
 
---
--- Constraints for dumped tables
---
 
---
 -- Constraints for table `alerts`
 --
 ALTER TABLE `alerts`
-  ADD CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patientID`);
+ADD CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `appointment`
 --
 ALTER TABLE `appointment`
-  ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`),
-  ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);
+ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`) ON UPDATE CASCADE,
+ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `labtest`
 --
 ALTER TABLE `labtest`
-  ADD CONSTRAINT `labTest_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`),
-  ADD CONSTRAINT `labTest_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`);
+ADD CONSTRAINT `labTest_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE,
+ADD CONSTRAINT `labTest_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `patient`
 --
 ALTER TABLE `patient`
-  ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `person` (`userID`) ON DELETE CASCADE;
+ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `person` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `prescription`
 --
 ALTER TABLE `prescription`
-  ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`),
-  ADD CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`);
+ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE,
+ADD CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `staff`
 --
 ALTER TABLE `staff`
-  ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `person` (`userID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);
-
-
+ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `person` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE;
