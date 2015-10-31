@@ -104,6 +104,45 @@ public class DoctorSQL {
     }
 
     /**
+     *
+     * Gets everything from prescriptions
+     * @return ArrayList of Prescriptions corresponding to Patient
+     */
+    public static ArrayList<Prescription> getAllPrescriptions() {
+
+        ArrayList<Prescription> PrescriptionList = new ArrayList<Prescription>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            preparedStatement = connect.prepareStatement("SELECT serialNumber, staffID, type, date, quantity, patientID  FROM prescription");
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                Prescription a = new Prescription();
+                a.setPrescriptionID(resultSet.getInt("serialNumber"));
+                a.setPatientID(resultSet.getInt("patientID"));
+                a.setStaffID(resultSet.getInt("staffID"));
+                a.setPrescriptionType(resultSet.getString("type"));
+                a.setStrDateAndTime(resultSet.getString("date"));
+                a.setQuantity(resultSet.getString("quantity"));
+
+                PrescriptionList.add(a);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            PrescriptionList = null;
+        } finally {
+            close();
+        }
+        return PrescriptionList;
+    }
+
+    /**
      * Given a valid staffID, date, type, patientID and quantity, return ID
      *
      * @param readMe: Prescription given a patient with a valid staffID, date, type, patientID and quantity,.

@@ -55,12 +55,12 @@ public class AARegisterTest {
         Random randomGenerator = new Random();
 
         //pick female or male name http://deron.meranda.us/data/
-        String firstFile = "src/test/java/org/teamone/core/Female.txt";
+        String firstFile = "src/test/java/org/teamone/core/input/Female.txt";
         int femaleOrMale = randomGenerator.nextInt(500);
         if((femaleOrMale%2)==0)//even
-            firstFile ="src/test/java/org/teamone/core/Male.txt";
+            firstFile ="src/test/java/org/teamone/core/input/Male.txt";
 
-        String lastFile = "src/test/java/org/teamone/core/lastNames.txt";
+        String lastFile = "src/test/java/org/teamone/core/input/lastNames.txt";
 
         //First Name array
         ArrayList<String> firstNames = new ArrayList<String>();
@@ -98,7 +98,7 @@ public class AARegisterTest {
         }
 
         //Street Name array
-        String streetFile = "src/test/java/org/teamone/core/StreetNamesTempe.txt";
+        String streetFile = "src/test/java/org/teamone/core/input/StreetNamesTempe.txt";
         ArrayList<String> streets = new ArrayList<String>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(streetFile));
@@ -145,7 +145,7 @@ public class AARegisterTest {
         regis.patientInformation.setSsn(random);
 
         //Insurance array
-        String insureFile = "src/test/java/org/teamone/core/Insurance.txt";
+        String insureFile = "src/test/java/org/teamone/core/input/Insurance.txt";
         ArrayList<String> insure = new ArrayList<String>();
         try {
             BufferedReader in = new BufferedReader(new FileReader(insureFile));
