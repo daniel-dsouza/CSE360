@@ -7,6 +7,9 @@ import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Random;
 
 import static org.junit.Assert.assertTrue;
@@ -50,16 +53,43 @@ public class AARegisterTest {
     {
         regis = new Patient();
         Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(1000);
-        String firstRNG ="RNG ";
-        for(int i = 0; i< 10; i++)//firstName
-        {
-            firstRNG += (char) (randomGenerator.nextInt(26) + 'a');
+
+        //pick female or male name http://deron.meranda.us/data/
+        String firstFile = "src/test/java/org/teamone/core/Female.txt";
+        int femaleOrMale = randomGenerator.nextInt(500);
+        if((femaleOrMale%2)==0)//even
+            firstFile ="src/test/java/org/teamone/core/Male.txt";
+
+        String lastFile = "src/test/java/org/teamone/core/lastNames.txt";
+
+        //First Name array
+        ArrayList<String> firstNames = new ArrayList<String>();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(firstFile));
+            while (in.ready()) {
+                firstNames.add(in.readLine());
+            }
+            in.close();
         }
-        String lastRNG = Integer.toString(randomInt);//lastname
+        catch(Exception e){    System.out.println(e);    }
+        //Last Name array
+        ArrayList<String> lastNames = new ArrayList<String>();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(firstFile));
+            while (in.ready()) {
+                lastNames.add(in.readLine());
+            }
+            in.close();
+        }
+        catch(Exception e){System.out.println(e);
+
+        }
+
+        String firstRNG = firstNames.get(randomGenerator.nextInt(firstNames.size()));
+        String lastRNG = lastNames.get(randomGenerator.nextInt(lastNames.size()));
         regis.patientInformation.setFirstName(firstRNG);
         regis.patientInformation.setLastName(lastRNG);
-        firstRNG += "@asu.edu";
+        firstRNG += lastRNG + "@asu.edu";
         regis.patientInformation.setEmail(firstRNG);
         String random = "" + (char) (randomGenerator.nextInt(26) + 'A');
         for(int i = 0; i< 10; i++)//address
@@ -67,8 +97,21 @@ public class AARegisterTest {
             random += (char) (randomGenerator.nextInt(26) + 'a');
         }
 
-        regis.patientInformation.setAddress(random);
-        regis.patientInformation.setCity("Tempe");
+        //Street Name array
+        String streetFile = "src/test/java/org/teamone/core/StreetNamesTempe.txt";
+        ArrayList<String> streets = new ArrayList<String>();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(streetFile));
+            while (in.ready()) {
+                streets.add(in.readLine());
+            }
+            in.close();
+        }
+        catch(Exception e){System.out.println(e);
+
+        }
+        regis.patientInformation.setAddress(firstNames.get(randomGenerator.nextInt(streets.size())));
+        regis.patientInformation.setCity("Phoenix");
         regis.patientInformation.setState("AZ");
         random ="";
         for(int i = 0; i< 5; i++)//zipcode
@@ -111,10 +154,8 @@ public class AARegisterTest {
         random =Integer.toString(age);
         regis.patientInformation.setAge(random);
 
-        String gender ="";
-        if((randomGenerator.nextInt(10)%2)==0)//even
-            gender ="Female";
-        else
+        String gender ="Female";
+        if((femaleOrMale%2)==0)//even
             gender = "Male";
         regis.patientInformation.setGender(gender);
     }
