@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.teamone.core.SQL.GenerateStatsSQL;
-import org.teamone.core.Statistics.HighCharts.BasicColumnChart;
 import org.teamone.core.Statistics.HighCharts.BasicColumnChartInteger;
 import org.teamone.core.Statistics.HighCharts.BasicPieChart;
 import org.teamone.core.Statistics.HighCharts.HighChart;
@@ -25,13 +24,13 @@ public class GenerateStatisticsController {
     @RequestMapping(value = "/patients_per_specialty", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    BasicColumnChart getPatientsPerSpecialty() {
-        BasicColumnChart chart = new BasicColumnChart();
+    BasicColumnChartInteger getPatientsPerSpecialty() {
+        BasicColumnChartInteger chart = new BasicColumnChartInteger();
         chart.setTitleHTML("Patients per Doctor Specialty");
         List<String> months = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
         chart.addXAxis("Months", months);
         chart.addYAxis("Doctor Type)");
-        ArrayList<ArrayList<Double>> year = GenerateStatsSQL.getNumOfPatientType();
+        ArrayList<ArrayList<Integer>> year = GenerateStatsSQL.getNumOfPatientType();
         chart.addData("Pediatric", year.get(0));
         chart.addData("General Care", year.get(1));
         chart.addData("Radiology (X-ray)",year.get(2));

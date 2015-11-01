@@ -494,22 +494,22 @@ public class GenerateStatsSQL {
         return Double.valueOf(df2.format(val));
     }
 
-    public static ArrayList<Double> countingPatientTypes(ArrayList<Appointment> currDoctorSpecialty)
+    public static ArrayList<Integer> countingPatientTypes(ArrayList<Appointment> currDoctorSpecialty)
     {
-        ArrayList<Double> pediatricianTypes = new ArrayList<Double>();
+        ArrayList<Integer> pediatricianTypes = new ArrayList<Integer>();
 
-        double jan = 0;
-        double feb = 0;
-        double mar = 0;
-        double apr = 0;
-        double may = 0;
-        double june = 0;
-        double july = 0;
-        double aug = 0;
-        double sept = 0;
-        double oct = 0;
-        double nov = 0;
-        double dec = 0;
+        int jan = 0;
+        int feb = 0;
+        int mar = 0;
+        int apr = 0;
+        int may = 0;
+        int june = 0;
+        int july = 0;
+        int aug = 0;
+        int sept = 0;
+        int oct = 0;
+        int nov = 0;
+        int dec = 0;
 
         try {
 
@@ -591,14 +591,14 @@ public class GenerateStatsSQL {
 
     }
 
-    public static ArrayList<ArrayList<Double>> getNumOfPatientType()
+    public static ArrayList<ArrayList<Integer>> getNumOfPatientType()
     {
-        ArrayList<ArrayList<Double>> patientType = new ArrayList<ArrayList<Double>>();
-        ArrayList<Double> pediatricianType = new ArrayList<Double>();
-        ArrayList<Double> generalCareType = new ArrayList<Double>();
-        ArrayList<Double> emergencyType = new ArrayList<Double>();
-        ArrayList<Double> neurologistType = new ArrayList<Double>();
-        ArrayList<Double> xrayType = new ArrayList<Double>();
+        ArrayList<ArrayList<Integer>> patientType = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> pediatricianType = new ArrayList<Integer>();
+        ArrayList<Integer> generalCareType = new ArrayList<Integer>();
+        ArrayList<Integer> emergencyType = new ArrayList<Integer>();
+        ArrayList<Integer> neurologistType = new ArrayList<Integer>();
+        ArrayList<Integer> xrayType = new ArrayList<Integer>();
 
         String listSpecialty = "";
         try {

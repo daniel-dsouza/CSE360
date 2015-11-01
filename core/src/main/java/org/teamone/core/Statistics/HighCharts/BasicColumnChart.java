@@ -34,7 +34,7 @@ public class BasicColumnChart extends HighChart{
 
         tooltip.put("headerFormat", "<span style=\"font-size:10px\">{point.key}</span><table>");
         tooltip.put("pointFormat", "<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td>" +
-                "<td style=\"padding:0\"><b>{point.y:.1f} mm</b></td></tr>");
+                "<td style=\"padding:0\"><b>{point.y:.1f}</b></td></tr>");
         tooltip.put("footerFormat", "</table>");
         tooltip.put("shared", true);
         tooltip.put("useHTML", true);

@@ -33,7 +33,7 @@ public class GenerateStatsTest {
         System.out.println("Ages 61-74: " + Agepop[6] + "%");
         System.out.println("Ages 75 & Up: " + Agepop[7] + "%\n");
 
-        ArrayList<ArrayList<Double>> patientTypes = new ArrayList<ArrayList<Double>>(GenerateStatsSQL.getNumOfPatientType());
+        ArrayList<ArrayList<Integer>> patientTypes = new ArrayList<ArrayList<Integer>>(GenerateStatsSQL.getNumOfPatientType());
         System.out.println("Pediatrician: " + patientTypes.get(0));
         System.out.println("General Care: " + patientTypes.get(1));
         System.out.println("X-Ray: " + patientTypes.get(2));
