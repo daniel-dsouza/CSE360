@@ -7,7 +7,7 @@
 
 <t:template>
     <jsp:attribute name="head">
-        <script type="text/javascript" src="js/appointments.js"></script>
+        <script type="text/javascript" src="/js/appointments.js"></script>
     </jsp:attribute>
     <jsp:body>
         <div class="container"> <!-- don't forget your bootstrap html. do the basic tutorial... -->

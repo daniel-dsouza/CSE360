@@ -56,6 +56,6 @@ public class MedicalHistoryController {
         user.getPatient().setMedicalHistory(attempt);
         PatientSQL.setMedicalHistory(user.getPatient());
 
-        return "redirect:/user/" + user.getPerson().getUserID();
+        return "redirect:/select_patient";
     }
 }

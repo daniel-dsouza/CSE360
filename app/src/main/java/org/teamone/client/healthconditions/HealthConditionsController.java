@@ -58,6 +58,6 @@ public class HealthConditionsController {
         user.getPatient().setHealthConditions(attempt);
         PatientSQL.setHealthConditions(user.getPatient());
 
-        return "redirect:/user/" + user.person.getUserID();
+        return "redirect:/select_patient";
     }
 }

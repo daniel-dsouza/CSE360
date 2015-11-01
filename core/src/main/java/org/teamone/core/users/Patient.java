@@ -3,7 +3,7 @@ package org.teamone.core.users;
 import org.teamone.core.labs.LabTest;
 import org.teamone.core.prescriptions.Prescription;
 
-import java.util.TreeMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Ryan on 10/7/2015.
@@ -21,10 +21,10 @@ public class Patient extends Person {
         patientInformation = new PatientInformation();
         healthConditions = new HealthConditions();
         medicalHistory = new MedicalHistory();
-        agentActions = new TreeMap<String, String>() {
-        };
-        agentActions.put("Schedule an appointment", "appointment/new");
-        agentActions.put("View appointments", "appointment/list");
+        agentActions = new LinkedHashMap<String, String>();
+        agentActions.put("Update Personal Information", "personal");
+        agentActions.put("Schedule an Appointment", "appointment/new");
+        agentActions.put("View Appointments", "appointment/list");
 
     }
 

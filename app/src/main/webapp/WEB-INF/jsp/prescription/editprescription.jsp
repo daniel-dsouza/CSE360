@@ -52,11 +52,7 @@
             <br/>
             <br/>
             <form:form method="post" commandName="gotoCreate" class="hiddenonreadonly">
-                <div class="button_holder" style="text-align: center;">
-                    <span class="group-btn">
-                        <input type="submit" value="Create Prescription" class="btn btn-primary btn-md"/>
-                    </span>
-                </div>
+                <input type="submit" class="btn btn-info" value="Create Prescription">
             </form:form>
         </div>
     </jsp:body>
