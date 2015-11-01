@@ -2,7 +2,6 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
 
 /**
@@ -25,7 +24,7 @@ public class AAPreloadApptTest {
                 //uncomment when ready
 
                 //appt.setDoctorID(docID);
-                appt = AppointmentSQL.random();//call this to random
+                //appt = AppointmentSQL.random();//call this to random
                 //boolean p = AppointmentSQL.preloadAppointment(appt);
                 //assertTrue("Failed to preload", p);//if p!=null returns false, display message
 

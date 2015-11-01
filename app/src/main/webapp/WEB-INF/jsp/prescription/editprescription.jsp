@@ -33,19 +33,23 @@
     </jsp:attribute>
     <jsp:body>
         <h1 style="text-align: center;">
-            Prescriptions <!-- Want to add Patients name here -->
+            Prescriptions for <c:out value="${user.patient.firstName}"/> <c:out value="${user.patient.lastName}"/>
         </h1>
         <br/>
         <div class="container">
             <c:forEach var="prescript" items="${prescriptions}">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         Prescription Type:
                             ${prescript.prescriptionType}
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         Quantity:
                             ${prescript.quantity}
+                    </div>
+                    <div class="col-lg-4">
+                        Date Prescribed:
+                            ${prescript.strDateAndTime}
                     </div>
                 </div>
             </c:forEach>

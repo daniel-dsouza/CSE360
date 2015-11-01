@@ -4,9 +4,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.teamone.client.generic.User;
+import org.teamone.core.SQL.LabReportSQL;
 import org.teamone.core.SQL.LabRequestSQL;
-import org.teamone.core.SQL.LabTestSQL;
-import org.teamone.core.labs.LabTest;
+import org.teamone.core.labs.LabReport;
 import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.LabStaff;
 
@@ -21,7 +21,7 @@ import java.util.Map;
 @Scope("request")
 @RequestMapping(value="/**/lab_report")
 @SessionAttributes("report")
-public class LabTestController {
+public class LabReportController {
 
     @RequestMapping(method= RequestMethod.GET)
     public String list (Map<String, Object> model,
@@ -31,7 +31,7 @@ public class LabTestController {
             return "redirect:/login";
         else if (!(user.getPerson() instanceof LabStaff))
             return "redirect:/user/" + user.person.getUserID();
-        List labReportsList = LabTestSQL.getAllLabTests();
+        List labReportsList = LabReportSQL.getAllLabReports();
         model.put("list", labReportsList);
         return "lab/listlabreport";
     }
@@ -50,9 +50,9 @@ public class LabTestController {
             id = Integer.parseInt(reportID);
         } catch (Exception e) { e.printStackTrace(); }
 
-        LabTest testID = new LabTest();
+        LabReport testID = new LabReport();
         testID.setRequestionID(id);
-        LabTest viewReport = LabTestSQL.viewLabTestByRequestion(testID); //get the labrequest.
+        LabReport viewReport = LabReportSQL.viewLabReportByRequestion(testID); //get the labrequest.
 
         for(String test : viewReport.getlabTest().keySet()) {
             if (viewReport.getlabTest().get(test).equals("false")) {
@@ -82,9 +82,9 @@ public class LabTestController {
             id = Integer.parseInt(reportID);
         } catch (Exception e) { e.printStackTrace(); }
 
-        LabTest testID = new LabTest();
+        LabReport testID = new LabReport();
         testID.setRequestionID(id);
-        LabTest editReport = LabTestSQL.viewLabTestByRequestion(testID); //get the labrequest.
+        LabReport editReport = LabReportSQL.viewLabReportByRequestion(testID); //get the labrequest.
 
         for(String test : editReport.getlabTest().keySet()) {
             if (editReport.getlabTest().get(test).equals("false")) {
@@ -100,10 +100,10 @@ public class LabTestController {
     @RequestMapping(value="/{reportID}/edit", method= RequestMethod.POST)
     public String editPost (Map<String, Object> model,
                             @PathVariable String reportID,
-                            @ModelAttribute("report") LabTest report,
+                            @ModelAttribute("report") LabReport report,
                             @ModelAttribute("user") User user) {
 
-        LabTestSQL.updateLabTest(report);
+        LabReportSQL.updateLabReport(report);
         return "redirect:/lab_report";
     }
 
@@ -127,7 +127,7 @@ public class LabTestController {
         testID.setRequestionID(id);
         LabTestRequest input = LabRequestSQL.viewLabRequest(testID); //get the labrequest.
 
-        LabTest newReport = new LabTest(id, ""); //only put the needed fields in the report.
+        LabReport newReport = new LabReport(id, ""); //only put the needed fields in the report.
         newReport.setPatient(input.getPatient());
         newReport.setPerson(input.getPatient());
         for(String test : input.getLabTestRequest().keySet()) {
@@ -149,11 +149,11 @@ public class LabTestController {
     @RequestMapping(value="/{reportID}/create", method= RequestMethod.POST)
     public String createPost (Map<String, Object> model,
                               @PathVariable String reportID,
-                              @ModelAttribute("report") LabTest report,
+                              @ModelAttribute("report") LabReport report,
                               @ModelAttribute("user") User user) {
 
         report.setPerson(user.getPerson()); //maybe set the lab staff member responsible?
-        LabTestSQL.updateLabTest(report);
+        LabReportSQL.updateLabReport(report);
         return "redirect:/request_test";
     }
 }
