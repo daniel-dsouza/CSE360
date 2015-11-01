@@ -1,14 +1,14 @@
 package org.teamone.client.healthconditions;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
 import org.teamone.core.SQL.PatientSQL;
-import org.teamone.core.users.*;
+import org.teamone.core.users.HealthConditions;
+import org.teamone.core.users.LabStaff;
+import org.teamone.core.users.Patient;
 
 import java.util.Map;
 

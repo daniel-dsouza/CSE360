@@ -113,7 +113,7 @@ public class AppointmentController {
 
         model.put("reason", reason);
 
-        System.out.println(model); //debug statement
+        //System.out.println(model); //debug statement
         return "appointment/PatientSchedAppt"; //return the view with linked model
     }
 

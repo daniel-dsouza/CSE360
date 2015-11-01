@@ -17,7 +17,7 @@ public class LoginTest {
 
         test = new Person();
         test.setUserID(501);
-        test.setName("Dr. Ryan Ang");
+        test.setName("Doctor Ryan:Ang");
         test.setPassword("go");
     }
 

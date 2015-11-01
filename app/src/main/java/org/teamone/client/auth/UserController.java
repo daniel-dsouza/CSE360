@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
-@RequestMapping(value = "/user/{userID}")
+@RequestMapping(value = "/user/")
 public class UserController {
 
     //@Autowired
