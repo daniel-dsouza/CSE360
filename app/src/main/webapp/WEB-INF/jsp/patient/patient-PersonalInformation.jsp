@@ -74,9 +74,8 @@
               <td>Gender*: </td>
               <td>
                 <form:select path="gender" class="selectpicker" name="gender" > <!-- one of the other options than "select one" must be selected -->
-                  <option>select one</option>
-                  <option>Male</option>
-                  <option>Female</option>
+                  <option>${gender1}</option>
+                  <option>${gender2}</option>
                 </form:select>
               </td>
             </tbody>

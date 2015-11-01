@@ -40,8 +40,19 @@ public class PersonalController {
 
 
 
+        String currentGender;
+        String oppisiteGender;
 
         PatientInformation attempt = user.getPatient().getPatientInformation();
+        if(attempt.getGender().equals("Male")){
+            currentGender = "Male";
+            oppisiteGender = "Female";
+        }else{
+            currentGender = "Female";
+            oppisiteGender = "Male";
+        }
+        model.put("gender1", currentGender);
+        model.put("gender2", oppisiteGender);
         model.put("userInput", attempt);
 
         return "/patient/patient-PersonalInformation";
@@ -51,13 +62,9 @@ public class PersonalController {
     public String processPatientInformation(@ModelAttribute("userInput") PatientInformation attempt,
                                             @ModelAttribute("user") User user) {
 
-        //System.out.println("Creating a Patient");
-
-        //attempt.displayPersonalInformation();
         user.getPatient().setPatientInformation(attempt);
         PatientSQL.UpdatePersonalInfo(user.getPatient());
 
-        //return "/patient/patient-PersonalInformation"; // should be patient's personal information view page
         return "redirect:/user/" + user.person.getUserID();
     }
 }
