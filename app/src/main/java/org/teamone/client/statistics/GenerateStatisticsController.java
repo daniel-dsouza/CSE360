@@ -61,7 +61,7 @@ public class GenerateStatisticsController {
         List<String> months = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
         chart.addXAxis("Months", months);
         chart.addYAxis("Number of Patients Registered");
-        chart.addData("Alerts", GenerateStatsSQL.getNumOfNewPatients());
+        chart.addData("Patients", GenerateStatsSQL.getNumOfNewPatients());
         return chart;
     }
 

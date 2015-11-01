@@ -57,7 +57,7 @@ public class AAPreloadRegisterTest {
         date += Integer.toString(randomGenerator.nextInt((9 - 1) + 1));//random between month 1 and month 9
         date += "-";
         int test1 = randomGenerator.nextInt((28 - 1) + 1);//random between day 1 and day 28
-        if(test1<9)
+        if(test1<=9)
             date += "0" + Integer.toString(test1);//since this is 1 digit number, we need a 0 in front of it
         else
             date += Integer.toString(test1);
