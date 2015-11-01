@@ -33,7 +33,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#female_male_ratio">
-                                Female to Mate Ratio</a></h4>
+                                Female to Male Ratio</a></h4>
                         </div>
 
                         <div id="female_male_ratio" class="panel-collapse collapse out">

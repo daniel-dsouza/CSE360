@@ -48,7 +48,6 @@ public class GenerateStatsSQL {
 
             while (resultSet.next()) {
 
-
                 date = getDate(resultSet.getString("alertdateAndTime"));
                 if (is1YearRange(date)) {
                     SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -396,8 +395,6 @@ public class GenerateStatsSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            String test = "patient";
-
             preparedStatement = connect.prepareStatement("SELECT age FROM patient WHERE occupation = 'patient';");
             resultSet = preparedStatement.executeQuery();
 
@@ -636,31 +633,31 @@ public class GenerateStatsSQL {
                 int arraySize = doctorSpecialty.size();
                 if (specialty.equals("Pediatrician")) {
 
-                    pediatricianType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+                    pediatricianType = countingPatientTypes(doctorSpecialty);
 
                 }
 
                 else if(specialty.equals("GeneralCare"))
                 {
-                    generalCareType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+                    generalCareType = countingPatientTypes(doctorSpecialty);
 
                 }
 
                 else if(specialty.equals("Neurologist"))
                 {
-                    neurologistType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+                    neurologistType = countingPatientTypes(doctorSpecialty);
 
                 }
 
                 else if(specialty.equals("X-Ray"))
                 {
-                    xrayType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+                    xrayType = countingPatientTypes(doctorSpecialty);
 
                 }
 
                 else if(specialty.equals("Emergency"))
                 {
-                    emergencyType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+                    emergencyType = countingPatientTypes(doctorSpecialty);
 
                 }
 

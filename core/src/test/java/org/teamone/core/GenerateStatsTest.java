@@ -18,8 +18,6 @@ public class GenerateStatsTest {
         System.out.println("Female Population: " + GenerateStatsSQL.getFemalePopulation() +  "%");
         GenerateStatsSQL.getAgePopulation();*/
 
-
-
         System.out.println("\n==EXAMPLE HOW TO GET FROM OBJECT====\nNumber of Alerts within this Month: " + GenerateStatsSQL.getNumOfAlerts());
         System.out.println("Number of New Patients within this Month: " + GenerateStatsSQL.getNumOfNewPatients());
         System.out.println("Male Population: " + GenerateStatsSQL.getMalePopulation() + "%");
@@ -35,11 +33,7 @@ public class GenerateStatsTest {
         System.out.println("Ages 61-74: " + Agepop[6] + "%");
         System.out.println("Ages 75 & Up: " + Agepop[7] + "%\n");
 
-        System.out.println("PATIENT TYPE TESTING");
-
-        ArrayList<ArrayList<Double>> patientTypes = new ArrayList<ArrayList<Double>>();
-        patientTypes = GenerateStatsSQL.getNumOfPatientType();
-
+        ArrayList<ArrayList<Double>> patientTypes = new ArrayList<ArrayList<Double>>(GenerateStatsSQL.getNumOfPatientType());
         System.out.println("Pediatrician: " + patientTypes.get(0));
         System.out.println("General Care: " + patientTypes.get(1));
         System.out.println("X-Ray: " + patientTypes.get(2));
@@ -49,35 +43,35 @@ public class GenerateStatsTest {
 
         System.out.println("Number of Emergency Alerts within the Year");
 
-        /*int[] numOfAlerts = GenerateStatsSQL.getNumOfAlerts();
-        System.out.println("January: " + numOfAlerts[0]);
-        System.out.println("February: " + numOfAlerts[1]);
-        System.out.println("March: " + numOfAlerts[2]);
-        System.out.println("April: " + numOfAlerts[3]);
-        System.out.println("May: " + numOfAlerts[4]);
-        System.out.println("June: " + numOfAlerts[5]);
-        System.out.println("July: " + numOfAlerts[6]);
-        System.out.println("August: " + numOfAlerts[7]);
-        System.out.println("September: " + numOfAlerts[8]);
-        System.out.println("October: " + numOfAlerts[9]);
-        System.out.println("November: " + numOfAlerts[10]);
-        System.out.println("December: " + numOfAlerts[11] + "\n");
+        ArrayList<Integer>  numOfAlerts = new ArrayList<Integer> (GenerateStatsSQL.getNumOfAlerts());
+        System.out.println("January: " + numOfAlerts.get(0));
+        System.out.println("February: " + numOfAlerts.get(1));
+        System.out.println("March: " + numOfAlerts.get(2));
+        System.out.println("April: " + numOfAlerts.get(3));
+        System.out.println("May: " + numOfAlerts.get(4));
+        System.out.println("June: " + numOfAlerts.get(5));
+        System.out.println("July: " + numOfAlerts.get(6));
+        System.out.println("August: " + numOfAlerts.get(7));
+        System.out.println("September: " + numOfAlerts.get(8));
+        System.out.println("October: " + numOfAlerts.get(9));
+        System.out.println("November: " + numOfAlerts.get(10));
+        System.out.println("December: " + numOfAlerts.get(11) + "\n");
 
         System.out.println("Number of New Patients within the Year");
 
-        int[] patientCount = GenerateStatsSQL.getNumOfNewPatients();
-        System.out.println("January: " + patientCount[0]);
-        System.out.println("February: " + patientCount[1]);
-        System.out.println("March: " + patientCount[2]);
-        System.out.println("April: " + patientCount[3]);
-        System.out.println("May: " + patientCount[4]);
-        System.out.println("June: " + patientCount[5]);
-        System.out.println("July: " + patientCount[6]);
-        System.out.println("August: " + patientCount[7]);
-        System.out.println("September: " + patientCount[8]);
-        System.out.println("October: " + patientCount[9]);
-        System.out.println("November: " + patientCount[10]);
-        System.out.println("December: " + patientCount[11]); */
+        ArrayList<Integer>  patientCount = new ArrayList<Integer> (GenerateStatsSQL.getNumOfNewPatients());
+        System.out.println("January: " + patientCount.get(0));
+        System.out.println("February: " + patientCount.get(1));
+        System.out.println("March: " + patientCount.get(2));
+        System.out.println("April: " + patientCount.get(3));
+        System.out.println("May: " + patientCount.get(4));
+        System.out.println("June: " + patientCount.get(5));
+        System.out.println("July: " + patientCount.get(6));
+        System.out.println("August: " + patientCount.get(7));
+        System.out.println("September: " + patientCount.get(8));
+        System.out.println("October: " + patientCount.get(9));
+        System.out.println("November: " + patientCount.get(10));
+        System.out.println("December: " + patientCount.get(11) + "\n");
 
     }
 }
