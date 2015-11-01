@@ -12,6 +12,6 @@ public class HSP extends Staff {
         agentActions.put("Select Patient", "select_patient");
         String registration ="user/" + getUserID() + "/registration/";//TODO: Almost working. need from session userID
         agentActions.put("Register Patient", registration); //TODO: assign this
-        agentActions.put("Generate Statistics", "#"); //TODO: assign this.
+        agentActions.put("Generate Statistics", "stats"); //TODO: assign this.
     }
 }
