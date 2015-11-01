@@ -155,13 +155,15 @@ public class LoginSQL {
 
     private static boolean verify(ResultSet resultSet, String pass) throws SQLException {
         // ResultSet is initially before the first data set
-        resultSet.next();
         boolean boolResult;
-        String passwordSQL = resultSet.getString("password");
-
-        if(pass.compareTo(passwordSQL)==0)
+        if(resultSet.first())//if Resultset does exist,
         {
-            boolResult = true;
+            String passwordSQL = resultSet.getString("password");
+
+            if (pass.compareTo(passwordSQL) == 0) {
+                boolResult = true;
+            } else
+                boolResult = false;
         }
         else
             boolResult = false;

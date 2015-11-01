@@ -55,12 +55,14 @@ public class AlertTest {
 
     @Test
     public void getListofAlerts() {
-        System.out.println("\nTest========Searching for Alerts ");
+        System.out.println("Test========Attempting to get a few alerts");
         ArrayList<Alert> testArr = AlertSQL.getListAlerts();
 
         assertTrue("There were no alerts, subsequent tests will fail", !testArr.isEmpty());
+        Alert tempAlert;
 
-        for (Alert tempAlert : testArr) {
+        for (int i = 0; i < 3; i++) {
+            tempAlert = testArr.get(i);
             System.out.println("Name " + LoginSQL.getName(tempAlert.getPatientID()) + " has reason " + tempAlert.getReason());
             System.out.println("Alert ID: " + tempAlert.getAlertID());
             System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());

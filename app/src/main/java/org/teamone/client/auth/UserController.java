@@ -16,14 +16,17 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
-@RequestMapping(value = "/user/{userID}")
+@RequestMapping(value = "/user/")
 public class UserController {
 
     //@Autowired
     //private User user;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String viewUserHome(
+//@Autowired
+    //private User user;
+
+    @RequestMapping(value = "{userID}", method = RequestMethod.GET)
+    public String view2(
             Map<String, Object> model,
             @PathVariable String userID,
             @ModelAttribute User user) {
@@ -31,4 +34,17 @@ public class UserController {
         //System.out.println(user.getUsername());
         return "auth/user";
     }
+
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String viewUserHome(
+            Map<String, Object> model,
+            @ModelAttribute User user) {
+        //redirect to correct page.
+
+        return "redirect:/login";
+
+    }
+
+
 }
