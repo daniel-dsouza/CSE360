@@ -62,13 +62,9 @@ public class PersonalController {
     public String processPatientInformation(@ModelAttribute("userInput") PatientInformation attempt,
                                             @ModelAttribute("user") User user) {
 
-        //System.out.println("Creating a Patient");
-
-        //attempt.displayPersonalInformation();
         user.getPatient().setPatientInformation(attempt);
         PatientSQL.UpdatePersonalInfo(user.getPatient());
 
-        //return "/patient/patient-PersonalInformation"; // should be patient's personal information view page
         return "redirect:/user/" + user.person.getUserID();
     }
 }
