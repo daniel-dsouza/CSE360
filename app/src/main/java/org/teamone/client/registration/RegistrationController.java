@@ -16,10 +16,9 @@ import java.util.Map;
 //@Scope("request")//This breaks userID
 public class RegistrationController {
 
-    //Patient attempt = new Patient();
 
     //The web page that leads to this must direct to registration/, registration will return a 404 error
-    @RequestMapping(value = "/user/**/registration/", method = RequestMethod.GET)
+    @RequestMapping(value = "/**/registration/", method = RequestMethod.GET)
     public String createPatient(Map<String, Object> model) {
 
         Patient attempt = new Patient();
@@ -32,13 +31,12 @@ public class RegistrationController {
 
     @RequestMapping(value = "/user/**/registration/{page}", method = RequestMethod.POST)
     public String processPatientInfo(@ModelAttribute("userInput") Patient attempt,
-                                     Map<String, Object> model, @ModelAttribute("user") User user,
+                                     @ModelAttribute("user") User user,
                                      @PathVariable String page) {
 
         if(page.equalsIgnoreCase("page1")) {
             System.out.println("Creating a Patient");
 
-            //attempt.displayPatientPersonalInformation();
             attempt=HspSQL.RegisterNewPatient(attempt);
             if(attempt!=null)
             {
@@ -75,8 +73,6 @@ public class RegistrationController {
             else
                 System.out.println("\nSet failed");
 
-            //return "/registration/hsp-medicalHistory"; //Used for debugging to make sure that check boxes functioned properly
-            //return "/registration/hsp-registration"; //This should be hsp-patients page or hsp-homepage or what ever the page that this should exit to is called
             return "redirect:/user/" + user.person.getUserID();
         }
     }

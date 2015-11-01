@@ -85,7 +85,7 @@
         <br/>
         <div class="button_holder" style="text-align: center;">
         <span class="group-btn">
-            <input type="submit" value="Next" class="btn btn-primary btn-md"/>
+            <input type="submit" value="Update" class="btn btn-primary btn-md"/>
         </span>
         </div>
         <h4 style="Color: #FF0000">
