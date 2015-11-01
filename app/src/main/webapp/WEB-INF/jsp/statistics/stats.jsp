@@ -19,7 +19,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#patients_per_specialty">
-                                STATS</a></h4>
+                                Number of Patients per Doctor Speciality</a></h4>
                         </div>
 
                         <div id="patients_per_specialty" class="panel-collapse collapse out">
@@ -33,7 +33,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#number_of_alerts">
-                                STATS</a></h4>
+                                Number of Submitted alerts</a></h4>
                         </div>
 
                         <div id="number_of_alerts" class="panel-collapse collapse out">
@@ -47,7 +47,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#new_patients">
-                                STATS</a></h4>
+                                Number of New Patients</a></h4>
                         </div>
 
                         <div id="new_patients" class="panel-collapse collapse out">
@@ -61,7 +61,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#age_groups">
-                                STATS</a></h4>
+                                Distribution of Age Groups</a></h4>
                         </div>
 
                         <div id="age_groups" class="panel-collapse collapse out">

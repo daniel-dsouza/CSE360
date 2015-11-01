@@ -1,4 +1,6 @@
-package org.teamone.core.Statistics;
+package org.teamone.core.Statistics.HighCharts;
+
+import org.teamone.core.Statistics.HighCharts.Components.Title;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,10 +10,8 @@ import java.util.Map;
  * Created by daniel on 10/31/15.
  */
 public abstract class HighChart {
-    public Map<String, Object> chart;
-    public Map<String, Object> title;
-    public Map<String, Object> tooltip;
-    public Map<String, Object> plotOptions;
+    public Map<String, Object> chart, subtitle, tooltip, plotOptions, credits, xAxis, yAxis;
+    public Title title;
     public ArrayList<Object> series;
 
     public HighChart() {
@@ -20,21 +20,26 @@ public abstract class HighChart {
         chart.put("plotBorderWidth", null);
         chart.put("plotShadow", false);
 
-        title = new HashMap<String, Object>();
-        title.put("text", "Browser<br>shares");
-        title.put("align", "center");
-        title.put("verticalAlign", "middle");
-        //title.put("y", 50);
+        title = new Title();
+
+        subtitle = new HashMap<String, Object>();
+        subtitle.put("text", "");
 
         tooltip = new HashMap<String, Object>();
-        tooltip.put("pointFormat", "{series.name}: <b>{point.percentage:.1f}%</b>");
 
         plotOptions = new HashMap<String, Object>();
+
+        credits = new HashMap<String, Object>();
+        credits.put("enabled", false);
 
         series = new ArrayList<Object>();
     }
 
     public void setTitleHTML(String html) {
-        this.title.put("text", html);
+        this.title.text = html;
+    }
+
+    public void setSubTitleHTML(String html) {
+        this.subtitle.put("text", html);
     }
 }
