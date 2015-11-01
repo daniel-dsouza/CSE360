@@ -5,7 +5,7 @@ function getRandomColor() {
     var letters = '13579BD'.split('');
     var color = '#';
     for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 6)];
+        color += letters[Math.floor(Math.random() * 7)];
     }
     return color;
 }
