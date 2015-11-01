@@ -8,7 +8,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/user/${user.person.userID}">IPIMS</a>
+        
+        <!--http://webtech-kapil.blogspot.com/2009/10/difference-between-empty-and-null-check.html-->
+        <c:if test="${user.person.userID ne null}">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/user/${user.person.userID}">IPIMS</a>
+        </c:if>
+        <c:if test="${user.person.userID == null}">
+            <a class="navbar-brand" href="#">IPIMS</a>
+        </c:if>
+
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
