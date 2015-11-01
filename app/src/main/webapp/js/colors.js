@@ -2,7 +2,7 @@
  * Created by daniel on 11/1/15.
  */
 function getRandomColor() {
-    var letters = '56789A'.split('');
+    var letters = '13579BD'.split('');
     var color = '#';
     for (var i = 0; i < 6; i++ ) {
         color += letters[Math.floor(Math.random() * 6)];
