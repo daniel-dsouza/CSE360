@@ -51,6 +51,14 @@ public class SelectPatientController {
         //redirect to correct page.
         if (action.equals("lab_test")) {
             return "redirect:/request_test/create";
+        } else if (action.equals("health_conditions")) {
+            return "redirect:/request_healthconditions/healthconditions";
+        } else if (action.equals("medical_history")) {
+            return "redirect:/request_medicalhistory/medicalhistory";
+        } else if (action.equals("e_prescribe")) {
+            return "redirect:/request_prescriptions/prescription";
+        } else if (action.equals("edit_info")){
+            return "redirect:/request_info/personal";
         } else {
             return "redirect:/user/" + user.person.getUserID();
         }
@@ -68,16 +76,17 @@ public class SelectPatientController {
         ArrayList<Patient> patients = PatientSQL.getAllPatient();
 
         Map<String, String> actions = new LinkedHashMap<String, String>();
-        actions.put("health_conditions", "Health Conditions"); //TODO: create link above
-        actions.put("medical_history", "Medical History"); //TODO: create link above
+        actions.put("health_conditions", "Health Conditions");
+        actions.put("medical_history", "Medical History");
 
         if (user.getPerson() instanceof Doctor) {
-            actions.put("e_prescribe", "E-Prescribe Prescription"); //TODO: create link above.
+            actions.put("e_prescribe", "E-Prescribe Prescription");
             actions.put("lab_test", "E-Prescribe Lab Tests");
         }
 
         if (user.getPerson() instanceof HSP) {
-            actions.put("edit_info", "Update Personal"); //TODO: create link above.
+            actions.put("e_prescribe", "View Prescriptions");
+            actions.put("edit_info", "Update Personal");
         }
 
         model.put("actions", actions);
