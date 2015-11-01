@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by daniel on 10/31/15.
  */
-public abstract class HighChart {
+public class HighChart {
     public Map<String, Object> chart, subtitle, tooltip, plotOptions, credits, xAxis, yAxis;
     public Title title;
     public ArrayList<Object> series;
