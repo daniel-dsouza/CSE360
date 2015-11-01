@@ -11,10 +11,7 @@ import org.teamone.core.Statistics.HighCharts.BasicColumnChartInteger;
 import org.teamone.core.Statistics.HighCharts.BasicPieChart;
 import org.teamone.core.Statistics.HighCharts.HighChart;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by daniel on 10/31/15.
@@ -30,15 +27,16 @@ public class GenerateStatisticsController {
     @ResponseBody
     BasicColumnChart getPatientsPerSpecialty() {
         BasicColumnChart chart = new BasicColumnChart();
-        chart.setTitleHTML("nom2");
+        chart.setTitleHTML("Patients per Doctor Specialty");
         List<String> months = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
         chart.addXAxis("Months", months);
         chart.addYAxis("Doctor Type)");
-        chart.addData("Pediatric", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("General Care", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("Emergency", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("Radiology (X-ray)", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("Neurology", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
+        ArrayList<ArrayList<Double>> year = GenerateStatsSQL.getNumOfPatientType();
+        chart.addData("Pediatric", year.get(0));
+        chart.addData("General Care", year.get(1));
+        chart.addData("Radiology (X-ray)",year.get(2));
+        chart.addData("Emergency",year.get(3));
+        chart.addData("Neurology", year.get(4));
         return chart;
     }
 
@@ -58,8 +56,29 @@ public class GenerateStatisticsController {
     @RequestMapping(value = "/new_patients", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    HighChart getNewPatients() {
+    BasicColumnChartInteger getNewPatients() {
+        BasicColumnChartInteger chart = new BasicColumnChartInteger();
+        chart.setTitleHTML("Number of New Patients");
+        List<String> months = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+        chart.addXAxis("Months", months);
+        chart.addYAxis("Number of Patients Registered");
+        chart.addData("Alerts", GenerateStatsSQL.getNumOfNewPatients());
+        return chart;
+    }
+
+    @RequestMapping(value = "/female_male_ratio", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    HighChart getRatio() {
         BasicPieChart chart = new BasicPieChart();
+        double m = GenerateStatsSQL.getMalePopulation();
+        double f = GenerateStatsSQL.getFemalePopulation();
+        Double male = new Double(m);
+        Double female = new Double(f);
+        Map<String, Double> gender = new HashMap<String, Double>();
+        gender.put("Female", female);
+        gender.put("Male", male);
+        chart.addData("Gender",gender);
         return chart;
     }
 
@@ -67,21 +86,29 @@ public class GenerateStatisticsController {
     public
     @ResponseBody
     HighChart getAgeGroups() {
-        BasicColumnChart chart = new BasicColumnChart();
-        chart.setTitleHTML("nom2");
-        List<String> months = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
-        chart.addXAxis("Months", months);
-        chart.addYAxis("Age groups");
-        chart.addData("0-12", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("13-18", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("19-26", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("27-40", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("41-50", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("51-60", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("61-74", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
-        chart.addData("75 & Up", new ArrayList<Double>(Arrays.asList(49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4)));
+        BasicPieChart chart = new BasicPieChart();
+        double age[] = GenerateStatsSQL.getAgePopulation();
+        Double group1 = new Double(age[0]);
+        Double group2 = new Double(age[1]);
+        Double group3 = new Double(age[2]);
+        Double group4 = new Double(age[3]);
+        Double group5 = new Double(age[4]);
+        Double group6 = new Double(age[5]);
+        Double group7 = new Double(age[6]);
+        Double group8 = new Double(age[7]);
+        Map<String, Double> ageGroups = new HashMap<String, Double>();
+        ageGroups.put("0-12", group1);
+        ageGroups.put("13-18", group2);
+        ageGroups.put("19-26", group3);
+        ageGroups.put("27-40", group4);
+        ageGroups.put("41-50", group5);
+        ageGroups.put("51-60", group6);
+        ageGroups.put("61-74", group7);
+        ageGroups.put("75 & Up", group8);
+        chart.addData("Age",ageGroups);
         return chart;
     }
+
 
     @RequestMapping(method = RequestMethod.GET)
     public String dispStats(Map<String, Object> model) {

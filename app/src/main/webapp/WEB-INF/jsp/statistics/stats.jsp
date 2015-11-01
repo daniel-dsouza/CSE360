@@ -32,6 +32,20 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#female_male_ratio">
+                                Female to Mate Ratio</a></h4>
+                        </div>
+
+                        <div id="female_male_ratio" class="panel-collapse collapse out">
+                            <div class="panel-body ">
+                                <div class="display">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
                             <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#number_of_alerts">
                                 Number of Submitted alerts</a></h4>
                         </div>

@@ -119,7 +119,6 @@ public class GenerateStatsSQL {
                 }*/
                 Integer[] intArray = new Integer[]{jan, feb, mar, apr, may, june, july, aug, sept, oct, nov, dec};
                 alertsList = new ArrayList<Integer>(Arrays.asList(intArray));
-
             }
 
         } catch (Exception e) {
@@ -159,8 +158,8 @@ public class GenerateStatsSQL {
         return oneYear;
     }
 
-    public static int[] getNumOfNewPatients() {
-        int[] patientCount = new int[12];
+    public static ArrayList<Integer> getNumOfNewPatients() {
+        ArrayList<Integer> patientList = new ArrayList<Integer>();
         int jan = 0;
         int feb = 0;
         int mar = 0;
@@ -258,27 +257,17 @@ public class GenerateStatsSQL {
             }
 
 
-            patientCount[0] = jan;
-            patientCount[1] = feb;
-            patientCount[2] = mar;
-            patientCount[3] = apr;
-            patientCount[4] = may;
-            patientCount[5] = june;
-            patientCount[6] = july;
-            patientCount[7] = aug;
-            patientCount[8] = sept;
-            patientCount[9] = oct;
-            patientCount[10] = nov;
-            patientCount[11] = dec;
+            Integer[] intArray = new Integer[]{jan, feb, mar, apr, may, june, july, aug, sept, oct, nov, dec};
+            patientList = new ArrayList<Integer>(Arrays.asList(intArray));
 
 
         } catch (Exception e) {
             System.out.println(e);
-            patientCount = null;
+            patientList = null;
         } finally {
             close();
         }
-        return patientCount;
+        return patientList;
 
 
     }
@@ -474,14 +463,14 @@ public class GenerateStatsSQL {
             groups[6] = ag7Percentage;
             groups[7] = ag8Percentage;
 
-            System.out.println("Ages 0-12: " + ag1Percentage + "%");
+            /*System.out.println("Ages 0-12: " + ag1Percentage + "%");
             System.out.println("Ages 13-18: " + ag2Percentage + "%");
             System.out.println("Ages 19-26: " + ag3Percentage + "%");
             System.out.println("Ages 27-40: " + ag4Percentage + "%");
             System.out.println("Ages 41-50: " + ag5Percentage + "%");
             System.out.println("Ages 51-60: " + ag6Percentage + "%");
             System.out.println("Ages 61-74: " + ag7Percentage + "%");
-            System.out.println("Ages 75 & Up: " + ag8Percentage + "%");
+            System.out.println("Ages 75 & Up: " + ag8Percentage + "%"); */
 
 
         } catch (Exception e) {
@@ -508,9 +497,9 @@ public class GenerateStatsSQL {
         return Double.valueOf(df2.format(val));
     }
 
-    public static double[] getNumOfPatientTypePediatrician() {
-
-        double[] pediatricianTypes = new double[12];
+    public static ArrayList<Double> countingPatientTypes(ArrayList<Appointment> currDoctorSpecialty)
+    {
+        ArrayList<Double> pediatricianTypes = new ArrayList<Double>();
 
         double jan = 0;
         double feb = 0;
@@ -525,148 +514,73 @@ public class GenerateStatsSQL {
         double nov = 0;
         double dec = 0;
 
-
-        double totalNumOfPatients = 0;
-        String listSpecialty = "";
-
-        double janPercentage = 0;
-        double febPercentage = 0;
-        double marPercentage = 0;
-        double aprPercentage = 0;
-        double mayPercentage = 0;
-        double junePercentage = 0;
-        double julyPercentage = 0;
-        double augPercentage = 0;
-        double septPercentage = 0;
-        double octPercentage = 0;
-        double novPercentage = 0;
-        double decPercentage = 0;
-
-
         try {
 
-            // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.jdbc.Driver");
-            // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            for(int i = 0; i < currDoctorSpecialty.size(); i ++) {
+                String date = currDoctorSpecialty.get(i).getDate();
+                if (is1YearRange(date)) {
+                    SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
+                    Calendar temp = Calendar.getInstance();
+                    Date currMonth = convertToDate.parse(date);
+                    temp.setTime(currMonth);
+                    int month = temp.get(Calendar.MONTH);
 
-            // PreparedStatements can use variables and are more efficient
+                    switch (month) {
+                        case 1:
+                            jan++;
+                            break;
+                        case 2:
+                            feb++;
+                            break;
+                        case 3:
+                            mar++;
+                            break;
+                        case 4:
+                            apr++;
+                            break;
+                        case 5:
+                            may++;
+                            break;
+                        case 6:
+                            june++;
+                            break;
+                        case 7:
+                            july++;
+                            break;
+                        case 8:
+                            aug++;
+                            break;
+                        case 9:
+                            sept++;
+                            break;
+                        case 10:
+                            oct++;
+                            break;
+                        case 11:
+                            nov++;
+                            break;
+                        case 12:
+                            dec++;
+                            break;
+                        default:
+                            System.out.println("Month is not found");
+                            break;
 
-            List<String> myList = new ArrayList<String>();
-            preparedStatement = connect.prepareStatement("SELECT specialty FROM staff WHERE occupation = 'Pediatrician';");
-            resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-
-                listSpecialty = resultSet.getString("specialty");
-                System.out.println("TESTING !@#$: " + listSpecialty);
-                if (myList.contains(listSpecialty)) {
-                    //do nothing
-
-                } else {
-                    myList.add(listSpecialty);
-                    //System.out.println(listSpecialty);
-                }
-            }
-
-            for (int j = 0; j < myList.size(); j++) {
-
-                String specialty = myList.get(j);
-                System.out.println("The current specialty is: " + specialty);
-                ArrayList<Appointment> doctorSpecialty = DoctorSQL.getListSpecialtyPatient(specialty);
-                int arraySize = doctorSpecialty.size();
-                if (specialty.equals("Pediatrician")) {
-
-                    String date = doctorSpecialty.get(j).getDate();
-                    //System.out.println(date);
-                    if (is1YearRange(date)) {
-                        SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
-                        Calendar temp = Calendar.getInstance();
-
-                        Date currMonth = convertToDate.parse(date);
-                        temp.setTime(currMonth);
-                        int month = temp.get(Calendar.MONTH);
-
-                        switch (month) {
-                            case 0:
-                                jan++;
-                                break;
-                            case 1:
-                                feb++;
-                                break;
-                            case 2:
-                                mar++;
-                                break;
-                            case 3:
-                                apr++;
-                                break;
-                            case 4:
-                                may++;
-                                break;
-                            case 5:
-                                june++;
-                                break;
-                            case 6:
-                                july++;
-                                break;
-                            case 7:
-                                aug++;
-                                break;
-                            case 8:
-                                sept++;
-                                break;
-                            case 9:
-                                oct++;
-                                break;
-                            case 10:
-                                nov++;
-                                break;
-                            case 11:
-                                dec++;
-                                break;
-                            default:
-                                System.out.println("Month is not found");
-                                break;
-
-                        }
                     }
-
-
                 }
-
             }
-
-
-            totalNumOfPatients = jan + feb + mar + apr + may + june + july + aug + sept + oct + nov + dec;
-
-            janPercentage = (jan / totalNumOfPatients) * 100;
-            febPercentage = (feb / totalNumOfPatients) * 100;
-            marPercentage = (mar / totalNumOfPatients) * 100;
-            aprPercentage = (apr / totalNumOfPatients) * 100;
-            mayPercentage = (may / totalNumOfPatients) * 100;
-            junePercentage = (june / totalNumOfPatients) * 100;
-            julyPercentage = (july / totalNumOfPatients) * 100;
-            augPercentage = (aug / totalNumOfPatients) * 100;
-            septPercentage = (sept / totalNumOfPatients) * 100;
-            octPercentage = (oct / totalNumOfPatients) * 100;
-            novPercentage = (nov / totalNumOfPatients) * 100;
-            decPercentage = (dec / totalNumOfPatients) * 100;
-
-
-            pediatricianTypes[0] = janPercentage;
-            pediatricianTypes[1] = febPercentage;
-            pediatricianTypes[2] = marPercentage;
-            pediatricianTypes[3] = aprPercentage;
-            pediatricianTypes[4] = mayPercentage;
-            pediatricianTypes[5] = junePercentage;
-            pediatricianTypes[6] = julyPercentage;
-            pediatricianTypes[7] = augPercentage;
-            pediatricianTypes[8] = septPercentage;
-            pediatricianTypes[9] = octPercentage;
-            pediatricianTypes[10] = novPercentage;
-            pediatricianTypes[11] = decPercentage;
-
+            pediatricianTypes.add(jan);
+            pediatricianTypes.add(feb);
+            pediatricianTypes.add(mar);
+            pediatricianTypes.add(apr);
+            pediatricianTypes.add(may);
+            pediatricianTypes.add(june);
+            pediatricianTypes.add(july);
+            pediatricianTypes.add(aug);
+            pediatricianTypes.add(sept);
+            pediatricianTypes.add(oct);
+            pediatricianTypes.add(nov);
+            pediatricianTypes.add(dec);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -679,6 +593,98 @@ public class GenerateStatsSQL {
         return pediatricianTypes;
 
     }
+
+    public static ArrayList<ArrayList<Double>> getNumOfPatientType()
+    {
+        ArrayList<ArrayList<Double>> patientType = new ArrayList<ArrayList<Double>>();
+        ArrayList<Double> pediatricianType = new ArrayList<Double>();
+        ArrayList<Double> generalCareType = new ArrayList<Double>();
+        ArrayList<Double> emergencyType = new ArrayList<Double>();
+        ArrayList<Double> neurologistType = new ArrayList<Double>();
+        ArrayList<Double> xrayType = new ArrayList<Double>();
+
+        String listSpecialty = "";
+        try {
+
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+            List<String> myList = new ArrayList<String>();
+            preparedStatement = connect.prepareStatement("SELECT specialty FROM staff WHERE occupation = 'Doctor';");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                listSpecialty = resultSet.getString("specialty");
+                if (myList.contains(listSpecialty)) {
+                    //do nothing
+
+                } else {
+                    myList.add(listSpecialty);
+                    //System.out.println(listSpecialty);
+                }
+            }
+
+            for (int j = 0; j < myList.size(); j++) {
+                String specialty = myList.get(j);
+                ArrayList<Appointment> doctorSpecialty = DoctorSQL.getListSpecialtyPatient(specialty);
+                int arraySize = doctorSpecialty.size();
+                if (specialty.equals("Pediatrician")) {
+
+                    pediatricianType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+
+                }
+
+                else if(specialty.equals("GeneralCare"))
+                {
+                    generalCareType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+
+                }
+
+                else if(specialty.equals("Neurologist"))
+                {
+                    neurologistType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+
+                }
+
+                else if(specialty.equals("X-Ray"))
+                {
+                    xrayType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+
+                }
+
+                else if(specialty.equals("Emergency"))
+                {
+                    emergencyType = (ArrayList<Double>)countingPatientTypes(doctorSpecialty).clone();
+
+                }
+
+            }
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            patientType = null;
+
+        } finally {
+            close();
+        }
+
+        patientType.add(pediatricianType);
+        patientType.add(generalCareType);
+        patientType.add(xrayType);
+        patientType.add(emergencyType);
+        patientType.add(neurologistType);
+
+        return patientType;
+
+    }
+
 
 
     public static String getDate(String dateAndTime) {
