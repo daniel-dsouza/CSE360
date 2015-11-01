@@ -1,6 +1,6 @@
 package org.teamone.core.users;
 
-import org.teamone.core.labs.LabTest;
+import org.teamone.core.labs.LabReport;
 import org.teamone.core.prescriptions.Prescription;
 
 import java.util.LinkedHashMap;
@@ -15,7 +15,7 @@ public class Patient extends Person {
     public HealthConditions healthConditions;
     public MedicalHistory medicalHistory;
     public Prescription prescription;
-    public LabTest labReports;
+    public LabReport labReports;
     public Patient() {
         super();
         patientInformation = new PatientInformation();
@@ -141,11 +141,11 @@ public class Patient extends Person {
         patientInformation.splitAddress(add);
     }
 
-    public LabTest getLabReports() {
+    public LabReport getLabReports() {
         return labReports;
     }
 
-    public void setLabReports(LabTest labReports) {
+    public void setLabReports(LabReport labReports) {
         this.labReports = labReports;
     }
 

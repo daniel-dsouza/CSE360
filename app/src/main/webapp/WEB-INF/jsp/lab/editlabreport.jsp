@@ -36,7 +36,7 @@
     <div class="row hiddenonreadonly">
       <div class="col-lg-12">
         <br/>
-        <input type="submit" class="btn btn-info" value="${createoreditorview} Lab Test">
+        <input type="submit" class="btn btn-info" value="${createoreditorview} Lab Report">
       </div>
     </div>
 

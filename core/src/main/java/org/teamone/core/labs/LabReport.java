@@ -11,7 +11,7 @@ import java.util.TreeMap;
 /**
  * Created by daniel on 10/11/15.
  */
-public class LabTest {
+public class LabReport {
     private int requestionID;
     private Patient patient;
 
@@ -21,12 +21,12 @@ public class LabTest {
     private Map<String, String> labTest;
     private Map<String, String> labTestNames;
 
-    public LabTest() {
+    public LabReport() {
         this(0, "");
         this.requestionID = 0; //TODO: make this a random number.
     }
 
-    public LabTest(int requestionID, String data) {
+    public LabReport(int requestionID, String data) {
         this.requestionID = requestionID;
         patient = new Patient();
         person = new Person();

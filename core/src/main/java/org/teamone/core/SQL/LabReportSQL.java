@@ -1,6 +1,6 @@
 package org.teamone.core.SQL;
 
-import org.teamone.core.labs.LabTest;
+import org.teamone.core.labs.LabReport;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by Ryan on 10/22/2015.
  * ONLY LAB TESTS OBJECTS OR ARRAYLISTS
  */
-public class LabTestSQL {
+public class LabReportSQL {
     private static Connection connect = null;
     private static Statement statement = null;
     private static PreparedStatement preparedStatement = null;
@@ -20,10 +20,10 @@ public class LabTestSQL {
 
     /**
      *
-     * @param LabTest with valid RequestionID and patient ID
+     * @param readMe with valid RequestionID and patient ID
      * @return
      */
-    public static LabTest updateLabTest(LabTest readMe) {
+    public static LabReport updateLabReport(LabReport readMe) {
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -64,10 +64,10 @@ public class LabTestSQL {
 
     /**
      *
-     * @param LabTest: Valid LabTest with a requestionID
-     * @return LabTest: returns a LabTest object
+     * @param readMe: Valid LabReport with a requestionID
+     * @return LabReport: returns a LabReport object
      */
-    public static LabTest viewLabTestByRequestion(LabTest readMe) {
+    public static LabReport viewLabReportByRequestion(LabReport readMe) {
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -115,11 +115,11 @@ public class LabTestSQL {
 
 
     /**
-     * Gets everything from table labtests
-     * @return ArrayList: list of LabTests
+     * Gets everything from table labReports
+     * @return ArrayList: list of LabReports
      */
-    public static ArrayList<LabTest> getAllLabTests() {
-        ArrayList<LabTest> LabTestList = new ArrayList<LabTest>();
+    public static ArrayList<LabReport> getAllLabReports() {
+        ArrayList<LabReport> labReportList = new ArrayList<LabReport>();
 
         try {
             // This will load the MySQL driver, each DB has its own driver
@@ -136,31 +136,31 @@ public class LabTestSQL {
             preparedStatement.setString(1, "labReport");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                LabTest new1 = new LabTest();
+                LabReport new1 = new LabReport();
                 new1.setRequestionID(resultSet.getInt("serialNumber"));
                 new1.toMapObj(resultSet.getString("labReport"));
                 Patient pat = new Patient();
                 pat.setUserID(resultSet.getInt("patientID"));
                 Staff sta = new Staff();
                 sta.setUserID(resultSet.getInt("staffID"));
-                LabTestList.add(new1);
+                labReportList.add(new1);
             }
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
-            LabTestList = null;
+            labReportList = null;
         } finally {
             close();
         }
-        return LabTestList;
+        return labReportList;
 
     }
     /**
      *
-     * @param LabTest: LabTest with valid patient ID
-     * @return LabTest object
+     * @param readMe: LabReport with valid patient ID
+     * @return LabReport object
      */
-    public static LabTest viewLabTest(LabTest readMe) {
+    public static LabReport viewLabReport(LabReport readMe) {
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -203,13 +203,13 @@ public class LabTestSQL {
     }
     /**
      *
-     * @param Patient p: given a patient with a valid patientID.
+     * @param  p: given a patient with a valid patientID.
      * @return ArrayList of LabTests corresponding to Patient
      */
 
-    public static ArrayList<LabTest> getListLabTestByPatient(Patient p) {
+    public static ArrayList<LabReport> getListLabReportByPatient(Patient p) {
 
-        ArrayList<LabTest> LabTestList = new ArrayList<LabTest>();
+        ArrayList<LabReport> labReportList = new ArrayList<LabReport>();
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
@@ -222,22 +222,22 @@ public class LabTestSQL {
             preparedStatement.setString(2, "labReport");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                LabTest a = new LabTest();
+                LabReport a = new LabReport();
                 Patient pat = new Patient();
                 pat.setUserID(patID);
                 a.setDate(resultSet.getString("date"));
                 a.toMapObj(resultSet.getString("labReport"));
                 a.setRequestionID(resultSet.getInt("serialNumber"));
-                LabTestList.add(a);
+                labReportList.add(a);
             }
 
         } catch (Exception e) {
             System.out.println(e);
-            LabTestList = null;
+            labReportList = null;
         } finally {
             close();
         }
-        return LabTestList;
+        return labReportList;
     }
 
 

@@ -9,7 +9,7 @@ public class GenerateStatsTest {
 
 
     @Test
-    public void updateHC(){
+    public void GenerateStats(){
 
         /*GenerateStatsSQL.getNumOfPatientType();
         System.out.println("Number of Alerts within this Month: " + GenerateStatsSQL.getNumOfAlerts());

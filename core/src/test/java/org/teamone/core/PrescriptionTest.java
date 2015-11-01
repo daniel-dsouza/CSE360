@@ -2,7 +2,7 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.DoctorSQL;
+import org.teamone.core.SQL.PrescriptionSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Patient;
@@ -34,7 +34,7 @@ public class PrescriptionTest {
     public void addPrescrition() {
         System.out.println("\nTest========adding prescription");
 
-        boolean check = DoctorSQL.addPrescription(add);
+        boolean check = PrescriptionSQL.addPrescription(add);
         assertTrue("Adding prescription failed ", check);
         System.out.println("\nUpdate successful");
 
@@ -47,7 +47,7 @@ public class PrescriptionTest {
         System.out.println("\nTest========get a list of all prescriptions by Patient ID");
         Patient new1 = new Patient();
         new1.setUserID(1002);
-        List<Prescription> test1 = DoctorSQL.getListPrescription(new1);
+        List<Prescription> test1 = PrescriptionSQL.getListPrescription(new1);
         assertTrue("No prescriptions by patient ID", !test1.isEmpty());
         System.out.println("\nView successful");
         for (Prescription tempAp : test1) {
@@ -65,7 +65,7 @@ public class PrescriptionTest {
     public void getAll() {
 
         System.out.println("\nTest========get a list of all prescriptions ");
-        List<Prescription> test1 = DoctorSQL.getAllPrescriptions();
+        List<Prescription> test1 = PrescriptionSQL.getAllPrescriptions();
         assertTrue("No prescriptions by patient ID", !test1.isEmpty());
         System.out.println("\nView successful");
         for (Prescription tempAp : test1) {
@@ -102,7 +102,7 @@ public class PrescriptionTest {
         System.out.println("\nTest========get one prescription by prescription ID");
         Prescription new2 = new Prescription();
         new2.setPrescriptionID(2);
-        Prescription test1 = DoctorSQL.viewPrescriptonByID(new2);
+        Prescription test1 = PrescriptionSQL.viewPrescriptonByID(new2);
         assertTrue("No prescription by prescription ID", test1 != null);
         System.out.println("\nView successful");
         System.out.println("Time:\t" + test1.getStrDateAndTime());

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
-import org.teamone.core.SQL.DoctorSQL;
+import org.teamone.core.SQL.PrescriptionSQL;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Doctor;
 import org.teamone.core.users.HSP;
@@ -36,7 +36,8 @@ public class PrescriptionController {
             return "redirect:/select_patient";
 
 
-        List prescriptionList = DoctorSQL.getListPrescription(user.getPatient());
+        List prescriptionList = PrescriptionSQL.getListPrescription(user.getPatient());
+        model.put("user",user);
         model.put("prescriptions",prescriptionList);
 
         return "prescription/editprescription";
@@ -84,7 +85,7 @@ public class PrescriptionController {
         attempt.setPatientID(user.getPatient().getUserID());
         attempt.setDateAndTime(date);
 
-        DoctorSQL.addPrescription(attempt);
+        PrescriptionSQL.addPrescription(attempt);
 
         return "redirect:/user/" + user.person.getUserID() + "/prescription";
     }
