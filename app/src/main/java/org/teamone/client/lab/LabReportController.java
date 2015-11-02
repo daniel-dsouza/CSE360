@@ -67,6 +67,37 @@ public class LabReportController {
         model.put("readonly", true);
         return "lab/editlabreport";
     }
+
+    @RequestMapping(value="/{reportID}/print", method= RequestMethod.GET)
+    public String printView (Map<String, Object> model,
+                           @PathVariable String reportID,
+                           @ModelAttribute("user") User user) {
+
+        if (user.getPerson() == null)
+            return "redirect:/login";
+
+        int id = 0;
+        String testString = "";
+        try {
+            id = Integer.parseInt(reportID);
+        } catch (Exception e) { e.printStackTrace(); }
+
+        LabReport testID = new LabReport();
+        testID.setRequestionID(id);
+        LabReport viewReport = LabReportSQL.viewLabReportByRequestion(testID); //get the labrequest.
+
+        for(String test : viewReport.getlabTest().keySet()) {
+            if (viewReport.getlabTest().get(test).equals("false")) {
+                viewReport.getlabTestNames().remove(test);
+            }
+        }
+
+        model.put("report", viewReport);
+        model.put("createoreditorview", "Print");
+        model.put("readonly", true);
+        return "lab/editlabreport";
+    }
+
     @RequestMapping(value="/view_list/{patientID}", method= RequestMethod.GET)
     public String viewGetPatient(Map<String, Object> model,
                            @PathVariable String patientID,
