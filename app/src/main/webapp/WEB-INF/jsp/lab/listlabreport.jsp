@@ -25,7 +25,7 @@
                     <c:forEach var="test" items="${list}">
                         <div class="col-lg-12" style="border-bottom-style: solid; border-width: 1px">
                             <div style="float: left; padding: 5px 5px 5px"> #${test.requestionID}</div>
-                            <div class="btn-group" style="float: right">
+                            <div class="btn-group" style="float: right; padding: 5px 5px 5px">
                                 <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/view"
                                    class="btn btn-info" role="button">View</a>
                                 <c:if test="${user.person.occupation == 'labstaff'}">
