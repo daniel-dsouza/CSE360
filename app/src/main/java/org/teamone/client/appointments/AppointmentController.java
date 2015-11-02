@@ -72,7 +72,7 @@ public class AppointmentController {
         Appointment appt = new Appointment();
 
         appt.setAppointmentID(appointmentID);
-        Appointment appointment = AppointmentSQL.viewAppointmentByApptID(appt); //TODO: method needs to return just one appt in backend
+        Appointment appointment = AppointmentSQL.viewAppointmentByApptID(appt);
 
         //TODO: add extra stuff here.
         model.put("appointment", appointment);

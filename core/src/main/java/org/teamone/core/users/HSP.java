@@ -10,8 +10,7 @@ public class HSP extends Staff {
         super();
         agentActions = new LinkedHashMap<String, String>() {};
         agentActions.put("Select Patient", "select_patient");
-        String registration ="user/" + getUserID() + "/registration/";//TODO: Almost working. need from session userID
-        agentActions.put("Register Patient", registration); //TODO: assign this
-        agentActions.put("Generate Statistics", "stats"); //TODO: assign this
+        agentActions.put("Register Patient", "registration/");
+        agentActions.put("Generate Statistics", "stats");
         }
 }

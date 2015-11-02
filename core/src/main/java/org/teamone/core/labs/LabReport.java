@@ -23,7 +23,7 @@ public class LabReport {
 
     public LabReport() {
         this(0, "");
-        this.requestionID = 0; //TODO: make this a random number.
+        this.requestionID = 0;
     }
 
     public LabReport(int requestionID, String data) {

@@ -32,7 +32,7 @@ public class LabTestRequest {
 
     public LabTestRequest() {
         this(0, "", null, null);
-        this.requestionID = 0; //TODO: make this a random number.
+        this.requestionID = 0;
      }
 
     @Override

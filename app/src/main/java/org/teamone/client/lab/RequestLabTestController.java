@@ -103,6 +103,6 @@ public class RequestLabTestController {
         if(hasOne) {//if atleast one in here, request. otherwise just drop redirect.
             LabRequestSQL.addLabRequest(request);
         }
-        return "redirect:/select_patient"; //TODO: send back to Select Patient.
+        return "redirect:/select_patient";
     }
 }

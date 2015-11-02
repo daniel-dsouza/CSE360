@@ -23,6 +23,7 @@ public class Patient extends Person {
         medicalHistory = new MedicalHistory();
         agentActions = new LinkedHashMap<String, String>();
         agentActions.put("Update Personal Information", "personal");
+        agentActions.put("Update Health Conditions", "healthconditions");
         agentActions.put("Schedule an Appointment", "appointment/new");
         agentActions.put("View Appointments", "appointment/list");
 

@@ -45,7 +45,7 @@ public class LoginController {
         pAttempt.setPassword(attempt.getPassword());
         Person pResult = LoginSQL.authenticate(pAttempt);
 
-        if (pResult != null) { //TODO:remove backdoor
+        if (pResult != null) {
             System.out.println("Authentication succeeded");
             user.person = pResult;
             return "redirect:/user/" + user.person.getUserID();
