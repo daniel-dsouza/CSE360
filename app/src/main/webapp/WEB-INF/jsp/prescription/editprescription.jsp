@@ -33,29 +33,28 @@
     </jsp:attribute>
     <jsp:body>
         <h1 style="text-align: center;">
-            Prescriptions for <c:out value="${user.patient.firstName}"/> <c:out value="${user.patient.lastName}"/>
+            Prescriptions <!-- Want to add Patients name here -->
         </h1>
         <br/>
         <div class="container">
             <c:forEach var="prescript" items="${prescriptions}">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         Prescription Type:
                             ${prescript.prescriptionType}
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         Quantity:
                             ${prescript.quantity}
                     </div>
-                    <div class="col-lg-4">
-                        Date Prescribed:
-                            ${prescript.strDateAndTime}
+                    <div style="float: right;">     <!-- don't like how this messed with my boxes, but don't feel up to fixing -->
+                        <a href="${pageContext.request.contextPath}/prescription/${prescript.prescriptionID}/print" class="btn btn-info" role="button">Print Page</a>
                     </div>
                 </div>
             </c:forEach>
             <br/>
             <br/>
-            <form:form method="post" commandName="gotoCreate" class="hiddenonreadonly">
+            <form:form method="post" commandName="gotoCreate" class="hiddenonreadonly" cssStyle="text-align: center">
                 <input type="submit" class="btn btn-info" value="Create Prescription">
             </form:form>
         </div>
