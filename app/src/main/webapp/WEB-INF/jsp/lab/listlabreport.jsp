@@ -30,10 +30,10 @@
                                    class="btn btn-info" role="button">View</a>
                             </div>
                             <c:if test="${user.person.occupation == 'labstaff'}">
-                            <div style="float: right; padding: 5px 5px 5px">
-                                <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/edit"
-                                   class="btn btn-info" role="button">Edit</a>
-                            </div>
+                                <div style="float: right; padding: 5px 5px 5px">
+                                    <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/edit"
+                                       class="btn btn-info" role="button">Edit</a>
+                                </div>
                             </c:if>
                         </div>
                     </c:forEach>

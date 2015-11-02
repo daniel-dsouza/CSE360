@@ -83,13 +83,26 @@ public class RequestLabTestController {
                               @ModelAttribute("request") LabTestRequest request,
                               @ModelAttribute("user") User user) {
 
-        request.setRequestionID(0); //TODO: remove this once select person is complete
+
         //Patient test = new Patient();
         //test.setUserID(1002);
         request.setPatient(user.getPatient());
         request.setPerson(user.getPerson());
+        boolean hasOne = true;
 
-        LabRequestSQL.addLabRequest(request);
+        Map<String,Boolean> MapRequest = request.getLabTestRequest();
+
+        for (Map.Entry<String, Boolean> entry : MapRequest.entrySet()) {
+            if(entry.getValue()) {
+                hasOne = true;
+                break;//if one is found to be true, submit request
+            }
+            else
+                hasOne = false;
+        }
+        if(hasOne) {//if atleast one in here, request. otherwise just drop redirect.
+            LabRequestSQL.addLabRequest(request);
+        }
         return "redirect:/select_patient"; //TODO: send back to Select Patient.
     }
 }
