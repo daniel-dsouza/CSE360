@@ -19,7 +19,7 @@ public class LabRequestSQL {
 
     /**
      *
-     * @param LabtestRequest test: LabTestRequest to be added.
+     * @param test: LabTestRequest to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
     public static Boolean addLabRequest(LabTestRequest test) {

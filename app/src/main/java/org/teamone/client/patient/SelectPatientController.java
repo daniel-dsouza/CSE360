@@ -57,6 +57,8 @@ public class SelectPatientController {
             return "redirect:/request_medicalhistory/medicalhistory";
         } else if (action.equals("e_prescribe")) {
             return "redirect:/request_prescriptions/prescription";
+        } else if (action.equals("view_lab_report")) {
+            return "redirect:/request_report/lab_report/view_list/" + user.getPatient().getUserID();
         } else if (action.equals("edit_info")){
             return "redirect:/request_info/personal";
         } else {
@@ -82,6 +84,7 @@ public class SelectPatientController {
         if (user.getPerson() instanceof Doctor) {
             actions.put("e_prescribe", "E-Prescribe Prescription");
             actions.put("lab_test", "E-Prescribe Lab Tests");
+            actions.put("view_lab_report", "View Lab Reports");
         }
 
         if (user.getPerson() instanceof HSP) {

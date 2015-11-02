@@ -43,7 +43,7 @@ public class PrescriptionController {
 
         List prescriptionList = PrescriptionSQL.getListPrescription(user.getPatient());
         model.put("prescriptions",prescriptionList);
-
+        model.put("user",user);
         return "prescription/editprescription";
     }
 

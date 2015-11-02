@@ -140,6 +140,14 @@ public class AppointmentController {
                                   @ModelAttribute User user) {
         System.out.println("edit an appointment");
 
+        Appointment appt = new Appointment();
+
+        appt.setAppointmentID(appointmentID);
+        Appointment current = AppointmentSQL.viewAppointmentByApptID(appt);
+
+        //TODO: add extra stuff here.
+        model.put("appointment", current);
+
         Map<String, String> speclist = new LinkedHashMap<String, String>(); //this is an example of a model attribute not in the appointment
         speclist.put("List", "List of Specialities");
         speclist.put("Emergency", "Emergency Doctor");//Internal value, user interface value
@@ -162,13 +170,7 @@ public class AppointmentController {
         model.put("reason", reason);
 
 
-        Appointment appt = new Appointment();
 
-        appt.setAppointmentID(appointmentID);
-        Appointment appointment = AppointmentSQL.viewAppointmentByApptID(appt);
-
-        //TODO: add extra stuff here.
-        model.put("appointment", appointment);
 
         return "appointment/PatientSchedAppt"; //return the view with linked model
 
