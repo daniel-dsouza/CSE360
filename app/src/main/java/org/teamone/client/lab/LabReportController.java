@@ -34,6 +34,7 @@ public class LabReportController {
             return "redirect:/user/" + user.person.getUserID();
         List labReportsList = LabReportSQL.getAllLabReports();
         model.put("list", labReportsList);
+        model.put("user", user);
         return "lab/listlabreport";
     }
 
@@ -84,8 +85,8 @@ public class LabReportController {
         testID.setUserID(id);
         List labReportsList = LabReportSQL.getListLabReportByPatient(testID); //get the labrequest.
         model.put("list", labReportsList);
-
-        return "lab/viewlistlabreport";
+        model.put("user", user);
+        return "lab/listlabreport";
     }
 
     @RequestMapping(value="/{reportID}/edit", method= RequestMethod.GET)
