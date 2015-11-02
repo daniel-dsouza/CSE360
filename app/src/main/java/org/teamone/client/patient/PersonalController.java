@@ -19,8 +19,6 @@ import java.util.Map;
 @RequestMapping(value = "/**/personal")
 public class PersonalController {
 
-
-    //TODO add a button so patients can access this function
     @RequestMapping(method = RequestMethod.GET)
     public String editPersonalInformation(Map<String, Object> model,
                                           @ModelAttribute("user") User user) {

@@ -22,8 +22,6 @@ import java.util.Map;
 @RequestMapping(value = "/**/healthconditions")
 public class HealthConditionsController {
 
-
-    //TODO add a button so patients can access this function
     @RequestMapping(method = RequestMethod.GET)
     public String viewHeathConditions(Map<String, Object> model,
                                       @ModelAttribute("user") User user)
