@@ -27,7 +27,7 @@
 
             $( document ).ready(function() {
                 setRandomColors();
-                setInterval("setRandomColors()", 50);
+                //setInterval("setRandomColors()", 50);
             });
         </script>
     </jsp:attribute>
