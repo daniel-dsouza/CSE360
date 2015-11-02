@@ -8,7 +8,7 @@
 
 <t:template>
   <jsp:body>
-    <div class="container" style="text-align: center">
+    <div class="container" style="text-align: center" id="section-to-print">
       <h1>Prescription ${prescription.prescriptionID}</h1>
       <div class="box" style="margin-left: 33%">
         <h3 style="text-align: left">Prescribing Doctor:<span style="margin-right: 15px"></span>${doc.firstName} ${doc.lastName}</h3>
@@ -19,7 +19,33 @@
       </div>
     </div>
     <div class="container" style="text-align: center">
-
+      <div class="button_holder">
+        <div class="row" style="column-count: 2; -webkit-column-count: 2; -moz-column-count: 2;">
+          <div style="text-align: right">
+            <input onclick="print()" value="Print" class="btn btn-primary btn-md" readonly/>
+          </div>
+          <form:form method="post" commandName="gotoPrescribe" cssStyle="text-align: left">
+            <input type="submit" class="btn btn-info" value="OK">
+          </form:form>
+        </div>
+      </div>
     </div>
   </jsp:body>
 </t:template>
+
+<!-- http://stackoverflow.com/a/2618980 -->
+<style>
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    div#section-to-print * {
+      visibility: visible;
+    }
+    div#section-to-print {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+</style>
