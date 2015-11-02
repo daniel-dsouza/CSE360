@@ -11,24 +11,27 @@
   <jsp:body>
     <div class="container">
       <!-- header -->
-      <div class="row">
+      <div class="row" style="text-align: center;">
         <h1>Create Prescription</h1>
       </div>
 
       <!-- form -->
       <form:form action="create" method="post" commandName="userInput">
-        <div class="row">
-          <label id="prescriptionType" >Prescription Type: </label>
-          <form:input class='form-control' type='text' path="prescriptionType" id="prescriptionType" required="true"/>
+        <div class="row" style="margin: 30px; text-align: center">
+          <label style="column-count: 2; -webkit-column-count: 2; -moz-column-count: 2; text-align: right;"> <!-- http://www.w3schools.com/cssref/css3_pr_column-count.asp -->
+            Prescription Type:
+              <form:input class='form-control' type='text' path="prescriptionType" id="prescriptionType" required="true"/>
+          </label>
           <br/>
+          <label style="column-count: 2; -webkit-column-count: 2; -moz-column-count: 2; text-align: right;">
+            Quantity:
+              <form:input class='form-control' type='text' path="quantity" id="quantity" required="true"/>
+          </label>
         </div>
-        <div class="row">
-          <label id="quantity">Quantity: </label>
-          <form:input class='form-control' type='text' path="quantity" id="quantity" required="true"/>
-          <br/>
-        </div>
-        <div class="row">
-          <input type="submit" class="btn btn-info" value="Prescribe">
+        <div class="button_holder" style="text-align: center;"> <!-- Cause an error -->
+          <span class="group-btn">
+            <input type="submit" value="Prescribe" class="btn btn-primary btn-md"/>
+          </span>
         </div>
       </form:form>
     </div>
