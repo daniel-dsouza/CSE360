@@ -25,16 +25,16 @@
                     <c:forEach var="test" items="${list}">
                         <div class="col-lg-12" style="border-bottom-style: solid; border-width: 1px">
                             <div style="float: left; padding: 5px 5px 5px"> #${test.requestionID}</div>
-                            <div style="float: right; padding: 5px 5px 5px">
+                            <div class="btn-group" style="float: right; padding: 5px 5px 5px">
                                 <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/view"
                                    class="btn btn-info" role="button">View</a>
-                            </div>
-                            <c:if test="${user.person.occupation == 'labstaff'}">
-                                <div style="float: right; padding: 5px 5px 5px">
+                                <c:if test="${user.person.occupation == 'labstaff'}">
                                     <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/edit"
                                        class="btn btn-info" role="button">Edit</a>
-                                </div>
-                            </c:if>
+                                </c:if>
+                                <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/print"
+                                   class="btn btn-info" role="button">Print</a>
+                            </div>
                         </div>
                     </c:forEach>
                 </c:if>

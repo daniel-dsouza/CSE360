@@ -19,11 +19,9 @@
                 <c:forEach var="request" items="${list}">
                     <div class="col-lg-12" style="border-bottom-style: solid; border-width: 1px">
                         <div style="float: left; padding: 5px 5px 5px"> #${request.requestionID}</div>
-                        <div style="float: right; padding: 5px 5px 5px">
+                        <div class="btn-group" style="float: right; padding: 5px 5px 5px">
                             <a href="${pageContext.request.contextPath}/request_test/${request.requestionID}/view"
                                class="btn btn-info" role="button">View</a>
-                        </div>
-                        <div style="float: right; padding: 5px 5px 5px">
                             <a href="${pageContext.request.contextPath}/lab_report/${request.requestionID}/create"
                                class="btn btn-info" role="button">Create</a>
                         </div>
