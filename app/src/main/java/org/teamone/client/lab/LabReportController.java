@@ -9,6 +9,7 @@ import org.teamone.core.SQL.LabRequestSQL;
 import org.teamone.core.labs.LabReport;
 import org.teamone.core.labs.LabTestRequest;
 import org.teamone.core.users.LabStaff;
+import org.teamone.core.users.Patient;
 
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,27 @@ public class LabReportController {
         model.put("createoreditorview", "View");
         model.put("readonly", true);
         return "lab/editlabreport";
+    }
+    @RequestMapping(value="/view_list/{patientID}", method= RequestMethod.GET)
+    public String viewGetPatient(Map<String, Object> model,
+                           @PathVariable String patientID,
+                           @ModelAttribute("user") User user) {
+
+        if (user.getPerson() == null)
+            return "redirect:/login";
+
+        int id = 0;
+        String testString = "";
+        try {
+            id = Integer.parseInt(patientID);
+        } catch (Exception e) { e.printStackTrace(); }
+
+        Patient testID = new Patient();
+        testID.setUserID(id);
+        List labReportsList = LabReportSQL.getListLabReportByPatient(testID); //get the labrequest.
+        model.put("list", labReportsList);
+
+        return "lab/viewlistlabreport";
     }
 
     @RequestMapping(value="/{reportID}/edit", method= RequestMethod.GET)
