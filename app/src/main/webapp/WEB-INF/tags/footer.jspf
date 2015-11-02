@@ -1,5 +1,5 @@
 <div class="container-fluid bg-1 text-center" style="background-color: rgb(0, 255, 201)">
     <h4>Created by Group 1 of CSE 360 Fall 2015</h4>
     <h4>We Are CIDSE Students</h4>
-    <h7><c:out value="${user.person.occupation}"/></h7>
+    <h6><c:out value="${user.person.occupation}"/></h6>
 </div>
