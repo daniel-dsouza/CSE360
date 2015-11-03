@@ -23,11 +23,11 @@
     <jsp:body>
         <div class="container">
             <h2>Create an Appointment</h2>
-            <form:form method="post" commandName="appointment">
+            <form:form method="post" commandName="appointment" onsubmit="return getDate()">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="datepaginator" id="paginator"></div>
-                        <form:input style= "display: none" id="day" size="50%" path="date" />
+                        <form:input style= "display: none" id="day" size="50%" path="date" /><!-- vulnerability. Inspect element and turn delete none. inject symbols to break SQL. Fixed by using getDate()-->
                         <br>
 
                         <div class="form-group">
