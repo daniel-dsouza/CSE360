@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
 import org.teamone.core.SQL.HspSQL;
 import org.teamone.core.SQL.PatientSQL;
+import org.teamone.core.users.HSP;
 import org.teamone.core.users.Patient;
 
 import java.util.Map;
@@ -19,8 +20,12 @@ public class RegistrationController {
 
     //The web page that leads to this must direct to registration/, registration will return a 404 error
     @RequestMapping(value = "/**/registration/", method = RequestMethod.GET)
-    public String createPatient(Map<String, Object> model) {
-
+    public String createPatient(Map<String, Object> model,
+                                @ModelAttribute User user) {
+        if (user.getPerson() == null )
+            return "redirect:/login";
+        else if (!(user.getPerson() instanceof HSP))//only HSP
+            return "redirect:/user/" + user.person.getUserID();
         Patient attempt = new Patient();
         model.put("userInput", attempt);
 

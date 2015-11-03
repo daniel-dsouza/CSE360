@@ -26,6 +26,8 @@ public class AppointmentListController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String findPatients(Map<String, Object> model, @ModelAttribute User user) {
+        if (user.getPerson() == null )
+            return "redirect:/login";
         List<Appointment> patientList; //Hashing strikes again.
         System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
         Appointment temp = new Appointment();
