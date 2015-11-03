@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.teamone.core.SQL.DoctorSQL;
+import org.teamone.core.SQL.PrescriptionSQL;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Patient;
 
@@ -32,7 +33,7 @@ public class NavbarAttributes {
         model.put("colors", false);
 
         if (user.getPerson() instanceof Patient) {
-            List<Prescription> list = DoctorSQL.getListPrescription( (Patient) user.getPerson());
+            List<Prescription> list = PrescriptionSQL.getListPrescription((Patient) user.getPerson());
             for (Prescription p : list) {
                 if (p.getPrescriptionType().equals("LSD")) {
                     model.put("colors", true);
