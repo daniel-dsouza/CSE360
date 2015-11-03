@@ -17,9 +17,7 @@ import org.teamone.core.users.LabStaff;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 //import org.teamone.client.generic.User;
 
@@ -71,7 +69,7 @@ public class AppointmentController {
     public String viewAppointment(Map<String, Object> model,
                                   @PathVariable int appointmentID,
                                   @ModelAttribute User user) {
-        if (user.getPerson() == null )
+        if (user.getPerson() == null)
             return "redirect:/login";
         System.out.println("view an appointment");
         Appointment appt = new Appointment();
@@ -89,7 +87,7 @@ public class AppointmentController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String viewUserHome(Map<String, Object> model,
                                @ModelAttribute User user) {
-        if (user.getPerson() == null )
+        if (user.getPerson() == null)
             return "redirect:/login";
         Appointment appointment1 = new Appointment(); //this is an example of a model attribute
 
@@ -145,7 +143,7 @@ public class AppointmentController {
     public String editAppointment(Map<String, Object> model,
                                   @PathVariable int appointmentID,
                                   @ModelAttribute User user) {
-        if (user.getPerson() == null )
+        if (user.getPerson() == null)
             return "redirect:/login";
         System.out.println("edit an appointment");
 
@@ -207,7 +205,7 @@ public class AppointmentController {
     @RequestMapping(value = "/createappointment", method = RequestMethod.GET)
     public String createAppointment(Map<String, Object> model,
                                     @ModelAttribute User user) {
-        if (user.getPerson() == null )
+        if (user.getPerson() == null)
             return "redirect:/login";
         else if (user.getPerson() instanceof LabStaff || user.getPerson() instanceof Patient)
             return "redirect:/user/" + user.person.getUserID();
@@ -226,6 +224,7 @@ public class AppointmentController {
     public String createAppointmentPost(Map<String, Object> model,
                                         @ModelAttribute("appointment") Appointment appt,
                                         @ModelAttribute("user") User user) { //this tells the method that there will be a field named appointment in the model
+
         if (user.getPerson() instanceof Doctor)
             appt.setDoctorID(user.getPerson().getUserID());//Doctors can not change the id.
         else
@@ -234,9 +233,20 @@ public class AppointmentController {
         System.out.println("Created appointment Date: " + appt.getDate());
         //System.out.println("Time: " + appt.getTime());
 
-        AppointmentSQL.createAppointment(appt);//Date time and doctor id
+        if (AppointmentSQL.createAppointment(appt)) //Date time and doctor id
+        {
+            return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
+        } else {
+            appt.setFailedToInsert(1);
+            model.put("appointment", appt);
 
+            Doctor failed = new Doctor();
+            failed.setUserID(appt.getDoctorID());
+            List occupiedTimes = AppointmentSQL.getOccupiedTimes(failed);
 
-        return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
+            Collections.sort(occupiedTimes, Appointment.dateCompare);
+            model.put("list", occupiedTimes);
+            return "appointment/createAppointment"; //failed to insert
+        }
     }
 }

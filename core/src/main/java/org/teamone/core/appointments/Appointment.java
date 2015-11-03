@@ -4,10 +4,12 @@ package org.teamone.core.appointments;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
+import java.util.Comparator;
+
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment>{
 
     private int appointmentID;
     private String date;//date is 01/01/2001
@@ -16,6 +18,7 @@ public class Appointment {
     private Staff doctor;
     private String reason;
     private Patient patient;
+    private int failedToInsert;//1 for failed to insert. If the insertion was successful, there is no need to set this value
 
     public Appointment()
     {
@@ -112,5 +115,58 @@ public class Appointment {
     public void setTempID(String tempID) {
         this.tempID = tempID;
     }
+
+    public int getFailedToInsert() {
+        return failedToInsert;
+    }
+
+    public void setFailedToInsert(int failedToInsert) {
+        this.failedToInsert = failedToInsert;
+    }
+
+    //http://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/
+    public int compareTo(Appointment compare) {
+
+        String compareDate = ((Appointment) compare).getDate();
+
+        //ascending order
+        return this.date.compareTo(compareDate);
+
+        //descending order
+        //return compareQuantity - this.quantity;
+
+    }
+
+    //http://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/
+    public static Comparator<Appointment> dateCompare
+            = new Comparator<Appointment>() {
+
+        public int compare(Appointment first, Appointment second) {
+
+            String date1 = first.getDate();
+            String date2 = second.getDate();
+
+            //ascending order
+            return date1.compareTo(date2);
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+        //http://stackoverflow.com/questions/5805602/how-to-sort-list-of-objects-by-some-property
+        public int secondaryCompare(Appointment first, Appointment second) {
+
+            String time1 = first.getTime();
+            String time2 = second.getTime();
+
+            //ascending order
+            return time1.compareTo(time2);
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+
+    };
 }
+
+
 
