@@ -13,6 +13,10 @@
     <c:if test="${readonly}" >
         <script type="text/javascript" src="/js/readonly.js "></script>
     </c:if>
+    <c:if test="${colors}" >
+        <script type="text/javascript" src="/js/colors.js"></script>
+    </c:if>
+
     <jsp:invoke fragment="head"/>
 </head>
 
