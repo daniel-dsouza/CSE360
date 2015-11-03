@@ -24,10 +24,51 @@
         <div class="container">
             <h2>Create an Appointment</h2>
             <form:form method="post" commandName="appointment" onsubmit="return getDate()">
+                <c:if test="${appointment.failedToInsert == 1}">
+                    <script>
+                        alert("That time and day is occupied. Please select a different time or day."); </script>
+                    Occupied Times for Doctor: <c:out value="${appointment.doctorID}"/>
+                    <div style="overflow:scroll;height:80px;width:100%;overflow:auto">
+
+                        <table width="800" border="0" class="my-table">
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                            </tr>
+                            <tr>
+                                <c:forEach var="test" items="${list}" varStatus="loop">
+                                <c:if test="${not loop.first and loop.index % 4 == 0}">
+                            </tr>
+                            <!-- http://stackoverflow.com/questions/15551599/how-to-break-and-display-one-arraylist-into-multiple-table-columns -->
+                            <tr>
+                                </c:if>
+
+                                <td style="border-left: 1px solid cyan; padding: 5px;">
+                                    <c:out value="${test.date}"/>
+                                </td>
+                                <td >
+                                    <c:out value="${test.time}"/>
+                                </td>
+
+                                </c:forEach>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </c:if>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="datepaginator" id="paginator"></div>
                         <form:input style= "display: none" id="day" size="50%" path="date" /><!-- vulnerability. Inspect element and turn delete none. inject symbols to break SQL. Fixed by using getDate()-->
+
                         <br>
 
                         <div class="form-group">
@@ -55,11 +96,11 @@
 
                         <div class="row">
                             <c:if test="${user.person.occupation == 'hsp'}">
-                            <label class="col-md-4 control-label" for="docID">Doctor ID</label>
-                            <form:input id="docID" size='3' path="tempID"
-                                        class="readonly" type="number" min="501" max="511" step="1" maxlength="10"
-                                        autofocus="autofocus"
-                                        required="required"/>
+                                <label class="col-md-4 control-label" for="docID">Doctor ID</label>
+                                <form:input id="docID" size='3' path="tempID"
+                                            class="readonly" type="number" min="501" max="511" step="1" maxlength="10"
+                                            autofocus="autofocus"
+                                            required="required"/>
                             </c:if>
                         </div>
 

@@ -36,7 +36,12 @@ public class AppointmentSQL {
         int date1 = randomGenerator.nextInt((12 - 11) + 1) + 11;//month
         date += Integer.toString(date1) + "-";
         date1 = randomGenerator.nextInt((28 - 1) + 1) + 1;//day
+        if (date1 <= 9)//if generator is less than 9, add 0
+        {
+            date += "0";
+        }
         date += Integer.toString(date1);
+
         String time = "";
         //nextInt((max - min) + 1)
         int time1 = randomGenerator.nextInt((12 - 0) + 1);//12 hour clock
@@ -182,7 +187,7 @@ public class AppointmentSQL {
             preparedStatement.setInt(1, patID);
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Appointment new1 = new Appointment();
 
                 String date = resultSet.getString("date");
@@ -301,21 +306,30 @@ public class AppointmentSQL {
             String date = readMe.getDate();
             String time = readMe.getTime();
 
-            String insertApp = "INSERT INTO appointment "
-                    + "(doctorID, date, time) VALUES"
-                    + "(?,?,?);";
+
+            String selectApp = "SELECT serialNumber from appointment "
+                    + "where doctorID = ?  AND date = ? AND time = ?;";
             // PreparedStatements can use variables and are more efficient
-            preparedStatement = connect.prepareStatement(insertApp);
+            preparedStatement = connect.prepareStatement(selectApp);
             preparedStatement.setInt(1, docID);
             preparedStatement.setString(2, date);
             preparedStatement.setString(3, time);
-            checker = preparedStatement.executeUpdate();
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.first())//if Resultset does exist,
+            {
+                Result = false;//so there exists a time. return false. can not insert the same appointment
+            } else {
+                String insertApp = "INSERT INTO appointment "
+                        + "(doctorID, date, time) VALUES"
+                        + "(?,?,?);";
+                preparedStatement = connect.prepareStatement(insertApp);
+                preparedStatement.setInt(1, docID);
+                preparedStatement.setString(2, date);
+                preparedStatement.setString(3, time);
+                preparedStatement.executeUpdate();
 
-            if (checker == 0) {
-                Result = false;
-            } else
                 Result = true;
-
+            }
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
@@ -370,10 +384,11 @@ public class AppointmentSQL {
         }
         return result;
     }
+
     /**
      * NULLS out the patientID and reason for an appointment
      *
-     * @param oldID:  appointmentID to be nulled out
+     * @param oldID: appointmentID to be nulled out
      * @return Boolean
      */
     public static Boolean delAppointmentAppt(int oldID) {
@@ -560,6 +575,42 @@ public class AppointmentSQL {
         return apptList;
     }
 
+    /**
+     * Returns a list of Appointments already created
+     *
+     * @param doc: Doctor with staff ID filled in
+     * @return ArrayList: Arraylist of Appointment objects
+     */
+    public static ArrayList<Appointment> getOccupiedTimes(Doctor doc) {
+        ArrayList<Appointment> apptList = new ArrayList<Appointment>();
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            int docID = doc.getUserID();
+            preparedStatement = connect.prepareStatement("select date, time, serialNumber from appointment where doctorID  = ?");
+            preparedStatement.setInt(1, docID);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Appointment appt = new Appointment();
+                appt.setDate(rs.getString("date"));
+                appt.setTime(rs.getString("time"));
+                appt.setDoctorID(docID);
+                apptList.add(appt);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            apptList = null;
+        } finally {
+            close();
+        }
+        return apptList;
+
+    }
     /**
      * Returns a list of Appointments available to doctor
      *
