@@ -2,13 +2,16 @@ package org.teamone.client.statistics;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.teamone.client.generic.User;
 import org.teamone.core.SQL.GenerateStatsSQL;
 import org.teamone.core.Statistics.HighCharts.BasicColumnChartInteger;
 import org.teamone.core.Statistics.HighCharts.BasicPieChart;
 import org.teamone.core.Statistics.HighCharts.HighChart;
+import org.teamone.core.users.HSP;
 
 import java.util.*;
 
@@ -110,7 +113,12 @@ public class GenerateStatisticsController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public String dispStats(Map<String, Object> model) {
-        return "statistics/stats";
+    public String dispStats(Map<String, Object> model,
+                            @ModelAttribute User user) {
+
+        if (user.getPerson() == null )
+            return "redirect:/login";
+        else if (!(user.getPerson() instanceof HSP))//only HSP
+            return "redirect:/user/" + user.person.getUserID();return "statistics/stats";
     }
 }

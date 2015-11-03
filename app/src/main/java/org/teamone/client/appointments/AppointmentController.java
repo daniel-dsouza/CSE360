@@ -13,6 +13,8 @@ import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.SQL.LoginSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.users.Doctor;
+import org.teamone.core.users.LabStaff;
+import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
 import java.util.ArrayList;
@@ -67,7 +69,10 @@ public class AppointmentController {
 
     @RequestMapping(value = "/view/{appointmentID}", method = RequestMethod.GET)    //views one specific appt
     public String viewAppointment(Map<String, Object> model,
-                                  @PathVariable int appointmentID) {
+                                  @PathVariable int appointmentID,
+                                  @ModelAttribute User user) {
+        if (user.getPerson() == null )
+            return "redirect:/login";
         System.out.println("view an appointment");
         Appointment appt = new Appointment();
 
@@ -84,6 +89,8 @@ public class AppointmentController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String viewUserHome(Map<String, Object> model,
                                @ModelAttribute User user) {
+        if (user.getPerson() == null )
+            return "redirect:/login";
         Appointment appointment1 = new Appointment(); //this is an example of a model attribute
 
         Map<String, String> speclist = new LinkedHashMap<String, String>(); //this is an example of a model attribute not in the appointment
@@ -138,6 +145,8 @@ public class AppointmentController {
     public String editAppointment(Map<String, Object> model,
                                   @PathVariable int appointmentID,
                                   @ModelAttribute User user) {
+        if (user.getPerson() == null )
+            return "redirect:/login";
         System.out.println("edit an appointment");
 
         Appointment appt = new Appointment();
@@ -170,8 +179,6 @@ public class AppointmentController {
         model.put("reason", reason);
 
 
-
-
         return "appointment/PatientSchedAppt"; //return the view with linked model
 
     }
@@ -192,6 +199,42 @@ public class AppointmentController {
         int oldID = appointmentID;
         System.out.println("old ID:" + oldID);
         AppointmentSQL.swapAppointmentAppt(ap1, oldID);
+
+
+        return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
+    }
+
+    @RequestMapping(value = "/createappointment", method = RequestMethod.GET)
+    public String createAppointment(Map<String, Object> model,
+                                    @ModelAttribute User user) {
+        if (user.getPerson() == null )
+            return "redirect:/login";
+        else if (user.getPerson() instanceof LabStaff || user.getPerson() instanceof Patient)
+            return "redirect:/user/" + user.person.getUserID();
+
+        System.out.println("Create an appointment");
+
+        Appointment appt = new Appointment();
+
+        model.put("appointment", appt);
+        model.put("user", user);
+        return "appointment/createAppointment"; //return the view with linked model
+
+    }
+
+    @RequestMapping(value = "/createappointment", method = RequestMethod.POST)
+    public String createAppointmentPost(Map<String, Object> model,
+                                        @ModelAttribute("appointment") Appointment appt,
+                                        @ModelAttribute("user") User user) { //this tells the method that there will be a field named appointment in the model
+        if (user.getPerson() instanceof Doctor)
+            appt.setDoctorID(user.getPerson().getUserID());//Doctors can not change the id.
+        else
+            appt.setDoctorID(Integer.parseInt(appt.getTempID()));//must be a HSP person
+        //System.out.println("DocID: " + appt.getDoctorID());
+        System.out.println("Created appointment Date: " + appt.getDate());
+        //System.out.println("Time: " + appt.getTime());
+
+        AppointmentSQL.createAppointment(appt);//Date time and doctor id
 
 
         return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.

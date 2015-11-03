@@ -25,6 +25,11 @@ public class RequestLabTestController {
     @RequestMapping(method= RequestMethod.GET)
     public String list (Map<String, Object> model,
                         @ModelAttribute User user) {
+        if(user.getPerson() == null)
+            return "redirect:/login";
+        else if (!(user.getPerson() instanceof LabStaff))
+            return "redirect:/user/" + user.person.getUserID();
+
         List labRequestList = LabRequestSQL.getAllLabRequests();
         model.put("list", labRequestList);
         return "lab/listlabrequests";

@@ -12,6 +12,7 @@ public class Appointment {
     private int appointmentID;
     private String date;//date is 01/01/2001
     private String time;//time is 3:00 PM
+    private String tempID;
     private Staff doctor;
     private String reason;
     private Patient patient;
@@ -104,5 +105,12 @@ public class Appointment {
         this.reason = reason;
     }
 
+    public String getTempID() {
+        return tempID;
+    }
+
+    public void setTempID(String tempID) {
+        this.tempID = tempID;
+    }
 }
 
