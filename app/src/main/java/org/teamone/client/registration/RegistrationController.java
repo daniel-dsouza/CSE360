@@ -34,7 +34,7 @@ public class RegistrationController {
 
     int ID = 0;
 
-    @RequestMapping(value = "/user/**/registration/{page}", method = RequestMethod.POST)
+    @RequestMapping(value = "/**/registration/{page}", method = RequestMethod.POST)
     public String processPatientInfo(@ModelAttribute("userInput") Patient attempt,
                                      @ModelAttribute("user") User user,
                                      @PathVariable String page) {

@@ -24,7 +24,7 @@ public class AARegisterTest {
     @Test
     public void RegisterTest()
         {
-            for(int i = 0; i < 0; i++) {//change this into how many runs u want.
+            for(int i = 0; i < 1; i++) {//change this into how many runs u want.
                 System.out.println("\nTest========Registering New Patient");
                 regis = HspSQL.random();//call this to random
                 Patient p = HspSQL.RegisterNewPatient(regis);

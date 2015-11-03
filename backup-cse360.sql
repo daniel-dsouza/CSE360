@@ -161,7 +161,7 @@ INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VAL
 (511, 'Doctor Ryan:', 'doctor', 'go', 'rya@asu.edu'),
 (512, 'Hannah:', 'hsp', 'go', 'ryaaan@asu.edu'),
 (513, 'Rick:', 'hsp', 'go', 'ryanad@asu.edu'),
-(514, 'Try:Hard', 'hsp', 'go', 'ryanad@asu.edu'),
+(514, 'Kevin:', 'hsp', 'go', 'ryanad@asu.edu'),
 (515, 'Eric:', 'hsp', 'go', 'ryanad@asu.edu'),
 (516, 'John:', 'hsp', 'go', 'ryanad@asu.edu'),
 (517, 'Gabriela:', 'labstaff', 'go', 'ryanad@asu.edu'),
@@ -246,38 +246,38 @@ INSERT INTO `statistics` (`serialNumber`, `patientPopulation`, `patientType`, `a
 -- Constraints for table `alerts`
 --
 ALTER TABLE `alerts`
-ADD CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE;
+ADD CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patientID`);
 
 --
 -- Constraints for table `appointment`
 --
 ALTER TABLE `appointment`
-ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`) ON UPDATE CASCADE,
-ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE;
+ADD CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`doctorID`) REFERENCES `staff` (`staffID`),
+ADD CONSTRAINT `appointment_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);
 
 --
 -- Constraints for table `labtest`
 --
 ALTER TABLE `labtest`
-ADD CONSTRAINT `labTest_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE,
-ADD CONSTRAINT `labTest_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON UPDATE CASCADE;
+ADD CONSTRAINT `labTest_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`),
+ADD CONSTRAINT `labTest_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`);
 
 --
 -- Constraints for table `patient`
 --
 ALTER TABLE `patient`
-ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `person` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `person` (`userID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `prescription`
 --
 ALTER TABLE `prescription`
-ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE,
-ADD CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON UPDATE CASCADE;
+ADD CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`),
+ADD CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`);
 
 --
 -- Constraints for table `staff`
 --
 ALTER TABLE `staff`
-ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `person` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON UPDATE CASCADE;
+ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `person` (`userID`) ON DELETE CASCADE ,
+ADD CONSTRAINT `staff_ibfk_2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`);

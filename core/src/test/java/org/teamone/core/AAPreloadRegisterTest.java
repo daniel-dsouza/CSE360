@@ -26,7 +26,7 @@ public class AAPreloadRegisterTest {
     @Test
     public void PreloadRegisterTest()
         {
-            for(int x = 0; x < 1; x ++) {//Change this to become how many random dates
+            for(int x = 0; x < 0; x ++) {//Change this to become how many random dates
                 randomTime();
                 for (int i = 0; i < 1; i++) {//change this into how many patients to be registered on that date
                     System.out.println("\nTest========Registering New Patient");
