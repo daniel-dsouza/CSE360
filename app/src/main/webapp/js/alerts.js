@@ -52,20 +52,31 @@ function resolvealert(divid, alertid) {
 
         }
     })
+    checkAlerts();
 };
-function checkAlerts(divid) {
+function showEmergencyRoom(divid) {
+    if (localStorage.getItem('alert') == 1) {
+        if ($('#' + divid).hasClass("blink"))
+        {}//do nothing
+        else $('#' + divid).addClass("blink");
+    }
+    else {
+        $('#' + divid).hide();
+    }
+};
+function checkAlerts() {
     $.ajax('/alert/check', {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
                 if (data.alertsPresent) {
                     // blink('#' + divid, -1, 1000);
-                    if ($('#' + divid).hasClass("blink")) $('#' + divid).removeClass("blink");
-                    else $('#' + divid).addClass("blink");
+                    localStorage.setItem('alert', 1);
+
                 }
                 else {
+                    localStorage.setItem('alert', 0);
 
-                    $('#' + divid).hide();
                 }
             }
         }

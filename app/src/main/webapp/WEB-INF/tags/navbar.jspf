@@ -6,8 +6,8 @@
 <script type="text/javascript">
     <!--
     $(document).ready(function () {
-        checkAlerts('alert');
-        <!-- setInterval("checkAlerts('alert')", 20000); -->
+        showEmergencyRoom('alert');
+        setInterval("showEmergencyRoom('alert')", 2000);
     });
     //-->
 </script>
@@ -52,15 +52,15 @@
                     </a>
                 </li>
             </c:forEach>
-
-
-            <li id="alert">
-                <a href="${pageContext.request.contextPath}/alert">
-                    <c:out value="Emergency Room"/>
-                </a>
-            </li>
-
-
+            <c:if test="${user.doctor.alertsPresent == 1}">
+                <c:if test="${user.doctor.specialty == 'Emergency'}">
+                    <li id="alert">
+                        <a href="${pageContext.request.contextPath}/alert">
+                            <c:out value="Emergency Room"/>
+                        </a>
+                    </li>
+                </c:if>
+            </c:if>
         </ul>
     </div>
 </div>

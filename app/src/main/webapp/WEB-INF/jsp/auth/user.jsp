@@ -4,6 +4,14 @@
 
 <t:template>
   <jsp:attribute name="head">
+      <script type="text/javascript">
+          <!--
+          $(document).ready(function () {
+              checkAlerts();
+              <!-- setInterval("checkAlerts()", 20000); -->
+          });
+          //-->
+      </script>
           </jsp:attribute>
     <jsp:body>
         <div class="container-fluid">

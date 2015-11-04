@@ -49,10 +49,13 @@ public class AlertController {
         Doctor temp1 = new Doctor();
         if (user.getPerson() != null && user.getDoctor() != null && user.doctor.getSpecialty().equals("Emergency")) {
             if (AlertSQL.areThereAlerts()) {
-                System.out.println("Set to 1");
+                //System.out.println("Set to 1");
                 temp1.setAlertsPresent(1);
-            } else
+                user.doctor.setAlertsPresent(1);
+            } else {
                 temp1.setAlertsPresent(0);
+                user.doctor.setAlertsPresent(0);
+            }
         }
         return temp1; //return JSON object
     }
