@@ -78,10 +78,11 @@ public class SelectPatientController {
         ArrayList<Patient> patients = PatientSQL.getAllPatient();
 
         Map<String, String> actions = new LinkedHashMap<String, String>();
-        actions.put("health_conditions", "Health Conditions");
+
         actions.put("medical_history", "Medical History");
 
         if (user.getPerson() instanceof Doctor) {
+            actions.put("health_conditions", "Health Conditions");
             actions.put("e_prescribe", "E-Prescribe Prescription");
             actions.put("lab_test", "E-Prescribe Lab Tests");
             actions.put("view_lab_report", "View Lab Reports");

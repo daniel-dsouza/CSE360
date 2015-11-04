@@ -7,11 +7,14 @@
 
 <t:template>
     <jsp:attribute name="head">
-        <script type="text/javascript" src="/js/datepaginator/moment.min.js"></script>
-        <script type="text/javascript"
-                src="/js/datepaginator/bootstrap-datepicker.js"></script>
-        <script type="text/javascript"
-                src="/js/datepaginator/bootstrap-datepaginator.min.js"></script>
+        <link href="/css/datepaginator/bootstrap-datepicker.css" rel="stylesheet" media="screen">
+        <link href="/css/datepaginator/bootstrap-datepaginator.css" rel="stylesheet" media="screen">
+
+        <script type="text/javascript" src="/js/datepaginator/jQuery.js"></script> <!-- forward declaration like in c++. call JQuery and moment first -->
+        <script type="text/javascript" src="/js/datepaginator/moment.js"></script>
+        <script type="text/javascript" src="/js/datepaginator/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="/js/datepaginator/bootstrap-datepaginator.js"></script>
+
         <script type="text/javascript" src="/js/datepaginator/datepaginator.js"></script>
     </jsp:attribute>
     <jsp:body>

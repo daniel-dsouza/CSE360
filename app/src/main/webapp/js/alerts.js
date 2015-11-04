@@ -30,7 +30,7 @@ function loadAlerts(element) {
             $('#' + element).html(outputHTML)
         },
         error: function () {
-            alert("error getting list.")
+            //alert("error getting list.")
         }
     });
 };
@@ -47,7 +47,7 @@ function resolvealert(divid, alertid) {
             $('#' + divid).hide();
         },
         error: function () {
-            alert("error getting list.");
+            //alert("error getting list.");
             $(divid).hide("slow");
 
         }
@@ -59,10 +59,12 @@ function checkAlerts(divid) {
             dataType: 'json',
             success: function (data) {
                 if (data.alertsPresent) {
-
-                    blink('#' + divid, -1, 1000);
+                    // blink('#' + divid, -1, 1000);
+                    if ($('#' + divid).hasClass("blink")) $('#' + divid).removeClass("blink");
+                    else $('#' + divid).addClass("blink");
                 }
                 else {
+
                     $('#' + divid).hide();
                 }
             }

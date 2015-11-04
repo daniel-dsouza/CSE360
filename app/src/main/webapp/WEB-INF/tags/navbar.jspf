@@ -7,7 +7,7 @@
     <!--
     $(document).ready(function () {
         checkAlerts('alert');
-        setInterval("checkAlerts('alert')", 20000);
+        <!-- setInterval("checkAlerts('alert')", 20000); -->
     });
     //-->
 </script>
