@@ -25,11 +25,11 @@
     <div id="nav">
         <jsp:directive.include file="navbar.jspf"/>
     </div>
-    <div id="body">
+    <div id="content">
         <jsp:doBody/>
-    </div>
-    <div id="pagefooter">
-        <jsp:directive.include file="footer.jspf"/>
+        <div id="pagefooter">
+            <jsp:directive.include file="footer.jspf"/>
+        </div>
     </div>
 </div>
 </body>

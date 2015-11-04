@@ -1,22 +1,32 @@
+/*The following apply to the global template*/
 #page {
     position: relative;
     min-height: 100%;
+    background-color: wheat;
 }
 
 #nav {
-    height: 55px;
+    height: 52px;
 }
 
-#body {
+#navbar {
+    padding-left: 10%;
+    padding-right: 10%;
+}
 
+#content {
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: whitesmoke;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 #pagefooter {
-    padding-top: 1px;
-    height: 100px;
     width: 100%;
 }
 
+/**/
 textarea {
     width: 100%
 }
