@@ -16,7 +16,6 @@ $(document).ready(function () {
             startDateFormat: "YYYY-MM-DD",
             selectedDate: d,//first date to be selected by default
             selectedDateFormat: "YYYY-MM-DD",
-            showCalendar: false,
             onSelectedDateChanged: function (event, date) {
                 selected = formatDate(date);
             }

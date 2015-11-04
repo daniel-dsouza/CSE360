@@ -3,6 +3,15 @@
 
 <script type="text/javascript" src="/js/alerts.js"></script>
 
+<script type="text/javascript">
+    <!--
+    $(document).ready(function () {
+        checkAlerts('alert');
+        setInterval("checkAlerts('alert')", 20000);
+    });
+    //-->
+</script>
+
 <div id="navbar" class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -43,16 +52,15 @@
                     </a>
                 </li>
             </c:forEach>
-            <c:if test="${user.doctor.alertsPresent == 1}">
-                <c:if test="${user.doctor.specialty == 'Emergency'}">
-                    <li id="alert">
-                        <a href="${pageContext.request.contextPath}/alert">
-                            <c:out value="Emergency Room"/>
-                        </a>
-                    </li>
-                    <script>blink("#alert", -1, 1000);</script>
-                </c:if>
-            </c:if>
+
+
+            <li id="alert">
+                <a href="${pageContext.request.contextPath}/alert">
+                    <c:out value="Emergency Room"/>
+                </a>
+            </li>
+
+
         </ul>
     </div>
 </div>

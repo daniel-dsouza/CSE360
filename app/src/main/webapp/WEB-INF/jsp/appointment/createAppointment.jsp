@@ -7,18 +7,12 @@
 
 <t:template>
     <jsp:attribute name="head">
-        <link href="http://jondmiles.com/bootstrap-datepaginator/css/bootstrap.min.css" rel="stylesheet" media="screen"
-              type="text/css">
-        <link href="http://jondmiles.com/bootstrap-datepaginator/css/bootstrap-datepicker.css" rel="stylesheet"
-              media="screen" type="text/css">
-        <link href="http://jondmiles.com/bootstrap-datepaginator/css/bootstrap-datepaginator.min.css" rel="stylesheet"
-              media="screen" type="text/css">
-        <script type="text/javascript" src="http://jondmiles.com/bootstrap-datepaginator/js/moment.min.js"></script>
+        <script type="text/javascript" src="/js/datepaginator/moment.min.js"></script>
         <script type="text/javascript"
-                src="http://jondmiles.com/bootstrap-datepaginator/js/bootstrap-datepicker.js"></script>
+                src="/js/datepaginator/bootstrap-datepicker.js"></script>
         <script type="text/javascript"
-                src="http://jondmiles.com/bootstrap-datepaginator/js/bootstrap-datepaginator.min.js"></script>
-        <script type="text/javascript" src="/js/datepaginator.js"></script>
+                src="/js/datepaginator/bootstrap-datepaginator.min.js"></script>
+        <script type="text/javascript" src="/js/datepaginator/datepaginator.js"></script>
     </jsp:attribute>
     <jsp:body>
         <div class="container">
@@ -52,7 +46,7 @@
                                 <td style="border-left: 1px solid cyan; padding: 5px;">
                                     <c:out value="${test.date}"/>
                                 </td>
-                                <td >
+                                <td>
                                     <c:out value="${test.time}"/>
                                 </td>
 
@@ -74,6 +68,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="timeselect">Time</label>
                             <br>
+
                             <div class="col-md-4">
                                 <form:select id="timeselect" name="timeselect" path="time" class="form-control">
                                     <option value="8:00 AM">8:00 AM</option>
@@ -97,11 +92,13 @@
                         <div class="form-class">
                             <c:if test="${user.person.occupation == 'hsp'}">
                                 <br><label class="col-md-4 control-label" for="docID">Doctor ID</label>
+
                                 <div class="col-md-4">
-                                <form:input id="docID" size='3' path="tempID"
-                                            class="readonly" type="number" min="501" max="511" step="1" maxlength="10"
-                                            autofocus="autofocus"
-                                            required="required"/>
+                                    <form:input id="docID" size='3' path="tempID"
+                                                class="readonly" type="number" min="501" max="511" step="1"
+                                                maxlength="10"
+                                                autofocus="autofocus"
+                                                required="required"/>
                                 </div>
                             </c:if>
                         </div>
@@ -109,7 +106,8 @@
                         <div class="button_holder" style="text-align: center;">
                             <br><br>
                             <span class="group-btn">
-                                <input type="submit" value="Create" class="btn btn-primary btn-md" style = "float:inherit"/>
+                                <input type="submit" value="Create" class="btn btn-primary btn-md"
+                                       style="float:inherit"/>
                              </span>
                         </div>
 
