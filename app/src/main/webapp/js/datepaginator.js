@@ -25,7 +25,7 @@ $(document).ready(function () {
 
         /*$('#paginator').on('selectedDateChanged', function(event, date) {
          document.getElementById('day').value=formatDate(date); //This way is a vulnerability. If you inspect element,
-                                                           //you can modify the text area. Inject symbols and our program will crash
+         //you can modify the text area. Inject symbols and our program will crash
          }); */
 
     }
@@ -62,8 +62,22 @@ function getDate() {
         return false;
     }
     else {
-        document.getElementById('day').value = selected;
-        return true;
+        var d = new Date(),//get current date
+            month = '' + (d.getMonth() + 1),
+            day = '' + (d.getDate()),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        var current = [year, month, day].join('-');
+        if (selected < current) {
+            alert("Please choose a future date");
+            return false;
+        } else {
+            document.getElementById('day').value = selected;
+            return true;
+        }
     }
 
 

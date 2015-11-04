@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="jumbotron" style="background-color: deepskyblue">
         <h1>Welcome <c:out value="${user.person.firstName}"/> <c:out value="${user.person.lastName}"/> to the IPIMS</h1>
-        <p>We put the 'balling in eyeballing</p>
+        <p>Healthcare made simple</p>
       </div>
     </div>
   </jsp:body>
