@@ -17,7 +17,7 @@ public class AlertSQL {
 
     /**
      * This is will set alert to be false
-     * @param Alert: Alert with valid alertID.
+     * @param alert: Alert with valid alertID.
      * @return true or false
      */
     public static Boolean setAlertOff(Alert alert) {
@@ -50,6 +50,36 @@ public class AlertSQL {
             close();
         }
         return boolResult;
+    }
+
+    /**
+     *
+     * @return Boolean. true if there is atleast 1 alert. false if none
+     */
+    public static Boolean areThereAlerts() {
+
+        Boolean result = false;
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            preparedStatement = connect.prepareStatement("SELECT alert_id FROM alerts WHERE AlertActive = 1;");
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.first())//if Resultset does exist,
+            {
+                result = true;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            result = false;
+        } finally {
+            close();
+        }
+        return result;
     }
 
     /**
@@ -91,7 +121,7 @@ public class AlertSQL {
     /**
      * get list of alerts by patient ID
      *
-     * @param patient with a valid ID.
+     * @param pat1 patient object with a valid ID.
      * @return arraylist
      */
     public static ArrayList<Alert> getListAlertsByPatient(Patient pat1) {

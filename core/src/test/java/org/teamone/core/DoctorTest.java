@@ -22,6 +22,20 @@ public class DoctorTest {
     }
 
     @Test
+    public void getSpec() {
+
+        System.out.println("\nTest========Getting for Specialty with doctor id ");
+        String temp = DoctorSQL.getSpecialty(501);
+        assertTrue("Could not get list of patients by doctor", !temp.isEmpty());
+
+
+        System.out.println("Doctor is a: " + temp);
+
+
+        System.out.println(TestStrings.testEnd);
+    }
+
+    @Test
     public void getListofPatients() {
         Doctor new1 = new Doctor();
         new1.setUserID(501);

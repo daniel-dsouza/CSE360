@@ -17,7 +17,37 @@ public class DoctorSQL {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
 
+    /**
+     * get specialty assigned to doctor id
+     * @param staff staff Object with valid staff ID
+     * @return String with specialty
+     */
+    public static String getSpecialty(int staff) {
+        //Staff staff = null;
+        String temp = null;
 
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+            preparedStatement = connect.prepareStatement("SELECT specialty FROM staff where staffID = ?");
+            preparedStatement.setInt(1, staff);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            temp = resultSet.getString("specialty");
+
+        } catch (Exception e) {
+            System.out.println(e);
+            temp = null;
+        } finally {
+            close();
+        }
+        return temp;
+    }
 
     /**
      * Method returns a list doctors.

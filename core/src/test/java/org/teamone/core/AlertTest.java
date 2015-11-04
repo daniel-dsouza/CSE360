@@ -22,7 +22,7 @@ public class AlertTest {
     public void setUp() {
 
         test = new Alert();
-        test.setAlertID(2005);
+        test.setAlertID(2004);
 
 
     }

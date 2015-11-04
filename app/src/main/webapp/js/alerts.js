@@ -53,3 +53,22 @@ function resolvealert(divid, alertid) {
         }
     })
 };
+
+//http://jsfiddle.net/jadendreamer/Nx4qS/
+function blink(elem, times, speed) {
+    if (times > 0 || times < 0) {
+        if ($(elem).hasClass("blink")) $(elem).removeClass("blink");
+        else $(elem).addClass("blink");
+    }
+
+    clearTimeout(function () {
+        blink(elem, times, speed);
+    });
+
+    if (times > 0 || times < 0) {
+        setTimeout(function () {
+            blink(elem, times, speed);
+        }, speed);
+        times -= .5;
+    }
+};

@@ -12,6 +12,6 @@ public class Doctor extends Staff {
         agentActions = new TreeMap<String, String>() {};
         agentActions.put("Select Patient", "select_patient");
         agentActions.put("Create Appointment", "appointment/createappointment");
-        agentActions.put("Alerts", "alert");
+        //agentActions.put("Alerts", "alert");
     }
 }

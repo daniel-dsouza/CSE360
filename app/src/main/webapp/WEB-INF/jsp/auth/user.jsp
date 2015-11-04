@@ -9,6 +9,11 @@
         <h1>Welcome <c:out value="${user.person.firstName}"/> <c:out value="${user.person.lastName}"/> to the IPIMS</h1>
         <p>Circle of Health</p>
       </div>
+      <c:if test="${user.doctor.alertsPresent == 1}">
+        <c:if test="${user.doctor.specialty == 'Emergency'}">
+          <div class="alertDoctor">Detected patients with severe conditions. Please report to the emergency room. </div>
+        </c:if>
+      </c:if>
     </div>
   </jsp:body>
 </t:template>

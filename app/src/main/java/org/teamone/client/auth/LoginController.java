@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
+import org.teamone.core.SQL.AlertSQL;
+import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.SQL.LoginSQL;
+import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Person;
 
 import java.util.Map;
@@ -47,7 +50,18 @@ public class LoginController {
 
         if (pResult != null) {
             System.out.println("Authentication succeeded");
+            if (AlertSQL.areThereAlerts()) {
+                if (pResult.getOccupation().equals("doctor")) {
+                    System.out.println("ID: " + pResult.getUserID());
+                    user.doctor = new Doctor();
+                    user.doctor.setAlertsPresent(1);
+                    user.doctor.setSpecialty(DoctorSQL.getSpecialty(pResult.getUserID()));
+                }
+            }
+
             user.person = pResult;
+
+
             return "redirect:/user/" + user.person.getUserID();
         } else {
             System.out.println("Authentication Failed");
@@ -78,6 +92,8 @@ class LoginAttempt {
         return this.password;
     }
 
-    LoginAttempt(){
-    };
+    LoginAttempt() {
+    }
+
+    ;
 }

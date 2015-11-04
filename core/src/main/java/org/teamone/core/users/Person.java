@@ -17,6 +17,7 @@ public class Person {
     private String email;
     private int userID = 0;
 
+
     public Map<String, String> agentActions; //action,url
     public Map<String, String> genericActions; //action,url
 
