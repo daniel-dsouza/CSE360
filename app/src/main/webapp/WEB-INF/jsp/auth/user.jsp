@@ -11,7 +11,7 @@
       </div>
       <c:if test="${user.doctor.alertsPresent == 1}">
         <c:if test="${user.doctor.specialty == 'Emergency'}">
-          <div class="alertDoctor">Detected patients with severe conditions. Please report to the emergency room. </div>
+          <div class="alertDoctor"><h2> Detected patients with severe conditions. Please report to the emergency room.</h2> </div>
         </c:if>
       </c:if>
     </div>
