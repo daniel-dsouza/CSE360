@@ -3,13 +3,10 @@ package org.teamone.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.AlertSQL;
-import org.teamone.core.SQL.LoginSQL;
 import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Alert;
 import org.teamone.core.users.Patient;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertTrue;
 
@@ -53,7 +50,7 @@ public class AlertTest {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
+    /*@Test
     public void getListofAlerts() {
         System.out.println("Test========Attempting to get a few alerts");
         ArrayList<Alert> testArr = AlertSQL.getListAlerts();
@@ -68,9 +65,9 @@ public class AlertTest {
             System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());
         }
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void getListByPatient() {
         System.out.println("\nTest========Searching for Alerts by patient ID 1002 ");
         Patient pat1 = new Patient();
@@ -85,5 +82,5 @@ public class AlertTest {
             System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());
         }
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 }
