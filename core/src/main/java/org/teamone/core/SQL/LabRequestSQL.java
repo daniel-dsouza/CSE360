@@ -152,6 +152,7 @@ public class LabRequestSQL {
                 new1.toMapObj(resultSet.getString("labReport"));
                 Patient pat = new Patient();
                 pat.setUserID(resultSet.getInt("patientID"));
+                new1.setPatient(pat); //added to get patient ID.
                 Person per = new Person();
                 per.setUserID(resultSet.getInt("staffID"));
                 new1.setPerson(per);
