@@ -13,8 +13,8 @@
     </jsp:attribute>
 
     <jsp:body>
-        <div class="container" id="target">
-            <div class="row">
+        <div class="container-fluid" id="target">
+            <%--<div class="row" style="margin: 20px">--%>
                 <div id="accordion" class="panel-group">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <%--</div>--%>
         </div>
     </jsp:body>
 </t:template>

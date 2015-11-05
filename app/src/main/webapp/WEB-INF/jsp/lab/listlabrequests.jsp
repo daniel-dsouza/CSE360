@@ -16,8 +16,8 @@
                 <h1>Start a Test</h1>
             </div>
             <c:forEach var="request" items="${list}">
-                <div class="row" style="border-bottom-style: solid; border-width: 1px">
-                <div class="col-lg-12" style="">
+                <div class="row border_row">
+                <div class="col-lg-12">
                     <div >
                         <div style="float: left; padding: 5px 5px 5px">
                             <h4>#${request.requestionID}</h4>
