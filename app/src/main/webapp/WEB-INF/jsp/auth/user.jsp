@@ -4,6 +4,7 @@
 
 <t:template>
   <jsp:attribute name="head">
+      <link href="/css/dropdown.css" rel="stylesheet" media="screen">
       <script type="text/javascript">
           <!--
           $(document).ready(function () {
@@ -19,7 +20,18 @@
                 <h1>Welcome <c:out value="${user.person.firstName}"/> <c:out value="${user.person.lastName}"/> to the
                     IPIMS</h1>
 
-                <p>Circle of Health</p>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: black">Circle of Health</a>
+                    <ul class="dropdown-menu">
+                        <li>It means no worries</li>
+                        <li>for the rest of your days.</li>
+                        <li>It's a problem free</li>
+                        <li>philosophy</li>
+                        <!-- <li>&copy; Disney. No copyright infringement intended</li> -->
+                    </ul>
+
+                </div>
+
             </div>
 
         </div>

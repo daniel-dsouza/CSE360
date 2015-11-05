@@ -1,0 +1,16 @@
+body {
+}
+.dropdown{
+    display: inline-block;
+}
+.navbar-default .navbar-nav > .dropdown:hover > a,
+.navbar-default .navbar-nav > .dropdown:hover > a:hover,
+.navbar-default .navbar-nav > .dropdown:hover > a:focus {
+    background-color: rgb(231, 231, 231);
+    color: black;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+    text-align: center;
+}
