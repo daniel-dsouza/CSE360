@@ -9,6 +9,7 @@ public class Staff extends Person {
     private String specialty ;
     private int patientID = 0;
     private String schedule ;
+    private int alertsPresent =0;
 
     private String emergencyWardDoctor = "yes";
 
@@ -42,6 +43,22 @@ public class Staff extends Person {
 
     public void setSchedule(String schedule) {
         this.schedule = schedule;
+    }
+
+    public int getAlertsPresent() {
+        return alertsPresent;
+    }
+
+    public void setAlertsPresent(int alertsPresent) {
+        this.alertsPresent = alertsPresent;
+    }
+
+    public String getEmergencyWardDoctor() {
+        return emergencyWardDoctor;
+    }
+
+    public void setEmergencyWardDoctor(String emergencyWardDoctor) {
+        this.emergencyWardDoctor = emergencyWardDoctor;
     }
 
     public Staff() {

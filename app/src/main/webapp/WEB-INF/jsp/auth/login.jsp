@@ -17,6 +17,7 @@
 </script>
 <t:template>
     <jsp:attribute name="head">
+        <link href="/css/custom-login.css" rel="stylesheet" media="screen">
         <script type="text/javascript"
                 src="<c:url value="/webjars/jquery-maskedinput/1.4.0/jquery.maskedinput.min.js" />"></script>
     </jsp:attribute>
@@ -37,7 +38,7 @@
 
                 <div class="row">
                     <div class="col-md-offset-4 col-md-4">
-                        <div class="form-login">
+                        <div class="custom-login">
                             <h4>Please Login</h4>
                             <form:input path="userID" id="userID" class="form-control input-sm chat-input"
                                         placeholder="userID"
