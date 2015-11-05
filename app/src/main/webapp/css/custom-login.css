@@ -8,9 +8,6 @@ body {
     margin: 0 auto;
     padding: 30px;
     border-radius: 5px;
-    background: rgb(255, 255, 255) url('/images/ASU_Ira_A._Fulton_Logo.png');;
+    background: rgb(255, 255, 255);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: bottom;
 }

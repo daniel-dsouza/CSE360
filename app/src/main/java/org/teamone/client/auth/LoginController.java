@@ -18,6 +18,7 @@ import org.teamone.core.SQL.LoginSQL;
 import org.teamone.core.users.Doctor;
 import org.teamone.core.users.Person;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -41,7 +42,8 @@ public class LoginController {
             //@ModelAttribute("userInput") LoginAttempt attempt,
             @ModelAttribute("userInput") LoginAttempt attempt,
             @ModelAttribute("user") User user, //special bean used to store session
-            Map<String, Object> model) {
+            Map<String, Object> model,
+            HttpServletRequest request) {
 
         Person pAttempt = new Person();
         pAttempt.setUserID(Integer.parseInt(attempt.getUserID()));
@@ -50,13 +52,19 @@ public class LoginController {
 
         if (pResult != null) {
             System.out.println("Authentication succeeded");
-            if (AlertSQL.areThereAlerts()) {
-                if (pResult.getOccupation().equals("doctor")) {
-                    System.out.println("ID: " + pResult.getUserID());
+            System.out.println("User ID: " + pResult.getUserID() + " has logged in from ip: " + request.getRemoteAddr());
+            System.out.println("This user is using browser: " + request.getHeader("User-Agent"));
+            if (pResult.getOccupation().equals("doctor")) {
+                if (DoctorSQL.getSpecialty(pResult.getUserID()).equals("Emergency")) {
                     user.doctor = new Doctor();
-                    user.doctor.setAlertsPresent(1);
-                    user.doctor.setSpecialty(DoctorSQL.getSpecialty(pResult.getUserID()));
+                    user.doctor.setSpecialty("Emergency");//already know this is an Emergency doctor
+                    if (AlertSQL.areThereAlerts()) {
+                        {
+                            user.doctor.setAlertsPresent(1);
+                        }
+                    }
                 }
+
             }
 
             user.person = pResult;

@@ -8,8 +8,7 @@
       <script type="text/javascript">
           <!--
           $(document).ready(function () {
-              checkAlerts();
-              <!-- setInterval("checkAlerts()", 20000); -->
+              showEmergencyRoom('alert');
           });
           //-->
       </script>

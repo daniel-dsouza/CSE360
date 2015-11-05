@@ -52,38 +52,32 @@ function resolvealert(divid, alertid) {
 
         }
     })
-    checkAlerts();
+    showEmergencyRoom('alert');
 };
 function showEmergencyRoom(divid) {
-    if (localStorage.getItem('alert') == 1) {
-        if ($('#' + divid).hasClass("blink"))
-        {}//do nothing
-        else $('#' + divid).addClass("blink");
-    }
-    else {
-        $('#' + divid).hide();
-    }
-};
-function checkAlerts() {
-    $.ajax('/alert/check', {
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                if (data.alertsPresent) {
-                    // blink('#' + divid, -1, 1000);
-                    localStorage.setItem('alert', 1);
 
-                }
-                else {
-                    localStorage.setItem('alert', 0);
+    var alertID = document.getElementById(divid);
+    if (alertID != null) //since alert div id only shows up in emergency, we can make a check for it
+    {
+        $.ajax('/alert/check', {
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.alertsPresent) {
+                        // blink('#' + divid, -1, 1000);
+                        $('#' + divid).show();
+                    }
+                    else {
+                        $('#' + divid).hide();
+                    }
 
                 }
             }
-        }
-    )
-}
-;
-
+        )
+    } else {
+        $('#' + divid).hide();
+    }
+};
 
 //http://jsfiddle.net/jadendreamer/Nx4qS/
 function blink(elem, times, speed) {

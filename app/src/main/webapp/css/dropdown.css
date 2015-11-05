@@ -3,6 +3,7 @@ body {
 .dropdown{
     display: inline-block;
 }
+
 .navbar-default .navbar-nav > .dropdown:hover > a,
 .navbar-default .navbar-nav > .dropdown:hover > a:hover,
 .navbar-default .navbar-nav > .dropdown:hover > a:focus {

@@ -49,7 +49,7 @@ public class AlertController {
         Doctor temp1 = new Doctor();
         if (user.getPerson() != null && user.getDoctor() != null && user.doctor.getSpecialty().equals("Emergency")) {
             if (AlertSQL.areThereAlerts()) {
-                //System.out.println("Set to 1");
+                System.out.println("Alerts Detected");
                 temp1.setAlertsPresent(1);
                 user.doctor.setAlertsPresent(1);
             } else {
@@ -70,7 +70,6 @@ public class AlertController {
     public
     @ResponseBody
     void resolveAlert(@PathVariable String alertID) {
-        System.out.println("lol");
         Alert resolved = new Alert();
         try {
             resolved.setAlertID(Integer.parseInt(alertID));
