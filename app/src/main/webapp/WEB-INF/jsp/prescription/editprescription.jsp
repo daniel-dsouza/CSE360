@@ -37,7 +37,7 @@
         </h1>
         <br/>
 
-        <div class="container">
+        <div class="container-fluid">
             <c:if test="${empty prescriptions}">
                 <div class="container" style="border-bottom-style: solid; border-width: 1px">
                     <div class="text-center">No Prescriptions Available</div>

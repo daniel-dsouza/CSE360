@@ -9,7 +9,7 @@
 
 <t:template>
   <jsp:body>
-    <div class="container">
+    <div class="container-fluid">
       <!-- header -->
       <div class="row">
         <h1>Create Prescription</h1>

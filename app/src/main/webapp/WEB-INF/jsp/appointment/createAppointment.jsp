@@ -18,7 +18,7 @@
         <script type="text/javascript" src="/js/datepaginator/datepaginator.js"></script>
     </jsp:attribute>
     <jsp:body>
-        <div class="container">
+        <div class="container-fluid">
             <h2>Create an Appointment</h2>
             <form:form method="post" commandName="appointment" onsubmit="return getDate()">
                 <c:if test="${appointment.failedToInsert == 1}">

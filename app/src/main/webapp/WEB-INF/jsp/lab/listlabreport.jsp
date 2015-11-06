@@ -12,12 +12,16 @@
 
     <jsp:body>
         <div class="container-fluid" id="target">
-            <div class="row" style="margin: 5px">
-                <h1>Lab Reports</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Lab Reports</h1>
+                </div>
             </div>
             <c:if test="${empty list}">
                 <div class="row">
-                    <div class="text-center">No Lab Reports Available</div>
+                    <div class="col-lg-12">
+                        <p>No Lab Reports Available</p>
+                    </div>
                 </div>
             </c:if>
             <c:if test="${not empty list}">
