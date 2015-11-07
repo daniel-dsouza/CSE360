@@ -16,6 +16,7 @@ import org.teamone.core.SQL.AlertSQL;
 import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.SQL.LoginSQL;
 import org.teamone.core.users.Doctor;
+import org.teamone.core.users.HSP;
 import org.teamone.core.users.Person;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,9 +55,12 @@ public class LoginController {
             System.out.println("Authentication succeeded");
             System.out.println("User ID: " + pResult.getUserID() + " has logged in from ip: " + request.getRemoteAddr());
             System.out.println("This user is using browser: " + request.getHeader("User-Agent"));
-            if (pResult.getOccupation().equals("doctor")) {
+            if (pResult.getOccupation().equals("doctor") || pResult instanceof HSP) //HSP override
+            {
+                user.doctor = new Doctor();
+                System.out.println("Created new doctor");
                 if (DoctorSQL.getSpecialty(pResult.getUserID()).equals("Emergency")) {
-                    user.doctor = new Doctor();
+
                     user.doctor.setSpecialty("Emergency");//already know this is an Emergency doctor
                     if (AlertSQL.areThereAlerts()) {
                         {

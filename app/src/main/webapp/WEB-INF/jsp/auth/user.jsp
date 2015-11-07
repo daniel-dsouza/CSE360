@@ -5,13 +5,7 @@
 <t:template>
   <jsp:attribute name="head">
       <link href="/css/dropdown.css" rel="stylesheet" media="screen">
-      <script type="text/javascript">
-          <!--
-          $(document).ready(function () {
-              showEmergencyRoom('alert');
-          });
-          //-->
-      </script>
+
           </jsp:attribute>
     <jsp:body>
         <div class="container-fluid">

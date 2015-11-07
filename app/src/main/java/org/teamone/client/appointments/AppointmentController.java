@@ -220,6 +220,25 @@ public class AppointmentController {
 
     }
 
+    @RequestMapping(value = "/createappointment/{docID}", method = RequestMethod.GET)
+    public String createAppointmentID(Map<String, Object> model,
+                                      @PathVariable String docID,
+                                      @ModelAttribute User user) {
+        if (user.getPerson() == null)
+            return "redirect:/login";
+        else if (user.getPerson() instanceof LabStaff || user.getPerson() instanceof Patient)
+            return "redirect:/user/" + user.person.getUserID();
+
+        System.out.println("Create an appointment");
+
+        Appointment appt = new Appointment();
+        appt.setTempDocID(docID);
+        model.put("appointment", appt);
+        model.put("user", user);
+        return "appointment/createAppointment"; //return the view with linked model
+
+    }
+
     @RequestMapping(value = "/createappointment", method = RequestMethod.POST)
     public String createAppointmentPost(Map<String, Object> model,
                                         @ModelAttribute("appointment") Appointment appt,
@@ -228,7 +247,7 @@ public class AppointmentController {
         if (user.getPerson() instanceof Doctor)
             appt.setDoctorID(user.getPerson().getUserID());//Doctors can not change the id.
         else
-            appt.setDoctorID(Integer.parseInt(appt.getTempID()));//must be a HSP person
+            appt.setDoctorID(Integer.parseInt(appt.getTempDocID()));//must be a HSP person
         //System.out.println("DocID: " + appt.getDoctorID());
         System.out.println("Created appointment Date: " + appt.getDate());
         //System.out.println("Time: " + appt.getTime());
