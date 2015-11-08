@@ -10,10 +10,7 @@ import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.users.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by daniel on 10/28/15.
@@ -79,7 +76,7 @@ public class SelectPatientController {
 
         Map<String, String> actions = new LinkedHashMap<String, String>();
 
-        actions.put("medical_history", "Medical History");
+
 
         if (user.getPerson() instanceof Doctor) {
             actions.put("health_conditions", "Health Conditions");
@@ -89,6 +86,7 @@ public class SelectPatientController {
         }
 
         if (user.getPerson() instanceof HSP) {
+            actions.put("medical_history", "Medical History");
             actions.put("e_prescribe", "View Prescriptions");
             actions.put("edit_info", "Update Personal");
         }
@@ -127,6 +125,7 @@ public class SelectPatientController {
         Appointment a = new Appointment();
         a.setPatientID(patientID);
         List<Appointment> patientAppointments = AppointmentSQL.viewAppointmentByPatient(a);
+        Collections.sort(patientAppointments, Appointment.dateCompare);
         return patientAppointments;
     }
 

@@ -10,6 +10,7 @@ import org.teamone.client.generic.User;
 import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -33,9 +34,10 @@ public class AppointmentListController {
         Appointment temp = new Appointment();
         temp.setPatientID(user.getPerson().getUserID());
         patientList = AppointmentSQL.viewAppointmentByPatient(temp);
-        for (Appointment tem : patientList) {
+        /*for (Appointment tem : patientList) {
             System.out.println("Appt ID: " + tem.getAppointmentID());
-        }
+        }*/
+        Collections.sort(patientList, Appointment.dateCompare);
         model.put("patientList", patientList);
 
         return "appointment/PatientList";//return the view with linked model
@@ -61,9 +63,10 @@ public class AppointmentListController {
         Appointment temp = new Appointment();
         temp.setDoctorID(user.getPerson().getUserID());
         doctorList = AppointmentSQL.viewAppointmentByDoctor(temp);
-        for (Appointment tem : doctorList) {
+        /*for (Appointment tem : doctorList) {
             System.out.println("Appt ID: " + tem.getAppointmentID());
-        }
+        }*/
+        Collections.sort(doctorList, Appointment.dateCompare);
         model.put("doctorList", doctorList);
 
         return "appointment/DoctorList";//return the view with linked model

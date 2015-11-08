@@ -110,9 +110,10 @@ public class AppointmentSQL {
                 new1.setDate(date);
                 new1.setTime(time);
                 new1.setReason(reason);
-                new1.setPatientID(patID);
+
                 new1.setAppointmentID(resultSet.getInt("serialNumber"));
                 new1.setPatient(pat1);
+                new1.setPatientID(patID);
                 a1.add(new1);
 
             }

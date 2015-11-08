@@ -14,6 +14,7 @@ import org.teamone.core.users.HSP;
 import org.teamone.core.users.Staff;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -143,6 +144,7 @@ public class AlertController {
         Appointment a = new Appointment();
         a.setDoctorID(doctorID);
         List<Appointment> doctorAppointments = AppointmentSQL.viewAppointmentByDoctor(a);
+        Collections.sort(doctorAppointments, Appointment.dateCompare);
         return doctorAppointments;
     }
 }
