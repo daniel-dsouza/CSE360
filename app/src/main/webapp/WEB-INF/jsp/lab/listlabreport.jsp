@@ -12,33 +12,38 @@
 
     <jsp:body>
         <div class="container-fluid" id="target">
-            <div class="row" style="margin: 5px">
-                <h1>Lab Reports</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Lab Reports</h1>
+                </div>
             </div>
-            <div class="row" style="margin: 10px">
-                <c:if test="${empty list}">
-                    <div class="container" style="border-bottom-style: solid; border-width: 1px">
-                        <div class="text-center">No Lab Reports Available</div>
+            <c:if test="${empty list}">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>No Lab Reports Available</p>
                     </div>
-                </c:if>
-                <c:if test="${not empty list}">
-                    <c:forEach var="test" items="${list}">
-                        <div class="col-lg-12" style="border-bottom-style: solid; border-width: 1px">
-                            <div style="float: left; padding: 5px 5px 5px"> #${test.requestionID}</div>
-                            <div class="btn-group" style="float: right; padding: 5px 5px 5px">
-                                <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/view"
-                                   class="btn btn-info" role="button">View</a>
-                                <c:if test="${user.person.occupation == 'labstaff'}">
-                                    <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/edit"
-                                       class="btn btn-info" role="button">Edit</a>
-                                </c:if>
-                                <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/print"
-                                   class="btn btn-info" role="button">Print</a>
-                            </div>
+                </div>
+            </c:if>
+            <c:if test="${not empty list}">
+                <c:forEach var="test" items="${list}">
+                    <div class="row border_row"><div class="col-lg-12">
+                        <div style="float: left; padding: 5px 5px 5px">
+                            <h4>#${test.requestionID}</h4>
+                            <h5>for patient #${test.patient.userID}</h5>
                         </div>
-                    </c:forEach>
-                </c:if>
-            </div>
+                        <div class="btn-group-vertical" style="float: right; padding: 5px 5px 5px">
+                            <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/view"
+                               class="btn btn-info" role="button">View</a>
+                            <c:if test="${user.person.occupation == 'labstaff'}">
+                                <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/edit"
+                                   class="btn btn-info" role="button">Edit</a>
+                            </c:if>
+                            <a href="${pageContext.request.contextPath}/lab_report/${test.requestionID}/print"
+                               class="btn btn-info" role="button">Print</a>
+                        </div>
+                    </div></div>
+                </c:forEach>
+            </c:if>
         </div>
     </jsp:body>
 </t:template>

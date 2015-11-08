@@ -24,7 +24,7 @@
         </h2>
         <!-- used http://bootsnipp.com/snippets/featured/animated-radios-amp-checkboxes-nojs -->
         <form:form action="healthconditions" method="post" commandName="userInput">
-            <div class="container">
+            <div class="container-fluid">
                 <table class="table" style="margin-bottom: 0;border: none">
                     <tbody>
                     <tr>

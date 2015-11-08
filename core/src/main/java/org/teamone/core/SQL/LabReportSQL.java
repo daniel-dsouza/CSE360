@@ -2,6 +2,7 @@ package org.teamone.core.SQL;
 
 import org.teamone.core.labs.LabReport;
 import org.teamone.core.users.Patient;
+import org.teamone.core.users.Person;
 import org.teamone.core.users.Staff;
 
 import java.sql.*;
@@ -141,8 +142,12 @@ public class LabReportSQL {
                 new1.toMapObj(resultSet.getString("labReport"));
                 Patient pat = new Patient();
                 pat.setUserID(resultSet.getInt("patientID"));
-                Staff sta = new Staff();
-                sta.setUserID(resultSet.getInt("staffID"));
+                new1.setPatient(pat);
+                //Staff sta = new Staff();
+                //sta.setUserID(resultSet.getInt("staffID"));
+                Person per = new Person();
+                per.setUserID(resultSet.getInt("staffID"));
+                new1.setPerson(per);
                 labReportList.add(new1);
             }
         } catch (Exception e) {

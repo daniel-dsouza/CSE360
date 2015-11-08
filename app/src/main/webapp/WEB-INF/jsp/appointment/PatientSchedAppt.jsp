@@ -10,7 +10,7 @@
         <script type="text/javascript" src="/js/appointments.js"></script>
     </jsp:attribute>
     <jsp:body>
-        <div class="container"> <!-- don't forget your bootstrap html. do the basic tutorial... -->
+        <div class="container-fluid"> <!-- don't forget your bootstrap html. do the basic tutorial... -->
             <div class="row">
                 <!-- method is what do when done, commandName is what object from the model to put stuff into, action should be the name of your jsp. -->
                 <form:form method="post" commandName="appointment">

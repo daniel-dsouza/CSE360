@@ -22,7 +22,8 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <h1>${createoreditorview} Lab Report</h1>
+      <h1>${createoreditorview} Lab Report #${report.requestionID}</h1>
+      <p>Patient ID: ${report.patient.userID}</p>
     </div>
   </div>
 

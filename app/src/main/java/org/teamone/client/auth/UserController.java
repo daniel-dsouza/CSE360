@@ -19,19 +19,14 @@ import java.util.Map;
 @RequestMapping(value = "/user/")
 public class UserController {
 
-    //@Autowired
-    //private User user;
-
-//@Autowired
-    //private User user;
-
     @RequestMapping(value = "{userID}", method = RequestMethod.GET)
     public String view2(
             Map<String, Object> model,
             @PathVariable String userID,
             @ModelAttribute User user) {
+        if (user.getPerson() == null)
+            return "redirect:/login";
         System.out.println("Load User Home");
-        //System.out.println(user.getUsername());
         return "auth/user";
     }
 
@@ -43,8 +38,5 @@ public class UserController {
         //redirect to correct page.
 
         return "redirect:/login";
-
     }
-
-
 }

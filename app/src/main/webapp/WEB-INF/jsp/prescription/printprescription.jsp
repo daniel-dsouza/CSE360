@@ -8,7 +8,7 @@
 
 <t:template>
   <jsp:body>
-    <div class="container" style="text-align: center" id="section-to-print">
+    <div class="container-fluid" style="text-align: center" id="section-to-print">
       <h1>Prescription # ${prescription.prescriptionID}</h1>
       <div class="box" style="margin-left: 33%">
         <h3 style="text-align: left">Prescribing Doctor:<span style="margin-right: 15px"></span>${doc.firstName} ${doc.lastName}</h3>

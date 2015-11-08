@@ -15,19 +15,24 @@
             <div class="row" style="margin: 5px">
                 <h1>Start a Test</h1>
             </div>
-            <div class="row" style="margin: 10px">
-                <c:forEach var="request" items="${list}">
-                    <div class="col-lg-12" style="border-bottom-style: solid; border-width: 1px">
-                        <div style="float: left; padding: 5px 5px 5px"> #${request.requestionID}</div>
-                        <div class="btn-group" style="float: right; padding: 5px 5px 5px">
+            <c:forEach var="request" items="${list}">
+                <div class="row border_row">
+                <div class="col-lg-12">
+                    <div >
+                        <div style="float: left; padding: 5px 5px 5px">
+                            <h4>#${request.requestionID}</h4>
+                            <h5>for patient #${request.patient.userID}</h5>
+                        </div>
+                        <div class="btn-group-vertical" style="float: right; padding: 5px 5px 5px">
                             <a href="${pageContext.request.contextPath}/request_test/${request.requestionID}/view"
                                class="btn btn-info" role="button">View</a>
                             <a href="${pageContext.request.contextPath}/lab_report/${request.requestionID}/create"
                                class="btn btn-info" role="button">Create</a>
                         </div>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+                </div>
+            </c:forEach>
         </div>
     </jsp:body>
 </t:template>

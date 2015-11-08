@@ -25,7 +25,7 @@
     <jsp:body>
         <!-- used http://bootsnipp.com/snippets/featured/simple-login -->
         <form:form name="login" action="login" method="post" commandName="userInput">
-            <div class="container">
+            <div class="container-fluid">
 
                 <c:if test="${not empty errorMessage}">
                     <div class="row">
