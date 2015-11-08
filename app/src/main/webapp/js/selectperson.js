@@ -29,7 +29,7 @@ function getAppointments(patientID, callback) {
             for (var i = 0; i < len; i++) {
                 outputHTML +=
                     '<div class="mini_appointment"><div style="float: left; margin-right: 5px;">' +
-                    '<a href="appointment/edit/' + data[i].appointmentID + '" class="btn btn-info" role="button">Edit</a>' +
+                    //'<a href="appointment/edit/' + data[i].appointmentID + '" class="btn btn-info" role="button">Edit</a>' +
                     '</div>' +
                     '<div>' +
                     'Date: ' + data[i].date + '</br>' +
