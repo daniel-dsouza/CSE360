@@ -42,6 +42,7 @@ public class AppointmentListController {
 
     }
 
+
     @RequestMapping(value = "/delete/{appointmentID}", method = RequestMethod.GET)
     public String handlePostEdit(Map<String, Object> model,
                                  @PathVariable int appointmentID) { //this tells the method that there will be a field named appointment in the model
@@ -51,4 +52,23 @@ public class AppointmentListController {
 
         return "redirect:/appointment/list"; //this will need to be "redirect:somesuccesspage" at some point.
     }
+    @RequestMapping(value = "/doctor", method = RequestMethod.GET)
+    public String findDoctors(Map<String, Object> model, @ModelAttribute User user) {
+        if (user.getPerson() == null )
+            return "redirect:/login";
+        List<Appointment> doctorList; //Hashing strikes again.
+        System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
+        Appointment temp = new Appointment();
+        temp.setDoctorID(user.getPerson().getUserID());
+        doctorList = AppointmentSQL.viewAppointmentByDoctor(temp);
+        for (Appointment tem : doctorList) {
+            System.out.println("Appt ID: " + tem.getAppointmentID());
+        }
+        model.put("doctorList", doctorList);
+
+        return "appointment/DoctorList";//return the view with linked model
+
+    }
+
+
 }

@@ -235,7 +235,7 @@ public class AppointmentController {
         appt.setTempDocID(docID);
         model.put("appointment", appt);
         model.put("user", user);
-        return "appointment/createAppointment"; //return the view with linked model
+        return "appointment/createAppointmentHSP"; //return the view with linked model
 
     }
 
@@ -266,6 +266,38 @@ public class AppointmentController {
             Collections.sort(occupiedTimes, Appointment.dateCompare);
             model.put("list", occupiedTimes);
             return "appointment/createAppointment"; //failed to insert
+        }
+    }
+    @RequestMapping(value = "/createappointment/{docID}", method = RequestMethod.POST)
+    public String createAppointmentHSPPost(Map<String, Object> model,
+                                        @ModelAttribute("appointment") Appointment appt,
+                                        @ModelAttribute("user") User user) { //this tells the method that there will be a field named appointment in the model
+
+        if (user.getPerson() instanceof Doctor)
+            appt.setDoctorID(user.getPerson().getUserID());//Doctors can not change the id.
+        else
+            appt.setDoctorID(Integer.parseInt(appt.getTempDocID()));//must be a HSP person
+        //System.out.println("DocID: " + appt.getDoctorID());
+        System.out.println("Created appointment Date: " + appt.getDate());
+        //System.out.println("Time: " + appt.getTime());
+
+        if (AppointmentSQL.createAppointment(appt)) //Date time and doctor id
+        {
+            AppointmentSQL.schedAppointmentEmergencyAppt(appt);
+            return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
+        }
+
+        else {
+
+            appt.setFailedToInsert(1);
+            model.put("appointment", appt);
+
+            Doctor failed = new Doctor();
+            failed.setUserID(appt.getDoctorID());
+            List occupiedTimes = AppointmentSQL.getOccupiedTimes(failed);
+            Collections.sort(occupiedTimes, Appointment.dateCompare);
+            model.put("list", occupiedTimes);
+            return "appointment/createAppointmentHSP"; //failed to insert
         }
     }
 }

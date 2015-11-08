@@ -97,6 +97,11 @@ public class AppointmentSQL {
                 String reason = resultSet.getString("reason");
                 int patID = resultSet.getInt("patientID");
 
+                Patient pat1 = new Patient();
+
+                pat1.setName(LoginSQL.getName(patID));
+                pat1.splitName((pat1.getName()));
+
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
                 System.out.println("Reason:\t" + reason);
@@ -107,6 +112,7 @@ public class AppointmentSQL {
                 new1.setReason(reason);
                 new1.setPatientID(patID);
                 new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                new1.setPatient(pat1);
                 a1.add(new1);
 
             }
@@ -197,6 +203,8 @@ public class AppointmentSQL {
                 Staff temp = new Staff();
                 temp.setUserID(docID);
                 Staff doc1 = DoctorSQL.getStaffComplete(temp);
+
+
 
                 /*System.out.println("Date:\t" + date);
                 System.out.println("Time:\t" + time);
@@ -507,6 +515,62 @@ public class AppointmentSQL {
             preparedStatement.setString(1, reason);
             preparedStatement.setInt(2, patID);
             preparedStatement.setInt(3, appID);
+            checker = preparedStatement.executeUpdate();
+
+
+            if (checker == 0)
+                Result = false;
+            else
+                Result = true;
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            Result = false;
+        } finally {
+            close();
+        }
+        return Result;
+
+    }
+
+    /**
+     * Schedule an existing appointment by doctorID, date, and time. This is because SQL is preloaded with patientID set to NULL
+     *
+     * @param readMe Appointment Object with valid doctorID
+     * @return Boolean
+     */
+    public static Boolean schedAppointmentEmergencyAppt(Appointment readMe) {
+        Boolean Result;
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int appID = readMe.getAppointmentID();
+            int patID = readMe.getPatientID();
+            int docID = readMe.getDoctorID();
+            String date = readMe.getDate();
+            String time = readMe.getTime();
+            String reason = readMe.getReason();
+
+            System.out.println(reason);
+            System.out.println(patID);
+
+
+            String updateApp = "UPDATE appointment SET"
+                    + " reason = ?, patientID = ? WHERE doctorID = ? AND date = ? AND time = ?;";
+
+            preparedStatement = connect.prepareStatement(updateApp);
+            preparedStatement.setString(1, reason);
+            preparedStatement.setInt(2, patID);
+            preparedStatement.setInt(3, docID);
+            preparedStatement.setString(4, date);
+            preparedStatement.setString(5, time);
             checker = preparedStatement.executeUpdate();
 
 
