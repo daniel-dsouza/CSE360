@@ -2,9 +2,15 @@ group 'teamone'
 version '1.0-SNAPSHOT'
 
 println name
-
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
 subprojects {
-    apply plugin: 'java' 
+    apply plugin: 'java'
 
     repositories {
         mavenCentral()
@@ -12,7 +18,7 @@ subprojects {
     }
 
     test {
-        outputs.upToDateWhen {false}
+        outputs.upToDateWhen { false }
         afterTest { desc, result ->
             println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
         }

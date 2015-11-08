@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.SQL.PrescriptionSQL;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Patient;
@@ -26,7 +25,12 @@ public class NavbarAttributes {
 
     @ModelAttribute
     public void setNavbar(Map<String, Object> model) {
-        System.out.println("loading navbar");
+        java.util.Date dateAndTime= new java.util.Date();
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat("h:mm:ss a");
+        String Time = sdf.format(dateAndTime);
+
+        System.out.println("loading navbar " + Time);
         model.put("user", user);
         model.put("pageactions", new TreeMap<String, String>());
         model.put("readonly", false);

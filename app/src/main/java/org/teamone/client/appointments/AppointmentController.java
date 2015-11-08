@@ -261,7 +261,7 @@ public class AppointmentController {
 
             Doctor failed = new Doctor();
             failed.setUserID(appt.getDoctorID());
-            List occupiedTimes = AppointmentSQL.getOccupiedTimes(failed);
+            List<Appointment> occupiedTimes = AppointmentSQL.getOccupiedTimes(failed);
 
             Collections.sort(occupiedTimes, Appointment.dateCompare);
             model.put("list", occupiedTimes);
@@ -294,7 +294,7 @@ public class AppointmentController {
 
             Doctor failed = new Doctor();
             failed.setUserID(appt.getDoctorID());
-            List occupiedTimes = AppointmentSQL.getOccupiedTimes(failed);
+            List<Appointment> occupiedTimes = AppointmentSQL.getOccupiedTimes(failed);
             Collections.sort(occupiedTimes, Appointment.dateCompare);
             model.put("list", occupiedTimes);
             return "appointment/createAppointmentHSP"; //failed to insert

@@ -67,7 +67,11 @@ public class AlertController {
         if (isEmergency || user.getPerson() instanceof HSP)//HSP override
         {
             if (AlertSQL.areThereAlerts()) {
-                System.out.println("Alerts Detected");
+                java.util.Date dateAndTime= new java.util.Date();
+                java.text.SimpleDateFormat sdf =
+                        new java.text.SimpleDateFormat("h:mm:ss a");
+                String Time = sdf.format(dateAndTime);
+                System.out.println("Alerts Detected " + Time);
                 temp1.setAlertsPresent(1);
                 user.doctor.setAlertsPresent(1);
             } else {
