@@ -79,7 +79,7 @@ public class SelectPatientController {
 
         Map<String, String> actions = new LinkedHashMap<String, String>();
 
-        actions.put("medical_history", "Medical History");
+
 
         if (user.getPerson() instanceof Doctor) {
             actions.put("health_conditions", "Health Conditions");
@@ -89,6 +89,7 @@ public class SelectPatientController {
         }
 
         if (user.getPerson() instanceof HSP) {
+            actions.put("medical_history", "Medical History");
             actions.put("e_prescribe", "View Prescriptions");
             actions.put("edit_info", "Update Personal");
         }

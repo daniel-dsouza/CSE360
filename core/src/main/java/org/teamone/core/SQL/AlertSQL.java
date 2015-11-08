@@ -17,6 +17,7 @@ public class AlertSQL {
 
     /**
      * This is will set alert to be false
+     *
      * @param alert: Alert with valid alertID.
      * @return true or false
      */
@@ -53,22 +54,21 @@ public class AlertSQL {
     }
 
     /**
-     *
      * @return Boolean. true if there is atleast 1 alert. false if none
      */
     public static Boolean areThereAlerts() {
-
+        Connection connect1 = null;
         Boolean result = false;
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            connect1 = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
-            preparedStatement = connect.prepareStatement("SELECT alert_id FROM alerts WHERE AlertActive = 1;");
+            preparedStatement = connect1.prepareStatement("SELECT alert_id FROM alerts WHERE AlertActive = 1;");
             resultSet = preparedStatement.executeQuery();
-            if(resultSet.first())//if Resultset does exist,
+            if (resultSet.first())//if Resultset does exist,
             {
                 result = true;
             }
@@ -77,6 +77,13 @@ public class AlertSQL {
             System.out.println(e);
             result = false;
         } finally {
+            try {
+                if (connect1 != null) {
+                    connect1.close();
+                }
+            } catch (Exception e) {
+
+            }
             close();
         }
         return result;
@@ -84,6 +91,7 @@ public class AlertSQL {
 
     /**
      * get list of alerts
+     *
      * @return arraylist
      */
     public static ArrayList<Alert> getListAlerts() {
@@ -157,6 +165,7 @@ public class AlertSQL {
         }
         return alertList;
     }
+
     // You need to close the resultSet
     private static void close() {
         try {

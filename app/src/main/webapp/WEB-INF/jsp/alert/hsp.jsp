@@ -14,6 +14,7 @@
             <!--
             $(document).ready(function () {
                 loadAlertsHsp('target');
+                setInterval("loadAlertsHsp('target')", 21000);
             });
             //-->
         </script>
@@ -58,7 +59,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
-                                                <div class="panel panel-default">
+                                                <div class="panel panel-default " style="overflow:scroll;height:290px;width:100%;overflow:auto">
                                                     <div class="panel-heading">
                                                         <h6 class="panel-title">Appointments</h6>
                                                     </div>

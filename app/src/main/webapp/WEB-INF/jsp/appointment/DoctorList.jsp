@@ -34,10 +34,6 @@
                             <div class="col-sm-2"> ${appt.date}</div>
                             <div class="col-sm-1"> ${appt.time}</div>
                             <div class="col-sm-1"> ${appt.patient.patientInformation.firstName}</div>
-                            <div class="col-sm-2">
-                                <a href="${pageContext.request.contextPath}/appointment/edit/${appt.appointmentID}"
-                                   class="btn btn-info" role="button">Edit appointment</a>
-                            </div>
                         </div>
                     </div>
                 </c:forEach>
