@@ -10,10 +10,7 @@ import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.users.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by daniel on 10/28/15.
@@ -128,6 +125,7 @@ public class SelectPatientController {
         Appointment a = new Appointment();
         a.setPatientID(patientID);
         List<Appointment> patientAppointments = AppointmentSQL.viewAppointmentByPatient(a);
+        Collections.sort(patientAppointments, Appointment.dateCompare);
         return patientAppointments;
     }
 

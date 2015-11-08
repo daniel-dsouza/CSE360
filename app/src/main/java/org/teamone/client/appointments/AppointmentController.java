@@ -59,6 +59,7 @@ public class AppointmentController {
         Doctor new1 = new Doctor();
         new1.setUserID(id);
         ArrayList<Appointment> dateList = AppointmentSQL.getAvailableDoctorTimes(new1);
+        Collections.sort(dateList, Appointment.dateCompare);
         System.out.println(name); //DEBUG statements
         System.out.println("returning date and time list");
         return dateList; //return JSON object
