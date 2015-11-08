@@ -5,10 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.teamone.client.generic.User;
 import org.teamone.core.SQL.AlertSQL;
+import org.teamone.core.SQL.AppointmentSQL;
+import org.teamone.core.SQL.DoctorSQL;
+import org.teamone.core.appointments.Appointment;
 import org.teamone.core.users.Alert;
 import org.teamone.core.users.Doctor;
+import org.teamone.core.users.HSP;
+import org.teamone.core.users.Staff;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,7 +53,19 @@ public class AlertController {
     @ResponseBody
     Doctor checkAlert(@ModelAttribute("user") User user) {
         Doctor temp1 = new Doctor();
-        if (user.getPerson() != null && user.getDoctor() != null && user.doctor.getSpecialty().equals("Emergency")) {
+        Boolean isEmergency = false;//use this to prevent null pointer since doctor may not be created
+
+        if (user.getDoctor() != null) //if doctor
+        {
+            if (user.doctor.getSpecialty() != null)// if specialty exists
+            {
+                if (user.doctor.getSpecialty().equals("Emergency")) {
+                    isEmergency = true;
+                }
+            }
+        }
+        if (isEmergency || user.getPerson() instanceof HSP)//HSP override
+        {
             if (AlertSQL.areThereAlerts()) {
                 System.out.println("Alerts Detected");
                 temp1.setAlertsPresent(1);
@@ -83,5 +101,44 @@ public class AlertController {
     @RequestMapping(method = RequestMethod.GET)
     String displayAlerts(Map<String, Object> model) {
         return "alert/alert";
+    }
+
+    @RequestMapping(value = "/hsp", method = RequestMethod.GET)
+    public String resolveAlert(Map<String, Object> model) {
+        System.out.println("Getting Emergency doctor list");
+        ArrayList<Staff> doctorList;
+        doctorList = DoctorSQL.getListDoctorSpecialty("Emergency");
+        model.put("docList", doctorList);
+        return "alert/hsp";
+    }
+
+    /**
+     * AJAX handler to return doctor object
+     *
+     * @return list of alerts as JSON objects
+     */
+    @RequestMapping(value = "/getdoctorinfo/{doctorID}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Staff getPatientInformation(@PathVariable("doctorID") int doctorID) {
+        Staff staff = new Staff();
+        staff.setUserID(doctorID);
+        Staff sendBack = DoctorSQL.getStaffComplete(staff);
+        return sendBack; //return JSON object
+    }
+
+    /**
+     * AJAX handler to return a doctor's appointments.
+     *
+     * @return list of alerts as JSON objects
+     */
+    @RequestMapping(value = "/getdoctorappt/{doctorID}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Appointment> getDoctorAppointments(@PathVariable("doctorID") int doctorID) {
+        Appointment a = new Appointment();
+        a.setDoctorID(doctorID);
+        List<Appointment> doctorAppointments = AppointmentSQL.viewAppointmentByDoctor(a);
+        return doctorAppointments;
     }
 }

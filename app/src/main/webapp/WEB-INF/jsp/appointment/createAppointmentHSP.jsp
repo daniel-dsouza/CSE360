@@ -18,7 +18,7 @@
         <script type="text/javascript" src="/js/datepaginator/datepaginator.js"></script>
     </jsp:attribute>
     <jsp:body>
-        <div class="container">
+        <div class="container-fluid">
             <h2>Create an Appointment</h2>
             <form:form method="post" commandName="appointment" onsubmit="return getDate()">
                 <c:if test="${appointment.failedToInsert == 1}">
@@ -93,17 +93,35 @@
 
 
                         <div class="form-class">
-                            <c:if test="${user.person.occupation == 'hsp'}">
-                                <br><label class="col-md-4 control-label" for="docID">Doctor ID</label>
 
-                                <div class="col-md-4">
-                                    <form:input id="docID" size='3' path="tempDocID"
-                                                class="readonly" type="number" min="501" max="511" step="1"
-                                                maxlength="10"
-                                                autofocus="autofocus"
-                                                required="required"/>
-                                </div>
-                            </c:if>
+                            <br><label class="col-md-4 control-label" for="docID">Doctor ID</label>
+
+                            <div class="col-md-4">
+                                <form:input id="docID" size='3' path="tempDocID"
+                                            class="readonly" type="number" min="501" max="511" step="1"
+                                            maxlength="10"
+                                            autofocus="autofocus"
+                                            required="required"/>
+                            </div>
+
+                        </div>
+
+                        <div class="form-class">
+
+                            <br><label class="col-md-4 control-label" for="patID">Patient ID</label>
+                            <div class="col-md-4">
+                                <form:input id="patID" size='3' path="patient.userID"
+                                            class="readonly" type="number" min="1001" step="1"
+                                            maxlength="10"
+                                            autofocus="autofocus"
+                                            required="required"/>
+                                <td>Reason*:</td>
+                                <td>
+                                    <form:input class='form-control' size='4' type='text' path="reason" id="reason"
+                                                required="true"/> <!-- name can only be letters -->
+                                </td>
+                            </div>
+
                         </div>
 
                         <div class="button_holder" style="text-align: center;">

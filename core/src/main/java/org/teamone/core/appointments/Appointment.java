@@ -14,7 +14,7 @@ public class Appointment implements Comparable<Appointment>{
     private int appointmentID;
     private String date;//date is 01/01/2001
     private String time;//time is 3:00 PM
-    private String tempID;
+    private String tempDocID;
     private Staff doctor;
     private String reason;
     private Patient patient;
@@ -108,12 +108,12 @@ public class Appointment implements Comparable<Appointment>{
         this.reason = reason;
     }
 
-    public String getTempID() {
-        return tempID;
+    public String getTempDocID() {
+        return tempDocID;
     }
 
-    public void setTempID(String tempID) {
-        this.tempID = tempID;
+    public void setTempDocID(String tempDocID) {
+        this.tempDocID = tempDocID;
     }
 
     public int getFailedToInsert() {

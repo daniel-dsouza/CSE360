@@ -53,9 +53,16 @@
                 </li>
             </c:forEach>
             <c:if test="${user.doctor.specialty == 'Emergency'}">
-                <li id="alert" class="blink">
+                <li id="alert" class="blink" style="display: none">
                     <a href="${pageContext.request.contextPath}/alert">
                         <c:out value="Emergency Room"/>
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${user.person.occupation == 'hsp'}">
+                <li id="alert" class="blink" style="display: none">
+                    <a href="${pageContext.request.contextPath}/alert/hsp">
+                        <c:out value="Contact Doctors"/>
                     </a>
                 </li>
             </c:if>
