@@ -26,7 +26,7 @@
         <div class="container-fluid" id="target" style="overflow:scroll;height:140px;width:100%;overflow:auto">
 
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div style="margin: 20px">
                 <!-- Page header -->
                 <div class="row">

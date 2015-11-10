@@ -69,8 +69,8 @@
                         <br>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="timeselect">Time</label>
-                            <br>
+                            <br><label class="col-md-4 control-label" for="timeselect">Time</label>
+
 
                             <div class="col-md-4">
                                 <form:select id="timeselect" name="timeselect" path="time" class="form-control">
@@ -94,7 +94,7 @@
 
                         <div class="form-class">
 
-                            <br><label class="col-md-4 control-label" for="docID">Doctor ID</label>
+                            <br><br><label class="col-md-4 control-label" for="docID">Doctor ID</label>
 
                             <div class="col-md-4">
                                 <form:input id="docID" size='3' path="tempDocID"
@@ -108,22 +108,28 @@
 
                         <div class="form-class">
 
-                            <br><label class="col-md-4 control-label" for="patID">Patient ID</label>
+                            <br><br><label class="col-md-4 control-label" for="patID">Patient ID</label>
+
                             <div class="col-md-4">
                                 <form:input id="patID" size='3' path="patient.userID"
                                             class="readonly" type="number" min="1001" step="1"
                                             maxlength="10"
                                             autofocus="autofocus"
                                             required="required"/>
-                                <td>Reason*:</td>
-                                <td>
-                                    <form:input class='form-control' size='4' type='text' path="reason" id="reason"
-                                                required="true"/> <!-- name can only be letters -->
-                                </td>
+
                             </div>
 
                         </div>
+                        <div class="form-class">
+                            <br><br><label class="col-md-4 control-label" for="reason">Reason:</label>
 
+                            <div class="col-md-4">
+                                <form:input class='form-control' size='4' type='text' path="reason" id="reason"
+                                            required="true"/> <!-- name can only be letters -->
+
+                            </div>
+
+                        </div>
                         <div class="button_holder" style="text-align: center;">
                             <br><br>
                             <span class="group-btn">

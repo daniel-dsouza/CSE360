@@ -16,12 +16,12 @@
                 <h1>Appointments</h1>
             </div>
             <c:if test="${empty doctorList}">
-                <div class="container" style="border-bottom-style: solid; border-width: 1px">
+                <div class="container-fluid" style="border-bottom-style: solid; border-width: 1px">
                     <div class="text-center">No Appointments Available</div>
                 </div>
             </c:if>
             <c:if test="${not empty doctorList}">
-                <div class="container" style="border-bottom-style: solid; border-width: 1px">
+                <div class="container-fluid" style="border-bottom-style: solid; border-width: 1px">
                     <div class="col-sm-2 col-sm-offset-1">Reason</div>
                     <div class="col-sm-2">Date</div>
                     <div class="col-sm-1">Time</div>
@@ -29,7 +29,7 @@
                 </div>
                 <c:forEach var="appt" items="${doctorList}">
                     <div class="row" style="margin: 5px">
-                        <div class="container" style="border-bottom-style: solid; border-width: 1px">
+                        <div class="container-fluid" style="border-bottom-style: solid; border-width: 1px">
                             <div class="col-sm-2 col-sm-offset-1"> ${appt.reason}</div>
                             <div class="col-sm-2"> ${appt.date}</div>
                             <div class="col-sm-1"> ${appt.time}</div>

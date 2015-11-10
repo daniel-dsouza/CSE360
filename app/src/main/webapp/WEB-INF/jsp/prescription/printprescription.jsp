@@ -18,7 +18,7 @@
         <h3 style="text-align: left">Amount (quantity):<span style="margin-right: 23px"></span>${prescription.quantity}</h3>
       </div>
     </div>
-    <div class="container" style="text-align: center">
+    <div class="container-fluid" style="text-align: center">
       <div class="button_holder">
         <div class="row" style="column-count: 2; -webkit-column-count: 2; -moz-column-count: 2;">
           <div style="text-align: right">
