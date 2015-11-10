@@ -55,6 +55,8 @@ function startDate() {
 
 function getDate() {
 
+    var bool = 0;//0 is false
+
     if (!selected) //http://stackoverflow.com/questions/5515310/is-there-a-standard-function-to-check-for-null-undefined-or-blank-variables-in
     {
         alert("Please choose a future date");
@@ -72,12 +74,20 @@ function getDate() {
         var current = [year, month, day].join('-');
         if (selected < current) {
             alert("Please choose a future date");
-            return false;
+            bool = 0;
         } else {
             document.getElementById('day').value = selected;
-            return true;
+            bool = 1;
         }
     }
 
-
+    var reason = $("#reason").val();
+    //http://jsfiddle.net/5vzZf/1/
+    if (reason.match(/\s/g)){
+        //alert('There is a space! The username is "' + username + '"');
+    } else {
+        alert('You must use atleast one space between the words');
+        bool = 0;
+    }
+    return bool;
 };
