@@ -9,7 +9,7 @@
         showEmergencyRoom('alert');
         setInterval("showEmergencyRoom('alert')", 10000);
         loadAlertsPopUp('alert');
-        setInterval("loadAlertsPopUp('alert')", 59000);
+        setInterval("loadAlertsPopUp('alert')", 31111);
     });
     //-->
 </script>
