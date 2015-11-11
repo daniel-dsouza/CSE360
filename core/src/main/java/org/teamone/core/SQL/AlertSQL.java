@@ -39,10 +39,7 @@ public class AlertSQL {
             preparedStatement.setInt(1, alertID);
             checker = preparedStatement.executeUpdate();
 
-            if (checker == 0)
-                boolResult = false;
-            else
-                boolResult = true;
+            boolResult = checker != 0;
 
         } catch (Exception e) {
             System.out.println(e);

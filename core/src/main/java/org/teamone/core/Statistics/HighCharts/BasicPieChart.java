@@ -33,7 +33,7 @@ public class BasicPieChart extends HighChart {
      * @param input
      */
     public void addData(String name, Map<String,Double> input) {
-        ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();;
+        ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
         for (String key : input.keySet()) {
             ArrayList<Object> list = new ArrayList<Object>();
             list.add(key);

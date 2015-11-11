@@ -17,8 +17,7 @@ function getPersonalInfo(patientID, callback) {
             alert("error getting list.")
         }
     });
-};
-
+}
 function getAppointments(patientID, callback) {
     $.ajax('/select_patient/getpatientappointments/' + patientID, {
         type: 'GET',
@@ -42,8 +41,7 @@ function getAppointments(patientID, callback) {
             alert("error getting list.")
         }
     });
-};
-
+}
 function getAlerts(patientID, callback) {
     $.ajax('/select_patient/getpatientalerts/' + patientID, {
         type: 'GET',
@@ -63,8 +61,7 @@ function getAlerts(patientID, callback) {
             alert("error getting list.")
         }
     });
-};
-
+}
 $(document).ready(function () {
     $('.panel-collapse').on('shown.bs.collapse', function (e) {
         //alert('Collapsible element ' + e.currentTarget.id + 'has been completely opened .');
