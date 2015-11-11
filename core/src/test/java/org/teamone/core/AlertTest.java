@@ -8,6 +8,8 @@ import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Alert;
 import org.teamone.core.users.Patient;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertTrue;
 
 public class AlertTest {
@@ -39,6 +41,22 @@ public class AlertTest {
         boolean check = AlertSQL.setAlertOff(test);
         //assertTrue("Failed to set alert off", check);//uncomment when read to test
         System.out.println("Off successful");
+        System.out.println(TestStrings.testEnd);
+    }
+
+    @Test
+    public void checkAlertPopUp() {
+        System.out.println("\nTest========Checking for alerts within a 5min");
+        ArrayList<Alert> testArr = AlertSQL.getListAlertsPopUp();
+        if(testArr!=null ) {
+            Alert tempAlert;
+
+            for (int i = 0; i < testArr.size(); i++) {
+                tempAlert = testArr.get(i);
+                System.out.println("Patient ID: " + tempAlert.getPatientID() + " has reason " + tempAlert.getReason());
+                System.out.println("Timestamp: " + tempAlert.getAlertDateAndTime());
+            }
+        }
         System.out.println(TestStrings.testEnd);
     }
 

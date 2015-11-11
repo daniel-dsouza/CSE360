@@ -14,7 +14,7 @@
             <!--
             $(document).ready(function () {
                 loadAlertsHsp('target');
-                setInterval("loadAlertsHsp('target')", 21000);
+                setInterval("loadAlertsHsp('target')", 6000);
             });
             //-->
         </script>
