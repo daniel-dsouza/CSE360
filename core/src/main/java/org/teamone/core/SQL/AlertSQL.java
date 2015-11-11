@@ -3,7 +3,10 @@ package org.teamone.core.SQL;
 import org.teamone.core.users.Alert;
 import org.teamone.core.users.Patient;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -11,10 +14,7 @@ import java.util.ArrayList;
  * Created by Ryan on 10/22/2015.
  */
 public class AlertSQL {
-    private static Connection connect = null;
-    private static Statement statement = null;
-    private static PreparedStatement preparedStatement = null;
-    private static ResultSet resultSet = null;
+
 
     /***
      * Checks if alerts exist in a timespan of 2 min
@@ -22,7 +22,6 @@ public class AlertSQL {
      * @param time1 takes the alertDateAndTime of an alert
      * @return True if the alert's time is within 5 minutes of the time.
      */
-
     public static Boolean isTimeWithin5Min(String time1) {
 
         java.util.Date dateToday = new java.util.Date();
@@ -89,11 +88,10 @@ public class AlertSQL {
      * @param alert: Alert with valid alertID.
      * @return true or false
      */
-
-
     public static Boolean setAlertOff(Alert alert) {
         boolean boolResult;
-
+        Connection connect = null;
+        PreparedStatement preparedStatement = null;
         try {
             int checker;
             // This will load the MySQL driver, each DB has its own driver
@@ -115,7 +113,17 @@ public class AlertSQL {
             System.out.println(e);
             boolResult = false;
         } finally {
-            close();
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         return boolResult;
     }
@@ -124,16 +132,18 @@ public class AlertSQL {
      * @return Boolean. true if there is atleast 1 alert. false if none
      */
     public static Boolean areThereAlerts() {
-        Connection connect1 = null;
+        Connection connect = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Boolean result = false;
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
             System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-            connect1 = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
-            preparedStatement = connect1.prepareStatement("SELECT alert_id FROM alerts WHERE AlertActive = 1;");
+            preparedStatement = connect.prepareStatement("SELECT alert_id FROM alerts WHERE AlertActive = 1;");
             resultSet = preparedStatement.executeQuery();
             if (resultSet.first())//if Resultset does exist,
             {
@@ -145,13 +155,27 @@ public class AlertSQL {
             result = false;
         } finally {
             try {
-                if (connect1 != null) {
-                    connect1.close();
+                if (connect != null) {
+                    connect.close();
                 }
             } catch (Exception e) {
 
             }
-            close();
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         return result;
     }
@@ -162,7 +186,9 @@ public class AlertSQL {
      * @return arraylist
      */
     public static ArrayList<Alert> getListAlerts() {
-
+        Connection connect = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         ArrayList<Alert> alertList = new ArrayList<Alert>();
         try {
             // This will load the MySQL driver, each DB has its own driver
@@ -188,7 +214,21 @@ public class AlertSQL {
             System.out.println(e);
             alertList = null;
         } finally {
-            close();
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         return alertList;
     }
@@ -199,7 +239,9 @@ public class AlertSQL {
      * @return arraylist
      */
     public static ArrayList<Alert> getListAlertsPopUp() {
-
+        Connection connect = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         ArrayList<Alert> alertList = new ArrayList<Alert>();
         ;
         try {
@@ -238,7 +280,21 @@ public class AlertSQL {
             System.out.println(e);
             alertList = null;
         } finally {
-            close();
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         return alertList;
     }
@@ -250,7 +306,9 @@ public class AlertSQL {
      * @return arraylist
      */
     public static ArrayList<Alert> getListAlertsByPatient(Patient pat1) {
-
+        Connection connect = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         ArrayList<Alert> alertList = new ArrayList<Alert>();
         try {
             // This will load the MySQL driver, each DB has its own driver
@@ -278,27 +336,22 @@ public class AlertSQL {
             System.out.println(e);
             alertList = null;
         } finally {
-            close();
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+
+                if (connect != null) {
+                    connect.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
         return alertList;
-    }
-
-    // You need to close the resultSet
-    private static void close() {
-        try {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (statement != null) {
-                statement.close();
-            }
-
-            if (connect != null) {
-                connect.close();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 }
