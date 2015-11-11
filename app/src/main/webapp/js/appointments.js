@@ -10,7 +10,7 @@ function loadDoctors() {
             var outputHTML = '<option value="">List of Doctors</option>';
             var len = data.length;
             for (var i = 0; i < len; i++) {
-                outputHTML += '<option value="' + data[i].name + '">' + data[i].firstName + '</option>';
+                outputHTML += '<option value="' + data[i].userID + '">' + data[i].firstName + '</option>';
             }
             outputHTML += '</option>';
 

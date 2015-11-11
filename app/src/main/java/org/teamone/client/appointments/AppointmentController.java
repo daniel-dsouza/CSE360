@@ -106,38 +106,60 @@ public class AppointmentController {
          */
         model.put("appointment", appointment1);
         model.put("speclist", speclist);
+
         Map<String, String> doctorsList = new LinkedHashMap<String, String>();
         doctorsList.put("", "List of Doctors");
         model.put("doctorlist", doctorsList);
 
-
+/*
         Map<String, String> dateList = new LinkedHashMap<String, String>();
         dateList.put("0", "List of Times");
         model.put("dateList", dateList);
-
+*/
         Map<String, String> reason = new LinkedHashMap<String, String>();
 
         model.put("reason", reason);
 
         //System.out.println(model); //debug statement
-        return "appointment/PatientSchedAppt"; //return the view with linked model
+        return "appointment/createAppointmentHSPCOPY"; //return the view with linked model
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String handlePost(Map<String, Object> model,
                              @ModelAttribute("appointment") Appointment ap1,
+                             @ModelAttribute("special")  LinkedHashMap<String, String> speclist1,
+                             @ModelAttribute("doctor")  LinkedHashMap<String, String> doctorsList1,
                              @ModelAttribute("user") User user) { //this tells the method that there will be a field named appointment in the model
 
         System.out.println(ap1.getDoctorSpec());
-        System.out.println(ap1.getDoctorName());
+        int docID = Integer.parseInt(ap1.getTempDocID());
+        ap1.getDoctor().splitName(LoginSQL.getName(docID));
         System.out.println(ap1.getReason());
-        System.out.println(ap1.getAppointmentID());
         System.out.println(user.getPerson().getUserID());
         ap1.setPatientID(user.getPerson().getUserID());
+        ap1.setDoctorID(docID);
+        System.out.println(ap1.getDoctorID());
+        if (AppointmentSQL.createAppointment(ap1)) //Date time and doctor id
+        {
+            AppointmentSQL.schedAppointmentEmergencyAppt(ap1);
+            return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
+        }
 
-        AppointmentSQL.schedAppointmentAppt(ap1);//just need patient ID and reason to be updated. appointmentID will be used to find the SQL row
+        else {
 
-        return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
+            ap1.setFailedToInsert(1);
+            model.put("appointment", ap1);
+            model.put("speclist", speclist1);
+
+            model.put("doctorlist", doctorsList1);
+
+            Doctor failed = new Doctor();
+            failed.setUserID(ap1.getDoctorID());
+            List<Appointment> occupiedTimes = AppointmentSQL.getOccupiedTimes(failed);
+            Collections.sort(occupiedTimes, Appointment.dateCompare);
+            model.put("list", occupiedTimes);
+            return "appointment/createAppointmentHSPCOPY"; //failed to insert
+        }
     }
 
     @RequestMapping(value = "/edit/{appointmentID}", method = RequestMethod.GET)
