@@ -153,6 +153,7 @@ public class AppointmentController {
         appt.setAppointmentID(appointmentID);
         Appointment current = AppointmentSQL.viewAppointmentByApptID(appt);
 
+
         //TODO: add extra stuff here.
         model.put("appointment", current);
 

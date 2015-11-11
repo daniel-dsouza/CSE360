@@ -64,6 +64,32 @@ function loadAlertsHsp(element) {
     });
 };
 
+function loadAlertsPopUp(divid) {
+    var alertID = document.getElementById(divid);
+    if (alertID != null) //since alert div id only shows up in emergency, we can make a check for it
+    {
+        $.ajax('/alert/getalertspopup', {
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                var outputHTML = 'Emergency Alert detected\n\n';
+                outputHTML += '==========================\n'
+                var len = data.length;
+                for (var i = 0; i < len; i++) {
+                    outputHTML +=
+                        'Patient#: ' + data[i].patientID + '\nTime: ' + data[i].alertDateAndTime + '\n' +
+                        'Reason: ' + data[i].reason + '\n==========================\n';
+                }
+                alert(outputHTML);
+            },
+            error: function () {
+                //alert("error getting list.")
+            }
+        });
+    }
+};
+
 function resolvealert(divid, alertid) {
     $.ajax('/alert/resolvealert/' + alertid, {
         type: 'GET',

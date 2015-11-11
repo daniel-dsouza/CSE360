@@ -4,9 +4,8 @@ import org.teamone.core.users.Alert;
 import org.teamone.core.users.Patient;
 
 import java.sql.*;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Created by Ryan on 10/22/2015.
@@ -19,6 +18,7 @@ public class AlertSQL {
 
     /***
      * Checks if alerts exist in a timespan of 2 min
+     *
      * @param time1 takes the alertDateAndTime of an alert
      * @return True if the alert's time is within 5 minutes of the time.
      */
@@ -46,44 +46,41 @@ public class AlertSQL {
             e.printStackTrace();
         }
 
-        if (appointmentDate.compareTo(dateToday) == 0)
-        {
+        if (appointmentDate.compareTo(dateToday) == 0) {
             SimpleDateFormat convertToTime = new SimpleDateFormat("HH:mm:ss");
 
             java.util.Date alertTime = new java.util.Date();
             java.util.Date currentTime = new java.util.Date();
 
-            java.util.Date fiveMin = new java.util.Date(System.currentTimeMillis()+5*60*1000);
-            String fiveMinStr = "";
+            java.util.Date tenMin = new java.util.Date(System.currentTimeMillis() - 10 * 60 * 1000);
+            String tenMinStr = "";
             String cTime = "";
             String time = "";
             int positionTime = 0;
-            positionTime = 1+time1.indexOf(" ");
+            positionTime = 1 + time1.indexOf(" ");
 
             time = time1.substring(positionTime);
             cTime = convertToTime.format(currentTime);
-            fiveMinStr = convertToTime.format(fiveMin);
+            tenMinStr = convertToTime.format(tenMin);
 
-            System.out.println("alert Time: "+time+"\ncurrent Time: "+cTime+"\nfive minutes from now: "+fiveMinStr);
+            System.out.println("alert Time: " + time + "\ncurrent Time: " + cTime + "\nfive minutes from now: " + tenMinStr);
 
             try {
                 alertTime = convertToTime.parse(time);
                 currentTime = convertToTime.parse(cTime);
-                fiveMin = convertToTime.parse(fiveMinStr);
+                tenMin = convertToTime.parse(tenMinStr);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            if (alertTime.compareTo(currentTime) >= 0 && alertTime.compareTo(fiveMin) <= 0)
+            if (alertTime.compareTo(currentTime) <= 0 && alertTime.compareTo(tenMin) >= 0)
                 return true;
             else
                 return false;
 
-        }
-        else return false;
+        } else return false;
     }
-
 
 
     /**
@@ -185,6 +182,56 @@ public class AlertSQL {
                 a.setAlertDateAndTime(resultSet.getString("alertDateAndTime"));
                 a.setAlertStatus(true);
                 alertList.add(a);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+            alertList = null;
+        } finally {
+            close();
+        }
+        return alertList;
+    }
+
+    /**
+     * get list of alerts within a 5min range
+     *
+     * @return arraylist
+     */
+    public static ArrayList<Alert> getListAlertsPopUp() {
+
+        ArrayList<Alert> alertList = new ArrayList<Alert>();
+        ;
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            preparedStatement = connect.prepareStatement("SELECT alert_id,  alert_reason,  doctor_id,  patient_id, alertDateAndTime  FROM alerts WHERE AlertActive = 1;");
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.first())//atleast one alert
+            {
+                do {
+                    String alertTime = resultSet.getString("alertDateAndTime");
+                    //System.out.println("Alert ID:" + resultSet.getInt("alert_id"));
+                    if (isTimeWithin5Min(alertTime)) {
+                        Alert a = new Alert();
+                        a.setAlertID(resultSet.getInt("alert_id"));
+                        a.setReason(resultSet.getString("alert_reason"));
+                        a.setDoctorID(resultSet.getInt("doctor_id"));
+                        a.setPatientID(resultSet.getInt("patient_id"));
+                        a.setAlertDateAndTime(alertTime);
+                        a.setAlertStatus(true);
+
+                        alertList.add(a);
+                    }
+                } while (resultSet.next());
+            }
+            if (alertList.size() == 0) {
+                alertList = null;
+
             }
 
         } catch (Exception e) {

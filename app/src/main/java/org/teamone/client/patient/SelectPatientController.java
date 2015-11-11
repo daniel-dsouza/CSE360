@@ -124,7 +124,7 @@ public class SelectPatientController {
 //        p.setUserID(patientID);
         Appointment a = new Appointment();
         a.setPatientID(patientID);
-        List<Appointment> patientAppointments = AppointmentSQL.viewAppointmentByPatient(a);
+        List<Appointment> patientAppointments = AppointmentSQL.viewFutureAppointmentByPatient(a);
         Collections.sort(patientAppointments, Appointment.dateCompare);
         return patientAppointments;
     }

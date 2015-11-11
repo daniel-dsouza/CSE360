@@ -8,6 +8,8 @@
     $(document).ready(function () {
         showEmergencyRoom('alert');
         setInterval("showEmergencyRoom('alert')", 10000);
+        loadAlertsPopUp('alert');
+        setInterval("loadAlertsPopUp('alert')", 59000);
     });
     //-->
 </script>

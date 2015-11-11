@@ -11,12 +11,11 @@ import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.*;
-import java.lang.Object;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 
 public class AppointmentSQL {
@@ -132,6 +131,7 @@ public class AppointmentSQL {
 
     /**
      * checks if a date is past or currentFuture.
+     *
      * @param date string must be in format yyyy-MM-dd
      * @return true is currentFuture, false is past.
      */
@@ -154,10 +154,10 @@ public class AppointmentSQL {
             e.printStackTrace();
         }
 
-            if (appointmentDate.compareTo(dateToday) > 0 || appointmentDate.compareTo(dateToday) == 0)
-                return true;
-            else
-                return false;
+        if (appointmentDate.compareTo(dateToday) > 0 || appointmentDate.compareTo(dateToday) == 0)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -190,22 +190,22 @@ public class AppointmentSQL {
                 String reason = resultSet.getString("reason");
                 int patID = resultSet.getInt("patientID");
 
-               if(isDateTodayOrFuture(date)){
-    Patient pat1 = new Patient();
-    pat1.setName(LoginSQL.getName(patID));
-    pat1.splitName((pat1.getName()));
+                if (isDateTodayOrFuture(date)) {
+                    Patient pat1 = new Patient();
+                    pat1.setName(LoginSQL.getName(patID));
+                    pat1.splitName((pat1.getName()));
 
-    new1.setDate(date);
-    new1.setTime(time);
-    new1.setReason(reason);
+                    new1.setDate(date);
+                    new1.setTime(time);
+                    new1.setReason(reason);
 
-    new1.setAppointmentID(resultSet.getInt("serialNumber"));
-    new1.setPatient(pat1);
-    new1.setPatientID(patID);
-    a1.add(new1);
+                    new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                    new1.setPatient(pat1);
+                    new1.setPatientID(patID);
+                    a1.add(new1);
 
-}
- }
+                }
+            }
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
@@ -295,17 +295,16 @@ public class AppointmentSQL {
                 temp.setUserID(docID);
                 Staff doc1 = DoctorSQL.getStaffComplete(temp);
 
-if(isDateTodayOrFuture(date))
-{
+                if (isDateTodayOrFuture(date)) {
 
-    new1.setDate(date);
-    new1.setTime(time);
-    new1.setReason(reason);
-    new1.setPatientID(docID);
-    new1.setAppointmentID(resultSet.getInt("serialNumber"));
-    new1.setDoctor(doc1);
-    a1.add(new1);
-}
+                    new1.setDate(date);
+                    new1.setTime(time);
+                    new1.setReason(reason);
+                    new1.setPatientID(docID);
+                    new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                    new1.setDoctor(doc1);
+                    a1.add(new1);
+                }
             }
 
         } catch (Exception e) {
@@ -381,7 +380,6 @@ if(isDateTodayOrFuture(date))
         return a1;
 
     }
-
 
 
     /**
@@ -811,11 +809,14 @@ if(isDateTodayOrFuture(date))
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                Appointment appt = new Appointment();
-                appt.setDate(rs.getString("date"));
-                appt.setTime(rs.getString("time"));
-                appt.setDoctorID(docID);
-                apptList.add(appt);
+                String date = rs.getString("date");
+                if(isDateTodayOrFuture(date)) {
+                    Appointment appt = new Appointment();
+                    appt.setDate(date);
+                    appt.setTime(rs.getString("time"));
+                    appt.setDoctorID(docID);
+                    apptList.add(appt);
+                }
             }
 
         } catch (Exception e) {
@@ -827,6 +828,7 @@ if(isDateTodayOrFuture(date))
         return apptList;
 
     }
+
     /**
      * Returns a list of Appointments available to doctor
      *

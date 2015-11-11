@@ -2,6 +2,7 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.teamone.core.SQL.AlertSQL;
 import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.baseclasstests.TestStrings;
@@ -81,7 +82,7 @@ public class AppointmentTester {
     {
         System.out.println("\nTest========check Time");
        // Boolean check = AppointmentSQL.isDateTodayOrFuture("2016-11-11");
-        Boolean check2 = AppointmentSQL.isTimeWithin5Min("2015-11-11 13:57:25");
+        Boolean check2 = AlertSQL.isTimeWithin5Min("2015-11-11 13:57:25");
         System.out.println("Result: " + check2);
 
         System.out.println(TestStrings.testEnd);
