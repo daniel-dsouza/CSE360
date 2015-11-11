@@ -92,6 +92,7 @@ function showEmergencyRoom(divid) {
                     if (data.alertsPresent) {
                         // blink('#' + divid, -1, 1000);
                         $('#' + divid).show();
+
                     }
                     else {
                         $('#' + divid).hide();

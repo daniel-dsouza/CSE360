@@ -13,6 +13,7 @@ import org.teamone.core.users.Staff;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.*;
 import java.lang.Object;
 import java.util.Date;
@@ -158,8 +159,6 @@ public class AppointmentSQL {
             else
                 return false;
     }
-
-
 
     /**
      * @param readMe Appointment Object with valid doctorID
