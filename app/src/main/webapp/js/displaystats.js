@@ -13,8 +13,7 @@ function getStats(id, callback) {
             alert("error getting data.")
         }
     });
-};
-
+}
 $(document).ready(function () {
     $('.panel-collapse').on('shown.bs.collapse', function (e) {
         getStats(e.currentTarget.id, function (json) {

@@ -76,6 +76,16 @@ public class AppointmentTester {
 
         System.out.println(TestStrings.testEnd);
     }
+    @Test
+    public void CheckFuture() //patient calls this when updating an existing one
+    {
+        System.out.println("\nTest========check date");
+        Boolean check = AppointmentSQL.isDateTodayOrFuture("2016-11-11");
+
+        System.out.println("Result: " + check);
+
+        System.out.println(TestStrings.testEnd);
+    }
 
     @Test
     public void editApptByApptID() //edit an already filled appointment. This must be the old time is now free for other users
@@ -94,7 +104,7 @@ public class AppointmentTester {
     public void viewApptByDocID() {
         //case 1, where user wants appoint through doctorID
         System.out.println("\nTest========Viewing patient with doctor ID");
-        List<Appointment> test1 = AppointmentSQL.viewAppointmentByDoctor(update);
+        List<Appointment> test1 = AppointmentSQL.viewFutureAppointmentByDoctor(update);
         assertTrue("No appointments by doctor ID", !test1.isEmpty());
 
         for (Appointment tempAp : test1) {

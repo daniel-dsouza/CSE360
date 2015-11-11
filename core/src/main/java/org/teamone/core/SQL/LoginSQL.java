@@ -160,10 +160,7 @@ public class LoginSQL {
         {
             String passwordSQL = resultSet.getString("password");
 
-            if (pass.compareTo(passwordSQL) == 0) {
-                boolResult = true;
-            } else
-                boolResult = false;
+            boolResult = pass.compareTo(passwordSQL) == 0;
         }
         else
             boolResult = false;
