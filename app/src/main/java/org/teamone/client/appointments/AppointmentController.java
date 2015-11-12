@@ -69,6 +69,9 @@ public class AppointmentController {
                                @ModelAttribute User user) {
         if (user.getPerson() == null)
             return "redirect:/login";
+        else if (!(user.getPerson() instanceof Patient))
+            return "redirect:/user/" + user.person.getUserID();
+
         Appointment appointment1 = new Appointment(); //this is an example of a model attribute
 
         Map<String, String> speclist = new LinkedHashMap<String, String>(); //this is an example of a model attribute not in the appointment
@@ -100,6 +103,8 @@ public class AppointmentController {
 
         //System.out.println(model); //debug statement
         return "appointment/createAppointmentPatient"; //return the view with linked model
+
+
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -152,6 +157,9 @@ public class AppointmentController {
                                   @ModelAttribute User user) {
         if (user.getPerson() == null)
             return "redirect:/login";
+        else if (!(user.getPerson() instanceof Patient))
+            return "redirect:/user/" + user.person.getUserID();
+
         System.out.println("edit an appointment");
 
         Appointment appt = new Appointment();
@@ -189,6 +197,7 @@ public class AppointmentController {
 
 
         return "appointment/editAppt"; //return the view with linked model
+
 
     }
 

@@ -25,8 +25,9 @@ public class StaffListTest {
 
     @Test
     public void getListDoctorBySpecialty() {
-        System.out.println("\nTest========Searching for Staff members 'Pediatrician' ");
-        ArrayList<Staff> testArr = DoctorSQL.getListDoctorSpecialty("Emergency");
+        String spec = "Emergency";
+        System.out.println("\nTest========Searching for Staff members: " + spec);
+        ArrayList<Staff> testArr = DoctorSQL.getListDoctorSpecialty(spec);
         assertTrue("Failed to get doctor specialty", !testArr.isEmpty());
 
         for (Staff tempStaff : testArr) {

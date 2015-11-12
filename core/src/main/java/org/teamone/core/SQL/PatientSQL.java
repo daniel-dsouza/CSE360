@@ -305,15 +305,12 @@ public class PatientSQL {
             if (patient.healthConditions.alertReason != null && !patient.healthConditions.alertReason.equals("")) {
                 preparedStatement = connect.prepareStatement("SELECT patient_id FROM alerts");
                 resultSet = preparedStatement.executeQuery();
-                while (resultSet.next())
-                //Retrieve by column name
                 System.out.println("=Detected alerts.");
 
                 java.util.Date dt = patient.healthConditions.alertDateAndTime;
                 java.text.SimpleDateFormat sdf =
                         new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String alertTime = sdf.format(dt);
-
 
                 System.out.println("Inserting Alert");
                 //INSERT INTO alerts(alert_reason, patient_id,AlertActive) VALUES (":anklePain", 1234,1) ;

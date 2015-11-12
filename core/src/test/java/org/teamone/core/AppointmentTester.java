@@ -97,7 +97,7 @@ public class AppointmentTester {
     @Test
     public void viewApptByDocID() {
         //case 1, where user wants appoint through doctorID
-        System.out.println("\nTest========Viewing patient with doctor ID");
+        System.out.println("\nTest========Viewing Future appointments with doctor ID");
         List<Appointment> test1 = AppointmentSQL.viewFutureAppointmentByDoctor(update);
         assertTrue("No appointments by doctor ID", !test1.isEmpty());
 
@@ -116,8 +116,8 @@ public class AppointmentTester {
     public void viewApptByPatID() {
         //case 2, where user wants appoint through patientID
         update.setPatientID(1002);
-        System.out.println("\nTest========Viewing patient with patient ID");
-        List<Appointment> test1 = AppointmentSQL.viewAppointmentByPatient(update);
+        System.out.println("\nTest========Viewing Future appointments with patient ID");
+        List<Appointment> test1 = AppointmentSQL.viewFutureAppointmentByPatient(update);
         assertTrue("No appointments by patient ID", !test1.isEmpty());
         for (Appointment tempAp : test1) {
             System.out.println("\nView successful");

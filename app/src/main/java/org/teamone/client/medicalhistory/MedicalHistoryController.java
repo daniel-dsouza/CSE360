@@ -2,6 +2,7 @@ package org.teamone.client.medicalhistory;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
@@ -21,8 +22,6 @@ import java.util.Map;
 @RequestMapping(value = "/**/medicalhistory")
 public class MedicalHistoryController {
 
-
-    //TODO add a button so patients can access this function
     @RequestMapping(method = RequestMethod.GET)
     public String viewHeathConditions(Map<String, Object> model,
                                       @ModelAttribute("user") User user) {
@@ -54,5 +53,30 @@ public class MedicalHistoryController {
         PatientSQL.setMedicalHistory(user.getPatient());
 
         return "redirect:/select_patient";
+    }
+
+    @RequestMapping(value = "view/{patientID}", method = RequestMethod.GET)
+    public String readonly(Map<String, Object> model,
+                           @ModelAttribute("user") User user,
+                           @PathVariable int patientID) {
+        if (user.getPerson() == null)
+            return "redirect:/login";
+        else if (user.getPerson() instanceof LabStaff)
+            return "redirect:/user/" + user.person.getUserID();
+        else if (!(user.getPerson() instanceof Patient))//allow doctors or hsp to view
+        {
+            Patient p = new Patient();
+            p.setUserID(patientID);
+            user.setPatient(PatientSQL.getPatientComplete(p));
+        }
+
+        if (user.getPatient() == null)               // If patient has not been initialized send them to patient select
+            return "redirect:/select_patient";
+
+
+        MedicalHistory userMedicalHistory = user.getPatient().getMedicalHistory();
+        model.put("userInput", userMedicalHistory);
+        model.put("readonly", true);
+        return "medical-history/editmedicalhistory";
     }
 }

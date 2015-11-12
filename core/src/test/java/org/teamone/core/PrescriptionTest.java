@@ -30,7 +30,7 @@ public class PrescriptionTest {
         add.setDateAndTime(date);
     }
 
-    @Test
+    /*@Test
     public void addPrescrition() {
         System.out.println("\nTest========adding prescription");
 
@@ -39,7 +39,7 @@ public class PrescriptionTest {
         System.out.println("\nUpdate successful");
 
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
     @Test
     public void getListPrescr() {

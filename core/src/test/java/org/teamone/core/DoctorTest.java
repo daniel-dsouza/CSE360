@@ -2,7 +2,6 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.baseclasstests.TestStrings;
@@ -65,15 +64,15 @@ public class DoctorTest {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
+    /*@Test
     public void createAppt() {
         System.out.println("\nTest========Creating an appointment ");
         Appointment appt = AppointmentSQL.random();
         appt.setDoctorID(501);
-        //boolean result = AppointmentSQL.createAppointment(appt);
-        //assertTrue("Could not create appointment by doctor", result);
+        boolean result = AppointmentSQL.createAppointment(appt);
+        assertTrue("Could not create appointment by doctor", result);
 
 
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 }

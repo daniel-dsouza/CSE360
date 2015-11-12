@@ -125,12 +125,20 @@ public class AlertController {
     }
 
     @RequestMapping(value = "/hsp", method = RequestMethod.GET)
-    public String resolveAlert(Map<String, Object> model) {
-        System.out.println("Getting Emergency doctor list");
-        ArrayList<Staff> doctorList;
-        doctorList = DoctorSQL.getListDoctorSpecialty("Emergency");
-        model.put("docList", doctorList);
-        return "alert/hsp";
+    public String resolveAlert(Map<String, Object> model,
+                               @ModelAttribute User user) {
+        if (user.getPerson() == null)
+            return "redirect:/login";
+        else if (user.getPerson() instanceof HSP) {
+            System.out.println("Getting Emergency doctor list");
+            ArrayList<Staff> doctorList;
+            doctorList = DoctorSQL.getListDoctorSpecialty("Emergency");
+            model.put("docList", doctorList);
+            return "alert/hsp";
+        } else {
+            return "redirect:/user/" + user.person.getUserID();
+        }
+
     }
 
     /**
