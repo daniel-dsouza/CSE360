@@ -59,7 +59,7 @@ public class LabRequestSQL {
 
     /**
      *
-     * @param LabTestRequest: Valid LabTestRequest with a requestionID
+     * @param readMe: Valid LabTestRequest with a requestionID
      * @return LabTestRequest: returns a LabTestRequest object
      */
     public static LabTestRequest viewLabRequest(LabTestRequest readMe) {
@@ -96,7 +96,7 @@ public class LabRequestSQL {
                 readMe.getPatient().setUserID(patID);
             }
 
-            if (!date.equals("null") &&  !labReport.equals(null)) {
+            if (!date.equals("null") &&  !labReport.equals("null")) {
                 readMe.setStrDateAndTime(date);
                 readMe.toMapObj(labReport);
                 if(readMe.getPerson() == null)//uh oh, person does not yet exists so, create one

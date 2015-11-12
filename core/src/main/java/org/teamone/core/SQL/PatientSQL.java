@@ -298,7 +298,7 @@ public class PatientSQL {
             String hc = patient.healthConditions.toString();
 //checking alert
             List<Integer> myList = new ArrayList<Integer>();
-            if (patient.healthConditions.alertReason != null && patient.healthConditions.alertReason != "") {
+            if (patient.healthConditions.alertReason != null && !patient.healthConditions.alertReason.equals("")) {
                 preparedStatement = connect.prepareStatement("SELECT patient_id FROM alerts");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next())

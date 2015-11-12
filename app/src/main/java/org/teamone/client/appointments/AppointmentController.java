@@ -38,8 +38,7 @@ public class AppointmentController {
     public
     @ResponseBody
     ArrayList<Staff> findDoctors(@PathVariable String speciality) {
-        ArrayList<Staff> doctorList = new ArrayList<Staff>(); //Hashing strikes again.
-        doctorList = DoctorSQL.getListDoctorSpecialty(speciality);
+        ArrayList<Staff> doctorList = DoctorSQL.getListDoctorSpecialty(speciality);
         System.out.println(speciality); //DEBUG statements
         System.out.println("returning doctor list");
         return doctorList; //return JSON object
@@ -140,8 +139,7 @@ public class AppointmentController {
         {
             AppointmentSQL.schedAppointment(ap1);
             return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
-        }
-        else {
+        } else {
 
             ap1.setFailedToInsert(1);
             model.put("appointment", ap1);
@@ -184,7 +182,7 @@ public class AppointmentController {
 
         current.setDoctorSpec(DoctorSQL.getSpecialty(current.getDoctorID()));
         current.getDoctor().splitName(LoginSQL.getName(current.getDoctorID()));
-        
+
         //TODO: add extra stuff here.
         model.put("appointment", current);
 
@@ -222,16 +220,14 @@ public class AppointmentController {
 
         System.out.println(ap1.getDoctorSpec());
         int docID;
-        if(ap1.getTempDocID().isEmpty())//assume they change dates and/or reason
+        if (ap1.getTempDocID().isEmpty())//assume they change dates and/or reason
         {
             Appointment appt = new Appointment();
 
             appt.setAppointmentID(appointmentID);
             Appointment oldAppt = AppointmentSQL.viewAppointmentByApptID(appt);
             docID = oldAppt.getDoctorID();
-        }
-        else
-        {
+        } else {
             docID = Integer.parseInt(ap1.getTempDocID());
 
         }
@@ -272,13 +268,14 @@ public class AppointmentController {
 
     @RequestMapping(value = "/createappointment/{docID}", method = RequestMethod.POST)
     public String createAppointmentHSPPost(Map<String, Object> model,
-                                        @ModelAttribute("appointment") Appointment appt,
-                                        @ModelAttribute("user") User user) { //this tells the method that there will be a field named appointment in the model
+                                           @ModelAttribute("appointment") Appointment appt,
+                                           @ModelAttribute("user") User user,
+                                           @PathVariable int docID) { //this tells the method that there will be a field named appointment in the model
 
         if (user.getPerson() instanceof Doctor)
             appt.setDoctorID(user.getPerson().getUserID());//Doctors can not change the id.
         else
-            appt.setDoctorID(Integer.parseInt(appt.getTempDocID()));//must be a HSP person
+            appt.setDoctorID(docID);//from path
         //System.out.println("DocID: " + appt.getDoctorID());
         System.out.println("Created appointment Date: " + appt.getDate());
         //System.out.println("Time: " + appt.getTime());
@@ -287,9 +284,7 @@ public class AppointmentController {
         {
             AppointmentSQL.schedAppointment(appt);
             return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
-        }
-
-        else {
+        } else {
 
             appt.setFailedToInsert(1);
             model.put("appointment", appt);

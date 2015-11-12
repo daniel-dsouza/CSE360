@@ -91,21 +91,6 @@
                             </div>
                         </div>
 
-
-                        <div class="form-class">
-
-                            <br><br><label class="col-md-4 control-label" for="docID">Doctor ID</label>
-
-                            <div class="col-md-4">
-                                <form:input id="docID" size='3' path="tempDocID"
-                                            class="readonly" type="number" min="501" max="511" step="1"
-                                            maxlength="10"
-                                            autofocus="autofocus"
-                                            required="required"/>
-                            </div>
-
-                        </div>
-
                         <div class="form-class">
 
                             <br><br><label class="col-md-4 control-label" for="patID">Patient ID</label>

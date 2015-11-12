@@ -24,11 +24,6 @@ public class SelectPatientController {
     /**
      * This method handles the redirects for the buttons.
      *
-     * @param model
-     * @param user
-     * @param action
-     * @param patientID
-     * @return
      */
     @RequestMapping(value = "/{patientID}/{action}")
     public String processAction(Map<String, Object> model,
@@ -79,15 +74,10 @@ public class SelectPatientController {
             Doctor d = new Doctor();
             d.setUserID(user.person.getUserID());
             patients = PatientSQL.getPatientByStaff(d);
-
-
         }
-
         else
         {
-
             patients = PatientSQL.getAllPatient();
-
         }
 
 

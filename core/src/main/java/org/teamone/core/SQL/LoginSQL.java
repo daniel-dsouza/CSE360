@@ -86,7 +86,7 @@ public class LoginSQL {
 
     /**
      * converts an ID into an name
-     * @param patientID
+     * @param patientID valid id
      * @return string name with associated id
      */
     public static String getName(int patientID) {
@@ -120,7 +120,7 @@ public class LoginSQL {
     }
     /**
      * converts an name into an ID
-     * @param patientID
+     * @param patientName
      * @return int ID with associated name
      */
     public static int getID(String patientName) {
