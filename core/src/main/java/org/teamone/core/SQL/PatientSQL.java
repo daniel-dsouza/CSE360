@@ -13,7 +13,6 @@ import org.teamone.core.users.Patient;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PatientSQL {
     private static Connection connect = null;
@@ -302,39 +301,30 @@ public class PatientSQL {
 
             String hc = patient.healthConditions.toString();
 //checking alert
-            List<Integer> myList = new ArrayList<Integer>();
+
             if (patient.healthConditions.alertReason != null && !patient.healthConditions.alertReason.equals("")) {
                 preparedStatement = connect.prepareStatement("SELECT patient_id FROM alerts");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next())
-                    myList.add(resultSet.getInt("patient_id"));
                 //Retrieve by column name
-                System.out.println("=Detected alerts. Patient ids have been added to list");
+                System.out.println("=Detected alerts.");
 
                 java.util.Date dt = patient.healthConditions.alertDateAndTime;
                 java.text.SimpleDateFormat sdf =
                         new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String alertTime = sdf.format(dt);
 
-                if (myList.contains(patient.getUserID())) {
-                    System.out.println("Alert in alerts table is present. Updating now");
-                    preparedStatement = connect.prepareStatement("UPDATE alerts set alert_reason = ?, AlertActive=TRUE, alertDateAndTime = ? where patient_id = ?");
-                    preparedStatement.setString(1, patient.healthConditions.alertReason);
-                    preparedStatement.setString(2, alertTime);
-                    preparedStatement.setInt(3, patient.getUserID());
-                    preparedStatement.executeUpdate();
 
-                } else {
-                    System.out.println("Alert in alerts table is NOT present. Inserting now");
-                    //INSERT INTO alerts(alert_reason, patient_id,AlertActive) VALUES (":anklePain", 1234,1) ;
-                    preparedStatement = connect.prepareStatement("INSERT INTO alerts(alert_reason, patient_id, alertDateAndTime, AlertActive) VALUES (?, ?, ?, TRUE) ;");
-                    preparedStatement.setString(1, patient.healthConditions.alertReason);
-                    preparedStatement.setInt(2, patient.getUserID());
-                    preparedStatement.setString(3, alertTime);
+                System.out.println("Inserting Alert");
+                //INSERT INTO alerts(alert_reason, patient_id,AlertActive) VALUES (":anklePain", 1234,1) ;
+                preparedStatement = connect.prepareStatement("INSERT INTO alerts(alert_reason, patient_id, alertDateAndTime, AlertActive) VALUES (?, ?, ?, TRUE) ;");
+                preparedStatement.setString(1, patient.healthConditions.alertReason);
+                preparedStatement.setInt(2, patient.getUserID());
+                preparedStatement.setString(3, alertTime);
 
-                    preparedStatement.executeUpdate();
+                preparedStatement.executeUpdate();
 
-                }
+
             }
             preparedStatement = connect.prepareStatement("UPDATE patient set healthConditions = ? where patientID = ?");
             preparedStatement.setString(1, hc);
