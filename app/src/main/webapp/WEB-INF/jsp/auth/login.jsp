@@ -17,7 +17,6 @@
 </script>
 <t:template>
     <jsp:attribute name="head">
-        <link href="/css/custom-login.css" rel="stylesheet" media="screen">
         <script type="text/javascript"
                 src="<c:url value="/webjars/jquery-maskedinput/1.4.0/jquery.maskedinput.min.js" />"></script>
     </jsp:attribute>

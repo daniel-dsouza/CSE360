@@ -73,7 +73,7 @@
 
 
                             <div class="col-md-4">
-                                <form:select id="timeselect" name="timeselect" path="time" class="form-control">
+                                <form:select id="timeselect" name="timeselect" path="time" class="form-control dropdown-bg">
                                     <option value="8:00 AM">8:00 AM</option>
                                     <option value="9:00 AM">9:00 AM</option>
                                     <option value="10:00 AM">10:00 AM</option>
@@ -98,7 +98,7 @@
 
                             <div class="col-md-4">
                                 <form:input id="docID" size='3' path="tempDocID"
-                                            class="readonly" type="number" min="501" max="511" step="1"
+                                            class="form-control input-sm chat-input" type="number" min="501" max="511" step="1"
                                             maxlength="10"
                                             autofocus="autofocus"
                                             required="required"/>
@@ -112,7 +112,7 @@
 
                             <div class="col-md-4">
                                 <form:input id="patID" size='3' path="patient.userID"
-                                            class="readonly" type="number" min="1001" step="1"
+                                            class="form-control input-sm chat-input" type="number" min="1001" step="1"
                                             maxlength="10"
                                             autofocus="autofocus"
                                             required="required"/>

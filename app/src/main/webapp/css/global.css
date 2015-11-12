@@ -2,7 +2,11 @@
 #page {
     position: relative;
     min-height: 100%;
-    background-color: darkcyan;
+    background-image: linear-gradient(to bottom, darkcyan, #93D8D8);
+    background-image: -o-linear-gradient(top, darkcyan, #93D8D8);
+    background-image: -moz-linear-gradient(top, darkcyan, #93D8D8);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(darkcyan), to(#93D8D8));
+    background-image: -webkit-linear-gradient(top, darkcyan, #93D8D8);
 }
 
 #nav {
@@ -34,6 +38,28 @@ textarea {
     width: 100%
 }
 
+/*http://stackoverflow.com/questions/2869212/css3-gradient-background-set-on-body-doesnt-stretch-but-instead-repeats*/
+body {
+    background-image: linear-gradient(to bottom, darkcyan, #93D8D8);
+    background-image: -o-linear-gradient(top, darkcyan, #93D8D8);
+    background-image: -moz-linear-gradient(top, darkcyan, #93D8D8);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(darkcyan), to(#93D8D8));
+    background-image: -webkit-linear-gradient(top, darkcyan, #93D8D8);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+.custom-login {
+    position: relative;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
 /*The following apply to different pages*/
 
 .mini_appointment {
@@ -67,4 +93,21 @@ textarea {
 .padded_row {
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.dropdown-bg{
+    color: black;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 139, 139, 0.67);
+    *background-color: rgba(0, 139, 139, 0.67);
+    background-image: -moz-linear-gradient(top, white, darkcyan);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(darkcyan));
+    background-image: -webkit-linear-gradient(top, white, darkcyan);
+    background-image: -o-linear-gradient(top, white, darkcyan);
+    background-image: linear-gradient(to bottom, white, darkcyan);
+    background-repeat: repeat-x;
+    border-color: darkcyan darkcyan white;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
