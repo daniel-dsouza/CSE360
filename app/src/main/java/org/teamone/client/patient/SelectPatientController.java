@@ -23,12 +23,6 @@ public class SelectPatientController {
 
     /**
      * This method handles the redirects for the buttons.
-     *
-     * @param model
-     * @param user
-     * @param action
-     * @param patientID
-     * @return
      */
     @RequestMapping(value = "/{patientID}/{action}")
     public String processAction(Map<String, Object> model,
@@ -56,7 +50,7 @@ public class SelectPatientController {
             return "redirect:/request_prescriptions/prescription";
         } else if (action.equals("view_lab_report")) {
             return "redirect:/request_report/lab_report/view_list/" + user.getPatient().getUserID();
-        } else if (action.equals("edit_info")){
+        } else if (action.equals("edit_info")) {
             return "redirect:/request_info/personal";
         } else {
             return "redirect:/user/" + user.person.getUserID();
@@ -74,25 +68,17 @@ public class SelectPatientController {
 
         ArrayList<Patient> patients = null;
 
-        if(user.getPerson() instanceof Doctor)
-        {
+        if (user.getPerson() instanceof Doctor) {
             Doctor d = new Doctor();
             d.setUserID(user.person.getUserID());
             patients = PatientSQL.getPatientByStaff(d);
-
-
-        }
-
-        else
-        {
-
+            Collections.sort(patients, Patient.patientIDComparator);
+        } else {
             patients = PatientSQL.getAllPatient();
-
         }
 
 
         Map<String, String> actions = new LinkedHashMap<String, String>();
-
 
 
         if (user.getPerson() instanceof Doctor) {

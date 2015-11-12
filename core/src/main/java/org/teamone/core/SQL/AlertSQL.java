@@ -62,7 +62,7 @@ public class AlertSQL {
             cTime = convertToTime.format(currentTime);
             tenMinStr = convertToTime.format(tenMin);
 
-            System.out.println("alert Time: " + time + "\ncurrent Time: " + cTime + "\nfive minutes from now: " + tenMinStr);
+            //System.out.println("alert Time: " + time + "\ncurrent Time: " + cTime + "\nfive minutes from now: " + tenMinStr);
 
             try {
                 alertTime = convertToTime.parse(time);
@@ -243,7 +243,7 @@ public class AlertSQL {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Alert> alertList = new ArrayList<Alert>();
-        ;
+
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");

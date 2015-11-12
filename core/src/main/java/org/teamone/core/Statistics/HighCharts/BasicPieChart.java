@@ -30,9 +30,10 @@ public class BasicPieChart extends HighChart {
 
     /**
      * Adds data to the simple pie chart.
+     *
      * @param input
      */
-    public void addData(String name, Map<String,Double> input) {
+    public void addData(String name, Map<String, Double> input) {
         ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
         for (String key : input.keySet()) {
             ArrayList<Object> list = new ArrayList<Object>();

@@ -35,6 +35,7 @@ public class PatientTest {
             patient.medicalHistory.set(condition, true);
         }
     }
+
     @Test
     public void checkPatientInformation() {
         Assert.assertEquals("Testing first name", patient.patientInformation.getName(), "Morty Smith");

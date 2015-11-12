@@ -14,7 +14,6 @@ import java.util.Random;
  */
 
 
-
 public class HspSQL {
     private static Connection connect = null;
     private static Statement statement = null;
@@ -33,8 +32,8 @@ public class HspSQL {
         //pick female or male name http://deron.meranda.us/data/
         String firstFile = "src/test/java/org/teamone/core/input/Female.txt";
         int femaleOrMale = randomGenerator.nextInt(500);
-        if((femaleOrMale%2)==0)//even
-            firstFile ="src/test/java/org/teamone/core/input/Male.txt";
+        if ((femaleOrMale % 2) == 0)//even
+            firstFile = "src/test/java/org/teamone/core/input/Male.txt";
 
         String lastFile = "src/test/java/org/teamone/core/input/lastNames.txt";
 
@@ -46,8 +45,9 @@ public class HspSQL {
                 firstNames.add(in.readLine());
             }
             in.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        catch(Exception e){    System.out.println(e);    }
         //Last Name array
         ArrayList<String> lastNames = new ArrayList<String>();
         try {
@@ -56,8 +56,8 @@ public class HspSQL {
                 lastNames.add(in.readLine());
             }
             in.close();
-        }
-        catch(Exception e){System.out.println(e);
+        } catch (Exception e) {
+            System.out.println(e);
 
         }
 
@@ -68,7 +68,7 @@ public class HspSQL {
         firstRNG += lastRNG + "@asu.edu";
         regis.patientInformation.setEmail(firstRNG);
         String random = "" + (char) (randomGenerator.nextInt(26) + 'A');
-        for(int i = 0; i< 10; i++)//address
+        for (int i = 0; i < 10; i++)//address
         {
             random += (char) (randomGenerator.nextInt(26) + 'a');
         }
@@ -82,40 +82,40 @@ public class HspSQL {
                 streets.add(in.readLine());
             }
             in.close();
-        }
-        catch(Exception e){System.out.println(e);
+        } catch (Exception e) {
+            System.out.println(e);
 
         }
         regis.patientInformation.setAddress(streets.get(randomGenerator.nextInt(streets.size())));
         regis.patientInformation.setCity("Phoenix");
         regis.patientInformation.setState("AZ");
-        random ="";
-        for(int i = 0; i< 5; i++)//zipcode
+        random = "";
+        for (int i = 0; i < 5; i++)//zipcode
         {
             random += (char) (randomGenerator.nextInt(10) + '0');
         }
 
         regis.patientInformation.setZipcode(random);
 
-        random ="";
-        for(int i = 0; i< 10; i++)//phone (480)-748-7374
+        random = "";
+        for (int i = 0; i < 10; i++)//phone (480)-748-7374
         {
-            if( i==0)
-                random +="(";
-            if( i==3)
-                random +=")-";
-            if( i==6)
-                random +="-";
+            if (i == 0)
+                random += "(";
+            if (i == 3)
+                random += ")-";
+            if (i == 6)
+                random += "-";
             random += (char) (randomGenerator.nextInt(10) + '0');
         }
         regis.patientInformation.setHomePhone(random);
-        random ="";
-        for(int i = 0; i < 9; i++)//SSN 000-00-0000
+        random = "";
+        for (int i = 0; i < 9; i++)//SSN 000-00-0000
         {
-            if( i==3)
-                random +="-";
-            if( i==5)
-                random +="-";
+            if (i == 3)
+                random += "-";
+            if (i == 5)
+                random += "-";
             random += (char) (randomGenerator.nextInt(10) + '0');
         }
         regis.patientInformation.setSsn(random);
@@ -129,18 +129,18 @@ public class HspSQL {
                 insure.add(in.readLine());
             }
             in.close();
-        }
-        catch(Exception e){System.out.println(e);
+        } catch (Exception e) {
+            System.out.println(e);
 
         }
         regis.patientInformation.setInsurance((insure.get(randomGenerator.nextInt(insure.size()))));
 
         int age = randomGenerator.nextInt(100);//age
-        random =Integer.toString(age);
+        random = Integer.toString(age);
         regis.patientInformation.setAge(random);
 
-        String gender ="Female";
-        if((femaleOrMale%2)==0)//even
+        String gender = "Female";
+        if ((femaleOrMale % 2) == 0)//even
             gender = "Male";
         regis.patientInformation.setGender(gender);
 
@@ -149,11 +149,12 @@ public class HspSQL {
 
     /**
      * Register a new patient
+     *
      * @param patient
      * @return Patient
      */
-    public static Patient RegisterNewPatient(Patient patient)
-    { Patient Result;
+    public static Patient RegisterNewPatient(Patient patient) {
+        Patient Result;
         try {
             int checker, checker2;
             // This will load the MySQL driver, each DB has its own driver
@@ -182,16 +183,16 @@ public class HspSQL {
 
             preparedStatementPerson = connect.prepareStatement(insertTablePerson);
             preparedStatementPerson.setString(1, name);
-            preparedStatementPerson.setString(2,"patient");
-            preparedStatementPerson.setString(3,"go");
-            preparedStatementPerson.setString(4,email);
+            preparedStatementPerson.setString(2, "patient");
+            preparedStatementPerson.setString(3, "go");
+            preparedStatementPerson.setString(4, email);
             checker2 = preparedStatementPerson.executeUpdate();
 
             preparedStatementPerson = connect.prepareStatement("SELECT userID FROM person WHERE name = ? AND occupation = ? AND password = ? AND emailID = ?");
             preparedStatementPerson.setString(1, name);
-            preparedStatementPerson.setString(2,"patient");
-            preparedStatementPerson.setString(3,"go");
-            preparedStatementPerson.setString(4,email);
+            preparedStatementPerson.setString(2, "patient");
+            preparedStatementPerson.setString(3, "go");
+            preparedStatementPerson.setString(4, email);
             resultSet = preparedStatementPerson.executeQuery();
             resultSet.next();
             int patientID = resultSet.getInt("userID");
@@ -204,7 +205,7 @@ public class HspSQL {
             preparedStatementPatient = connect.prepareStatement(insertTablePatient);
 
             //`serialNumber`, `patientID`, `medicalHistory`, `occupation`, `address`, `SSN`, `gender`, `insurance`, `age`, `phone`, `healthConditions`, `labReports`, `alertDateAndTime`, `alertStatus`, `prescriptions`
-            java.util.Date dateAndTime= new java.util.Date();
+            java.util.Date dateAndTime = new java.util.Date();
             java.text.SimpleDateFormat sdf =
                     new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String strDateAndTime = sdf.format(dateAndTime);
@@ -218,11 +219,11 @@ public class HspSQL {
             preparedStatementPatient.setString(8, phone);
             preparedStatementPatient.setString(9, patient.medicalHistory.toString());
             preparedStatementPatient.setString(10, patient.healthConditions.toString());
-            preparedStatementPatient.setString(11,strDateAndTime);
+            preparedStatementPatient.setString(11, strDateAndTime);
             checker = preparedStatementPatient.executeUpdate();
 
-            System.out.println("checker1=============="+checker);
-            System.out.println("checker2=============="+checker2);
+            System.out.println("checker1==============" + checker);
+            System.out.println("checker2==============" + checker2);
             System.out.println("Adding info into Patient obj");
 
             Result = new Patient();
@@ -238,9 +239,8 @@ public class HspSQL {
             Result.setAge(age);
             Result.setPhone(phone);
 
-            if (checker==0 | checker2==0)
+            if (checker == 0 | checker2 == 0)
                 Result = null;
-
 
 
         } catch (Exception e) {
@@ -252,13 +252,15 @@ public class HspSQL {
         return Result;
 
     }
+
     /**
      * Register a new patient, although this one can manually pick a date
+     *
      * @param patient, date
      * @return Patient
      */
-    public static Patient RegisterPreload(Patient patient, String date)
-    { Patient Result;
+    public static Patient RegisterPreload(Patient patient, String date) {
+        Patient Result;
         try {
             int checker, checker2;
             // This will load the MySQL driver, each DB has its own driver
@@ -287,16 +289,16 @@ public class HspSQL {
 
             preparedStatementPerson = connect.prepareStatement(insertTablePerson);
             preparedStatementPerson.setString(1, name);
-            preparedStatementPerson.setString(2,"patient");
-            preparedStatementPerson.setString(3,"go");
-            preparedStatementPerson.setString(4,email);
+            preparedStatementPerson.setString(2, "patient");
+            preparedStatementPerson.setString(3, "go");
+            preparedStatementPerson.setString(4, email);
             checker2 = preparedStatementPerson.executeUpdate();
 
             preparedStatementPerson = connect.prepareStatement("SELECT userID FROM person WHERE name = ? AND occupation = ? AND password = ? AND emailID = ?");
             preparedStatementPerson.setString(1, name);
-            preparedStatementPerson.setString(2,"patient");
-            preparedStatementPerson.setString(3,"go");
-            preparedStatementPerson.setString(4,email);
+            preparedStatementPerson.setString(2, "patient");
+            preparedStatementPerson.setString(3, "go");
+            preparedStatementPerson.setString(4, email);
             resultSet = preparedStatementPerson.executeQuery();
             resultSet.next();
             int patientID = resultSet.getInt("userID");
@@ -322,8 +324,8 @@ public class HspSQL {
             preparedStatementPatient.setString(11, date);
             checker = preparedStatementPatient.executeUpdate();
 
-            System.out.println("checker1=============="+checker);
-            System.out.println("checker2=============="+checker2);
+            System.out.println("checker1==============" + checker);
+            System.out.println("checker2==============" + checker2);
             System.out.println("Adding info into Patient obj");
 
             Result = new Patient();
@@ -339,9 +341,8 @@ public class HspSQL {
             Result.setAge(age);
             Result.setPhone(phone);
 
-            if (checker==0 | checker2==0)
+            if (checker == 0 | checker2 == 0)
                 Result = null;
-
 
 
         } catch (Exception e) {
@@ -356,6 +357,7 @@ public class HspSQL {
 
     /**
      * Extracts all persons in Person table
+     *
      * @return ArrayList: of all persons
      */
     public static ArrayList<Person> revealAll() {
@@ -393,8 +395,10 @@ public class HspSQL {
         }
         return adminList;
     }
+
     /**
      * Deletes all persons in Person table with id above 1001. ids from 1001 to 1999 are reserved for patients.
+     *
      * @return ArrayList: of all persons with id>1001
      */
     public static ArrayList<Person> deletePatients() {
@@ -425,11 +429,10 @@ public class HspSQL {
                 pers.setEmail(rs.getString("emailID"));
                 adminList.add(pers);
             }
-            if(checker ==0) {
+            if (checker == 0) {
                 System.out.println("Delete failed");
                 adminList = null;
-            }
-            else
+            } else
                 System.out.println("Delete success");
         } catch (Exception e) {
             System.out.println(e);
@@ -440,6 +443,7 @@ public class HspSQL {
         }
         return adminList;
     }
+
     // You need to close the resultSet
     private static void close() {
         try {

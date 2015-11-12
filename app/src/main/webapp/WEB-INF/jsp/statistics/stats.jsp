@@ -14,80 +14,83 @@
 
     <jsp:body>
         <div class="container-fluid" id="target">
-            <%--<div class="row" style="margin: 20px">--%>
-                <div id="accordion" class="panel-group">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#patients_per_specialty">
-                                Number of Patients For Each Doctor Speciality</a></h4>
-                        </div>
-
-                        <div id="patients_per_specialty" class="panel-collapse collapse out">
-                            <div class="panel-body ">
-                                <div class="display">
-
-                                </div>
-                            </div>
-                        </div>
+                <%--<div class="row" style="margin: 20px">--%>
+            <div id="accordion" class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                   href="#patients_per_specialty">
+                            Number of Patients For Each Doctor Speciality</a></h4>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#female_male_ratio">
-                                Female to Male Ratio</a></h4>
-                        </div>
 
-                        <div id="female_male_ratio" class="panel-collapse collapse out">
-                            <div class="panel-body ">
-                                <div class="display">
+                    <div id="patients_per_specialty" class="panel-collapse collapse out">
+                        <div class="panel-body ">
+                            <div class="display">
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#number_of_alerts">
-                                Number of Submitted Alerts</a></h4>
-                        </div>
-
-                        <div id="number_of_alerts" class="panel-collapse collapse out">
-                            <div class="panel-body ">
-                                <div class="display">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#new_patients">
-                                Number of New Patients</a></h4>
-                        </div>
-
-                        <div id="new_patients" class="panel-collapse collapse out">
-                            <div class="panel-body ">
-                                <div class="display">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#age_groups">
-                                Distribution of Age Groups</a></h4>
-                        </div>
-
-                        <div id="age_groups" class="panel-collapse collapse out">
-                            <div class="panel-body ">
-                                <div class="display">
-
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <%--</div>--%>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                   href="#female_male_ratio">
+                            Female to Male Ratio</a></h4>
+                    </div>
+
+                    <div id="female_male_ratio" class="panel-collapse collapse out">
+                        <div class="panel-body ">
+                            <div class="display">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                                   href="#number_of_alerts">
+                            Number of Submitted Alerts</a></h4>
+                    </div>
+
+                    <div id="number_of_alerts" class="panel-collapse collapse out">
+                        <div class="panel-body ">
+                            <div class="display">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#new_patients">
+                            Number of New Patients</a></h4>
+                    </div>
+
+                    <div id="new_patients" class="panel-collapse collapse out">
+                        <div class="panel-body ">
+                            <div class="display">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#age_groups">
+                            Distribution of Age Groups</a></h4>
+                    </div>
+
+                    <div id="age_groups" class="panel-collapse collapse out">
+                        <div class="panel-body ">
+                            <div class="display">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <%--</div>--%>
         </div>
     </jsp:body>
 </t:template>

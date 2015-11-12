@@ -22,7 +22,7 @@ public class RegistrationController {
     @RequestMapping(value = "/**/registration/", method = RequestMethod.GET)
     public String createPatient(Map<String, Object> model,
                                 @ModelAttribute User user) {
-        if (user.getPerson() == null )
+        if (user.getPerson() == null)
             return "redirect:/login";
         else if (!(user.getPerson() instanceof HSP))//only HSP
             return "redirect:/user/" + user.person.getUserID();
@@ -39,43 +39,37 @@ public class RegistrationController {
                                      @ModelAttribute("user") User user,
                                      @PathVariable String page) {
 
-        if(page.equalsIgnoreCase("page1")) {
+        if (page.equalsIgnoreCase("page1")) {
             System.out.println("Creating a Patient");
 
-            attempt=HspSQL.RegisterNewPatient(attempt);
-            if(attempt!=null)
-            {
+            attempt = HspSQL.RegisterNewPatient(attempt);
+            if (attempt != null) {
                 System.out.println("*********************Register successful************************");
                 ID = attempt.getUserID();
-            }
-            else
+            } else
                 System.out.println("\n************************Register failed********************");
 
             return "/registration/hsp-healthConditions";
-        }else if(page.equalsIgnoreCase("page2")){
+        } else if (page.equalsIgnoreCase("page2")) {
             System.out.println("Loading Health Conditions");
 
             //attempt.displayHealthConditions();
             attempt.setUserID(ID);
-            if(PatientSQL.setHealthConditions(attempt))
-            {
+            if (PatientSQL.setHealthConditions(attempt)) {
                 System.out.println("Set successful");
-            }
-            else
+            } else
                 System.out.println("\nSet failed");
 
             //return "/registration/hsp-healthConditions"; //Used for debugging to make sure that check boxes functioned properly
             return "/registration/hsp-medicalHistory"; //This is the correct return
-        }else{
+        } else {
             System.out.println("Loading Medical Conditions");
 
             //attempt.displayMedicalHistory();
             attempt.setUserID(ID);
-            if(PatientSQL.setMedicalHistory(attempt))
-            {
+            if (PatientSQL.setMedicalHistory(attempt)) {
                 System.out.println("Set successful");
-            }
-            else
+            } else
                 System.out.println("\nSet failed");
 
             return "redirect:/user/" + user.person.getUserID();

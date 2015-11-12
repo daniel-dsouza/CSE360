@@ -46,7 +46,8 @@
                                         required="required"/>
                             </br>
                             <input:password path="password" id="userPassword" class="form-control input-sm chat-input"
-                                            placeholder="password" maxlength="40" required="required" onkeypress="capLock(event)"/>
+                                            placeholder="password" maxlength="40" required="required"
+                                            onkeypress="capLock(event)"/>
                             <div id="divMayus" style="visibility:hidden">Caps Lock is on.</div>
                             </br>
 

@@ -25,7 +25,7 @@ public class NavbarAttributes {
 
     @ModelAttribute
     public void setNavbar(Map<String, Object> model) {
-        java.util.Date dateAndTime= new java.util.Date();
+        java.util.Date dateAndTime = new java.util.Date();
         java.text.SimpleDateFormat sdf =
                 new java.text.SimpleDateFormat("h:mm:ss a");
         String Time = sdf.format(dateAndTime);

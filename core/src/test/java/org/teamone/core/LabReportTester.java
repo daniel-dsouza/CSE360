@@ -68,6 +68,7 @@ public class LabReportTester {
         System.out.println(TestStrings.testEnd);
 
     }
+
     @Test
     public void getAllReport() {
 

@@ -32,6 +32,7 @@ public class LabRequestTest {
         //assertTrue("A lab request could not be added.", result);
         System.out.println(TestStrings.testEnd);
     }
+
     @Test
     public void createEmptyLabRequest() {
         System.out.println("Test========Attempting to add lab request with empty string");
@@ -44,6 +45,7 @@ public class LabRequestTest {
         assertTrue("A lab request could not be added.", result);
         System.out.println(TestStrings.testEnd);
     }
+
     @Test
     public void listLabRequests() {
         System.out.println("Test========Attempting to get list of requests");
@@ -60,7 +62,7 @@ public class LabRequestTest {
         System.out.println("Test========Attempting to get one request");
         LabTestRequest result = null;
         try {
-            for (int i=0; i <20; i++) {
+            for (int i = 0; i < 20; i++) {
                 LabTestRequest viewable = new LabTestRequest();
                 viewable.setRequestionID(i);
                 result = LabRequestSQL.viewLabRequest(viewable);

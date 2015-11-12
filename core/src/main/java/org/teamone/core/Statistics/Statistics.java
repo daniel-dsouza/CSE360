@@ -15,7 +15,7 @@ public class Statistics {
 
     private double patientMalePopulation = 0;
 
-    private float admissionRates  =  0;
+    private float admissionRates = 0;
 
 
     public float getHealthOutcomes() {
@@ -50,9 +50,13 @@ public class Statistics {
         this.patientMalePopulation = patientMalePopulation;
     }
 
-    public double[] getPatientAgePopulation(){ return patientAge; }
+    public double[] getPatientAgePopulation() {
+        return patientAge;
+    }
 
-    public void setPatientAgePopulation(double[] patientAge){ this.patientAge = patientAge; }
+    public void setPatientAgePopulation(double[] patientAge) {
+        this.patientAge = patientAge;
+    }
 
     public float getAdmissionRates() {
         return admissionRates;

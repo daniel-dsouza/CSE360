@@ -28,33 +28,30 @@ public class HealthConditions {
 
     public String toString() {
         String str = "", temp = "";
-        alertReason ="";//clear out alerts
+        alertReason = "";//clear out alerts
         Iterator<Map.Entry<String, Boolean>> entries = healthConditions.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry<String, Boolean> entry = entries.next();
-            for(int i =0; i< alertCondition.length;i++)
-            {
-                if (alertCondition[i] == entry.getKey() && entry.getValue()==true)
-                {
-                    alertReason=alertReason+entry.getKey()+":";
+            for (int i = 0; i < alertCondition.length; i++) {
+                if (alertCondition[i] == entry.getKey() && entry.getValue() == true) {
+                    alertReason = alertReason + entry.getKey() + ":";
                     alertDateAndTime = new Date();//timeStamp
 
                 }
             }
-            temp=entry.getKey()+","+entry.getValue()+":";
+            temp = entry.getKey() + "," + entry.getValue() + ":";
             str = str.concat(temp);
         }
         //System.out.println(str);
         return str;
     }
 
-    public void toMapObj(String str){
+    public void toMapObj(String str) {
         Map<String, Boolean> healthConditions = null;
 
         String[] parts = str.split(":");
-        for(String temp2:parts)
-        {
-            String[] temp3 =  temp2.split(",");
+        for (String temp2 : parts) {
+            String[] temp3 = temp2.split(",");
             boolean abcd = Boolean.parseBoolean(temp3[1]);
             this.healthConditions.put(temp3[0], abcd);
         }

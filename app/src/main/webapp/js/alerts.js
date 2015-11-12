@@ -33,7 +33,7 @@ function loadAlerts(element) {
             //alert("error getting list.")
         }
     });
-};
+}
 
 function loadAlertsHsp(element) {
     $.ajax('/alert/getalerts', {
@@ -62,7 +62,7 @@ function loadAlertsHsp(element) {
             //alert("error getting list.")
         }
     });
-};
+}
 
 function loadAlertsPopUp(divid) {
     var alertID = document.getElementById(divid);
@@ -74,7 +74,7 @@ function loadAlertsPopUp(divid) {
             success: function (data) {
 
                 var outputHTML = 'Emergency Alert detected\n\n';
-                outputHTML += '==========================\n'
+                outputHTML += '==========================\n';
                 var len = data.length;
                 for (var i = 0; i < len; i++) {
                     outputHTML +=
@@ -88,7 +88,7 @@ function loadAlertsPopUp(divid) {
             }
         });
     }
-};
+}
 
 function resolvealert(divid, alertid) {
     $.ajax('/alert/resolvealert/' + alertid, {
@@ -103,9 +103,9 @@ function resolvealert(divid, alertid) {
             $(divid).hide("slow");
 
         }
-    })
+    });
     showEmergencyRoom('alert');
-};
+}
 function showEmergencyRoom(divid) {
 
     var alertID = document.getElementById(divid);
@@ -130,7 +130,7 @@ function showEmergencyRoom(divid) {
     } else {
         $('#' + divid).hide();
     }
-};
+}
 
 //http://jsfiddle.net/jadendreamer/Nx4qS/
 function blink(elem, times, speed) {
@@ -149,4 +149,4 @@ function blink(elem, times, speed) {
         }, speed);
         times -= .5;
     }
-};
+}

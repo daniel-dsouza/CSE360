@@ -20,13 +20,13 @@ import java.util.Map;
 
 @Controller
 @Scope("request")
-@RequestMapping(value="/**/lab_report")
+@RequestMapping(value = "/**/lab_report")
 @SessionAttributes("report")
 public class LabReportController {
 
-    @RequestMapping(method= RequestMethod.GET)
-    public String list (Map<String, Object> model,
-                        @ModelAttribute User user) {
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(Map<String, Object> model,
+                       @ModelAttribute User user) {
 
         if (user.getPerson() == null)
             return "redirect:/login";
@@ -38,10 +38,10 @@ public class LabReportController {
         return "lab/listlabreport";
     }
 
-    @RequestMapping(value="/{reportID}/view", method= RequestMethod.GET)
-    public String viewGet (Map<String, Object> model,
-                        @PathVariable String reportID,
-                        @ModelAttribute("user") User user) {
+    @RequestMapping(value = "/{reportID}/view", method = RequestMethod.GET)
+    public String viewGet(Map<String, Object> model,
+                          @PathVariable String reportID,
+                          @ModelAttribute("user") User user) {
 
         if (user.getPerson() == null)
             return "redirect:/login";
@@ -50,13 +50,15 @@ public class LabReportController {
         String testString = "";
         try {
             id = Integer.parseInt(reportID);
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         LabReport testID = new LabReport();
         testID.setRequestionID(id);
         LabReport viewReport = LabReportSQL.viewLabReportByRequestion(testID); //get the labrequest.
 
-        for(String test : viewReport.getlabTest().keySet()) {
+        for (String test : viewReport.getlabTest().keySet()) {
             if (viewReport.getlabTest().get(test).equals("false")) {
                 viewReport.getlabTestNames().remove(test);
             }
@@ -68,10 +70,10 @@ public class LabReportController {
         return "lab/editlabreport";
     }
 
-    @RequestMapping(value="/{reportID}/print", method= RequestMethod.GET)
-    public String printView (Map<String, Object> model,
-                           @PathVariable String reportID,
-                           @ModelAttribute("user") User user) {
+    @RequestMapping(value = "/{reportID}/print", method = RequestMethod.GET)
+    public String printView(Map<String, Object> model,
+                            @PathVariable String reportID,
+                            @ModelAttribute("user") User user) {
 
         if (user.getPerson() == null)
             return "redirect:/login";
@@ -80,13 +82,15 @@ public class LabReportController {
         String testString = "";
         try {
             id = Integer.parseInt(reportID);
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         LabReport testID = new LabReport();
         testID.setRequestionID(id);
         LabReport viewReport = LabReportSQL.viewLabReportByRequestion(testID); //get the labrequest.
 
-        for(String test : viewReport.getlabTest().keySet()) {
+        for (String test : viewReport.getlabTest().keySet()) {
             if (viewReport.getlabTest().get(test).equals("false")) {
                 viewReport.getlabTestNames().remove(test);
             }
@@ -98,10 +102,10 @@ public class LabReportController {
         return "lab/editlabreport";
     }
 
-    @RequestMapping(value="/view_list/{patientID}", method= RequestMethod.GET)
+    @RequestMapping(value = "/view_list/{patientID}", method = RequestMethod.GET)
     public String viewGetPatient(Map<String, Object> model,
-                           @PathVariable String patientID,
-                           @ModelAttribute("user") User user) {
+                                 @PathVariable String patientID,
+                                 @ModelAttribute("user") User user) {
 
         if (user.getPerson() == null)
             return "redirect:/login";
@@ -110,7 +114,9 @@ public class LabReportController {
         String testString = "";
         try {
             id = Integer.parseInt(patientID);
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Patient testID = new Patient();
         testID.setUserID(id);
@@ -120,10 +126,10 @@ public class LabReportController {
         return "lab/listlabreport";
     }
 
-    @RequestMapping(value="/{reportID}/edit", method= RequestMethod.GET)
-    public String editGet (Map<String, Object> model,
-                        @PathVariable String reportID,
-                        @ModelAttribute("user") User user) {
+    @RequestMapping(value = "/{reportID}/edit", method = RequestMethod.GET)
+    public String editGet(Map<String, Object> model,
+                          @PathVariable String reportID,
+                          @ModelAttribute("user") User user) {
 
         if (user.getPerson() == null)
             return "redirect:/login";
@@ -134,13 +140,15 @@ public class LabReportController {
         String testString = "";
         try {
             id = Integer.parseInt(reportID);
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         LabReport testID = new LabReport();
         testID.setRequestionID(id);
         LabReport editReport = LabReportSQL.viewLabReportByRequestion(testID); //get the labrequest.
 
-        for(String test : editReport.getlabTest().keySet()) {
+        for (String test : editReport.getlabTest().keySet()) {
             if (editReport.getlabTest().get(test).equals("false")) {
                 editReport.getlabTestNames().remove(test);
             }
@@ -151,20 +159,20 @@ public class LabReportController {
         return "lab/editlabreport";
     }
 
-    @RequestMapping(value="/{reportID}/edit", method= RequestMethod.POST)
-    public String editPost (Map<String, Object> model,
-                            @PathVariable String reportID,
-                            @ModelAttribute("report") LabReport report,
-                            @ModelAttribute("user") User user) {
+    @RequestMapping(value = "/{reportID}/edit", method = RequestMethod.POST)
+    public String editPost(Map<String, Object> model,
+                           @PathVariable String reportID,
+                           @ModelAttribute("report") LabReport report,
+                           @ModelAttribute("user") User user) {
 
         LabReportSQL.updateLabReport(report);
         return "redirect:/lab_report";
     }
 
-    @RequestMapping(value="/{reportID}/create", method= RequestMethod.GET)
-    public String createGet (Map<String, Object> model,
-                        @PathVariable String reportID,
-                        @ModelAttribute("user") User user) {
+    @RequestMapping(value = "/{reportID}/create", method = RequestMethod.GET)
+    public String createGet(Map<String, Object> model,
+                            @PathVariable String reportID,
+                            @ModelAttribute("user") User user) {
 
         if (user.getPerson() == null)
             return "redirect:/login";
@@ -175,7 +183,9 @@ public class LabReportController {
         String testString = "";
         try {
             id = Integer.parseInt(reportID);
-        } catch (Exception e) { e.printStackTrace(); }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         LabTestRequest testID = new LabTestRequest();
         testID.setRequestionID(id);
@@ -184,13 +194,12 @@ public class LabReportController {
         LabReport newReport = new LabReport(id, ""); //only put the needed fields in the report.
         newReport.setPatient(input.getPatient());
         newReport.setPerson(input.getPatient());
-        for(String test : input.getLabTestRequest().keySet()) {
+        for (String test : input.getLabTestRequest().keySet()) {
             if (input.getLabTestRequest().get(test)) {
                 newReport.getlabTest().put(test, "");
                 newReport.getlabTestNames().put(test, input.getLabTestRequestNames().get(test));
                 System.out.print(newReport.getlabTestNames().get(test));
-            }
-            else {
+            } else {
                 newReport.getlabTestNames().remove(test);
             }
         }
@@ -200,11 +209,11 @@ public class LabReportController {
         return "lab/editlabreport";
     }
 
-    @RequestMapping(value="/{reportID}/create", method= RequestMethod.POST)
-    public String createPost (Map<String, Object> model,
-                              @PathVariable String reportID,
-                              @ModelAttribute("report") LabReport report,
-                              @ModelAttribute("user") User user) {
+    @RequestMapping(value = "/{reportID}/create", method = RequestMethod.POST)
+    public String createPost(Map<String, Object> model,
+                             @PathVariable String reportID,
+                             @ModelAttribute("report") LabReport report,
+                             @ModelAttribute("user") User user) {
 
         report.setPerson(user.getPerson()); //maybe set the lab staff member responsible?
         LabReportSQL.updateLabReport(report);

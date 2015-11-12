@@ -25,7 +25,7 @@
                     <script>
                         alert("That time and day is occupied. Please select a different time or day."); </script>
                     Occupied Times for Doctor: <c:out value="${appointment.doctorID}"/>
-                    <div style="overflow:scroll;height:80px;width:100%;overflow:auto">
+                    <div style="overflow:auto;height:80px;width:100%;">
 
                         <table width="800" border="0" class="my-table">
                             <tr>
@@ -89,21 +89,6 @@
                                     <option value="8:00 PM">8:00 PM</option>
                                 </form:select>
                             </div>
-                        </div>
-
-
-                        <div class="form-class">
-
-                            <br><br><label class="col-md-4 control-label" for="docID">Doctor ID</label>
-
-                            <div class="col-md-4">
-                                <form:input id="docID" size='3' path="tempDocID"
-                                            class="readonly" type="number" min="501" max="511" step="1"
-                                            maxlength="10"
-                                            autofocus="autofocus"
-                                            required="required"/>
-                            </div>
-
                         </div>
 
                         <div class="form-class">

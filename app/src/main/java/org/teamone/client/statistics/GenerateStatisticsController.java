@@ -36,8 +36,8 @@ public class GenerateStatisticsController {
         ArrayList<ArrayList<Integer>> year = GenerateStatsSQL.getNumOfPatientType();
         chart.addData("Pediatric", year.get(0));
         chart.addData("General Care", year.get(1));
-        chart.addData("Radiology (X-ray)",year.get(2));
-        chart.addData("Emergency",year.get(3));
+        chart.addData("Radiology (X-ray)", year.get(2));
+        chart.addData("Emergency", year.get(3));
         chart.addData("Neurology", year.get(4));
         return chart;
     }
@@ -80,7 +80,7 @@ public class GenerateStatisticsController {
         Map<String, Double> gender = new HashMap<String, Double>();
         gender.put("Female", female);
         gender.put("Male", male);
-        chart.addData("Gender",gender);
+        chart.addData("Gender", gender);
         return chart;
     }
 
@@ -107,7 +107,7 @@ public class GenerateStatisticsController {
         ageGroups.put("51-60", group6);
         ageGroups.put("61-74", group7);
         ageGroups.put("75 & Up", group8);
-        chart.addData("Age",ageGroups);
+        chart.addData("Age", ageGroups);
         return chart;
     }
 
@@ -116,9 +116,10 @@ public class GenerateStatisticsController {
     public String dispStats(Map<String, Object> model,
                             @ModelAttribute User user) {
 
-        if (user.getPerson() == null )
+        if (user.getPerson() == null)
             return "redirect:/login";
         else if (!(user.getPerson() instanceof HSP))//only HSP
-            return "redirect:/user/" + user.person.getUserID();return "statistics/stats";
+            return "redirect:/user/" + user.person.getUserID();
+        return "statistics/stats";
     }
 }

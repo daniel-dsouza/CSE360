@@ -104,5 +104,6 @@ class LoginAttempt {
         return this.password;
     }
 
-    LoginAttempt() {}
+    LoginAttempt() {
+    }
 }

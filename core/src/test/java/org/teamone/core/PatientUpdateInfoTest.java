@@ -21,15 +21,15 @@ public class PatientUpdateInfoTest {
         update = new Patient();
         update.setUserID(1002);
         update.patientInformation.setFirstName("Ryan");
-        update.patientInformation.setLastName("The Diva");
+        update.patientInformation.setLastName("Ang");
         update.patientInformation.setAddress("Eastern Ocean");
         update.patientInformation.setCity("Tempe");
         update.patientInformation.setState("AZ");
         update.patientInformation.setZipcode("85200");
-        update.patientInformation.setEmail("new@as.edu");
+        update.patientInformation.setEmail("new@asu.edu");
         update.patientInformation.setHomePhone("(480)-948-9940");
         update.patientInformation.setSsn("194-45-3453");
-        update.patientInformation.setInsurance("newSrurnace");
+        update.patientInformation.setInsurance("The Fourth One");
         update.patientInformation.setAge("22");
         update.patientInformation.setGender("Male");
 

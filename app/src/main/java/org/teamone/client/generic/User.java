@@ -11,7 +11,7 @@ import org.teamone.core.users.Staff;
  */
 @Component
 @Scope("session")
-public class User{
+public class User {
 
     public Person getPerson() {
         return person;

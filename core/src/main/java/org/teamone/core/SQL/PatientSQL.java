@@ -23,6 +23,7 @@ public class PatientSQL {
 
     /**
      * update personal info
+     *
      * @param patient with valid PatientID
      * @return
      */
@@ -97,8 +98,10 @@ public class PatientSQL {
         }
         return Result;
     }
+
     /**
      * get all data from SQL with a patient ID
+     *
      * @param patient Patient Object with valid patient ID
      * @return Patient object with all data filled in
      */
@@ -132,24 +135,20 @@ public class PatientSQL {
             patient.splitName(resultSet.getString("p2.name"));
             patient.setEmail(resultSet.getString("p2.emailID"));
             String mh = resultSet.getString("p.medicalhistory");
-            if(mh ==null)
-            {
+            if (mh == null) {
                 System.out.println("No medical history");
-            }
-            else
+            } else
                 patient.medicalHistory.toMapObj(mh);
 
 
             String hc = resultSet.getString("p.healthConditions");
-            if(hc ==null)
-            {
+            if (hc == null) {
                 System.out.println("No health conditions");
-            }else
-            patient.healthConditions.toMapObj(hc);
+            } else
+                patient.healthConditions.toMapObj(hc);
 
 
             patient.setUserID(ID);
-
 
 
         } catch (Exception e) {
@@ -165,6 +164,7 @@ public class PatientSQL {
 
     /**
      * gets medical history
+     *
      * @param patient with valid patient ID
      * @return
      */
@@ -200,8 +200,10 @@ public class PatientSQL {
         return patient;
 
     }
+
     /**
      * sets medical history
+     *
      * @param patient with valid patient ID
      * @return
      */
@@ -240,6 +242,7 @@ public class PatientSQL {
 
     /**
      * gets health conditions
+     *
      * @param patient with valid patient ID
      * @return
      */
@@ -275,8 +278,10 @@ public class PatientSQL {
         return patient;
 
     }
+
     /**
      * set health conditions
+     *
      * @param patient with valid patient ID
      * @return
      */
@@ -298,12 +303,12 @@ public class PatientSQL {
             String hc = patient.healthConditions.toString();
 //checking alert
             List<Integer> myList = new ArrayList<Integer>();
-            if (patient.healthConditions.alertReason != null && patient.healthConditions.alertReason != "") {
+            if (patient.healthConditions.alertReason != null && !patient.healthConditions.alertReason.equals("")) {
                 preparedStatement = connect.prepareStatement("SELECT patient_id FROM alerts");
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next())
                     myList.add(resultSet.getInt("patient_id"));
-                    //Retrieve by column name
+                //Retrieve by column name
                 System.out.println("=Detected alerts. Patient ids have been added to list");
 
                 java.util.Date dt = patient.healthConditions.alertDateAndTime;
@@ -319,8 +324,7 @@ public class PatientSQL {
                     preparedStatement.setInt(3, patient.getUserID());
                     preparedStatement.executeUpdate();
 
-                }
-                else {
+                } else {
                     System.out.println("Alert in alerts table is NOT present. Inserting now");
                     //INSERT INTO alerts(alert_reason, patient_id,AlertActive) VALUES (":anklePain", 1234,1) ;
                     preparedStatement = connect.prepareStatement("INSERT INTO alerts(alert_reason, patient_id, alertDateAndTime, AlertActive) VALUES (?, ?, ?, TRUE) ;");
@@ -347,8 +351,10 @@ public class PatientSQL {
         }
         return boolResult;
     }
+
     /**
      * Returns a list of patients based on Patients.
+     *
      * @param queryName: Given a string name
      * @return ArrayList: List of Patients
      */
@@ -384,8 +390,10 @@ public class PatientSQL {
         }
         return patientList;
     }
+
     /**
      * gets all patients
+     *
      * @param
      * @return Arraylist of patients
      */
@@ -403,7 +411,7 @@ public class PatientSQL {
 
             preparedStatement = connect.prepareStatement("select userID, name, password, emailID from person where occupation = ?;");
             //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
-            preparedStatement.setString(1,"patient");
+            preparedStatement.setString(1, "patient");
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -425,12 +433,14 @@ public class PatientSQL {
         }
         return PatientList;
     }
+
     /**
      * Returns a list of patients based on doctors.
+     *
      * @param doc: Given a staff object
      * @return ArrayList: List of Patients
      */
-    public static ArrayList<Patient> getPatientByStaff (Doctor doc) {
+    public static ArrayList<Patient> getPatientByStaff(Doctor doc) {
         ArrayList<Patient> PatientList = new ArrayList<Patient>();
         try {
             // This will load the MySQL driver, each DB has its own driver
@@ -443,15 +453,25 @@ public class PatientSQL {
 
             preparedStatement = connect.prepareStatement("select patientID from appointment where doctorID = ? and patientID IS NOT NULL;");
             //preparedStatementPatient = connect.prepareStatement("select userID from person where lName like '%" + queryName + "%' or lName like '%" + queryName + "%';");
-            preparedStatement.setInt(1,docID);
+            preparedStatement.setInt(1, docID);
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                Patient pers = new Patient();
-                pers.setUserID(rs.getInt("patientID"));
+            ArrayList<Integer> myPatients = new ArrayList<Integer>();
 
-                //pers= PatientSQL.getPatientComplete(pers);
-                PatientList.add(pers);
+            while (rs.next()) {
+                int patID = rs.getInt("patientID");
+                if (myPatients.contains(patID)) {
+                    //do nothing
+
+                } else {
+                    myPatients.add(patID);
+                    Patient pers = new Patient();
+                    pers.setUserID(patID);
+
+                    //pers= PatientSQL.getPatientComplete(pers);
+                    PatientList.add(pers);
+                }
+
             }
 
         } catch (Exception e) {
