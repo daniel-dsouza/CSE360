@@ -104,7 +104,6 @@ public class AlertController {
      * Resolves an alert.
      *
      * @param alertID
-     * @return
      */
     @RequestMapping(value = "/resolvealert/{alertID}", method = RequestMethod.GET)
     public

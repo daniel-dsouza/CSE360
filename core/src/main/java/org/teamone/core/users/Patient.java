@@ -3,12 +3,13 @@ package org.teamone.core.users;
 import org.teamone.core.labs.LabReport;
 import org.teamone.core.prescriptions.Prescription;
 
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Patient extends Person {
+public class Patient extends Person implements Comparable<Patient> {
     private String occupation; //why do we care?
 
     public PatientInformation patientInformation;
@@ -16,6 +17,7 @@ public class Patient extends Person {
     public MedicalHistory medicalHistory;
     public Prescription prescription;
     public LabReport labReports;
+
     public Patient() {
         super();
         patientInformation = new PatientInformation();
@@ -95,6 +97,7 @@ public class Patient extends Person {
         //this.phone = phone;
         this.patientInformation.setHomePhone(phone);
     }
+
     public String getEmail() {
         return patientInformation.getEmail();
     }
@@ -111,6 +114,7 @@ public class Patient extends Person {
     public void setHealthConditions(HealthConditions hc) {
         healthConditions = hc;
     }
+
     public MedicalHistory getMedicalHistory() {
 
         return medicalHistory;
@@ -120,24 +124,22 @@ public class Patient extends Person {
         medicalHistory = mh;
     }
 
-    public String getName()
-    {
+    public String getName() {
 
         return patientInformation.getName();
     }
-    public void setName(String name)
-    {
+
+    public void setName(String name) {
         patientInformation.setName(name);
         patientInformation.splitName(name);
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
 
         return patientInformation.getAddress();
     }
-    public void setAddress(String add)
-    {
+
+    public void setAddress(String add) {
         patientInformation.setAddress(add);
         patientInformation.splitAddress(add);
     }
@@ -157,5 +159,36 @@ public class Patient extends Person {
     public void setPrescription(Prescription prescription) {
         this.prescription = prescription;
     }
+
+    public int compareTo(Patient compare) {
+
+        int compareID = compare.getUserID();
+
+        //ascending order
+        return this.getUserID() - compareID;
+
+        //descending order
+        //return compareQuantity - this.quantity;
+
+    }
+
+    //http://www.mkyong.com/java/java-object-sorting-example-comparable-and-comparator/
+    public static Comparator<Patient> patientIDComparator
+            = new Comparator<Patient>() {
+
+        public int compare(Patient first, Patient second) {
+
+            int ID1 = first.getUserID();
+            int ID2 = second.getUserID();
+
+            //ascending order
+            return ID1 - ID2;
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+
+
+    };
 }
 

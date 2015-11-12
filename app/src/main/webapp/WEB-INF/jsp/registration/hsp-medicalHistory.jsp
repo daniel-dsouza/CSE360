@@ -1,10 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
-
 
 
 <!-- used http://community.sitepoint.com/t/make-all-table-cells-the-same-size/3363/3 -->
@@ -12,7 +11,8 @@
     td {
         border-spacing: 0;
         width: 70px;
-        margin: 0; padding: 0;
+        margin: 0;
+        padding: 0;
     }
 </style>
 

@@ -9,7 +9,7 @@ public class GenerateStatsTest {
 
 
     @Test
-    public void GenerateStats(){
+    public void GenerateStats() {
 
         /*GenerateStatsSQL.getNumOfPatientType();
         System.out.println("Number of Alerts within this Month: " + GenerateStatsSQL.getNumOfAlerts());
@@ -21,11 +21,11 @@ public class GenerateStatsTest {
         System.out.println("\n==EXAMPLE HOW TO GET FROM OBJECT====\nNumber of Alerts within this Month: " + GenerateStatsSQL.getNumOfAlerts());
         System.out.println("Number of New Patients within this Month: " + GenerateStatsSQL.getNumOfNewPatients());
         System.out.println("Male Population: " + GenerateStatsSQL.getMalePopulation() + "%");
-        System.out.println("Female Population: "+GenerateStatsSQL.getFemalePopulation() + "%\n");
+        System.out.println("Female Population: " + GenerateStatsSQL.getFemalePopulation() + "%\n");
 
         double[] Agepop = GenerateStatsSQL.getAgePopulation();
         System.out.println("Ages 0-12: " + Agepop[0] + "%");
-        System.out.println("Ages 13-18: " + Agepop[1]+ "%");
+        System.out.println("Ages 13-18: " + Agepop[1] + "%");
         System.out.println("Ages 19-26: " + Agepop[2] + "%");
         System.out.println("Ages 27-40: " + Agepop[3] + "%");
         System.out.println("Ages 41-50: " + Agepop[4] + "%");
@@ -43,7 +43,7 @@ public class GenerateStatsTest {
 
         System.out.println("Number of Emergency Alerts within the Year");
 
-        ArrayList<Integer>  numOfAlerts = new ArrayList<Integer> (GenerateStatsSQL.getNumOfAlerts());
+        ArrayList<Integer> numOfAlerts = new ArrayList<Integer>(GenerateStatsSQL.getNumOfAlerts());
         System.out.println("January: " + numOfAlerts.get(0));
         System.out.println("February: " + numOfAlerts.get(1));
         System.out.println("March: " + numOfAlerts.get(2));
@@ -59,7 +59,7 @@ public class GenerateStatsTest {
 
         System.out.println("Number of New Patients within the Year");
 
-        ArrayList<Integer>  patientCount = new ArrayList<Integer> (GenerateStatsSQL.getNumOfNewPatients());
+        ArrayList<Integer> patientCount = new ArrayList<Integer>(GenerateStatsSQL.getNumOfNewPatients());
         System.out.println("January: " + patientCount.get(0));
         System.out.println("February: " + patientCount.get(1));
         System.out.println("March: " + patientCount.get(2));

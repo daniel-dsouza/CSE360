@@ -10,6 +10,7 @@ public class Alert {
     private int patientID;
     private int doctorID;
     private int alertID;
+
     public String getAlertDateAndTime() {
         return alertDateAndTime;
     }
@@ -57,8 +58,8 @@ public class Alert {
     public void setAlertID(int alertID) {
         this.alertID = alertID;
     }
-    public Alert()
-    {
+
+    public Alert() {
 
     }
 }

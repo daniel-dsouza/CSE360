@@ -4,19 +4,19 @@
 
 function loadDoctors() {
     $.ajax('/appointment/getdoctors/' + $("#special").val(), {
-        type:'GET',
-        dataType:'json',
-        success:function(data) {
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
             var outputHTML = '<option value="">List of Doctors</option>';
             var len = data.length;
             for (var i = 0; i < len; i++) {
-                outputHTML += '<option value="' + data[i].name + '">' + data[i].firstName + '</option>';
+                outputHTML += '<option value="' + data[i].userID + '">' + data[i].firstName + '</option>';
             }
             outputHTML += '</option>';
 
             $('#doctor').html(outputHTML)
         },
-        error: function() {
+        error: function () {
 
             alert("error getting list.")
         }
@@ -42,11 +42,11 @@ function loadTimes() {
         }
     })
 }
-function checkReason(){
+function checkReason() {
     var reason = $("#reason").val();
 
     //http://jsfiddle.net/5vzZf/1/
-    if (reason.match(/\s/g)){
+    if (reason.match(/\s/g)) {
         //alert('There is a space! The username is "' + username + '"');
     } else {
         alert('You must use atleast one space between the words');

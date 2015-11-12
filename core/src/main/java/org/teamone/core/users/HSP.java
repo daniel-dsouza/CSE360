@@ -8,10 +8,11 @@ import java.util.LinkedHashMap;
 public class HSP extends Staff {
     public HSP() {
         super();
-        agentActions = new LinkedHashMap<String, String>() {};
+        agentActions = new LinkedHashMap<String, String>() {
+        };
         agentActions.put("Select Patient", "select_patient");
         agentActions.put("Register Patient", "registration/");
         agentActions.put("Generate Statistics", "stats");
         //agentActions.put("Create Appointment", "appointment/createappointment");
-        }
+    }
 }

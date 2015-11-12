@@ -3,7 +3,6 @@ package org.teamone.core.SQL;
 import org.teamone.core.labs.LabReport;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Person;
-import org.teamone.core.users.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public class LabReportSQL {
 
 
     /**
-     *
      * @param readMe with valid RequestionID and patient ID
      * @return
      */
@@ -52,8 +50,7 @@ public class LabReportSQL {
             checker = preparedStatement.executeUpdate();
 
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
             readMe = null;
@@ -62,9 +59,7 @@ public class LabReportSQL {
     }
 
 
-
     /**
-     *
      * @param readMe: Valid LabReport with a requestionID
      * @return LabReport: returns a LabReport object
      */
@@ -92,14 +87,12 @@ public class LabReportSQL {
             int patID = resultSet.getInt("patientID");
             int stafID = resultSet.getInt("staffID");
 
-            if (!date.equals("null") &&  !labReport.equals(null)) {
+            if (!date.equals("null") && !labReport.equals(null)) {
                 readMe.setDate(date);
                 readMe.toMapObj(labReport);
                 readMe.getPatient().setUserID(patID);
                 readMe.getPerson().setUserID(stafID);
-            }
-            else
-            {
+            } else {
                 System.out.println("===========EMPTY RESULT========RETURN NULL");
                 readMe = null;
             }
@@ -117,6 +110,7 @@ public class LabReportSQL {
 
     /**
      * Gets everything from table labReports
+     *
      * @return ArrayList: list of LabReports
      */
     public static ArrayList<LabReport> getAllLabReports() {
@@ -160,8 +154,8 @@ public class LabReportSQL {
         return labReportList;
 
     }
+
     /**
-     *
      * @param readMe: LabReport with valid patient ID
      * @return LabReport object
      */
@@ -186,13 +180,11 @@ public class LabReportSQL {
 
             String labReport = resultSet.getString("labReport");
             String date = resultSet.getString("date");
-            if (!date.equals("null") &&  !labReport.equals(null)) {
+            if (!date.equals("null") && !labReport.equals(null)) {
 
                 readMe.setDate(date);
                 readMe.toMapObj(labReport);
-            }
-            else
-            {
+            } else {
                 System.out.println("===========EMPTY RESULT========RETURN NULL");
                 readMe = null;
             }
@@ -206,9 +198,9 @@ public class LabReportSQL {
         return readMe;
 
     }
+
     /**
-     *
-     * @param  p: given a patient with a valid patientID.
+     * @param p: given a patient with a valid patientID.
      * @return ArrayList of LabTests corresponding to Patient
      */
 

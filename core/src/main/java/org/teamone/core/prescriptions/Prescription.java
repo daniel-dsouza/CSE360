@@ -94,8 +94,7 @@ public class Prescription {
         this.strDateAndTime = strDateAndTime;
     }
 
-    public void convertDate()
-    {
+    public void convertDate() {
         java.text.SimpleDateFormat sdf =
                 new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         strDateAndTime = sdf.format(dateAndTime);

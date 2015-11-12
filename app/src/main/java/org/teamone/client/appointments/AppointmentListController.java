@@ -28,14 +28,14 @@ public class AppointmentListController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String findPatients(Map<String, Object> model, @ModelAttribute User user) {
-        if (user.getPerson() == null )
+        if (user.getPerson() == null)
             return "redirect:/login";
-        else if(!(user.getPerson() instanceof Patient))//only patients
+        else if (!(user.getPerson() instanceof Patient))//only patients
         {
             return "redirect:/user/" + user.person.getUserID();
         }
         List<Appointment> patientList; //Hashing strikes again.
-        System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
+        //System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
         Appointment temp = new Appointment();
         temp.setPatientID(user.getPerson().getUserID());
         patientList = AppointmentSQL.viewFutureAppointmentByPatient(temp);
@@ -59,12 +59,13 @@ public class AppointmentListController {
 
         return "redirect:/appointment/list"; //this will need to be "redirect:somesuccesspage" at some point.
     }
+
     @RequestMapping(value = "/doctor", method = RequestMethod.GET)
     public String findDoctors(Map<String, Object> model, @ModelAttribute User user) {
-        if (user.getPerson() == null )
+        if (user.getPerson() == null)
             return "redirect:/login";
         List<Appointment> doctorList; //Hashing strikes again.
-        System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
+        //System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
         Appointment temp = new Appointment();
         temp.setDoctorID(user.getPerson().getUserID());
         doctorList = AppointmentSQL.viewFutureAppointmentByDoctor(temp);

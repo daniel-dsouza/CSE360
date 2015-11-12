@@ -4,7 +4,7 @@ package org.teamone.core.SQL;
  * Created by Ryan on 10/7/2015.
  * http://www.vogella.com/tutorials/MySQLJava/article.html
  * http://zetcode.com/db/mysqljava/
- *
+ * <p/>
  * http://makble.com/spring-data-jpa-spring-mvc-and-gradle-integration
  */
 
@@ -37,31 +37,20 @@ public class LoginSQL {
             String pass = check.getPassword();
 
             preparedStatement = connect.prepareStatement("SELECT userID, name, occupation, password, emailID from person WHERE userID = ?");
-            preparedStatement.setInt(1,ID);
+            preparedStatement.setInt(1, ID);
             resultSet = preparedStatement.executeQuery();
-            if(verify(resultSet, pass))
-            {
+            if (verify(resultSet, pass)) {
                 //resultSet.next();
                 String occ = resultSet.getString("occupation");
-               if(occ.equals("patient"))
-               {
-                   check = new Patient();
-               }else
-                if(occ.equals("doctor"))
-                {
+                if (occ.equals("patient")) {
+                    check = new Patient();
+                } else if (occ.equals("doctor")) {
                     check = new Doctor();
-                }else
-                if(occ.equals("hsp"))
-                {
+                } else if (occ.equals("hsp")) {
                     check = new HSP();
-                }
-                else
-                if(occ.equals("labstaff"))
-                {
+                } else if (occ.equals("labstaff")) {
                     check = new LabStaff();
-                }
-                else
-                {
+                } else {
                     check = new Person();
                 }
                 check.setName(resultSet.getString("name"));
@@ -70,8 +59,7 @@ public class LoginSQL {
                 check.setEmail(resultSet.getString("emailID"));
                 check.setUserID(ID);
 
-            }
-            else
+            } else
                 check = null;
 
         } catch (Exception e) {
@@ -86,7 +74,7 @@ public class LoginSQL {
 
     /**
      * converts an ID into an name
-     * @param patientID
+     * @param patientID valid id
      * @return string name with associated id
      */
     public static String getName(int patientID) {
@@ -100,13 +88,12 @@ public class LoginSQL {
 
 
             preparedStatement = connect.prepareStatement("SELECT name from person WHERE userID = ?");
-            preparedStatement.setInt(1,patientID);
+            preparedStatement.setInt(1, patientID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             username = resultSet.getString("name");
 
             System.out.println("The name for id: " + patientID + " is: " + username);
-
 
 
         } catch (Exception e) {
@@ -118,9 +105,10 @@ public class LoginSQL {
         return username;
 
     }
+
     /**
      * converts an name into an ID
-     * @param patientID
+     * @param patientName
      * @return int ID with associated name
      */
     public static int getID(String patientName) {
@@ -140,8 +128,6 @@ public class LoginSQL {
             System.out.println("UserID for " + patientName + " is: " + userID);
 
 
-
-
         } catch (Exception e) {
             System.out.println(e);
             userID = 0;
@@ -156,13 +142,12 @@ public class LoginSQL {
     private static boolean verify(ResultSet resultSet, String pass) throws SQLException {
         // ResultSet is initially before the first data set
         boolean boolResult;
-        if(resultSet.first())//if Resultset does exist,
+        if (resultSet.first())//if Resultset does exist,
         {
             String passwordSQL = resultSet.getString("password");
 
             boolResult = pass.compareTo(passwordSQL) == 0;
-        }
-        else
+        } else
             boolResult = false;
         return boolResult;
     }

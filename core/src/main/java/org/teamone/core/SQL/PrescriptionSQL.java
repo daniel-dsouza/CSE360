@@ -20,7 +20,6 @@ public class PrescriptionSQL {
     private static ResultSet resultSet = null;
 
     /**
-     *
      * @param patient: Prescription to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
@@ -61,7 +60,6 @@ public class PrescriptionSQL {
     }
 
     /**
-     *
      * @param patient: given a patient with a valid patientID.
      * @return ArrayList of Prescriptions corresponding to Patient
      */
@@ -102,8 +100,8 @@ public class PrescriptionSQL {
     }
 
     /**
-     *
      * Gets everything from prescriptions
+     *
      * @return ArrayList of Prescriptions corresponding to Patient
      */
     public static ArrayList<Prescription> getAllPrescriptions() {
@@ -186,7 +184,6 @@ public class PrescriptionSQL {
     }
 
     /**
-     *
      * @param readMe: Prescription given a patient with a valid serialnumber
      * @return Prescription object
      */

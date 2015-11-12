@@ -1,8 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 
 <t:template>
@@ -99,7 +99,7 @@
         <!-- End of widget-content -->
         <br/>
 
-        <div class="button_holder" style="text-align: center;">
+                <div class="button_holder" style="text-align: center;">
         <span class="group-btn">
             <input type="submit" value="Next" class="btn btn-primary btn-md"/>
         </span>
@@ -116,51 +116,57 @@
 
 <!-- http://stackoverflow.com/questions/16134733/html-javascript-simple-form-validation-on-submit -->
 <script>
-  function checkFormRegistration(){
-    var email = $("#email").val();
-    var gender = $("#gender").val();
-    var zipcode = $("#zipcode").val();
-    var phone = $("#phone").val();
-    var ssn = $("#ssn").val();
-    var age = $("#age").val();
-    var firstName = $("#firstName").val();
-    var lastName = $("#lastName").val();
-    if ((/(.+)@(.+){2,}\.(.+){2,}/.test(email)) || email=="" || email==null) { } else {       //this is copied and pasted from stack overflow
-      alert("Please enter a valid email");
-      return false;
+    function checkFormRegistration() {
+        var email = $("#email").val();
+        var gender = $("#gender").val();
+        var zipcode = $("#zipcode").val();
+        var phone = $("#phone").val();
+        var ssn = $("#ssn").val();
+        var age = $("#age").val();
+        var firstName = $("#firstName").val();
+        var lastName = $("#lastName").val();
+        if ((/(.+)@(.+){2,}\.(.+){2,}/.test(email)) || email == "" || email == null) {
+        } else {       //this is copied and pasted from stack overflow
+            alert("Please enter a valid email");
+            return false;
+        }
+        if (gender == "select one" || gender == null) {
+            alert("Please select a gender");
+            return false;
+        }
+        if ((/^\d{5}$/.test(zipcode)) || (/^\d{5}-\d{4}$/.test(zipcode))) {
+        } else { // && !/^(.+){6}/.test(zipcode) //  && !/^\d{6}/.test(zipcode) && !/-\d{5}$/.test(zipcode) Just added $ ^ and it worked. Yeah. Removed stuff and it still worked
+            alert("Please enter a valid zipcode.\nEither ##### or #####-####");
+            return false;
+        }
+        if (/^\(\d{3}\)-\d{3}-\d{4}$/.test(phone)) {
+        } else {
+            alert("Please enter a valid phone number.\n(###)-###-####");
+            return false;
+        }
+        if (/^\d{3}-\d{2}-\d{4}$/.test(ssn)) {
+        } else {
+            alert("Please enter a valid social security number.\n###-##-####");
+            return false;
+        }
+        if (/^\d{1,}$/.test(age)) {
+            if (age > 150) {
+                alert("Please enter an age under 150.");
+            }
+        } else {
+            alert("Please enter a number for age.");
+            return false;
+        }
+        if (/^[a-zA-Z]{1,}$/.test(firstName)) {
+        } else {
+            alert("Please make sure your first name only contains letters");
+            return false;
+        }
+        if (/^[a-zA-Z]{1,}$/.test(lastName)) {
+        } else {
+            alert("Please make sure your last name only contains letters");
+            return false;
+        }
+        return true;
     }
-    if (gender == "select one" || gender == null) {
-      alert("Please select a gender");
-      return false;
-    }
-    if((/^\d{5}$/.test(zipcode)) || (/^\d{5}-\d{4}$/.test(zipcode))){} else { // && !/^(.+){6}/.test(zipcode) //  && !/^\d{6}/.test(zipcode) && !/-\d{5}$/.test(zipcode) Just added $ ^ and it worked. Yeah. Removed stuff and it still worked
-      alert("Please enter a valid zipcode.\nEither ##### or #####-####");
-      return false;
-    }
-    if(/^\(\d{3}\)-\d{3}-\d{4}$/.test(phone)){} else{
-      alert("Please enter a valid phone number.\n(###)-###-####");
-      return false;
-    }
-    if(/^\d{3}-\d{2}-\d{4}$/.test(ssn)){} else{
-      alert("Please enter a valid social security number.\n###-##-####");
-      return false;
-    }
-    if(/^\d{1,}$/.test(age)){
-      if(age > 150){
-        alert("Please enter an age under 150.");
-      }
-    } else{
-      alert("Please enter a number for age.");
-      return false;
-    }
-    if(/^[a-zA-Z]{1,}$/.test(firstName)){} else{
-      alert("Please make sure your first name only contains letters");
-      return false;
-    }
-    if(/^[a-zA-Z]{1,}$/.test(lastName)){} else{
-      alert("Please make sure your last name only contains letters");
-      return false;
-    }
-    return true;
-  }
 </script>

@@ -22,10 +22,10 @@ import java.util.Map;
 @SessionAttributes("request")
 public class RequestLabTestController {
 
-    @RequestMapping(method= RequestMethod.GET)
-    public String list (Map<String, Object> model,
-                        @ModelAttribute User user) {
-        if(user.getPerson() == null)
+    @RequestMapping(method = RequestMethod.GET)
+    public String list(Map<String, Object> model,
+                       @ModelAttribute User user) {
+        if (user.getPerson() == null)
             return "redirect:/login";
         else if (!(user.getPerson() instanceof LabStaff))
             return "redirect:/user/" + user.person.getUserID();
@@ -40,9 +40,9 @@ public class RequestLabTestController {
                           @PathVariable String id,
                           @ModelAttribute User user) {
         //they don't say they be who they are, but they don't
-        if(user.getPerson() == null)
+        if (user.getPerson() == null)
             return "redirect:/login";
-        if(!(user.getPerson() instanceof LabStaff) && !(user.getPerson() instanceof Doctor))
+        if (!(user.getPerson() instanceof LabStaff) && !(user.getPerson() instanceof Doctor))
             return "redirect:/user/" + user.person.getUserID();
 
         LabTestRequest testID = new LabTestRequest();
@@ -57,11 +57,11 @@ public class RequestLabTestController {
         model.put("request", request);
 
         if (request == null) {
-            System.out.println(Integer.parseInt(id) +" this returns null");
+            System.out.println(Integer.parseInt(id) + " this returns null");
             return "lab/editlabtestrequest";
         }
 
-        for(String key : request.getLabTestRequest().keySet()) {
+        for (String key : request.getLabTestRequest().keySet()) {
             if (request.getLabTestRequest().get(key))
                 System.out.println(key + " ");
         }
@@ -73,7 +73,7 @@ public class RequestLabTestController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String getList(Map<String, Object> model,
                           @ModelAttribute User user) {
-        if(user.getPerson() == null)
+        if (user.getPerson() == null)
             return "redirect:/login";
         else if (!(user.getPerson() instanceof Doctor))
             return "redirect:/user/" + user.person.getUserID();
@@ -84,9 +84,9 @@ public class RequestLabTestController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String submitTest (Map<String, Object> model,
-                              @ModelAttribute("request") LabTestRequest request,
-                              @ModelAttribute("user") User user) {
+    public String submitTest(Map<String, Object> model,
+                             @ModelAttribute("request") LabTestRequest request,
+                             @ModelAttribute("user") User user) {
 
 
         //Patient test = new Patient();
@@ -95,17 +95,16 @@ public class RequestLabTestController {
         request.setPerson(user.getPerson());
         boolean hasOne = true;
 
-        Map<String,Boolean> MapRequest = request.getLabTestRequest();
+        Map<String, Boolean> MapRequest = request.getLabTestRequest();
 
         for (Map.Entry<String, Boolean> entry : MapRequest.entrySet()) {
-            if(entry.getValue()) {
+            if (entry.getValue()) {
                 hasOne = true;
                 break;//if one is found to be true, submit request
-            }
-            else
+            } else
                 hasOne = false;
         }
-        if(hasOne) {//if atleast one in here, request. otherwise just drop redirect.
+        if (hasOne) {//if atleast one in here, request. otherwise just drop redirect.
             LabRequestSQL.addLabRequest(request);
         }
         return "redirect:/select_patient";

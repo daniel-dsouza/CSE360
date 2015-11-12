@@ -25,27 +25,26 @@ public class PersonalController {
 
         if (user.getPerson() == null)
             return "redirect:/login";
-        else if(user.getPerson() instanceof LabStaff)
+        else if (user.getPerson() instanceof LabStaff)
             return "redirect:/user/" + user.person.getUserID();
-        else if(user.getPerson() instanceof Patient){
+        else if (user.getPerson() instanceof Patient) {
             Patient p = new Patient();
             p.setUserID(user.getPerson().getUserID());
             user.setPatient(PatientSQL.getPatientComplete(p));
         }
 
-        if(user.getPatient() == null)               // If patient has not been initialized send them to patient select
+        if (user.getPatient() == null)               // If patient has not been initialized send them to patient select
             return "redirect:/select_patient";
-
 
 
         String currentGender;
         String oppisiteGender;
 
         PatientInformation attempt = user.getPatient().getPatientInformation();
-        if(attempt.getGender().equals("Male")){
+        if (attempt.getGender().equals("Male")) {
             currentGender = "Male";
             oppisiteGender = "Female";
-        }else{
+        } else {
             currentGender = "Female";
             oppisiteGender = "Male";
         }

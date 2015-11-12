@@ -5,8 +5,8 @@ package org.teamone.core.users;
  */
 public class PatientInformation {
     private String name;
-    private String firstName ="";
-    private String lastName ="";
+    private String firstName = "";
+    private String lastName = "";
     private String age;
     private String address = "";
     private String city = "";
@@ -125,28 +125,32 @@ public class PatientInformation {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public String toStringName()//to SQL
     {
         name = firstName + ":" + lastName;
         return name;
     }
+
     public void splitName(String nam)//from SQL
     {
         String[] data = nam.split(":");
         firstName = data[0];
         lastName = data[1];
     }
+
     public String toStringAddress()//to SQL
     {
         address = address + ":" + city + ":" + state + ":" + zipcode;
         return address;
     }
+
     public void splitAddress(String add)//from SQL
     {
         String[] data = add.split(":");
         address = data[0];
         city = data[1];
         state = data[2];
-        zipcode =data[3];
+        zipcode = data[3];
     }
 }

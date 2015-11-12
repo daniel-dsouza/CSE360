@@ -48,7 +48,7 @@ public class AlertTest {
     public void checkAlertPopUp() {
         System.out.println("\nTest========Checking for alerts within a 5min");
         ArrayList<Alert> testArr = AlertSQL.getListAlertsPopUp();
-        if(testArr!=null ) {
+        if (testArr != null) {
             Alert tempAlert;
 
             for (int i = 0; i < testArr.size(); i++) {

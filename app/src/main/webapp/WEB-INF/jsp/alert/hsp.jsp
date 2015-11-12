@@ -23,7 +23,7 @@
         <!--Display list of partial-doctors-->
         <h1>Alerts</h1>
 
-        <div class="container-fluid" id="target" style="overflow:scroll;height:150px;width:100%;overflow:auto">
+        <div class="container-fluid" id="target" style="overflow:auto;height:150px;width:100%;">
 
         </div>
         <div class="container-fluid">
@@ -60,7 +60,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
-                                                <div class="panel panel-default " style="overflow:scroll;height:290px;width:100%;overflow:auto">
+                                                <div class="panel panel-default "
+                                                     style="overflow:auto;height:290px;width:100%;">
                                                     <div class="panel-heading">
                                                         <h6 class="panel-title">Appointments</h6>
                                                     </div>

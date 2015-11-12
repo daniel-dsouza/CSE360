@@ -81,13 +81,4 @@ function getDate() {
         }
     }
 
-    var reason = $("#reason").val();
-    //http://jsfiddle.net/5vzZf/1/
-    if (reason.match(/\s/g)){
-        //alert('There is a space! The username is "' + username + '"');
-    } else {
-        alert('You must use atleast one space between the words');
-        bool = 0;
-    }
-    return bool;
 };
