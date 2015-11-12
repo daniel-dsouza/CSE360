@@ -22,7 +22,7 @@
             </c:if>
             <c:if test="${not empty doctorList}">
                 <div class="container-fluid" style="border-bottom-style: solid; border-width: 1px">
-                    <div class="col-sm-2 col-sm-offset-1">Reason</div>
+                    <div class="col-sm-3 col-sm-offset-.5">Reason</div>
                     <div class="col-sm-2">Date</div>
                     <div class="col-sm-1">Time</div>
                     <div class="col-sm-1">Patient</div>
@@ -30,7 +30,7 @@
                 <c:forEach var="appt" items="${doctorList}">
                     <div class="row" style="margin: 5px">
                         <div class="container-fluid" style="border-bottom-style: solid; border-width: 1px">
-                            <div class="col-sm-2 col-sm-offset-1"> ${appt.reason}</div>
+                            <div class="col-sm-3 col-sm-offset-.5"> ${appt.reason}</div>
                             <div class="col-sm-2"> ${appt.date}</div>
                             <div class="col-sm-1"> ${appt.time}</div>
                             <div class="col-sm-1"> ${appt.patient.patientInformation.firstName}</div>

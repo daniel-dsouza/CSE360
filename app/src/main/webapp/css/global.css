@@ -2,7 +2,11 @@
 #page {
     position: relative;
     min-height: 100%;
-    background-color: darkcyan;
+    background-image: linear-gradient(to bottom, #79E0D8, white);
+    background-image: -o-linear-gradient(top, #79E0D8, white);
+    background-image: -moz-linear-gradient(top, #79E0D8, white);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#79E0D8), to(white));
+    background-image: -webkit-linear-gradient(top, #79E0D8, white);
 }
 
 #nav {
@@ -24,8 +28,8 @@
 }
 
 #pagefooter {
-    background-color: ghostwhite;
-    border-radius: 20px;
+    background-color: #F3B9B9;
+    border-radius: 6px;
     width: 100%;
 }
 
@@ -34,6 +38,28 @@ textarea {
     width: 100%
 }
 
+/*http://stackoverflow.com/questions/2869212/css3-gradient-background-set-on-body-doesnt-stretch-but-instead-repeats*/
+body {
+    background-image: linear-gradient(to bottom, #79E0D8, white);
+    background-image: -o-linear-gradient(top, #79E0D8, white);
+    background-image: -moz-linear-gradient(top, #79E0D8, white);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#79E0D8), to(white));
+    background-image: -webkit-linear-gradient(top, #79E0D8, white);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+.custom-login {
+    position: relative;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 5px;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
 /*The following apply to different pages*/
 
 .mini_appointment {
@@ -69,3 +95,4 @@ textarea {
     padding-left: 20px;
     padding-right: 20px;
 }
+

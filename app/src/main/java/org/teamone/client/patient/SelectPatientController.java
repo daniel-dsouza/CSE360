@@ -44,8 +44,12 @@ public class SelectPatientController {
             return "redirect:/request_test/create";
         } else if (action.equals("health_conditions")) {
             return "redirect:/request_healthconditions/healthconditions";
+        } else if (action.equals("view_health_conditions")) {
+            return "redirect:/request_healthconditions/healthconditions/view/"+ user.getPatient().getUserID();
         } else if (action.equals("medical_history")) {
             return "redirect:/request_medicalhistory/medicalhistory";
+        } else if (action.equals("view_medical_history")) {
+            return "redirect:/request_medicalhistory/medicalhistory/view/"+ user.getPatient().getUserID();
         } else if (action.equals("e_prescribe")) {
             return "redirect:/request_prescriptions/prescription";
         } else if (action.equals("view_lab_report")) {
@@ -83,12 +87,14 @@ public class SelectPatientController {
 
         if (user.getPerson() instanceof Doctor) {
             actions.put("health_conditions", "Health Conditions");
+            //actions.put("view_medical_history", "View Medical History");
             actions.put("e_prescribe", "E-Prescribe Prescription");
             actions.put("lab_test", "E-Prescribe Lab Tests");
             actions.put("view_lab_report", "View Lab Reports");
         }
 
         if (user.getPerson() instanceof HSP) {
+            actions.put("view_health_conditions", "View Health Conditions");
             actions.put("medical_history", "Medical History");
             actions.put("e_prescribe", "View Prescriptions");
             actions.put("edit_info", "Update Personal");

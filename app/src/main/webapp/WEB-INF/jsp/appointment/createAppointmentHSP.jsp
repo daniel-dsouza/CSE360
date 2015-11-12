@@ -97,7 +97,7 @@
 
                             <div class="col-md-4">
                                 <form:input id="patID" size='3' path="patient.userID"
-                                            class="readonly" type="number" min="1001" step="1"
+                                            class="form-control input-sm chat-input" type="number" min="1001" step="1"
                                             maxlength="10"
                                             autofocus="autofocus"
                                             required="required"/>

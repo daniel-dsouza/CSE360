@@ -31,7 +31,7 @@ public class PatientListTest {
         Patient temppat;
         for (int i = 0; i < testArr.size(); i++) {
             temppat = testArr.get(i);
-            System.out.println("Name: " + temppat.getName() + "\tPatient ID: " + temppat.getUserID());
+            System.out.println("\tPatient ID: " + temppat.getUserID());
         }
         System.out.println(TestStrings.testEnd);
     }

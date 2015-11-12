@@ -31,16 +31,6 @@ public class HealthConditionTest {
     }
 
     @Test
-    public void setHC() {
-        System.out.println("\nTest========setting list health conditions");
-        boolean check = PatientSQL.setHealthConditions(test);
-        assertTrue("Could not set health conditions", check);
-
-        System.out.println("Set successful");
-        System.out.println(TestStrings.testEnd);
-    }
-
-    @Test
     public void viewHC() {
         System.out.println("\nTest========Get list health conditions");
         Patient p = PatientSQL.getHealthConditions(test);

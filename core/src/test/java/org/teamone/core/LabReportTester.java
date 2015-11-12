@@ -62,7 +62,7 @@ public class LabReportTester {
         assertTrue("No lab tests by patient ID", !tempList.isEmpty());
         LabReport tempRequest;
         for (LabReport l : tempList) {
-            System.out.println(l.getPatient().getName() + "\tTest ID: " + l.getRequestionID());
+            System.out.println("Test ID: " + l.getRequestionID());
         }
 
         System.out.println(TestStrings.testEnd);
@@ -76,7 +76,7 @@ public class LabReportTester {
         ArrayList<LabReport> tempList = LabReportSQL.getAllLabReports();
         assertTrue("No lab tests ", !tempList.isEmpty());
         for (LabReport l : tempList) {
-            System.out.println(l.getPatient().getName() + "\tTest ID: " + l.getRequestionID());
+            System.out.println("Test ID: " + l.getRequestionID());
         }
 
         System.out.println(TestStrings.testEnd);
