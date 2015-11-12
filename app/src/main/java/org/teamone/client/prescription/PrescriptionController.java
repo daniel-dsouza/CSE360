@@ -29,27 +29,27 @@ public class PrescriptionController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewPatient(@ModelAttribute("user") User user,
-                              Map<String, Object> model){
+                              Map<String, Object> model) {
         if (user.getPerson() == null)
             return "redirect:/login";
-        else if(user.getPerson() instanceof HSP)    // If the person is HSP they can only see and not create prescriptions
+        else if (user.getPerson() instanceof HSP)    // If the person is HSP they can only see and not create prescriptions
             model.put("readonly", true);
         else if (!(user.getPerson() instanceof Doctor))
             return "redirect:/user/" + user.person.getUserID();
 
-        if(user.getPatient() == null)               // If patient has not been initialized send them to patient select
+        if (user.getPatient() == null)               // If patient has not been initialized send them to patient select
             return "redirect:/select_patient";
 
 
         List prescriptionList = PrescriptionSQL.getListPrescription(user.getPatient());
-        model.put("prescriptions",prescriptionList);
-        model.put("user",user);
+        model.put("prescriptions", prescriptionList);
+        model.put("user", user);
         return "prescription/editprescription";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String moveToCreatePatient(@ModelAttribute("user") User user,
-                                      Map<String, Object> model){
+                                      Map<String, Object> model) {
 
 
         return "redirect:/user/" + user.person.getUserID() + "/prescription/create";
@@ -58,17 +58,16 @@ public class PrescriptionController {
 
     @RequestMapping(value = "/{prescriptID}/print", method = RequestMethod.GET)
     public String printPatient(@ModelAttribute("user") User user,
-                                @PathVariable("prescriptID") int preID,
-                                Map<String, Object> model) {
+                               @PathVariable("prescriptID") int preID,
+                               Map<String, Object> model) {
 
         if (user.getPerson() == null)
             return "redirect:/login";
         else if (!(user.getPerson() instanceof Doctor))
             return "redirect:/user/" + user.person.getUserID();
 
-        if(user.getPatient() == null)
+        if (user.getPatient() == null)
             return "redirect:/select_patient";
-
 
 
         Prescription prescript = new Prescription();
@@ -78,28 +77,23 @@ public class PrescriptionController {
         Staff doc = DoctorSQL.getStaffComplete(prescript.getDoctor());
 
 
-        model.put("doc",doc);
-        model.put("pat",pat);
-        model.put("prescription",prescript);
+        model.put("doc", doc);
+        model.put("pat", pat);
+        model.put("prescription", prescript);
 
 
         return "prescription/printprescription";
     }
 
 
-
-
     @RequestMapping(value = "/{prescriptID}/print", method = RequestMethod.POST)
     public String postPrint(@ModelAttribute("userInput") Prescription attempt,
-                                Map<String, Object> model,
-                                @ModelAttribute("user") User user) {
-
+                            Map<String, Object> model,
+                            @ModelAttribute("user") User user) {
 
 
         return "redirect:/user/" + user.person.getUserID() + "/prescription";
     }
-
-
 
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -111,9 +105,8 @@ public class PrescriptionController {
         else if (!(user.getPerson() instanceof Doctor))
             return "redirect:/user/" + user.person.getUserID();
 
-        if(user.getPatient() == null)
+        if (user.getPatient() == null)
             return "redirect:/select_patient";
-
 
 
         Prescription attempt = new Prescription();

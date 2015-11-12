@@ -5,11 +5,11 @@ package org.teamone.core.users;
  */
 public class Staff extends Person {
 
-    private String occupation ;
-    private String specialty ;
+    private String occupation;
+    private String specialty;
     private int patientID = 0;
-    private String schedule ;
-    private int alertsPresent =0;
+    private String schedule;
+    private int alertsPresent = 0;
 
     private String emergencyWardDoctor = "yes";
 

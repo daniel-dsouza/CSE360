@@ -24,7 +24,11 @@ public class LabTestRequest {
     public Set<String> getKeys() {
         return labTestRequest.keySet();
     }
-    public Map<String, Boolean> getLabTestRequest() { return this.labTestRequest; }
+
+    public Map<String, Boolean> getLabTestRequest() {
+        return this.labTestRequest;
+    }
+
     public void set(String test, boolean state) {
         this.labTestRequest.put(test, state);
     }
@@ -33,7 +37,7 @@ public class LabTestRequest {
     public LabTestRequest() {
         this(0, "", null, null);
         this.requestionID = 0;
-     }
+    }
 
     @Override
     public String toString() {
@@ -45,13 +49,13 @@ public class LabTestRequest {
         return value;
 
     }
-    public void toMapObj(String str){
+
+    public void toMapObj(String str) {
         Map<String, Boolean> labTestRequest = null;
 
         String[] parts = str.split(":");
-        for(String temp2:parts)
-        {
-            String[] temp3 =  temp2.split(",");
+        for (String temp2 : parts) {
+            String[] temp3 = temp2.split(",");
             boolean abcd = Boolean.parseBoolean(temp3[1]);
             this.labTestRequest.put(temp3[0], abcd);
         }
@@ -79,7 +83,7 @@ public class LabTestRequest {
         patient = pat;
         person = per;
 
-        dateAndTime= new java.util.Date();
+        dateAndTime = new java.util.Date();
         java.text.SimpleDateFormat sdf =
                 new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         strDateAndTime = sdf.format(dateAndTime);
@@ -89,101 +93,101 @@ public class LabTestRequest {
 
         this.labTestRequest.put("comprehensiveMetabolicPanel", false);
         this.labTestRequestNames.put("comprehensiveMetabolicPanel", "Comprehensive Metabolic Panel");
-        
+
         this.labTestRequest.put("chemPanelBasic", false);
         this.labTestRequestNames.put("chemPanelBasic", "ChemPanel Basic");
-        
+
         this.labTestRequest.put("electrolytePanel", false);
         this.labTestRequestNames.put("electrolytePanel", "Electrolyte Panel");
-        
+
         this.labTestRequest.put("hepaticFunctionPanel", false);
         this.labTestRequestNames.put("hepaticFunctionPanel", "Hepatic Function Panel");
-        
+
         this.labTestRequest.put("lipidPanel", false);
         this.labTestRequestNames.put("lipidPanel", "Lipid Panel");
-        
+
         this.labTestRequest.put("liverProfile", false);
         this.labTestRequestNames.put("liverProfile", "Liver Profile");
-        
+
         this.labTestRequest.put("amylase", false);
         this.labTestRequestNames.put("amylase", "Amylase");
-        
+
         this.labTestRequest.put("hemogram", false);
         this.labTestRequestNames.put("hemogram", "Hemogram");
-        
+
         this.labTestRequest.put("completeBloodCount", false);
         this.labTestRequestNames.put("completeBloodCount", "Complete Blood Count");
-        
+
         this.labTestRequest.put("creatinine", false);
         this.labTestRequestNames.put("creatinine", "Creatinine");
-        
+
         this.labTestRequest.put("cholesterol", false);
         this.labTestRequestNames.put("cholesterol", "Cholesterol");
-        
+
         this.labTestRequest.put("follicleStimulatingHoromone", false);
         this.labTestRequestNames.put("follicleStimulatingHoromone", "Follicle Stimulating Horomone");
-        
+
         this.labTestRequest.put("glucose", false);
         this.labTestRequestNames.put("glucose", "Glucose");
-        
+
         this.labTestRequest.put("Hemoglobin", false);
         this.labTestRequestNames.put("Hemoglobin", "Hemoglobin");
-        
+
         this.labTestRequest.put("hepatitusB", false);
         this.labTestRequestNames.put("hepatitusB", "Hepatitus B");
-        
+
         this.labTestRequest.put("hepatitusC", false);
         this.labTestRequestNames.put("hepatitusC", "Hepatitus C");
-        
+
         this.labTestRequest.put("hiv", false);
         this.labTestRequestNames.put("hiv", "HIV");
-        
+
         this.labTestRequest.put("Iron", false);
         this.labTestRequestNames.put("Iron", "Iron");
-        
+
         this.labTestRequest.put("lacticDehydrogenase", false);
         this.labTestRequestNames.put("lacticDehydrogenase", "Lactic Dehydrogenase");
-        
+
         this.labTestRequest.put("lithium", false);
         this.labTestRequestNames.put("lithium", "Lithium");
-        
+
         this.labTestRequest.put("potassium", false);
         this.labTestRequestNames.put("potassium", "Potassium");
-        
+
         this.labTestRequest.put("pregnancy", false);
         this.labTestRequestNames.put("pregnancy", "Pregnancy");
-        
+
         this.labTestRequest.put("rheumatoidFactor", false);
         this.labTestRequestNames.put("rheumatoidFactor", "Rheumatoid Factor");
-        
+
         this.labTestRequest.put("sedimentationRate", false);
         this.labTestRequestNames.put("sedimentationRate", "Sedimentation Rate");
-        
+
         this.labTestRequest.put("syphillis", false);
         this.labTestRequestNames.put("syphillis", "Syphillis");
-        
+
         this.labTestRequest.put("thyroidStimulatingHormone", false);
         this.labTestRequestNames.put("thyroidStimulatingHormone", "Thyroid Stimulating Hormone");
-        
+
         this.labTestRequest.put("triglycerides", false);
         this.labTestRequestNames.put("triglycerides", "Triglycerides");
-        
+
         this.labTestRequest.put("uricAcid", false);
         this.labTestRequestNames.put("uricAcid", "Uric Acid");
-        
+
         this.labTestRequest.put("urogram", false);
         this.labTestRequestNames.put("urogram", "Urogram");
-        
+
         this.labTestRequest.put("vitaminB12", false);
         this.labTestRequestNames.put("vitaminB12", "Vitamin B12");
-        
+
         this.labTestRequest.put("vitaminD", false);
         this.labTestRequestNames.put("vitaminD", "Vitamin D");
-        
+
         this.labTestRequest.put("culture", false);
         this.labTestRequestNames.put("culture", "Culture");
 
-        if(!data.equals("")) {
+        if (!data.equals("")) {
             String[] pairs = data.split(":");
             for (String x : pairs) {
                 String[] pair = x.split(",");
@@ -193,15 +197,25 @@ public class LabTestRequest {
         }
     }
 
-    public void setLabTestRequest(Map<String, Boolean> labTestRequest) { this.labTestRequest = labTestRequest; }
+    public void setLabTestRequest(Map<String, Boolean> labTestRequest) {
+        this.labTestRequest = labTestRequest;
+    }
 
-    public int getRequestionID() { return requestionID; }
+    public int getRequestionID() {
+        return requestionID;
+    }
 
-    public void setRequestionID(int requestionID) { this.requestionID = requestionID; }
+    public void setRequestionID(int requestionID) {
+        this.requestionID = requestionID;
+    }
 
-    public Patient getPatient() { return patient; }
+    public Patient getPatient() {
+        return patient;
+    }
 
-    public void setPatient(Patient patientID) { this.patient = patientID; }
+    public void setPatient(Patient patientID) {
+        this.patient = patientID;
+    }
 
     public Person getPerson() {
         return person;
@@ -211,103 +225,267 @@ public class LabTestRequest {
         this.person = person;
     }
 
-    public Map<String, String> getLabTestRequestNames() { return labTestRequestNames; }
+    public Map<String, String> getLabTestRequestNames() {
+        return labTestRequestNames;
+    }
 
-    public void setLabTestRequestNames(Map<String, String> labTestRequestNames) { this.labTestRequestNames = labTestRequestNames; }
+    public void setLabTestRequestNames(Map<String, String> labTestRequestNames) {
+        this.labTestRequestNames = labTestRequestNames;
+    }
 
-    public void setComprehensiveMetabolicPanel(boolean value) { this.labTestRequest.put("comprehensiveMetabolicPanel", value); }
-    public boolean getComprehensiveMetabolicPanel() { return this.labTestRequest.get("comprehensiveMetabolicPanel"); }
+    public void setComprehensiveMetabolicPanel(boolean value) {
+        this.labTestRequest.put("comprehensiveMetabolicPanel", value);
+    }
 
-    public void setChemPanelBasic(boolean value) { this.labTestRequest.put("chemPanelBasic", value); }
-    public boolean getChemPanelBasic() { return this.labTestRequest.get("chemPanelBasic"); }
+    public boolean getComprehensiveMetabolicPanel() {
+        return this.labTestRequest.get("comprehensiveMetabolicPanel");
+    }
 
-    public void setElectrolytePanel(boolean value) { this.labTestRequest.put("electrolytePanel", value); }
-    public boolean getElectrolytePanel() { return this.labTestRequest.get("electrolytePanel"); }
+    public void setChemPanelBasic(boolean value) {
+        this.labTestRequest.put("chemPanelBasic", value);
+    }
 
-    public void setHepaticFunctionPanel(boolean value) { this.labTestRequest.put("hepaticFunctionPanel", value); }
-    public boolean getHepaticFunctionPanel() { return this.labTestRequest.get("hepaticFunctionPanel"); }
+    public boolean getChemPanelBasic() {
+        return this.labTestRequest.get("chemPanelBasic");
+    }
 
-    public void setLipidPanel(boolean value) { this.labTestRequest.put("lipidPanel", value); }
-    public boolean getLipidPanel() { return this.labTestRequest.get("lipidPanel"); }
+    public void setElectrolytePanel(boolean value) {
+        this.labTestRequest.put("electrolytePanel", value);
+    }
 
-    public void setLiverProfile(boolean value) { this.labTestRequest.put("liverProfile", value); }
-    public boolean getLiverProfile() { return this.labTestRequest.get("liverProfile"); }
+    public boolean getElectrolytePanel() {
+        return this.labTestRequest.get("electrolytePanel");
+    }
 
-    public void setAmylase(boolean value) { this.labTestRequest.put("amylase", value); }
-    public boolean getAmylase() { return this.labTestRequest.get("amylase"); }
+    public void setHepaticFunctionPanel(boolean value) {
+        this.labTestRequest.put("hepaticFunctionPanel", value);
+    }
 
-    public void setHemogram(boolean value) { this.labTestRequest.put("hemogram", value); }
-    public boolean getHemogram() { return this.labTestRequest.get("hemogram"); }
+    public boolean getHepaticFunctionPanel() {
+        return this.labTestRequest.get("hepaticFunctionPanel");
+    }
 
-    public void setCompleteBloodCount(boolean value) { this.labTestRequest.put("completeBloodCount", value); }
-    public boolean getCompleteBloodCount() { return this.labTestRequest.get("completeBloodCount"); }
+    public void setLipidPanel(boolean value) {
+        this.labTestRequest.put("lipidPanel", value);
+    }
 
-    public void setCreatinine(boolean value) { this.labTestRequest.put("creatinine", value); }
-    public boolean getCreatinine() { return this.labTestRequest.get("creatinine"); }
+    public boolean getLipidPanel() {
+        return this.labTestRequest.get("lipidPanel");
+    }
 
-    public void setcholesterol(boolean value) { this.labTestRequest.put("cholesterol", value); }
-    public boolean getcholesterol() { return this.labTestRequest.get("cholesterol"); }
+    public void setLiverProfile(boolean value) {
+        this.labTestRequest.put("liverProfile", value);
+    }
 
-    public void setFollicleStimulatingHoromone(boolean value) { this.labTestRequest.put("follicleStimulatingHoromone", value); }
-    public boolean getFollicleStimulatingHoromone() { return this.labTestRequest.get("follicleStimulatingHoromone"); }
+    public boolean getLiverProfile() {
+        return this.labTestRequest.get("liverProfile");
+    }
 
-    public void setGlucose(boolean value) { this.labTestRequest.put("glucose", value); }
-    public boolean getGlucose() { return this.labTestRequest.get("glucose"); }
+    public void setAmylase(boolean value) {
+        this.labTestRequest.put("amylase", value);
+    }
 
-    public void setHemoglobin(boolean value) { this.labTestRequest.put("Hemoglobin", value); }
-    public boolean getHemoglobin() { return this.labTestRequest.get("Hemoglobin"); }
+    public boolean getAmylase() {
+        return this.labTestRequest.get("amylase");
+    }
 
-    public void setHepatitusB(boolean value) { this.labTestRequest.put("hepatitusB", value); }
-    public boolean getHepatitusB() { return this.labTestRequest.get("hepatitusB"); }
+    public void setHemogram(boolean value) {
+        this.labTestRequest.put("hemogram", value);
+    }
 
-    public void setHepatitusC(boolean value) { this.labTestRequest.put("hepatitusC", value); }
-    public boolean getHepatitusC() { return this.labTestRequest.get("hepatitusC"); }
+    public boolean getHemogram() {
+        return this.labTestRequest.get("hemogram");
+    }
 
-    public void sethiv(boolean value) { this.labTestRequest.put("hiv", value); }
-    public boolean gethiv() { return this.labTestRequest.get("hiv"); }
+    public void setCompleteBloodCount(boolean value) {
+        this.labTestRequest.put("completeBloodCount", value);
+    }
 
-    public void setIron(boolean value) { this.labTestRequest.put("Iron", value); }
-    public boolean getIron() { return this.labTestRequest.get("Iron"); }
+    public boolean getCompleteBloodCount() {
+        return this.labTestRequest.get("completeBloodCount");
+    }
 
-    public void setLacticDehydrogenase(boolean value) { this.labTestRequest.put("lacticDehydrogenase", value); }
-    public boolean getLacticDehydrogenase() { return this.labTestRequest.get("lacticDehydrogenase"); }
+    public void setCreatinine(boolean value) {
+        this.labTestRequest.put("creatinine", value);
+    }
 
-    public void setLithium(boolean value) { this.labTestRequest.put("lithium", value); }
-    public boolean getLithium() { return this.labTestRequest.get("lithium"); }
+    public boolean getCreatinine() {
+        return this.labTestRequest.get("creatinine");
+    }
 
-    public void setPotassium(boolean value) { this.labTestRequest.put("potassium", value); }
-    public boolean getPotassium() { return this.labTestRequest.get("potassium"); }
+    public void setcholesterol(boolean value) {
+        this.labTestRequest.put("cholesterol", value);
+    }
 
-    public void setPregnancy(boolean value) { this.labTestRequest.put("pregnancy", value); }
-    public boolean getPregnancy() { return this.labTestRequest.get("pregnancy"); }
+    public boolean getcholesterol() {
+        return this.labTestRequest.get("cholesterol");
+    }
 
-    public void setRheumatoidFactor(boolean value) { this.labTestRequest.put("rheumatoidFactor", value); }
-    public boolean getRheumatoidFactor() { return this.labTestRequest.get("rheumatoidFactor"); }
+    public void setFollicleStimulatingHoromone(boolean value) {
+        this.labTestRequest.put("follicleStimulatingHoromone", value);
+    }
 
-    public void setSedimentationRate(boolean value) { this.labTestRequest.put("sedimentationRate", value); }
-    public boolean getSedimentationRate() { return this.labTestRequest.get("sedimentationRate"); }
+    public boolean getFollicleStimulatingHoromone() {
+        return this.labTestRequest.get("follicleStimulatingHoromone");
+    }
 
-    public void setSyphillis(boolean value) { this.labTestRequest.put("syphillis", value); }
-    public boolean getSyphillis() { return this.labTestRequest.get("syphillis"); }
+    public void setGlucose(boolean value) {
+        this.labTestRequest.put("glucose", value);
+    }
 
-    public void setThyroidStimulatingHormone(boolean value) { this.labTestRequest.put("thyroidStimulatingHormone", value); }
-    public boolean getThyroidStimulatingHormone() { return this.labTestRequest.get("thyroidStimulatingHormone"); }
+    public boolean getGlucose() {
+        return this.labTestRequest.get("glucose");
+    }
 
-    public void setTriglycerides(boolean value) { this.labTestRequest.put("triglycerides", value); }
-    public boolean getTriglycerides() { return this.labTestRequest.get("triglycerides"); }
+    public void setHemoglobin(boolean value) {
+        this.labTestRequest.put("Hemoglobin", value);
+    }
 
-    public void setUricAcid(boolean value) { this.labTestRequest.put("uricAcid", value); }
-    public boolean getUricAcid() { return this.labTestRequest.get("uricAcid"); }
+    public boolean getHemoglobin() {
+        return this.labTestRequest.get("Hemoglobin");
+    }
 
-    public void setUrogram(boolean value) { this.labTestRequest.put("urogram", value); }
-    public boolean getUrogram() { return this.labTestRequest.get("urogram"); }
+    public void setHepatitusB(boolean value) {
+        this.labTestRequest.put("hepatitusB", value);
+    }
 
-    public void setVitaminB12(boolean value) { this.labTestRequest.put("vitaminB12", value); }
-    public boolean getVitaminB12() { return this.labTestRequest.get("vitaminB12"); }
+    public boolean getHepatitusB() {
+        return this.labTestRequest.get("hepatitusB");
+    }
 
-    public void setVitaminD(boolean value) { this.labTestRequest.put("vitaminD", value); }
-    public boolean getVitaminD() { return this.labTestRequest.get("vitaminD"); }
+    public void setHepatitusC(boolean value) {
+        this.labTestRequest.put("hepatitusC", value);
+    }
 
-    public void setCulture(boolean value) { this.labTestRequest.put("culture", value); }
-    public boolean getCulture() { return this.labTestRequest.get("culture"); }
+    public boolean getHepatitusC() {
+        return this.labTestRequest.get("hepatitusC");
+    }
+
+    public void sethiv(boolean value) {
+        this.labTestRequest.put("hiv", value);
+    }
+
+    public boolean gethiv() {
+        return this.labTestRequest.get("hiv");
+    }
+
+    public void setIron(boolean value) {
+        this.labTestRequest.put("Iron", value);
+    }
+
+    public boolean getIron() {
+        return this.labTestRequest.get("Iron");
+    }
+
+    public void setLacticDehydrogenase(boolean value) {
+        this.labTestRequest.put("lacticDehydrogenase", value);
+    }
+
+    public boolean getLacticDehydrogenase() {
+        return this.labTestRequest.get("lacticDehydrogenase");
+    }
+
+    public void setLithium(boolean value) {
+        this.labTestRequest.put("lithium", value);
+    }
+
+    public boolean getLithium() {
+        return this.labTestRequest.get("lithium");
+    }
+
+    public void setPotassium(boolean value) {
+        this.labTestRequest.put("potassium", value);
+    }
+
+    public boolean getPotassium() {
+        return this.labTestRequest.get("potassium");
+    }
+
+    public void setPregnancy(boolean value) {
+        this.labTestRequest.put("pregnancy", value);
+    }
+
+    public boolean getPregnancy() {
+        return this.labTestRequest.get("pregnancy");
+    }
+
+    public void setRheumatoidFactor(boolean value) {
+        this.labTestRequest.put("rheumatoidFactor", value);
+    }
+
+    public boolean getRheumatoidFactor() {
+        return this.labTestRequest.get("rheumatoidFactor");
+    }
+
+    public void setSedimentationRate(boolean value) {
+        this.labTestRequest.put("sedimentationRate", value);
+    }
+
+    public boolean getSedimentationRate() {
+        return this.labTestRequest.get("sedimentationRate");
+    }
+
+    public void setSyphillis(boolean value) {
+        this.labTestRequest.put("syphillis", value);
+    }
+
+    public boolean getSyphillis() {
+        return this.labTestRequest.get("syphillis");
+    }
+
+    public void setThyroidStimulatingHormone(boolean value) {
+        this.labTestRequest.put("thyroidStimulatingHormone", value);
+    }
+
+    public boolean getThyroidStimulatingHormone() {
+        return this.labTestRequest.get("thyroidStimulatingHormone");
+    }
+
+    public void setTriglycerides(boolean value) {
+        this.labTestRequest.put("triglycerides", value);
+    }
+
+    public boolean getTriglycerides() {
+        return this.labTestRequest.get("triglycerides");
+    }
+
+    public void setUricAcid(boolean value) {
+        this.labTestRequest.put("uricAcid", value);
+    }
+
+    public boolean getUricAcid() {
+        return this.labTestRequest.get("uricAcid");
+    }
+
+    public void setUrogram(boolean value) {
+        this.labTestRequest.put("urogram", value);
+    }
+
+    public boolean getUrogram() {
+        return this.labTestRequest.get("urogram");
+    }
+
+    public void setVitaminB12(boolean value) {
+        this.labTestRequest.put("vitaminB12", value);
+    }
+
+    public boolean getVitaminB12() {
+        return this.labTestRequest.get("vitaminB12");
+    }
+
+    public void setVitaminD(boolean value) {
+        this.labTestRequest.put("vitaminD", value);
+    }
+
+    public boolean getVitaminD() {
+        return this.labTestRequest.get("vitaminD");
+    }
+
+    public void setCulture(boolean value) {
+        this.labTestRequest.put("culture", value);
+    }
+
+    public boolean getCulture() {
+        return this.labTestRequest.get("culture");
+    }
 }

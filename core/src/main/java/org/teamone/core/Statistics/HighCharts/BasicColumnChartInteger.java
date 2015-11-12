@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by daniel on 10/31/15.
  * This Column Chart does not have 1 decimal. For Integers
  */
-public class BasicColumnChartInteger extends HighChart{
+public class BasicColumnChartInteger extends HighChart {
 
     Map<String, Object> column;
 
@@ -57,7 +57,8 @@ public class BasicColumnChartInteger extends HighChart{
 
     /**
      * Adds data to a simple column chart.
-     * @param name the key for the value
+     *
+     * @param name  the key for the value
      * @param value the arraylist of values.
      */
     public void addData(String name, ArrayList<Integer> value) {

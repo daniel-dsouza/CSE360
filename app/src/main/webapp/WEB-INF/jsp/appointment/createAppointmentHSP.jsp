@@ -25,7 +25,7 @@
                     <script>
                         alert("That time and day is occupied. Please select a different time or day."); </script>
                     Occupied Times for Doctor: <c:out value="${appointment.doctorID}"/>
-                    <div style="overflow:scroll;height:80px;width:100%;overflow:auto">
+                    <div style="overflow:auto;height:80px;width:100%;">
 
                         <table width="800" border="0" class="my-table">
                             <tr>

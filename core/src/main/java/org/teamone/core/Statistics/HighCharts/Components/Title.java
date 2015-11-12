@@ -6,11 +6,11 @@ package org.teamone.core.Statistics.HighCharts.Components;
 public class Title {
     public String text;
 
-    public Title (String text) {
+    public Title(String text) {
         this.text = text;
     }
 
-    public Title () {
+    public Title() {
         this("");
     }
 }

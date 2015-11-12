@@ -18,7 +18,6 @@ public class LabRequestSQL {
     private static ResultSet resultSet = null;
 
     /**
-     *
      * @param test: LabTestRequest to be added.
      * @return true or false: True if insert into SQL success. false otherwise
      */
@@ -58,7 +57,6 @@ public class LabRequestSQL {
     }
 
     /**
-     *
      * @param readMe: Valid LabTestRequest with a requestionID
      * @return LabTestRequest: returns a LabTestRequest object
      */
@@ -88,27 +86,24 @@ public class LabRequestSQL {
 
             if (patID != 0) //if it does not equal zero, great, we can set it
             {
-                if(readMe.getPatient() == null)//uh oh, patient does not yet exists so, create one
+                if (readMe.getPatient() == null)//uh oh, patient does not yet exists so, create one
                 {
-                    Patient new1= new Patient();
+                    Patient new1 = new Patient();
                     readMe.setPatient(new1);
                 }
                 readMe.getPatient().setUserID(patID);
             }
 
-            if (!date.equals("null") &&  !labReport.equals("null")) {
+            if (!date.equals("null") && !labReport.equals("null")) {
                 readMe.setStrDateAndTime(date);
                 readMe.toMapObj(labReport);
-                if(readMe.getPerson() == null)//uh oh, person does not yet exists so, create one
+                if (readMe.getPerson() == null)//uh oh, person does not yet exists so, create one
                 {
                     Person new1 = new Person();
                     readMe.setPerson(new1);
                 }
                 readMe.getPerson().setUserID(stafID);
-            }
-
-            else
-            {
+            } else {
                 System.out.println("===========EMPTY RESULT========RETURN NULL");
                 readMe = null;
             }
@@ -122,8 +117,10 @@ public class LabRequestSQL {
         return readMe;
 
     }
+
     /**
      * Gets everything from table labtests
+     *
      * @return ArrayList: list of LabTestRequest
      */
     public static ArrayList<LabTestRequest> getAllLabRequests() {

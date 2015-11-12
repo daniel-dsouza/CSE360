@@ -9,7 +9,8 @@ public class Doctor extends Staff {
 
     public Doctor() {
         super();
-        agentActions = new TreeMap<String, String>() {};
+        agentActions = new TreeMap<String, String>() {
+        };
         agentActions.put("Select Patient", "select_patient");
         //agentActions.put("Create Appointment", "appointment/createappointment");
         agentActions.put("View Appointments", "appointment/list/doctor");

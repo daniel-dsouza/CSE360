@@ -9,7 +9,7 @@ import java.util.Comparator;
 /**
  * Created by Ryan on 10/7/2015.
  */
-public class Appointment implements Comparable<Appointment>{
+public class Appointment implements Comparable<Appointment> {
 
     private int appointmentID;
     private String date;//date is 01/01/2001
@@ -20,14 +20,15 @@ public class Appointment implements Comparable<Appointment>{
     private Patient patient;
     private int failedToInsert;//1 for failed to insert. If the insertion was successful, there is no need to set this value
 
-    public Appointment()
-    {
+    public Appointment() {
         doctor = new Staff();
         patient = new Patient();
     }
+
     public String getDoctorName() {
         return doctor.getName();
     }
+
     public void setAppointmentID(int appointmentID) {
         this.appointmentID = appointmentID;
     }
@@ -62,8 +63,7 @@ public class Appointment implements Comparable<Appointment>{
         return doctor.getSpecialty();
     }
 
-    public void setDoctorSpec(String doctorSpec)
-    {
+    public void setDoctorSpec(String doctorSpec) {
         this.doctor.setSpecialty(doctorSpec);
     }
 
@@ -71,8 +71,7 @@ public class Appointment implements Comparable<Appointment>{
         return patient.getUserID();
     }
 
-    public void setPatientID(int patientID)
-    {
+    public void setPatientID(int patientID) {
         this.patient.setUserID(patientID);
     }
 
@@ -152,6 +151,7 @@ public class Appointment implements Comparable<Appointment>{
             //descending order
             //return fruitName2.compareTo(fruitName1);
         }
+
         //http://stackoverflow.com/questions/5805602/how-to-sort-list-of-objects-by-some-property
         public int secondaryCompare(Appointment first, Appointment second) {
 

@@ -19,6 +19,7 @@ public class DoctorSQL {
 
     /**
      * get specialty assigned to doctor id
+     *
      * @param staff staff Object with valid staff ID
      * @return String with specialty
      */
@@ -51,10 +52,11 @@ public class DoctorSQL {
 
     /**
      * Method returns a list doctors.
+     *
      * @param specialty: String to find in sql
      * @return ArrayList: Arraylist of staff objects
      */
-    public static ArrayList<Staff> getListDoctorSpecialty (String specialty) {
+    public static ArrayList<Staff> getListDoctorSpecialty(String specialty) {
         ArrayList<Staff> arrayOfDoctors = new ArrayList<Staff>();
         try {
             int checker, checker2;
@@ -70,7 +72,7 @@ public class DoctorSQL {
             preparedStatement.setString(1, specialty);
             resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 //Retrieve by column name
 
                 Staff newStaff = new Staff();
@@ -135,6 +137,7 @@ public class DoctorSQL {
 
     /**
      * get all data from SQL with a staff ID
+     *
      * @param staff staff Object with valid staff ID
      * @return staff object with all data filled in
      */
@@ -177,10 +180,11 @@ public class DoctorSQL {
 
     /**
      * Method returns a list doctors.
+     *
      * @param doc: Doctor with valid id
      * @return ArrayList: Arraylist of patients objects
      */
-    public static ArrayList<Patient> getDoctorPatientsList (Doctor doc) {
+    public static ArrayList<Patient> getDoctorPatientsList(Doctor doc) {
         ArrayList<Patient> arrayOfPatient = new ArrayList<Patient>();
         try {
             int checker, checker2;
@@ -196,7 +200,7 @@ public class DoctorSQL {
             preparedStatement.setInt(1, docID);
             resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 //Retrieve by column name
 
                 Patient new1 = new Patient();
@@ -214,6 +218,7 @@ public class DoctorSQL {
         return arrayOfPatient;
 
     }
+
     // You need to close the resultSet
     private static void close() {
         try {

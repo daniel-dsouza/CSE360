@@ -23,134 +23,136 @@
     </jsp:attribute>
     <jsp:body>
         <div class="container-fluid">
-            <h2>Create an Appointment</h2>
+        <h2>Create an Appointment</h2>
 
 
+        <form:form method="post" commandName="appointment" onsubmit="return getDate()">
 
-            <form:form method="post" commandName="appointment" onsubmit="return getDate()">
+            <!-- ADDED -->
+            <div class="container-fluid"> <!-- don't forget your bootstrap html. do the basic tutorial... -->
+            <div class="row">
+                <div class="form-class">
+                    <br>
+                    <label class="col-md-4 control-label" for="special">Specialty:</label>
 
-                <!-- ADDED -->
-                <div class="container-fluid"> <!-- don't forget your bootstrap html. do the basic tutorial... -->
-                <div class="row">
-                    <div class="form-class">
-                        <br>
-                        <label class="col-md-4 control-label" for="special">Specialty:</label>
-                        <div class="col-md-4">
-                            <!-- method is what do when done, commandName is what object from the model to put stuff into, action should be the name of your jsp. -->
-                            <form:select id="special" path="doctorSpec" items="${speclist}"
-                                         onchange="loadDoctors()"/><br/>
-                        </div>
-                    </div>
-                        <!-- path is where in the object specified by command name to store the result, a get method for Java. items is the list of results -->
-                        <!-- Doctor: -->
-
-                        <!-- id is how jquery get the element. -->
-                    <div class="form-class">
-                        <br><br>
-                        <label class="col-md-4 control-label" for="doctor">Doctor:</label>
-                        <div class="col-md-4">
-                            <form:select id="doctor" path="tempDocID" items="${doctorlist}"/><br/>
-                        </div>
-                        <br><br><br>
+                    <div class="col-md-4">
+                        <!-- method is what do when done, commandName is what object from the model to put stuff into, action should be the name of your jsp. -->
+                        <form:select id="special" path="doctorSpec" items="${speclist}"
+                                     onchange="loadDoctors()"/><br/>
                     </div>
                 </div>
+                <!-- path is where in the object specified by command name to store the result, a get method for Java. items is the list of results -->
+                <!-- Doctor: -->
 
-
-                <c:if test="${appointment.failedToInsert == 1}">
-                    <script>
-                        alert("That time and day is occupied. Please select a different time or day."); </script>
-                    Occupied Times for: <c:out value="${appointment.doctor.firstName}"/>
-                    <br>
-                    <br>
-                    <div style="overflow:scroll;height:80px;width:100%;overflow:auto">
-
-                        <table width="800" border="0" class="my-table">
-                            <tr>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                            </tr>
-                            <tr>
-                                <c:forEach var="test" items="${list}" varStatus="loop">
-                                <c:if test="${not loop.first and loop.index % 4 == 0}">
-                            </tr>
-                            <!-- http://stackoverflow.com/questions/15551599/how-to-break-and-display-one-arraylist-into-multiple-table-columns -->
-                            <tr>
-                                </c:if>
-
-                                <td style="border-left: 1px solid cyan; padding: 5px;">
-                                    <c:out value="${test.date}"/>
-                                </td>
-                                <td>
-                                    <c:out value="${test.time}"/>
-                                </td>
-
-                                </c:forEach>
-                            </tr>
-                        </table>
-                    </div>
+                <!-- id is how jquery get the element. -->
+                <div class="form-class">
                     <br><br>
+                    <label class="col-md-4 control-label" for="doctor">Doctor:</label>
 
-                </c:if>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="datepaginator" id="paginator"></div>
-                        <form:input style= "display: none" id="day" size="50%" path="date" /><!-- vulnerability. Inspect element and turn delete none. inject symbols to break SQL. Fixed by using getDate()-->
-
-                        <br>
-
-                        <div class="form-group">
-                            <br><label class="col-md-4 control-label" for="timeselect">Time:</label>
+                    <div class="col-md-4">
+                        <form:select id="doctor" path="tempDocID" items="${doctorlist}"/><br/>
+                    </div>
+                    <br><br><br>
+                </div>
+            </div>
 
 
-                            <div class="col-md-4">
-                                <form:select id="timeselect" name="timeselect" path="time" class="form-control">
-                                    <option value="8:00 AM">8:00 AM</option>
-                                    <option value="9:00 AM">9:00 AM</option>
-                                    <option value="10:00 AM">10:00 AM</option>
-                                    <option value="11:00 AM">11:00 AM</option>
-                                    <option value="12:00 PM">12:00 PM</option>
-                                    <option value="1:00 PM">1:00 PM</option>
-                                    <option value="2:00 PM">2:00 PM</option>
-                                    <option value="3:00 PM">3:00 PM</option>
-                                    <option value="4:00 PM">4:00 PM</option>
-                                    <option value="5:00 PM">5:00 PM</option>
-                                    <option value="6:00 PM">6:00 PM</option>
-                                    <option value="7:00 PM">7:00 PM</option>
-                                    <option value="8:00 PM">8:00 PM</option>
-                                </form:select>
-                            </div>
+            <c:if test="${appointment.failedToInsert == 1}">
+                <script>
+                    alert("That time and day is occupied. Please select a different time or day."); </script>
+                Occupied Times for: <c:out value="${appointment.doctor.firstName}"/>
+                <br>
+                <br>
+
+                <div style="overflow:auto;height:80px;width:100%;">
+
+                    <table width="800" border="0" class="my-table">
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                        <tr>
+                            <c:forEach var="test" items="${list}" varStatus="loop">
+                            <c:if test="${not loop.first and loop.index % 4 == 0}">
+                        </tr>
+                        <!-- http://stackoverflow.com/questions/15551599/how-to-break-and-display-one-arraylist-into-multiple-table-columns -->
+                        <tr>
+                            </c:if>
+
+                            <td style="border-left: 1px solid cyan; padding: 5px;">
+                                <c:out value="${test.date}"/>
+                            </td>
+                            <td>
+                                <c:out value="${test.time}"/>
+                            </td>
+
+                            </c:forEach>
+                        </tr>
+                    </table>
+                </div>
+                <br><br>
+
+            </c:if>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="datepaginator" id="paginator"></div>
+                    <form:input style= "display: none" id="day" size="50%" path="date" /><!-- vulnerability. Inspect element and turn delete none. inject symbols to break SQL. Fixed by using getDate()-->
+
+                    <br>
+
+                    <div class="form-group">
+                        <br><label class="col-md-4 control-label" for="timeselect">Time:</label>
+
+
+                        <div class="col-md-4">
+                            <form:select id="timeselect" name="timeselect" path="time" class="form-control">
+                                <option value="8:00 AM">8:00 AM</option>
+                                <option value="9:00 AM">9:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="1:00 PM">1:00 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
+                                <option value="4:00 PM">4:00 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
+                                <option value="6:00 PM">6:00 PM</option>
+                                <option value="7:00 PM">7:00 PM</option>
+                                <option value="8:00 PM">8:00 PM</option>
+                            </form:select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-class">
+                        <br><br><label class="col-md-4 control-label" for="reason">Reason:</label>
+
+                        <div class="col-md-4">
+                            <form:input class='form-control' size='4' type='text' path="reason" id="reason"
+                                        required="true"/> <!-- name can only be letters -->
+
                         </div>
 
-
-                        <div class="form-class">
-                            <br><br><label class="col-md-4 control-label" for="reason">Reason:</label>
-
-                            <div class="col-md-4">
-                                <form:input class='form-control' size='4' type='text' path="reason" id="reason"
-                                            required="true"/> <!-- name can only be letters -->
-
-                            </div>
-
-                        </div>
-                        <div class="button_holder" style="text-align: center;">
-                            <br><br><br>
+                    </div>
+                    <div class="button_holder" style="text-align: center;">
+                        <br><br><br>
                             <span class="group-btn">
                                 <input type="submit" value="Create" class="btn btn-primary btn-md"
                                        style="float:inherit"/>
                              </span>
-                        </div>
-
                     </div>
 
                 </div>
-            </form:form>
+
+            </div>
+        </form:form>
 
         </div>
 

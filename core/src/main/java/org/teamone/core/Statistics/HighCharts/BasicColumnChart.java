@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by daniel on 10/31/15.
  */
-public class BasicColumnChart extends HighChart{
+public class BasicColumnChart extends HighChart {
 
     Map<String, Object> column;
 
@@ -56,7 +56,8 @@ public class BasicColumnChart extends HighChart{
 
     /**
      * Adds data to a simple column chart.
-     * @param name the key for the value
+     *
+     * @param name  the key for the value
      * @param value the arraylist of values.
      */
     public void addData(String name, ArrayList<Double> value) {

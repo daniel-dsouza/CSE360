@@ -580,9 +580,9 @@ public class AppointmentSQL {
         return Result;
 
     }
+
     /**
      * Delete all appointments will patient - null
-     *
      *
      * @return Boolean
      */
@@ -817,7 +817,7 @@ public class AppointmentSQL {
 
             while (rs.next()) {
                 String date = rs.getString("date");
-                if(isDateTodayOrFuture(date)) {
+                if (isDateTodayOrFuture(date)) {
                     Appointment appt = new Appointment();
                     appt.setDate(date);
                     appt.setTime(rs.getString("time"));

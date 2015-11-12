@@ -494,8 +494,7 @@ public class GenerateStatsSQL {
         return Double.valueOf(df2.format(val));
     }
 
-    public static ArrayList<Integer> countingPatientTypes(ArrayList<Appointment> currDoctorSpecialty)
-    {
+    public static ArrayList<Integer> countingPatientTypes(ArrayList<Appointment> currDoctorSpecialty) {
         ArrayList<Integer> pediatricianTypes = new ArrayList<Integer>();
 
         int jan = 0;
@@ -513,7 +512,7 @@ public class GenerateStatsSQL {
 
         try {
 
-            for(int i = 0; i < currDoctorSpecialty.size(); i ++) {
+            for (int i = 0; i < currDoctorSpecialty.size(); i++) {
                 String date = currDoctorSpecialty.get(i).getDate();
                 if (is1YearRange(date)) {
                     SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -591,8 +590,7 @@ public class GenerateStatsSQL {
 
     }
 
-    public static ArrayList<ArrayList<Integer>> getNumOfPatientType()
-    {
+    public static ArrayList<ArrayList<Integer>> getNumOfPatientType() {
         ArrayList<ArrayList<Integer>> patientType = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> pediatricianType = new ArrayList<Integer>();
         ArrayList<Integer> generalCareType = new ArrayList<Integer>();
@@ -635,28 +633,16 @@ public class GenerateStatsSQL {
 
                     pediatricianType = countingPatientTypes(doctorSpecialty);
 
-                }
-
-                else if(specialty.equals("GeneralCare"))
-                {
+                } else if (specialty.equals("GeneralCare")) {
                     generalCareType = countingPatientTypes(doctorSpecialty);
 
-                }
-
-                else if(specialty.equals("Neurologist"))
-                {
+                } else if (specialty.equals("Neurologist")) {
                     neurologistType = countingPatientTypes(doctorSpecialty);
 
-                }
-
-                else if(specialty.equals("X-Ray"))
-                {
+                } else if (specialty.equals("X-Ray")) {
                     xrayType = countingPatientTypes(doctorSpecialty);
 
-                }
-
-                else if(specialty.equals("Emergency"))
-                {
+                } else if (specialty.equals("Emergency")) {
                     emergencyType = countingPatientTypes(doctorSpecialty);
 
                 }
@@ -681,7 +667,6 @@ public class GenerateStatsSQL {
         return patientType;
 
     }
-
 
 
     public static String getDate(String dateAndTime) {

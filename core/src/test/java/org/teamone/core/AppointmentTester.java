@@ -85,15 +85,15 @@ public class AppointmentTester {
     public void CheckFuture() //patient calls this when updating an existing one
     {
         System.out.println("\nTest========check Time");
-       // Boolean check = AppointmentSQL.isDateTodayOrFuture("2016-11-11");
+        // Boolean check = AppointmentSQL.isDateTodayOrFuture("2016-11-11");
         Boolean check2 = AlertSQL.isTimeWithin5Min("2015-11-11 13:57:25");
         System.out.println("Result: " + check2);
-    
+
 
         System.out.println(TestStrings.testEnd);
     }
 
-    
+
     @Test
     public void viewApptByDocID() {
         //case 1, where user wants appoint through doctorID

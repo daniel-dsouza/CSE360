@@ -10,8 +10,8 @@ import java.util.TreeMap;
 
 public class Person {
     private String name;
-    private String firstName ="";
-    private String lastName ="";
+    private String firstName = "";
+    private String lastName = "";
     private String occupation;
     private String password;
     private String email;
@@ -67,31 +67,48 @@ public class Person {
         this.userID = userID;
     }
 
-    public Map<String, String> getAgentActions() { return agentActions; }
+    public Map<String, String> getAgentActions() {
+        return agentActions;
+    }
 
-    public void setAgentActions(Map<String, String> agentActions) { this.agentActions = agentActions; }
+    public void setAgentActions(Map<String, String> agentActions) {
+        this.agentActions = agentActions;
+    }
 
-    public Map<String, String> getGenericActions() { return genericActions; }
+    public Map<String, String> getGenericActions() {
+        return genericActions;
+    }
 
-    public void setGenericActions(Map<String, String> genericActions) { this.genericActions = genericActions; }
+    public void setGenericActions(Map<String, String> genericActions) {
+        this.genericActions = genericActions;
+    }
 
-    public String getFirstName() { return firstName; }
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public String getLastName() { return lastName; }
+    public String getLastName() {
+        return lastName;
+    }
 
-    public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     /**
      * //to SQL
      */
-    public void toStringName(){
-        name = firstName + ":" +lastName;
+    public void toStringName() {
+        name = firstName + ":" + lastName;
     }
 
     /**
      * //from SQL
+     *
      * @param nam
      */
     public void splitName(String nam) {

@@ -67,7 +67,7 @@
                 <br>
                 <br>
 
-                <div style="overflow:scroll;height:80px;width:100%;overflow:auto">
+                <div style="overflow:auto;height:80px;width:100%;">
 
                     <table width="800" border="0" class="my-table">
                         <tr>
