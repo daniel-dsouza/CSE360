@@ -11,7 +11,9 @@ import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -128,6 +130,94 @@ public class AppointmentSQL {
     }
 
     /**
+     * checks if a date is past or currentFuture.
+     *
+     * @param date string must be in format yyyy-MM-dd
+     * @return true is currentFuture, false is past.
+     */
+
+    public static Boolean isDateTodayOrFuture(String date) {
+
+        Date dateToday = new Date();
+        Date appointmentDate = new Date();
+        SimpleDateFormat convertToDate = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+
+            Date temp = new Date();
+            String todayStr = convertToDate.format(temp);
+
+            dateToday = convertToDate.parse(todayStr);
+            appointmentDate = convertToDate.parse(date);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (appointmentDate.compareTo(dateToday) > 0 || appointmentDate.compareTo(dateToday) == 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * @param readMe Appointment Object with valid doctorID
+     * @return list of future appointments by doctor
+     */
+    public static List<Appointment> viewFutureAppointmentByDoctor(Appointment readMe) {
+        List<Appointment> a1 = new ArrayList<Appointment>();
+
+        try {
+
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int docID = readMe.getDoctorID();
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID, serialNumber FROM appointment where doctorID = ? AND patientID IS NOT NULL and date ");
+            preparedStatement.setInt(1, docID);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Appointment new1 = new Appointment();
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+                int patID = resultSet.getInt("patientID");
+
+                if (isDateTodayOrFuture(date)) {
+                    Patient pat1 = new Patient();
+                    pat1.setName(LoginSQL.getName(patID));
+                    pat1.splitName((pat1.getName()));
+
+                    new1.setDate(date);
+                    new1.setTime(time);
+                    new1.setReason(reason);
+
+                    new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                    new1.setPatient(pat1);
+                    new1.setPatientID(patID);
+                    a1.add(new1);
+
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            a1 = null;
+        } finally {
+            close();
+        }
+        return a1;
+    }
+
+
+    /**
      * Given an appoint with doctorID, Time, PatientID, and Date, return ID
      *
      * @param readMe Appointment Object with valid  doctorID, Time, PatientID, and Date,
@@ -168,6 +258,64 @@ public class AppointmentSQL {
             close();
         }
         return readMe;
+    }
+
+    /**
+     * @param readMe Appointment Object with valid patientID
+     * @return list of appointments by patient
+     */
+
+    public static List<Appointment> viewFutureAppointmentByPatient(Appointment readMe) {
+        List<Appointment> a1 = new ArrayList<Appointment>();
+
+        try {
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int patID = readMe.getPatientID();
+
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, doctorID, serialNumber FROM appointment where patientID = ?");
+            preparedStatement.setInt(1, patID);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Appointment new1 = new Appointment();
+
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+                int docID = resultSet.getInt("doctorID");
+                Staff temp = new Staff();
+                temp.setUserID(docID);
+                Staff doc1 = DoctorSQL.getStaffComplete(temp);
+
+                if (isDateTodayOrFuture(date)) {
+
+                    new1.setDate(date);
+                    new1.setTime(time);
+                    new1.setReason(reason);
+                    new1.setPatientID(docID);
+                    new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                    new1.setDoctor(doc1);
+                    a1.add(new1);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            a1 = null;
+        } finally {
+            close();
+        }
+        return a1;
+
     }
 
     /**
@@ -232,6 +380,7 @@ public class AppointmentSQL {
         return a1;
 
     }
+
 
     /**
      * @param readMe Appointment Object with valid appointmentID
@@ -667,11 +816,14 @@ public class AppointmentSQL {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                Appointment appt = new Appointment();
-                appt.setDate(rs.getString("date"));
-                appt.setTime(rs.getString("time"));
-                appt.setDoctorID(docID);
-                apptList.add(appt);
+                String date = rs.getString("date");
+                if(isDateTodayOrFuture(date)) {
+                    Appointment appt = new Appointment();
+                    appt.setDate(date);
+                    appt.setTime(rs.getString("time"));
+                    appt.setDoctorID(docID);
+                    apptList.add(appt);
+                }
             }
 
         } catch (Exception e) {

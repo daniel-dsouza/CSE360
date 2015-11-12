@@ -2,6 +2,7 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.teamone.core.SQL.AlertSQL;
 import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
 import org.teamone.core.baseclasstests.TestStrings;
@@ -78,15 +79,26 @@ public class AppointmentTester {
         assertTrue("editing appointment by patient ID failed ", check);
 
         System.out.println(TestStrings.testEnd);
-    }*/
+    }
+    */
+    @Test
+    public void CheckFuture() //patient calls this when updating an existing one
+    {
+        System.out.println("\nTest========check Time");
+       // Boolean check = AppointmentSQL.isDateTodayOrFuture("2016-11-11");
+        Boolean check2 = AlertSQL.isTimeWithin5Min("2015-11-11 13:57:25");
+        System.out.println("Result: " + check2);
+    
 
+        System.out.println(TestStrings.testEnd);
+    }
 
-
+    
     @Test
     public void viewApptByDocID() {
         //case 1, where user wants appoint through doctorID
         System.out.println("\nTest========Viewing patient with doctor ID");
-        List<Appointment> test1 = AppointmentSQL.viewAppointmentByDoctor(update);
+        List<Appointment> test1 = AppointmentSQL.viewFutureAppointmentByDoctor(update);
         assertTrue("No appointments by doctor ID", !test1.isEmpty());
 
         for (Appointment tempAp : test1) {

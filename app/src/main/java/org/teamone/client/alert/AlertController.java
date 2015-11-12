@@ -35,11 +35,28 @@ public class AlertController {
     @RequestMapping(value = "/getalerts", method = RequestMethod.GET)
     public
     @ResponseBody
-    ArrayList<Alert> findDoctors() {
+    ArrayList<Alert> getListAlert() {
         //System.out.println("alerts tagged:" + doctor);
         //request list of patients with optional doctor.
 
         ArrayList<Alert> alertList = AlertSQL.getListAlerts();
+        System.out.println("returning list of alerts");
+        return alertList; //return JSON object
+    }
+
+    /**
+     * AJAX handler to return alerts.
+     *
+     * @return list of alerts as JSON objects
+     */
+    @RequestMapping(value = "/getalertspopup", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    ArrayList<Alert> find5min() {
+        //System.out.println("alerts tagged:" + doctor);
+        //request list of patients with optional doctor.
+
+        ArrayList<Alert> alertList = AlertSQL.getListAlertsPopUp();
         System.out.println("returning list of alerts");
         return alertList; //return JSON object
     }
@@ -68,7 +85,7 @@ public class AlertController {
         if (isEmergency || user.getPerson() instanceof HSP)//HSP override
         {
             if (AlertSQL.areThereAlerts()) {
-                java.util.Date dateAndTime= new java.util.Date();
+                java.util.Date dateAndTime = new java.util.Date();
                 java.text.SimpleDateFormat sdf =
                         new java.text.SimpleDateFormat("h:mm:ss a");
                 String Time = sdf.format(dateAndTime);
@@ -143,7 +160,7 @@ public class AlertController {
     List<Appointment> getDoctorAppointments(@PathVariable("doctorID") int doctorID) {
         Appointment a = new Appointment();
         a.setDoctorID(doctorID);
-        List<Appointment> doctorAppointments = AppointmentSQL.viewAppointmentByDoctor(a);
+        List<Appointment> doctorAppointments = AppointmentSQL.viewFutureAppointmentByDoctor(a);
         Collections.sort(doctorAppointments, Appointment.dateCompare);
         return doctorAppointments;
     }

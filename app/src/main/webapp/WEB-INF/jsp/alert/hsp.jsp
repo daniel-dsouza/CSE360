@@ -14,7 +14,7 @@
             <!--
             $(document).ready(function () {
                 loadAlertsHsp('target');
-                setInterval("loadAlertsHsp('target')", 21000);
+                setInterval("loadAlertsHsp('target')", 19999);
             });
             //-->
         </script>
@@ -23,7 +23,7 @@
         <!--Display list of partial-doctors-->
         <h1>Alerts</h1>
 
-        <div class="container-fluid" id="target" style="overflow:scroll;height:140px;width:100%;overflow:auto">
+        <div class="container-fluid" id="target" style="overflow:scroll;height:150px;width:100%;overflow:auto">
 
         </div>
         <div class="container-fluid">
@@ -31,6 +31,7 @@
                 <!-- Page header -->
                 <div class="row">
                     <h1>Select Doctor</h1>
+                    <h5>Please select a doctor and create an emergency appointment.</h5>
                 </div>
                 <div class="row">
                     <div id="accordion" class="panel-group">

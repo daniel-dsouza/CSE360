@@ -49,10 +49,7 @@ public class PrescriptionSQL {
             preparedStatement.setString(5, patient.getQuantity());
             checker = preparedStatement.executeUpdate();
 
-            if (checker == 0)
-                boolResult = false;
-            else
-                boolResult = true;
+            boolResult = checker != 0;
 
         } catch (Exception e) {
             System.out.println(e);

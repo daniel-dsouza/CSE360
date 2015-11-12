@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.teamone.client.generic.User;
 import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.appointments.Appointment;
+import org.teamone.core.users.Patient;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,11 +30,15 @@ public class AppointmentListController {
     public String findPatients(Map<String, Object> model, @ModelAttribute User user) {
         if (user.getPerson() == null )
             return "redirect:/login";
+        else if(!(user.getPerson() instanceof Patient))//only patients
+        {
+            return "redirect:/user/" + user.person.getUserID();
+        }
         List<Appointment> patientList; //Hashing strikes again.
         //System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
         Appointment temp = new Appointment();
         temp.setPatientID(user.getPerson().getUserID());
-        patientList = AppointmentSQL.viewAppointmentByPatient(temp);
+        patientList = AppointmentSQL.viewFutureAppointmentByPatient(temp);
         /*for (Appointment tem : patientList) {
             System.out.println("Appt ID: " + tem.getAppointmentID());
         }*/
@@ -62,7 +67,7 @@ public class AppointmentListController {
         //System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
         Appointment temp = new Appointment();
         temp.setDoctorID(user.getPerson().getUserID());
-        doctorList = AppointmentSQL.viewAppointmentByDoctor(temp);
+        doctorList = AppointmentSQL.viewFutureAppointmentByDoctor(temp);
         /*for (Appointment tem : doctorList) {
             System.out.println("Appt ID: " + tem.getAppointmentID());
         }*/

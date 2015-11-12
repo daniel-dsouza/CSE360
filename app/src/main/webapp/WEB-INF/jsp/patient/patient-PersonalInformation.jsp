@@ -132,7 +132,7 @@
         alert("Please enter an age under 150.");
       }
     } else{
-      alert("Please enter a number for age.")
+      alert("Please enter a number for age.");
       return false;
     }
     if(/^[a-zA-Z]{1,}$/.test(firstName)){} else{

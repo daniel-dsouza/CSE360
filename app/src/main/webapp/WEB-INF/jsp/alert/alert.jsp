@@ -12,7 +12,7 @@
           <!--
           $(document).ready(function () {
               loadAlerts('target');
-              setInterval("loadAlerts('target')", 21000);
+              setInterval("loadAlerts('target')", 16666);
           });
           //-->
         </script>

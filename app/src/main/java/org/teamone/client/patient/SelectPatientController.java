@@ -72,7 +72,24 @@ public class SelectPatientController {
         if (!(user.getPerson() instanceof Doctor) && !(user.getPerson() instanceof HSP))
             return "redirect:/user/" + user.person.getUserID();
 
-        ArrayList<Patient> patients = PatientSQL.getAllPatient();
+        ArrayList<Patient> patients = null;
+
+        if(user.getPerson() instanceof Doctor)
+        {
+            Doctor d = new Doctor();
+            d.setUserID(user.person.getUserID());
+            patients = PatientSQL.getPatientByStaff(d);
+
+
+        }
+
+        else
+        {
+
+            patients = PatientSQL.getAllPatient();
+
+        }
+
 
         Map<String, String> actions = new LinkedHashMap<String, String>();
 
@@ -124,7 +141,7 @@ public class SelectPatientController {
 //        p.setUserID(patientID);
         Appointment a = new Appointment();
         a.setPatientID(patientID);
-        List<Appointment> patientAppointments = AppointmentSQL.viewAppointmentByPatient(a);
+        List<Appointment> patientAppointments = AppointmentSQL.viewFutureAppointmentByPatient(a);
         Collections.sort(patientAppointments, Appointment.dateCompare);
         return patientAppointments;
     }

@@ -106,7 +106,6 @@ public class AppointmentController {
          */
         model.put("appointment", appointment1);
         model.put("speclist", speclist);
-
         Map<String, String> doctorsList = new LinkedHashMap<String, String>();
         doctorsList.put("", "List of Doctors");
         model.put("doctorlist", doctorsList);
@@ -185,8 +184,7 @@ public class AppointmentController {
 
         current.setDoctorSpec(DoctorSQL.getSpecialty(current.getDoctorID()));
         current.getDoctor().splitName(LoginSQL.getName(current.getDoctorID()));
-
-
+        
         //TODO: add extra stuff here.
         model.put("appointment", current);
 
