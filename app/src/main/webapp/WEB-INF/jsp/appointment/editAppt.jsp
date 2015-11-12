@@ -14,17 +14,54 @@
         <script type="text/javascript" src="/js/datepaginator/moment.js"></script>
         <script type="text/javascript" src="/js/datepaginator/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="/js/datepaginator/bootstrap-datepaginator.js"></script>
-
         <script type="text/javascript" src="/js/datepaginator/datepaginator.js"></script>
+
+        <!-- ADDED -->
+        <script type="text/javascript" src="/js/appointments.js"></script>
+
+
     </jsp:attribute>
     <jsp:body>
         <div class="container-fluid">
-            <h2>Create an Appointment</h2>
+            <h2>Edit Appointment</h2>
+
+
+
             <form:form method="post" commandName="appointment" onsubmit="return getDate()">
+
+                <!-- ADDED -->
+                <div class="container-fluid"> <!-- don't forget your bootstrap html. do the basic tutorial... -->
+                <div class="row">
+                    <div class="form-class">
+                        <br>
+                        <label class="col-md-6 control-label" for="special">Specialty:</label>
+                        <div class="col-md-6">
+                            <!-- method is what do when done, commandName is what object from the model to put stuff into, action should be the name of your jsp. -->
+                            <br><br><form:select id="special" path="doctorSpec" items="${speclist}"
+                                         onchange="loadDoctors()"/>Current Specialty: <c:out value="${appointment.doctor.specialty}"/><br/>
+                        </div>
+                    </div>
+                        <!-- path is where in the object specified by command name to store the result, a get method for Java. items is the list of results -->
+                        <!-- Doctor: -->
+
+                        <!-- id is how jquery get the element. -->
+                    <div class="form-class">
+                        <br><br>
+                        <label class="col-md-6 control-label" for="doctor">Doctor:</label>
+                        <div class="col-md-6">
+                            <br><br><form:select id="doctor" path="tempDocID" items="${doctorlist}"/>Current Doctor: <c:out value="${appointment.doctor.firstName}" /> <br/>
+                        </div>
+                        <br><br><br>
+                    </div>
+                </div>
+
+
                 <c:if test="${appointment.failedToInsert == 1}">
                     <script>
                         alert("That time and day is occupied. Please select a different time or day."); </script>
-                    Occupied Times for Doctor: <c:out value="${appointment.doctorID}"/>
+                    Occupied Times for: <c:out value="${appointment.doctor.firstName}"/>
+                    <br>
+                    <br>
                     <div style="overflow:scroll;height:80px;width:100%;overflow:auto">
 
                         <table width="800" border="0" class="my-table">
@@ -56,8 +93,8 @@
                                 </c:forEach>
                             </tr>
                         </table>
-
                     </div>
+                    <br><br>
 
                 </c:if>
 
@@ -69,10 +106,12 @@
                         <br>
 
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="timeselect">Time</label>
-                            <br>
+                            <br><br>Current Time: <c:out value="${appointment.time}" /> <br/>
 
-                            <div class="col-md-4">
+                            <br><label class="col-md-6 control-label" for="timeselect">Time:</label>
+
+
+                            <div class="col-md-6">
                                 <form:select id="timeselect" name="timeselect" path="time" class="form-control">
                                     <option value="8:00 AM">8:00 AM</option>
                                     <option value="9:00 AM">9:00 AM</option>
@@ -93,21 +132,18 @@
 
 
                         <div class="form-class">
-                            <c:if test="${user.person.occupation == 'hsp'}">
-                                <br><label class="col-md-4 control-label" for="docID">Doctor ID</label>
 
-                                <div class="col-md-4">
-                                    <form:input id="docID" size='3' path="tempDocID"
-                                                class="readonly" type="number" min="501" max="511" step="1"
-                                                maxlength="10"
-                                                autofocus="autofocus"
-                                                required="required"/>
-                                </div>
-                            </c:if>
+                            <br><br><label class="col-md-6 control-label" for="reason">Reason:</label>
+
+                            <div class="col-md-6">
+                                <form:input class='form-control' size='4' type='text' path="reason" id="reason"
+                                            required="true"/> <!-- name can only be letters -->
+
+                            </div>
+
                         </div>
-
                         <div class="button_holder" style="text-align: center;">
-                            <br><br>
+                            <br><br><br>
                             <span class="group-btn">
                                 <input type="submit" value="Create" class="btn btn-primary btn-md"
                                        style="float:inherit"/>
