@@ -30,7 +30,7 @@ public class AppointmentListController {
         if (user.getPerson() == null )
             return "redirect:/login";
         List<Appointment> patientList; //Hashing strikes again.
-        System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
+        //System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
         Appointment temp = new Appointment();
         temp.setPatientID(user.getPerson().getUserID());
         patientList = AppointmentSQL.viewAppointmentByPatient(temp);
@@ -59,7 +59,7 @@ public class AppointmentListController {
         if (user.getPerson() == null )
             return "redirect:/login";
         List<Appointment> doctorList; //Hashing strikes again.
-        System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
+        //System.out.println(user.getPerson().getUserID() + " this works"); //DEBUG statements
         Appointment temp = new Appointment();
         temp.setDoctorID(user.getPerson().getUserID());
         doctorList = AppointmentSQL.viewAppointmentByDoctor(temp);

@@ -62,33 +62,25 @@ public class AppointmentTester {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
-    public void dSchedAppt() //patient calls this when updating an existing one
+    /*@Test
+    public void swapAppt() //patient calls this when updating an existing one
     {
         System.out.println("\nTest========Scheduling appointment");
-        Boolean check = AppointmentSQL.schedAppointmentAppt(sched);
+        Appointment appt = new Appointment();
+        appt.setAppointmentID(373);
+        Appointment oldAppt = AppointmentSQL.viewAppointmentByApptID(appt);
+        appt.setDoctorID(oldAppt.getDoctorID());
+        appt.setPatientID(oldAppt.getPatientID());
+        appt.setTime(oldAppt.getTime());
+        appt.setDate("2015-11-16");
+        appt.setReason("New");
+        Boolean check = AppointmentSQL.updateAppointmentAppt(appt, oldAppt.getAppointmentID());
         assertTrue("editing appointment by patient ID failed ", check);
-        System.out.println("\nUpdate successful");
-        System.out.println("Date:\t" + sched.getDate());
-        System.out.println("Time:\t" + sched.getTime());
-        System.out.println("Reason:\t" + sched.getReason());
-        System.out.println("Doctor ID:\t" + sched.getDoctorID());
 
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
-    @Test
-    public void editApptByApptID() //edit an already filled appointment. This must be the old time is now free for other users
-    {
-        System.out.println("\nTest========updating Appointment with appt ID");
 
-        Boolean newTest = AppointmentSQL.swapAppointmentAppt(update, 56);
-        assertTrue("Could not edit appointment by appt id", newTest);
-
-        System.out.println("\nupdate successful");
-
-        System.out.println(TestStrings.testEnd);
-    }
 
     @Test
     public void viewApptByDocID() {
@@ -145,8 +137,13 @@ public class AppointmentTester {
         System.out.println(TestStrings.testEnd);
     }
 
-
-
+   /* @Test
+    public void deleteAll() {
+        System.out.println("\nTest========Deleting all appointments with patientID = NULL");
+        Boolean test1 = AppointmentSQL.delAllAppointmentByPatient();
+        assertTrue("No appointment by appointment ID", test1);
+        System.out.println(TestStrings.testEnd);
+    }*/
 
     /*@Test
     public void zGetAppointmentID() {

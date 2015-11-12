@@ -139,10 +139,9 @@ public class AppointmentController {
         System.out.println(ap1.getDoctorID());
         if (AppointmentSQL.createAppointment(ap1)) //Date time and doctor id
         {
-            AppointmentSQL.schedAppointmentEmergencyAppt(ap1);
+            AppointmentSQL.schedAppointment(ap1);
             return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
         }
-
         else {
 
             ap1.setFailedToInsert(1);
@@ -224,15 +223,30 @@ public class AppointmentController {
                                  @ModelAttribute("user") User user) { //this tells the method that there will be a field named appointment in the model
 
         System.out.println(ap1.getDoctorSpec());
-        System.out.println(ap1.getDoctorName());
+        int docID;
+        if(ap1.getTempDocID().isEmpty())//assume they change dates and/or reason
+        {
+            Appointment appt = new Appointment();
+
+            appt.setAppointmentID(appointmentID);
+            Appointment oldAppt = AppointmentSQL.viewAppointmentByApptID(appt);
+            docID = oldAppt.getDoctorID();
+        }
+        else
+        {
+            docID = Integer.parseInt(ap1.getTempDocID());
+
+        }
+
         System.out.println(ap1.getReason());
-        System.out.println("new ID:" + ap1.getAppointmentID());
         System.out.println(user.getPerson().getUserID());
         ap1.setPatientID(user.getPerson().getUserID());
+        ap1.setDoctorID(docID);
+        System.out.println(ap1.getDoctorID());
 
         int oldID = appointmentID;
         System.out.println("old ID:" + oldID);
-        AppointmentSQL.swapAppointmentAppt(ap1, oldID);
+        AppointmentSQL.updateAppointmentAppt(ap1, oldID);
 
 
         return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
@@ -273,7 +287,7 @@ public class AppointmentController {
 
         if (AppointmentSQL.createAppointment(appt)) //Date time and doctor id
         {
-            AppointmentSQL.schedAppointmentEmergencyAppt(appt);
+            AppointmentSQL.schedAppointment(appt);
             return "redirect:/user/" + user.person.getUserID(); //this will need to be "redirect:somesuccesspage" at some point.
         }
 

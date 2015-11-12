@@ -395,9 +395,9 @@ public class AppointmentSQL {
     }
 
     /**
-     * NULLS out the patientID and reason for an appointment
+     * Delete an appointment by ID
      *
-     * @param oldID: appointmentID to be nulled out
+     * @param oldID: appointmentID to be Deleted
      * @return Boolean
      */
     public static Boolean delAppointmentAppt(int oldID) {
@@ -412,9 +412,45 @@ public class AppointmentSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
 
-            String nullApp = "UPDATE appointment SET reason = NULL, patientID = NULL WHERE serialNumber = ?;";
-            preparedStatement = connect.prepareStatement(nullApp);
+            String delApp = "DELETE from appointment WHERE serialNumber = ?;";
+            preparedStatement = connect.prepareStatement(delApp);
             preparedStatement.setInt(1, oldID);
+            checker2 = preparedStatement.executeUpdate();
+
+            if (checker2 == 0)
+                Result = false;
+            else
+                Result = true;
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            Result = false;
+        } finally {
+            close();
+        }
+        return Result;
+
+    }
+    /**
+     * Delete all appointments will patient - null
+     *
+     *
+     * @return Boolean
+     */
+    public static Boolean delAllAppointmentByPatient() {
+        Boolean Result;
+        try {
+            int checker2;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+
+            String delApp = "DELETE from appointment WHERE patientID IS NULL;";
+            preparedStatement = connect.prepareStatement(delApp);
             checker2 = preparedStatement.executeUpdate();
 
             if (checker2 == 0)
@@ -433,16 +469,19 @@ public class AppointmentSQL {
     }
 
     /**
-     * given an Appointment with valid info, and the old appointmentID,  this is "swap" appointments.
-     * This is because the oldID needs to have the reason and patientID set to NULL. Thus "swapping" occurs.
+     * given an Appointment with valid info, and the old appointmentID, this will update it.
+     * <p/>
+     * case 1: if the patient only updates the reason, then we can check if the readMe is the same as oldID
+     * case 2: if the patient changes date and time, then we need to get the oldID and update that will new values
      *
-     * @param readMe Appointment Object with valid appointmentID
+     * @param readMe Appointment Object with valid appointmentID, docID, date,time, patID
      * @return Boolean
      */
-    public static Boolean swapAppointmentAppt(Appointment readMe, int oldID) {
-        Boolean Result;
+    public static Boolean updateAppointmentAppt(Appointment readMe, int oldID) {
+        Boolean Result = false;
+        int checker = 0, checker2 = 0;
         try {
-            int checker, checker2;
+
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
             // Setup the connection with the DB
@@ -450,29 +489,51 @@ public class AppointmentSQL {
 
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
-            // PreparedStatements can use variables and are more efficient
-            int appID = readMe.getAppointmentID();
+            int docID = readMe.getDoctorID();
+            String date = readMe.getDate();
+            String time = readMe.getTime();
             int patID = readMe.getPatientID();
             String reason = readMe.getReason();
 
-            String updateApp = "UPDATE appointment SET"
-                    + " reason = ?, patientID = ? WHERE serialNumber = ? ;";
+            String selectApp = "SELECT serialNumber from appointment "
+                    + "where doctorID = ?  AND date = ? AND time = ?;";
+            // PreparedStatements can use variables and are more efficient
+            preparedStatement = connect.prepareStatement(selectApp);
+            preparedStatement.setInt(1, docID);
+            preparedStatement.setString(2, date);
+            preparedStatement.setString(3, time);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.first()) {
 
-            preparedStatement = connect.prepareStatement(updateApp);
-            preparedStatement.setString(1, reason);
-            preparedStatement.setInt(2, patID);
-            preparedStatement.setInt(3, appID);
+                //update the reason since the docID and date and time is present. If appointment exists, this should ALWAYS be true
 
-            checker = preparedStatement.executeUpdate();
-            String nullApp = "UPDATE appointment SET reason = NULL, patientID = NULL WHERE serialNumber = ?;";
-            preparedStatement = connect.prepareStatement(nullApp);
-            preparedStatement.setInt(1, oldID);
-            checker2 = preparedStatement.executeUpdate();
+                String updateApp = "UPDATE appointment SET"
+                        + " reason = ? WHERE serialNumber = ? ;";
 
-            if (checker == 0 | checker2 == 0)
-                Result = false;
-            else
+                preparedStatement = connect.prepareStatement(updateApp);
+                preparedStatement.setString(1, reason);
+                preparedStatement.setInt(2, oldID);
+                checker = preparedStatement.executeUpdate();
                 Result = true;
+
+            } else //if docID, date OR time is changed, we need the oldID and update that
+            {
+
+                String updateApp = "UPDATE appointment SET"
+                        + " reason = ?, patientID = ?, doctorID = ?, date = ?, time = ? WHERE serialNumber = ? ;";
+
+                preparedStatement = connect.prepareStatement(updateApp);
+                preparedStatement.setString(1, reason);
+                preparedStatement.setInt(2, patID);
+                preparedStatement.setInt(3, docID);
+                preparedStatement.setString(4, date);
+                preparedStatement.setString(5, time);
+                preparedStatement.setInt(6, oldID);
+                checker = preparedStatement.executeUpdate();
+                Result = true;
+
+            }
+
         } catch (Exception e) {
             System.out.println("===========EMPTY RESULT========RETURN NULL");
             System.out.println(e);
@@ -485,12 +546,12 @@ public class AppointmentSQL {
     }
 
     /**
-     * Schedule an existing appointment by Appointment ID. This is because SQL is preloaded with patientID set to NULL
+     * Schedule an existing appointment by Appointment ID. This is because SQL is checked for a duplicate using createAppt method
      *
-     * @param readMe Appointment Object with valid appointmentID
+     * @param readMe Appointment Object with valid doctorID, date, time
      * @return Boolean
      */
-    public static Boolean schedAppointmentAppt(Appointment readMe) {
+    public static Boolean schedAppointment(Appointment readMe) {
         Boolean Result;
         try {
             int checker;
@@ -508,60 +569,6 @@ public class AppointmentSQL {
             String date = readMe.getDate();
             String time = readMe.getTime();
             String reason = readMe.getReason();
-
-            String updateApp = "UPDATE appointment SET"
-                    + " reason = ?, patientID = ? WHERE serialNumber = ? ;";
-
-            preparedStatement = connect.prepareStatement(updateApp);
-            preparedStatement.setString(1, reason);
-            preparedStatement.setInt(2, patID);
-            preparedStatement.setInt(3, appID);
-            checker = preparedStatement.executeUpdate();
-
-
-            if (checker == 0)
-                Result = false;
-            else
-                Result = true;
-        } catch (Exception e) {
-            System.out.println("===========EMPTY RESULT========RETURN NULL");
-            System.out.println(e);
-            Result = false;
-        } finally {
-            close();
-        }
-        return Result;
-
-    }
-
-    /**
-     * Schedule an existing appointment by doctorID, date, and time. This is because SQL is preloaded with patientID set to NULL
-     *
-     * @param readMe Appointment Object with valid doctorID
-     * @return Boolean
-     */
-    public static Boolean schedAppointmentEmergencyAppt(Appointment readMe) {
-        Boolean Result;
-        try {
-            int checker;
-            // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.jdbc.Driver");
-            // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-
-            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-
-            // PreparedStatements can use variables and are more efficient
-            int appID = readMe.getAppointmentID();
-            int patID = readMe.getPatientID();
-            int docID = readMe.getDoctorID();
-            String date = readMe.getDate();
-            String time = readMe.getTime();
-            String reason = readMe.getReason();
-
-            System.out.println(reason);
-            System.out.println(patID);
-
 
             String updateApp = "UPDATE appointment SET"
                     + " reason = ?, patientID = ? WHERE doctorID = ? AND date = ? AND time = ?;";
@@ -676,6 +683,7 @@ public class AppointmentSQL {
         return apptList;
 
     }
+
     /**
      * Returns a list of Appointments available to doctor
      *
