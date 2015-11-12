@@ -2,10 +2,8 @@ package org.teamone.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.teamone.core.SQL.AppointmentSQL;
 import org.teamone.core.SQL.DoctorSQL;
 import org.teamone.core.SQL.PatientSQL;
-import org.teamone.core.appointments.Appointment;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Staff;
@@ -39,7 +37,7 @@ public class StaffListTest {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
+    /*@Test
     public void getPatientsAppointmentByName() {
         System.out.println("\nTest========Searching for Patient's Appointments for 'Ryan:The Diva' ");
         ArrayList<Appointment> testAppoint = AppointmentSQL.getPatientsAppointment("Ryan:The Diva");
@@ -54,7 +52,7 @@ public class StaffListTest {
         }
 
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
     @Test
     public void getPatientsByName() {

@@ -50,21 +50,7 @@ public class DoctorTest {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
-    public void getAvailableTimes() {
-        System.out.println("\nTest========Searching for Available Doctor Times ");
-        Doctor new1 = new Doctor();
-        new1.setUserID(501);
-        ArrayList<Appointment> timesList = AppointmentSQL.getAvailableDoctorTimes(new1);
-        assertTrue("Could not get Available Doctor Times", !timesList.isEmpty());
 
-        System.out.println("*********************Find successful************************");
-        for (Appointment tempApp : timesList) {
-            System.out.println("Available Date: " + tempApp.getDate() + "\tTime: " + tempApp.getTime());
-        }
-
-        System.out.println(TestStrings.testEnd);
-    }
 
     @Test
     public void getListofPatientsBySpecialty() {

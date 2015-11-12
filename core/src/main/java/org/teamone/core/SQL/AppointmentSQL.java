@@ -836,43 +836,7 @@ public class AppointmentSQL {
 
     }
 
-    /**
-     * Returns a list of Appointments available to doctor
-     *
-     * @param doc: Doctor with staff ID filled in
-     * @return ArrayList: Arraylist of Appointment objects
-     */
-    public static ArrayList<Appointment> getAvailableDoctorTimes(Doctor doc) {
-        ArrayList<Appointment> apptList = new ArrayList<Appointment>();
-        try {
-            // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.jdbc.Driver");
-            // Setup the connection with the DB
-            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
-            int docID = doc.getUserID();
-            preparedStatement = connect.prepareStatement("select date, time, serialNumber from appointment where doctorID  = ? and patientID IS NULL");
-            preparedStatement.setInt(1, docID);
-            ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                Appointment appt = new Appointment();
-                appt.setDate(rs.getString("date"));
-                appt.setTime(rs.getString("time"));
-                appt.setAppointmentID(rs.getInt("serialNumber"));
-                appt.setDoctorID(docID);
-                apptList.add(appt);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-            apptList = null;
-        } finally {
-            close();
-        }
-        return apptList;
-
-    }
 
 
     /**

@@ -130,7 +130,7 @@ public class AppointmentTester {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
+   /* @Test
     public void viewApptByAppID() {
         //case 1
         update.setAppointmentID(5);
@@ -147,7 +147,7 @@ public class AppointmentTester {
         //System.out.println("Patient address:\t" + test1.getPatient().getAddress());
 
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
    /* @Test
     public void deleteAll() {

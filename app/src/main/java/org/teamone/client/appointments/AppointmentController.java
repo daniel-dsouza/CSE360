@@ -44,26 +44,6 @@ public class AppointmentController {
         return doctorList; //return JSON object
     }
 
-    /**
-     * This is used with .ajax to dynamically update the list of appointments.
-     *
-     * @param name which doctor has open appointments.
-     * @return json list of appointments.
-     */
-    @RequestMapping(value = "/gettimes/{name}", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ArrayList<Appointment> findTimes(@PathVariable String name) {
-        int id = LoginSQL.getID(name);
-        Doctor new1 = new Doctor();
-        new1.setUserID(id);
-        ArrayList<Appointment> dateList = AppointmentSQL.getAvailableDoctorTimes(new1);
-        Collections.sort(dateList, Appointment.dateCompare);
-        System.out.println(name); //DEBUG statements
-        System.out.println("returning date and time list");
-        return dateList; //return JSON object
-    }
-
 
     /*@RequestMapping(value = "/view/{appointmentID}", method = RequestMethod.GET)    //views one specific appt
     public String viewAppointment(Map<String, Object> model,
