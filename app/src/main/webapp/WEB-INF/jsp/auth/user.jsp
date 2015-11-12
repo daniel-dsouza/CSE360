@@ -9,7 +9,7 @@
           </jsp:attribute>
     <jsp:body>
         <div class="container-fluid">
-            <div class="jumbotron" style="background-color: deepskyblue">
+            <div class="jumbotron" style="background-color: #79E0D8">
                 <h1>Welcome <c:out value="${user.person.firstName}"/> <c:out value="${user.person.lastName}"/> to the
                     IPIMS</h1>
 

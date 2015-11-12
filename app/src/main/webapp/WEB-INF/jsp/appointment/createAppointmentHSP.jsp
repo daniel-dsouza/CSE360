@@ -73,7 +73,7 @@
 
 
                             <div class="col-md-4">
-                                <form:select id="timeselect" name="timeselect" path="time" class="form-control dropdown-bg">
+                                <form:select id="timeselect" name="timeselect" path="time" class="form-control">
                                     <option value="8:00 AM">8:00 AM</option>
                                     <option value="9:00 AM">9:00 AM</option>
                                     <option value="10:00 AM">10:00 AM</option>

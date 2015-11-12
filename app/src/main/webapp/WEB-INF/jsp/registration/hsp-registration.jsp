@@ -17,73 +17,73 @@
           <table class="table" style="margin-bottom: 0;border: none"> <!-- Rows and cols of the table -->
             <tbody>
             <tr> <!-- Row 1 -->
-              <td>First Name*:</td>
+              <td>First Name:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.firstName" id="firstName"
                             required="true"/> <!-- name can only be letters -->
               </td>
-              <td>Last Name*:</td>
+              <td>Last Name:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.lastName" id="lastName"
                             required="true"/> <!-- name can only be letters -->
               </td>
             </tr>
             <tr> <!-- Row 2 -->
-              <td>Age*:</td>
+              <td>Age:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.age" id="age"
                             required="true"/> <!-- age must be a number -->
               </td>
-              <td>Address*:</td>
+              <td>Address:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.address"
                             required="true"/> <!-- only checked to see if it is empty -->
               </td>
             </tr>
             <tr> <!-- Row 3 -->
-              <td>City*:</td>
+              <td>City:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.city" required="true"/>
                 <!-- only checked to see if it is empty -->
               </td>
-              <td>State*:</td>
+              <td>State:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.state" required="true"/>
                 <!-- only checked to see if it is empty -->
               </td>
             </tr>
             <tr> <!-- Row 4 -->
-              <td>Zipcode*:</td>
+              <td>Zipcode:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.zipcode" id="zipcode"
                             required="true"/> <!-- must be of form ##### or #####-#### to pass -->
               </td>
-              <td>Phone Number*:</td>
+              <td>Phone Number:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.homePhone" id="phone"
                             required="true"/> <!-- must be of form (###)-###-#### -->
               </td>
             </tr>
             <tr> <!-- Row 5 -->
-              <td>Email*:</td>
+              <td>Email:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.email" id="email"
                             required="true"/>
                 <!-- must be (any char)@(any two or more char).(any two or more char) to pass -->
               </td>
-              <td>Insurance*:</td>
+              <td>Insurance:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.insurance"
                             required="true"/> <!-- only checked to see if it is empty -->
               </td>
             </tr>
             <tr> <!-- Row 6 -->
-              <td>Social Security #*:</td>
+              <td>Social Security #:<span style = "Color: red">*</span></td>
               <td>
                 <form:input class='form-control' size='4' type='text' path="patientInformation.ssn" id="ssn"
                             required="true"/> <!-- must be ###-##-#### -->
               </td>
-              <td>Gender*:</td>
+              <td>Gender:<span style = "Color: red">*</span></td>
               <td>
                 <form:select path="patientInformation.gender" class="selectpicker"
                              id="gender"> <!-- one of the other options than "select one" must be selected -->
@@ -104,8 +104,8 @@
             <input type="submit" value="Next" class="btn btn-primary btn-md"/>
         </span>
         </div>
-        <h4 style="Color: #FF0000">
-          * = Required
+        <h4 style="Color: black">
+          <span style = "Color: red">*</span> Indicates required field
         </h4>
       </div>
       <!-- /widget -->
