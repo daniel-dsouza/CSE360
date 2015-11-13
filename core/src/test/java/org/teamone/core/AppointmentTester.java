@@ -42,7 +42,7 @@ public class AppointmentTester {
 
     }
 
-    @Test
+    /*@Test
     public void createAppt() //doctor calls this
     {
         System.out.println("\nTest========Creating appointment");
@@ -61,7 +61,7 @@ public class AppointmentTester {
         System.out.println("Doctor ID:\t" + create.getDoctorID());
 
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
     /*@Test
     public void swapAppt() //patient calls this when updating an existing one

@@ -35,7 +35,7 @@ public class AppointmentSQL {
         int randomInt = randomGenerator.nextInt(1000);
         String date = "2015-";
         //nextInt((max - min) + 1) + min
-        int date1 = randomGenerator.nextInt((12 - 11) + 1) + 11;//month
+        int date1 = randomGenerator.nextInt((11 - 10) + 1) + 10;//month
         date += Integer.toString(date1) + "-";
         date1 = randomGenerator.nextInt((28 - 1) + 1) + 1;//day
         if (date1 <= 9)//if generator is less than 9, add 0

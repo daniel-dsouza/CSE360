@@ -20,8 +20,8 @@ public class LabReportTester {
 
         test = new LabReport();
         test.getPatient().setUserID(1002);
-        test.setRequestionID(4);
-        test.toMapObj("potassium,WHAT WHT WHAT:");
+        test.setRequestionID(1);
+        test.toMapObj("potassium,Patient is okay:");
 
     }
 

@@ -49,10 +49,11 @@
                                             onkeypress="capLock(event)"/>
                             <div id="divMayus" style="visibility:hidden">Caps Lock is on.</div>
                             </br>
-
+                            <div style="text-align: center;">
                             <span class="group-btn">
                                 <input type="submit" value="Login" class="btn btn-primary btn-md"/>
                             </span>
+                            </div>
                         </div>
                     </div>
                 </div>
