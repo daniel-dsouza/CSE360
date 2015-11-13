@@ -20,11 +20,12 @@ public class AAPreloadApptTest {
     public void RegisterTest() {
         System.out.println("\nTest========Preloading appointments");
         for (int docID = 501; docID <= 511; docID++) {//This loop generates appointments PER doctor
-            for (int x = 0; x < 5; x++) {//this loops generates 5 appoints for each doctor
+            for (int x = 0; x < 3; x++) {//this loops generates 5 appoints for each doctor
                 //uncomment when ready
 
-                //appt.setDoctorID(docID);
+
                 //appt = AppointmentSQL.random();//call this to random
+                //appt.setDoctorID(docID);
                 //boolean p = AppointmentSQL.preloadAppointment(appt);
                 //assertTrue("Failed to preload", p);//if p!=null returns false, display message
 

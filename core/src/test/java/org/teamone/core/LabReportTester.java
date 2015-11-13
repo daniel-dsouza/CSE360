@@ -20,8 +20,8 @@ public class LabReportTester {
 
         test = new LabReport();
         test.getPatient().setUserID(1002);
-        test.setRequestionID(4);
-        test.toMapObj("potassium,WHAT WHT WHAT:");
+        test.setRequestionID(1);
+        test.toMapObj("potassium,Patient is okay:");
 
     }
 
@@ -76,7 +76,7 @@ public class LabReportTester {
         ArrayList<LabReport> tempList = LabReportSQL.getAllLabReports();
         assertTrue("No lab tests ", !tempList.isEmpty());
         for (LabReport l : tempList) {
-            System.out.println("Test ID: " + l.getRequestionID());
+            System.out.println("Patient ID: " + l.getPatient().getUserID() +"\tTest ID: " + l.getRequestionID());
         }
 
         System.out.println(TestStrings.testEnd);

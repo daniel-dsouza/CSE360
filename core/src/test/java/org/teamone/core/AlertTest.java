@@ -3,14 +3,11 @@ package org.teamone.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.teamone.core.SQL.AlertSQL;
-import org.teamone.core.SQL.PatientSQL;
 import org.teamone.core.baseclasstests.TestStrings;
 import org.teamone.core.users.Alert;
 import org.teamone.core.users.Patient;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.assertTrue;
 
 public class AlertTest {
 
@@ -60,13 +57,13 @@ public class AlertTest {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
+   /* @Test
     public void setHC() {
         boolean check = PatientSQL.setHealthConditions(test2);
         assertTrue("Failed to set health conditions", check);
         System.out.println("Set/Update successful");
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
     /*@Test
     public void getListofAlerts() {

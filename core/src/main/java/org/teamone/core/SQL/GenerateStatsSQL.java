@@ -519,7 +519,7 @@ public class GenerateStatsSQL {
                     Calendar temp = Calendar.getInstance();
                     Date currMonth = convertToDate.parse(date);
                     temp.setTime(currMonth);
-                    int month = temp.get(Calendar.MONTH);
+                    int month = (temp.get(Calendar.MONTH)) + 1;
 
                     switch (month) {
                         case 1:
@@ -680,11 +680,7 @@ public class GenerateStatsSQL {
 
     }
 
-    /**
-     * get list of alerts
-     *
-     * @return arraylist
-     */
+
 
     // You need to close the resultSet
     private static void close() {

@@ -33,7 +33,7 @@ public class LabRequestTest {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
+    /*@Test
     public void createEmptyLabRequest() {
         System.out.println("Test========Attempting to add lab request with empty string");
         Patient pat = new Patient();
@@ -44,7 +44,7 @@ public class LabRequestTest {
         boolean result = LabRequestSQL.addLabRequest(new1);
         assertTrue("A lab request could not be added.", result);
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
     @Test
     public void listLabRequests() {

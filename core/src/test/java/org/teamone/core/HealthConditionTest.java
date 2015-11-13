@@ -20,7 +20,7 @@ public class HealthConditionTest {
         test.healthConditions.toMapObj("anklePain,true:");
     }
 
-    @Test
+   /* @Test
     public void updateHC() {
         System.out.println("\nTest========Update health conditions");
         Boolean p = PatientSQL.setHealthConditions(test);
@@ -28,7 +28,7 @@ public class HealthConditionTest {
 
         System.out.println("Update successful");
         System.out.println(TestStrings.testEnd);
-    }
+    }*/
 
     @Test
     public void viewHC() {
