@@ -225,6 +225,7 @@ public class LabReportSQL {
                 a.setDate(resultSet.getString("date"));
                 a.toMapObj(resultSet.getString("labReport"));
                 a.setRequestionID(resultSet.getInt("serialNumber"));
+                a.setPatient(pat);
                 labReportList.add(a);
             }
 
