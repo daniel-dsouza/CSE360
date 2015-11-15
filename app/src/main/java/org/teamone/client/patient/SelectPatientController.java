@@ -87,7 +87,7 @@ public class SelectPatientController {
 
         if (user.getPerson() instanceof Doctor) {
             actions.put("health_conditions", "Health Conditions");
-            //actions.put("view_medical_history", "View Medical History");
+            actions.put("view_medical_history", "View Medical History");
             actions.put("e_prescribe", "E-Prescribe Prescription");
             actions.put("lab_test", "E-Prescribe Lab Tests");
             actions.put("view_lab_report", "View Lab Reports");

@@ -53,7 +53,12 @@ public class LoginController {
 
         if (pResult != null) {
             System.out.println("Authentication succeeded");
-            System.out.println("User ID: " + pResult.getUserID() + " has logged in from ip: " + request.getRemoteAddr());
+            String ip = request.getRemoteAddr();
+            if (ip.equals("0:0:0:0:0:0:0:1"))//ipv6 code for localhost. convert to ipv4
+            {
+                ip = "127.0.0.1";
+            }
+            System.out.println("User ID: " + pResult.getUserID() + " has logged in from ip: " + ip);
             System.out.println("This user is using browser: " + request.getHeader("User-Agent"));
             if (pResult.getOccupation().equals("doctor") || pResult instanceof HSP) //HSP override
             {

@@ -17,10 +17,10 @@ function loadAlerts(element) {
                     '<div style="float:left; padding: 20px 0px 10px 10px; width=100%">' +
                     '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;" data-toggle="collapse" data-target="#reason' + i + ' ">' + 'Expand Detail' + '</button>' +
                     '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;" onclick="resolvealert(alert' + i + ',' + data[i].alertID + ')">' + 'Resolve' + '</button>' +
-                    '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;">' + 'Health Conditions' + '</button>' +
-                    '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;">' + 'Medical History' + '</button>' +
-                    '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;">' + 'Labs' + '</button>' +
-                    '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;">' + 'Prescriptions' + '</button>' +
+                    '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;" onclick="redirect(' + data[i].patientID + ',' + "'" + 'health_conditions' + "'" + ')">' + 'Health Conditions' + '</button>' +
+                    '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;" onclick="redirect(' + data[i].patientID + ',' + "'" + 'view_medical_history' + "'" + ')">' + 'Medical History' + '</button>' +
+                    '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;" onclick="redirect(' + data[i].patientID + ',' + "'" + 'view_lab_report' + "'" + ')">' + 'Lab Reports' + '</button>' +
+                    '<button type="button" class="btn btn-primary btn-md" style="float:left; margin: 0px 5px 5px 0px;" onclick="redirect(' + data[i].patientID + ',' + "'" + 'e_prescribe' + "'" + ')">' + 'Prescriptions' + '</button>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
@@ -150,3 +150,10 @@ function blink(elem, times, speed) {
         times -= .5;
     }
 }
+
+function redirect(id, action) {
+    var hc = "select_patient/" + id + "/" + action;
+    window.location.href = hc;
+}
+
+
