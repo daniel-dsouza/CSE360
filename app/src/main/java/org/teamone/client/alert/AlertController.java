@@ -119,10 +119,6 @@ public class AlertController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    String displayAlerts(Map<String, Object> model) {
-        return "alert/alert";
-    }
 
     @RequestMapping(value = "/hsp", method = RequestMethod.GET)
     public String resolveAlert(Map<String, Object> model,
@@ -170,5 +166,16 @@ public class AlertController {
         List<Appointment> doctorAppointments = AppointmentSQL.viewFutureAppointmentByDoctor(a);
         Collections.sort(doctorAppointments, Appointment.dateCompare);
         return doctorAppointments;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    String displayAlerts(Map<String, Object> model,
+                         @ModelAttribute User user) {
+        if (user.getPerson() == null)
+            return "redirect:/login";
+        else if (!(user.getPerson() instanceof Doctor))
+            return "redirect:/user/" + user.person.getUserID();
+        else
+            return "alert/alert";//only doctors
     }
 }
