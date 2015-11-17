@@ -37,20 +37,21 @@
 
                     <div class="col-md-4">
                         <!-- method is what do when done, commandName is what object from the model to put stuff into, action should be the name of your jsp. -->
-                        <form:select id="special" path="doctorSpec" items="${speclist}"
+                        <form:select id="special" path="doctorSpec" class="form-control" items="${speclist}"
                                      onchange="loadDoctors()"/><br/>
                     </div>
                 </div>
                 <!-- path is where in the object specified by command name to store the result, a get method for Java. items is the list of results -->
                 <!-- Doctor: -->
-
+            </div>
+            <div class="row">
                 <!-- id is how jquery get the element. -->
                 <div class="form-class">
-                    <br><br>
+                    <br>
                     <label class="col-md-4 control-label" for="doctor">Doctor:</label>
 
                     <div class="col-md-4">
-                        <form:select id="doctor" path="tempDocID" items="${doctorlist}"/><br/>
+                        <form:select id="doctor" path="tempDocID" class="form-control" items="${doctorlist}"/><br/>
                     </div>
                     <br><br><br>
                 </div>

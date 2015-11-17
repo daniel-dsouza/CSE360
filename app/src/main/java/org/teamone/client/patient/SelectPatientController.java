@@ -45,11 +45,11 @@ public class SelectPatientController {
         } else if (action.equals("health_conditions")) {
             return "redirect:/request_healthconditions/healthconditions";
         } else if (action.equals("view_health_conditions")) {
-            return "redirect:/request_healthconditions/healthconditions/view/"+ user.getPatient().getUserID();
+            return "redirect:/request_healthconditions/healthconditions/view/" + user.getPatient().getUserID();
         } else if (action.equals("medical_history")) {
             return "redirect:/request_medicalhistory/medicalhistory";
         } else if (action.equals("view_medical_history")) {
-            return "redirect:/request_medicalhistory/medicalhistory/view/"+ user.getPatient().getUserID();
+            return "redirect:/request_medicalhistory/medicalhistory/view/" + user.getPatient().getUserID();
         } else if (action.equals("e_prescribe")) {
             return "redirect:/request_prescriptions/prescription";
         } else if (action.equals("view_lab_report")) {
@@ -128,12 +128,20 @@ public class SelectPatientController {
     @RequestMapping(value = "/getpatientappointments/{patientID}", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<Appointment> getPatientAppointments(@PathVariable("patientID") int patientID) {
+    List<Appointment> getPatientAppointments(@PathVariable("patientID") int patientID,
+                                             @ModelAttribute User user) {
 //        Patient p = new Patient();
 //        p.setUserID(patientID);
         Appointment a = new Appointment();
         a.setPatientID(patientID);
-        List<Appointment> patientAppointments = AppointmentSQL.viewFutureAppointmentByPatient(a);
+        List<Appointment> patientAppointments;
+        if (user.getPerson() instanceof Doctor) {
+            a.setDoctorID(user.getPerson().getUserID());
+            patientAppointments = AppointmentSQL.viewFutureAppointmentByDoctorAndPatient(a);
+        } else {
+            patientAppointments = AppointmentSQL.viewFutureAppointmentByPatient(a);
+        }
+
         Collections.sort(patientAppointments, Appointment.dateCompare);
         return patientAppointments;
     }

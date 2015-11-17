@@ -179,7 +179,7 @@ public class AppointmentSQL {
 
             // PreparedStatements can use variables and are more efficient
             int docID = readMe.getDoctorID();
-            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID, serialNumber FROM appointment where doctorID = ? AND patientID IS NOT NULL and date ");
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID, serialNumber FROM appointment where doctorID = ? AND patientID IS NOT NULL ");
             preparedStatement.setInt(1, docID);
             resultSet = preparedStatement.executeQuery();
 
@@ -202,6 +202,70 @@ public class AppointmentSQL {
                     new1.setAppointmentID(resultSet.getInt("serialNumber"));
                     new1.setPatient(pat1);
                     new1.setPatientID(patID);
+                    a1.add(new1);
+
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("===========EMPTY RESULT========RETURN NULL");
+            System.out.println(e);
+            a1 = null;
+        } finally {
+            close();
+        }
+        return a1;
+    }
+
+    /**
+     * @param readMe Appointment Object with valid doctorID and patientID
+     * @return list of future appointments by doctor
+     */
+    public static List<Appointment> viewFutureAppointmentByDoctorAndPatient(Appointment readMe) {
+        List<Appointment> a1 = new ArrayList<Appointment>();
+
+        try {
+
+            int checker;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+            int docID = readMe.getDoctorID();
+            int patID = readMe.getPatientID();
+            preparedStatement = connect.prepareStatement("SELECT date, time, reason, patientID, serialNumber FROM appointment where doctorID = ? AND patientID = ?  ");
+            preparedStatement.setInt(1, docID);
+            preparedStatement.setInt(2, patID);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Appointment new1 = new Appointment();
+                String date = resultSet.getString("date");
+                String time = resultSet.getString("time");
+                String reason = resultSet.getString("reason");
+
+                if (isDateTodayOrFuture(date)) {
+                    Patient pat1 = new Patient();
+                    pat1.setName(LoginSQL.getName(patID));
+                    pat1.splitName((pat1.getName()));
+                    pat1.setUserID(patID);
+
+
+                    Staff doc1 = new Doctor();
+                    doc1.setUserID(docID);
+
+                    new1.setDate(date);
+                    new1.setTime(time);
+                    new1.setReason(reason);
+
+                    new1.setAppointmentID(resultSet.getInt("serialNumber"));
+                    new1.setPatient(pat1);
+                    new1.setDoctor(doc1);
+
                     a1.add(new1);
 
                 }
@@ -300,7 +364,7 @@ public class AppointmentSQL {
                     new1.setDate(date);
                     new1.setTime(time);
                     new1.setReason(reason);
-                    new1.setPatientID(docID);
+                    new1.setPatientID(patID);
                     new1.setAppointmentID(resultSet.getInt("serialNumber"));
                     new1.setDoctor(doc1);
                     a1.add(new1);
