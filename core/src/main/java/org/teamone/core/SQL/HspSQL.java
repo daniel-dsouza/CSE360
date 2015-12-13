@@ -395,7 +395,46 @@ public class HspSQL {
         }
         return adminList;
     }
+    /**
+     * check if trying to access a master panel
+     *
+     * @param type which type of panel
+     * @param pass password for that panel
+     * @return Person object
+     */
+    public static boolean authenticate(String type, String pass) {
 
+        boolean check =false;
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+            PreparedStatement preparedStatement = null;
+            preparedStatement = connect.prepareStatement("SELECT password from master WHERE type = ?");
+            preparedStatement.setString(1, type);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            String passInSQL = resultSet.getString("password");
+            if(passInSQL.equals(pass))
+            {
+                check = true;
+            } else
+                check = false;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            check = false;
+        } finally {
+            close();
+        }
+        return check;
+
+    }
     /**
      * Deletes all persons in Person table with id above 1001. ids from 1001 to 1999 are reserved for patients.
      *

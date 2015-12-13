@@ -131,6 +131,15 @@ INSERT INTO `person` (`userID`, `name`, `occupation`, `password`, `emailID`) VAL
 (521, 'Doctor Dre:', 'labstaff', 'go', 'ryanad@asu.edu');
 -- --------------------------------------------------------
 
+
+
+CREATE TABLE IF NOT EXISTS `master` (
+ `type` varchar(500) DEFAULT NULL,
+  `password` varchar(500) DEFAULT NULL
+);
+
+INSERT INTO `master` (`type`, `password`) VALUES
+('MasterPanel', 'RyanR0cks');
 --
 -- Table structure for table `prescriptions`
 --
