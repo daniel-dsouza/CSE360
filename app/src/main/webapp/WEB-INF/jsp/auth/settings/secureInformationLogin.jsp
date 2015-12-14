@@ -4,21 +4,13 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
-<!-- http://stackoverflow.com/questions/2308895/detect-caps-lock-on-off-using-jquery -->
-<script>
-    function capLock(e) {
-        kc = e.keyCode ? e.keyCode : e.which;
-        sk = e.shiftKey ? e.shiftKey : ((kc == 16) ? true : false);
-        if (((kc >= 65 && kc <= 90) && !sk) || ((kc >= 97 && kc <= 122) && sk))
-            document.getElementById('divMayus').style.visibility = 'visible';
-        else
-            document.getElementById('divMayus').style.visibility = 'hidden';
-    }
-</script>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <t:template>
     <jsp:attribute name="head">
         <script type="text/javascript"
                 src="<c:url value="/webjars/jquery-maskedinput/1.4.0/jquery.maskedinput.min.js" />"></script>
+         <script type="text/javascript"
+                 src="<c:url value="/js/login.js" />"></script>
     </jsp:attribute>
 
     <jsp:body>
@@ -34,13 +26,13 @@
                         </div>
                     </div>
                 </c:if>
-
-                <div class="row">
+                <div class="row" id="body1">
                     <div class="col-md-offset-4 col-md-4">
                         <div class="custom-login">
                             <h4><c:out value="${infoMessage}"/></h4>
                             <input:password path="password" id="userPassword" class="form-control input-sm chat-input"
                                             placeholder="password" maxlength="40" required="required"
+                                            autofocus="autofocus"
                                             onkeypress="capLock(event)"/>
                             <div id="divMayus" style="visibility:hidden">Caps Lock is on.</div>
                             </br>
@@ -52,6 +44,16 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                    var url = window.location.href;
+                    var lastPart = url.substr(url.lastIndexOf('/') + 1);
+
+                    if (lastPart === "masterPanel") {
+                        displayWarning("body1");
+                    }
+                </script>
+
+
             </div>
         </form:form>
     </jsp:body>

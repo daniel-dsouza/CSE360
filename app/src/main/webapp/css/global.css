@@ -60,6 +60,7 @@ body {
     background: rgb(255, 255, 255);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+
 /*The following apply to different pages*/
 
 .mini_appointment {
@@ -83,6 +84,21 @@ body {
     vertical-align: middle;
     margin-bottom: 10px;
     height: 40px;
+}
+
+.row-warning {
+    background-image: url("/images/Authorized.gif"), url("/images/Authorized.gif");
+    background-size: contain, contain;
+    background-repeat: no-repeat, no-repeat;
+    background-position: 1%, 99%;
+}
+
+#master-password.col-sm-2 {
+    color: transparent;
+}
+
+#master-password:hover.col-sm-2 {
+    color: inherit;
 }
 
 /*Pages that list things.*/

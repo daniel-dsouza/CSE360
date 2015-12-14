@@ -17,41 +17,49 @@
                 <ul class="nav navbar-nav sider-navbar">
                     <li id="profile">
                         <figure class="profile-userpic">
-                            <img src="http://www.keita-gaming.com/assets/profile/default-avatar-c5d8ec086224cb6fc4e395f4ba3018c2.jpg"
+                            <img src="/images/default-profile.jpg"
                                  class="img-responsive" alt="Profile Picture">
                         </figure>
                         <div class="profile-usertitle">
-                            <div class="profile-usertitle-name"><c:out value="${user.person.firstName}"/> <c:out value="${user.person.lastName}"/></div>
+                            <div class="profile-usertitle-name"><c:out value="${user.person.firstName}"/> <c:out
+                                    value="${user.person.lastName}"/></div>
                             <div class="profile-usertitle-title"><c:out value="${user.person.occupation}"/></div>
                         </div>
                     </li>
                     <li class="sider-menu">
                         <ul>
-                            <li class="active" id="changePassword" onclick="redirectSettings(this)"><a href="#"><span class="fa fa-fw fa-dashboard"></span> Change password</a>
+                            <li class="active" id="/settings/changePassword" onclick="redirectSettings(this)"><a href="#"><span
+                                    class="fa fa-fw fa-dashboard"></span> Change password</a>
+                            </li>
+                            <li id="changeProfile"><a href="#"><span class="fa fa-fw fa-dashboard"></span> Change
+                                Profile picture</a>
                             </li>
                             <c:if test="${user.person.occupation == 'hsp'}">
 
-                            <li>
-                                <a href="#" data-toggle="collapse" data-target="#submenu-1"><span
-                                        class="fa fa-database"></span> Database <span
-                                        class="fa fa-fw fa-caret-down"></span></a>
-                                <ul id="submenu-1" class="collapse">
-                                    <li><a href="#">MySQL</a></li>
-                                    <li><a href="#">PostgreSQL</a></li>
-                                    <li><a href="#">Oracle</a></li>
-                                </ul>
-                            </li>
-                            <li id="masterPanel" onclick="redirectSettings(this)" ><a href="#"><span class="fa fa-folder"></span> Master Panel</a></li>
-                            <li>
-                                <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-cog"></i>
-                                    System
-                                    <span class="fa fa-fw fa-caret-down"></span></a>
-                                <ul id="submenu-2" class="collapse">
-                                    <li><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistics</a></li>
-                                    <li><a href="#"><i class="fa fa-code"></i> API</a></li>
-                                    <li><a href="#"><span class="fa fa-exclamation-circle"></span> Error Log</a></li>
-                                </ul>
-                            </li>
+                                <li>
+                                    <a href="#" data-toggle="collapse" data-target="#submenu-1"><span
+                                            class="fa fa-database"></span> Database <span
+                                            class="fa fa-fw fa-caret-down"></span></a>
+                                    <ul id="submenu-1" class="collapse">
+                                        <li><a href="#">MySQL</a></li>
+                                        <li><a href="#">PostgreSQL</a></li>
+                                        <li><a href="#">Oracle</a></li>
+                                    </ul>
+                                </li>
+                                <li id="masterPanel" onclick="redirectSettings(this)"><a href="#"><span
+                                        class="fa fa-folder"></span> Master Panel</a></li>
+                                <li>
+                                    <a href="#" data-toggle="collapse" data-target="#submenu-2"><i
+                                            class="fa fa-cog"></i>
+                                        System
+                                        <span class="fa fa-fw fa-caret-down"></span></a>
+                                    <ul id="submenu-2" class="collapse">
+                                        <li><a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistics</a></li>
+                                        <li><a href="#"><i class="fa fa-code"></i> API</a></li>
+                                        <li><a href="#"><span class="fa fa-exclamation-circle"></span> Error Log</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </c:if>
                         </ul>
                     </li>
@@ -67,7 +75,8 @@
 
                         <p>
                             Careful, if you break something, I will make a man out of you.
-                            Get ready, cause I will make your life miserable. But sir, "Can't you see the tears we're cryin'?
+                            Get ready, cause I will make your life miserable. But sir, "Can't you see the tears we're
+                            cryin'?
                             Can't there be some happiness for me?"
                             Hah! If you walk the footsteps of a stranger, you'll learn things you never knew.
                             Confused? It's clear from your vacant expressions, the lights are not all on upstairs.
@@ -83,7 +92,7 @@
                         </p>
 
                         <p>
-                           Why should I worry? IPIMS is great, forget about your worries and your strife.
+                            Why should I worry? IPIMS is great, forget about your worries and your strife.
                             Once you get treated, look inside yourself. You are more than what you have become.
                         </p>
                     </div>
