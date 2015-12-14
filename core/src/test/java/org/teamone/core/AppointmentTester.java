@@ -113,7 +113,7 @@ public class AppointmentTester {
         System.out.println(TestStrings.testEnd);
     }
 
-    @Test
+    @Ignore
     public void viewApptByPatID() {
         //case 2, where user wants appoint through patientID
         update.setPatientID(1002);

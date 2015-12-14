@@ -24,7 +24,7 @@ public class PatientListTest {
 
     @Test
     public void getPatientByStaf() {
-        System.out.println("\\nTest========Searching for Patients by staff ID ");
+        System.out.println("\nTest========Searching for Patients by staff ID ");
         ArrayList<Patient> testArr = PatientSQL.getPatientByStaff(test);
         assertTrue("Failed to get patients by staff", !testArr.isEmpty());
 
