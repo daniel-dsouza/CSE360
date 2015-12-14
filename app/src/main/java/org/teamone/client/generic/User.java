@@ -6,6 +6,8 @@ import org.teamone.core.users.Patient;
 import org.teamone.core.users.Person;
 import org.teamone.core.users.Staff;
 
+import java.util.Date;
+
 /**
  * Created by daniel on 10/7/15.
  */
@@ -37,9 +39,18 @@ public class User {
         this.doctor = doctor;
     }
 
+    public Date getSettingsTime() {
+        return settingsTime;
+    }
+
+    public void setSettingsTime(Date settingsTime) {
+        this.settingsTime = settingsTime;
+    }
+
     public Person person;
     public Patient patient;
     public Staff doctor;
+    private Date settingsTime = null;
 
     public User() {
         super();

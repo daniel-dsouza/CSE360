@@ -20,6 +20,7 @@ public class LoginSQL {
 
     /**
      * check if ID and password is correct
+     *
      * @param check person object with ID and password loaded
      * @return Person object
      */
@@ -74,6 +75,7 @@ public class LoginSQL {
 
     /**
      * converts an ID into an name
+     *
      * @param patientID valid id
      * @return string name with associated id
      */
@@ -108,6 +110,7 @@ public class LoginSQL {
 
     /**
      * converts an name into an ID
+     *
      * @param patientName
      * @return int ID with associated name
      */
@@ -150,6 +153,43 @@ public class LoginSQL {
         } else
             boolResult = false;
         return boolResult;
+    }
+
+    /**
+     * change password
+     *
+     * @param check       person object with ID and password loaded
+     * @param newPassword password in a form of string
+     * @return Person object
+     */
+    public static boolean changePassword(Person check, String newPassword) {
+
+        boolean result = false;
+        try {
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+            // PreparedStatements can use variables and are more efficient
+
+            int ID = check.getUserID();
+
+            preparedStatement = connect.prepareStatement("UPDATE person SET password = ? WHERE userID = ?");
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, ID);
+            preparedStatement.executeUpdate();
+            result = true;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            result = false;
+        } finally {
+            close();
+        }
+        return result;
+
     }
 
     // You need to close the resultSet

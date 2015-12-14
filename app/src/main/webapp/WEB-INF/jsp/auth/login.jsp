@@ -4,21 +4,14 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
-<!-- http://stackoverflow.com/questions/2308895/detect-caps-lock-on-off-using-jquery -->
-<script>
-    function capLock(e) {
-        kc = e.keyCode ? e.keyCode : e.which;
-        sk = e.shiftKey ? e.shiftKey : ((kc == 16) ? true : false);
-        if (((kc >= 65 && kc <= 90) && !sk) || ((kc >= 97 && kc <= 122) && sk))
-            document.getElementById('divMayus').style.visibility = 'visible';
-        else
-            document.getElementById('divMayus').style.visibility = 'hidden';
-    }
-</script>
+
+
 <t:template>
     <jsp:attribute name="head">
         <script type="text/javascript"
                 src="<c:url value="/webjars/jquery-maskedinput/1.4.0/jquery.maskedinput.min.js" />"></script>
+        <script type="text/javascript"
+                src="<c:url value="/js/login.js" />"></script>
     </jsp:attribute>
 
     <jsp:body>

@@ -25,6 +25,7 @@ public class Person {
         super();
         genericActions = new TreeMap<String, String>();
         genericActions.put("Logout", "logout");
+        genericActions.put("Settings", "settings");
     }
 
     public String getName() {

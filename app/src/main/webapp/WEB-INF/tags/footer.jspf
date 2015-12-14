@@ -1,5 +1,5 @@
 <div class="container-fluid bg-1 text-center">
     <h4>Created by Group 1 of CSE 360 Fall 2015</h4>
     <h4>We Are CIDSE Students</h4>
-    <h6>Welcome <c:out value="${user.person.occupation}"/>!</h6>
+    <h6>Actually, I did most of the work.</h6>
 </div>
