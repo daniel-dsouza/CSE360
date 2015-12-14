@@ -1,6 +1,7 @@
 package org.teamone.core;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.teamone.core.SQL.AlertSQL;
 import org.teamone.core.SQL.AppointmentSQL;
@@ -94,7 +95,7 @@ public class AppointmentTester {
     }
 
 
-    @Test
+    @Ignore
     public void viewApptByDocID() {
         //case 1, where user wants appoint through doctorID
         System.out.println("\nTest========Viewing Future appointments with doctor ID");

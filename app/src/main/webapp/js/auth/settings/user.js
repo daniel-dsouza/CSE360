@@ -3,6 +3,6 @@
  */
 
 function redirectSettings(ele) {
-    var hc = "" + ele.id;
+    var hc = window.location.href + "/" + ele.id;
     window.location.href = hc;
 }

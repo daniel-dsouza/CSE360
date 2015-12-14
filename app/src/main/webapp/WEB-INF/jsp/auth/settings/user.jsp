@@ -28,7 +28,7 @@
                     </li>
                     <li class="sider-menu">
                         <ul>
-                            <li class="active" id="/settings/changePassword" onclick="redirectSettings(this)"><a href="#"><span
+                            <li class="active" id="changePassword" onclick="redirectSettings(this)"><a href="#"><span
                                     class="fa fa-fw fa-dashboard"></span> Change password</a>
                             </li>
                             <li id="changeProfile"><a href="#"><span class="fa fa-fw fa-dashboard"></span> Change
