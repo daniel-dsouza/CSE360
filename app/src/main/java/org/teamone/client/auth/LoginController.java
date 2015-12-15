@@ -31,11 +31,18 @@ public class LoginController {
     //private User user;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String viewLogin(Map<String, Object> model) {
+    public String viewLogin(Map<String, Object> model,
+                            @ModelAttribute User user) {
         LoginAttempt attempt = new LoginAttempt();
         model.put("userInput", attempt);
         System.out.println("loading login");
-        return "auth/login";
+        if(user.getPerson() == null)
+        {
+            return "auth/login";
+        }else//already logged in, redirect to home
+        {
+            return "redirect:/user/" + user.person.getUserID();
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST)

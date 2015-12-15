@@ -371,6 +371,12 @@ public class HspSQL {
                 if(occupation.equals("doctor"))
                     name = "Doctor " + name;
                 String specialty = newStaff.getSpecialty();
+
+                if(occupation.equals("hsp"))//override from frontend
+                    specialty = "hsp";
+                if(occupation.equals("labstaff"))//override from frontend
+                    specialty = "labstaff";
+
                 String email = newStaff.getEmail();
 
                 //http://www.mkyong.com/jdbc/jdbc-preparestatement-example-insert-a-record/

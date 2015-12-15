@@ -12,6 +12,7 @@ public class HSP extends Staff {
         };
         agentActions.put("Select Patient", "select_patient");
         agentActions.put("Register Patient", "registration/");
+        agentActions.put("Register Staff", "registrationStaff/");
         agentActions.put("Generate Statistics", "stats");
         //agentActions.put("Create Appointment", "appointment/createappointment");
     }
