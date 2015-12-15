@@ -2,6 +2,7 @@ package org.teamone.core.SQL;
 
 import org.teamone.core.users.Patient;
 import org.teamone.core.users.Person;
+import org.teamone.core.users.Staff;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -68,10 +69,6 @@ public class HspSQL {
         firstRNG += lastRNG + "@asu.edu";
         regis.patientInformation.setEmail(firstRNG);
         String random = "" + (char) (randomGenerator.nextInt(26) + 'A');
-        for (int i = 0; i < 10; i++)//address
-        {
-            random += (char) (randomGenerator.nextInt(26) + 'a');
-        }
 
         //Street Name array
         String streetFile = "src/test/java/org/teamone/core/input/StreetNamesTempe.txt";
@@ -148,6 +145,95 @@ public class HspSQL {
     }
 
     /**
+     * DO NOT USE THIS IN FRONTEND. TESTING BACKEND ONLY
+     */
+    public static Staff randomStaff()//randomizer so we can loop multiple
+    {
+        Staff regis = new Staff();
+        Random randomGenerator = new Random();
+
+        //pick female or male name http://deron.meranda.us/data/
+        String firstFile = "src/test/java/org/teamone/core/input/Female.txt";
+        int femaleOrMale = randomGenerator.nextInt(500);
+        if ((femaleOrMale % 2) == 0)//even
+            firstFile = "src/test/java/org/teamone/core/input/Male.txt";
+
+        String lastFile = "src/test/java/org/teamone/core/input/lastNames.txt";
+
+        //First Name array
+        ArrayList<String> firstNames = new ArrayList<String>();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(firstFile));
+            while (in.ready()) {
+                firstNames.add(in.readLine());
+            }
+            in.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        //Last Name array
+        ArrayList<String> lastNames = new ArrayList<String>();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(firstFile));
+            while (in.ready()) {
+                lastNames.add(in.readLine());
+            }
+            in.close();
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+
+        String firstRNG = firstNames.get(randomGenerator.nextInt(firstNames.size()));
+        String lastRNG = lastNames.get(randomGenerator.nextInt(lastNames.size()));
+        regis.setFirstName(firstRNG);
+        regis.setLastName(lastRNG);
+        regis.toStringName();
+        firstRNG += lastRNG + "@asu.edu";
+        regis.setEmail(firstRNG);
+
+        //occupation
+        String occupation;
+        String specialty;
+        int occu = randomGenerator.nextInt(500);
+        if ((occu % 3) == 0) {
+            occupation = "doctor";
+
+            int spec = randomGenerator.nextInt(500);
+            if ((spec % 5) == 0) {
+
+                specialty = "Pediatrician";
+
+            } else if ((spec % 5) == 1) {
+                specialty = "GeneralCare";
+
+            } else if ((spec % 5) == 2) {
+                specialty = "Neurologist";
+
+            } else if ((spec % 5) == 3) {
+                specialty = "X-Ray";
+
+            } else {
+                specialty = "Emergency";
+
+            }
+        } else {
+            if ((occu % 3) == 1) {
+                occupation = "hsp";
+                specialty = occupation;
+            } else {
+                occupation = "labstaff";
+                specialty = occupation;
+            }
+
+        }
+        regis.setOccupation(occupation);
+        regis.setSpecialty(specialty);
+
+        return regis;
+    }
+
+    /**
      * Register a new patient
      *
      * @param patient
@@ -164,7 +250,6 @@ public class HspSQL {
             connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
 
             // PreparedStatements can use variables and are more efficient
-            int userID = patient.getUserID();
 
             String name = patient.patientInformation.toStringName();
             String SSN = patient.getSSN();
@@ -239,6 +324,92 @@ public class HspSQL {
             Result.setAge(age);
             Result.setPhone(phone);
 
+            if (checker == 0 | checker2 == 0)
+                Result = null;
+
+
+        } catch (Exception e) {
+            System.out.println(e);
+            Result = null;
+        } finally {
+            close();
+        }
+        return Result;
+
+    }
+
+    /**
+     * Register a new staff memeber
+     *
+     * @param newStaff name, occupation, specialty, email
+     * @return Patient
+     */
+    public static Staff RegisterNewStaff(Staff newStaff) {
+        Staff Result;
+        try {
+            int checker = 0, checker2 = 0;
+            // This will load the MySQL driver, each DB has its own driver
+            Class.forName("com.mysql.jdbc.Driver");
+            // Setup the connection with the DB
+            System.out.println("\nTrying to connect to mysql for: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+            connect = DriverManager.getConnection(credentialsSQL.remoteMySQLLocation, credentialsSQL.remoteMySQLuser, credentialsSQL.remoteMySQLpass);
+
+
+            //check if person table is full. staff members are form 501 to 1000
+            preparedStatementPerson = connect.prepareStatement("SELECT userID FROM person WHERE userID <= 1000");
+            resultSet = preparedStatementPerson.executeQuery();
+            int lastUsedID = 501;
+            while (resultSet.next()) {
+                lastUsedID = resultSet.getInt("userID");
+            }
+            if (!(lastUsedID >= 1000))//if not greater 1000, we can insert
+            {
+                newStaff.toStringName();
+
+                String name = newStaff.getName();
+                String occupation = newStaff.getOccupation();
+                if(occupation.equals("doctor"))
+                    name = "Doctor " + name;
+                String specialty = newStaff.getSpecialty();
+                String email = newStaff.getEmail();
+
+                //http://www.mkyong.com/jdbc/jdbc-preparestatement-example-insert-a-record/
+                String insertTablePerson = "INSERT INTO person"
+                        + "(userID, name, occupation, password, emailID) VALUES"
+                        + "(?,?,?,?,?)";
+                int staffID = lastUsedID + 1;
+                preparedStatementPerson = connect.prepareStatement(insertTablePerson);
+                preparedStatementPerson.setInt(1, staffID);
+                preparedStatementPerson.setString(2, name);
+                preparedStatementPerson.setString(3, occupation);
+                preparedStatementPerson.setString(4, "go");
+                preparedStatementPerson.setString(5, email);
+                checker = preparedStatementPerson.executeUpdate();
+
+                String insertTableStaff = "INSERT INTO staff"
+                        + "(staffID, occupation, specialty) VALUES"
+                        + "(?,?,?)";
+
+                preparedStatementPatient = connect.prepareStatement(insertTableStaff);
+
+                preparedStatementPatient.setInt(1, staffID);
+                preparedStatementPatient.setString(2, occupation);
+                preparedStatementPatient.setString(3, specialty);
+                checker2 = preparedStatementPatient.executeUpdate();
+
+                //System.out.println("checker1==============" + checker);
+                //System.out.println("checker2==============" + checker2);
+
+                Result = new Staff();
+                Result.setOccupation(occupation);
+                Result.setName(name);
+                Result.setUserID(staffID);
+                Result.setEmail(email);
+
+
+            } else {
+                Result = null;
+            }
             if (checker == 0 | checker2 == 0)
                 Result = null;
 
@@ -395,6 +566,7 @@ public class HspSQL {
         }
         return adminList;
     }
+
     /**
      * check if trying to access a master panel
      *
@@ -404,7 +576,7 @@ public class HspSQL {
      */
     public static boolean authenticate(String type, String pass) {
 
-        boolean check =false;
+        boolean check = false;
         try {
             // This will load the MySQL driver, each DB has its own driver
             Class.forName("com.mysql.jdbc.Driver");
@@ -420,11 +592,7 @@ public class HspSQL {
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             String passInSQL = resultSet.getString("password");
-            if(passInSQL.equals(pass))
-            {
-                check = true;
-            } else
-                check = false;
+            check = passInSQL.equals(pass);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -435,6 +603,7 @@ public class HspSQL {
         return check;
 
     }
+
     /**
      * Deletes all persons in Person table with id above 1001. ids from 1001 to 1999 are reserved for patients.
      *

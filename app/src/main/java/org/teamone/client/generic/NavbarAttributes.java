@@ -8,6 +8,7 @@ import org.teamone.core.SQL.PrescriptionSQL;
 import org.teamone.core.prescriptions.Prescription;
 import org.teamone.core.users.Patient;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -24,12 +25,14 @@ public class NavbarAttributes {
     private User user;
 
     @ModelAttribute
-    public void setNavbar(Map<String, Object> model) {
+    public void setNavbar(Map<String, Object> model,
+                          HttpServletRequest request) {
         java.util.Date dateAndTime = new java.util.Date();
         java.text.SimpleDateFormat sdf =
                 new java.text.SimpleDateFormat("h:mm:ss a");
         String Time = sdf.format(dateAndTime);
 
+        //System.out.println("loading navbar " + Time + " from " + request.getRemoteAddr() );
         System.out.println("loading navbar " + Time);
         model.put("user", user);
         model.put("pageactions", new TreeMap<String, String>());
