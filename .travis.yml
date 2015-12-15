@@ -3,6 +3,6 @@ jdk:
   - oraclejdk8
   
 before_install:
-  #- mysql -e "source cse360.sql;" -uroot
-  #- echo "USE mysql;\nUPDATE user SET password=PASSWORD('cse360') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+  - mysql -e "source test-cse360.sql;" -uroot
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('cse360') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - chmod +x gradlew
